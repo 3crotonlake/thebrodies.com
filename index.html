@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRODIE TRIPS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f9f7f3;
+    --ink: #1a1a18;
+    --muted: #7a7a72;
+    --border: #e0ddd8;
+    --accent: #8b3a2a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.4rem 3rem;
+    background: rgba(249,247,243,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--ink);
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    background: url('https://images.squarespace-cdn.com/content/v1/61906958b4dd7a051a855dfb/1673389627834-SSDZIB616MIYSUSMKVO2/IMG_3380.jpg') center/cover no-repeat;
+    display: flex; flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem 3rem;
+    position: relative;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(26,26,24,0.55) 0%, transparent 60%);
+  }
+
+  .hero-text { position: relative; z-index: 1; }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    color: #fff;
+    line-height: 0.95;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* TRIPS SECTION */
+  .trips-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+  }
+
+  .year-block { margin-bottom: 5rem; }
+
+  .year-header {
+    display: flex; align-items: baseline; gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .year-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .year-count {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .trips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .trip-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--border);
+    background: #fff;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .trip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(26,26,24,0.1);
+  }
+
+  .trip-card-img {
+    width: 100%; height: 200px;
+    object-fit: cover;
+    display: block;
+    background: var(--border);
+  }
+
+  .trip-card-img.placeholder {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+    background: #f0ede8;
+  }
+
+  .trip-card-body { padding: 1.25rem 1.5rem 1.5rem; }
+
+  .trip-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+  }
+
+  .trip-card-meta {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .trip-card-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+  }
+
+  .badge-new {
+    display: inline-block;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    padding: 2px 7px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* COCKTAILS TEASER */
+  .cocktails-section {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .cocktails-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+  }
+
+  .cocktails-section p {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: rgba(249,247,243,0.6);
+    margin-bottom: 2rem;
+  }
+
+  .btn-outline {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--cream);
+    border: 1px solid rgba(249,247,243,0.4);
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .btn-outline:hover {
+    background: rgba(249,247,243,0.1);
+    border-color: var(--cream);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 2.5rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 600px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { padding: 2rem 1.5rem; }
+    .trips-section { padding: 4rem 1.5rem 3rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">Brodie Trips</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#trips">Trips</a></li>
+    <li><a href="cocktails/index.html">Cocktails</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1 class="hero-title">Brodie<br>Trips</h1>
+    <p class="hero-subtitle">Adventures around the world</p>
+  </div>
+</section>
+
+<section class="trips-section" id="trips">
+
+  <!-- 2026 -->
+  <div class="year-block">
+    <div class="year-header">
+      <span class="year-number">2026</span>
+      <span class="year-count">2 trips <span class="badge-new">New</span></span>
+    </div>
+    <div class="trips-grid">
+      <a class="trip-card" href="trips/oxford-2026.html">
+        <div class="trip-card-img placeholder">🇬🇧</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Oxford</div>
+          <div class="trip-card-meta">England · 2026</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+      <a class="trip-card" href="trips/memphis-2026.html">
+        <div class="trip-card-img placeholder">🇺🇸</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Memphis</div>
+          <div class="trip-card-meta">Tennessee · 2026</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2025 -->
+  <div class="year-block">
+    <div class="year-header">
+      <span class="year-number">2025</span>
+      <span class="year-count">5 trips <span class="badge-new">New</span></span>
+    </div>
+    <div class="trips-grid">
+      <a class="trip-card" href="trips/london-oxford-paris-2025.html">
+        <div class="trip-card-img placeholder">🇬🇧🇫🇷</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">London / Oxford / Paris</div>
+          <div class="trip-card-meta">UK & France · 2025</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+      <a class="trip-card" href="trips/florence-rome-2025.html">
+        <div class="trip-card-img placeholder">🇮🇹</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Florence & Rome</div>
+          <div class="trip-card-meta">Italy · 2025</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+      <a class="trip-card" href="trips/utah-2025.html">
+        <div class="trip-card-img placeholder">🇺🇸</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Girls Trip — Utah</div>
+          <div class="trip-card-meta">USA · 2025</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+      <a class="trip-card" href="trips/switzerland-sweden-2025.html">
+        <div class="trip-card-img placeholder">🇨🇭🇸🇪</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Switzerland & Sweden</div>
+          <div class="trip-card-meta">Europe · 2025</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+      <a class="trip-card" href="trips/charleston-2025.html">
+        <div class="trip-card-img placeholder">🇺🇸</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Charleston</div>
+          <div class="trip-card-meta">South Carolina · 2025</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2024 -->
+  <div class="year-block">
+    <div class="year-header">
+      <span class="year-number">2024</span>
+      <span class="year-count">2 trips <span class="badge-new">New</span></span>
+    </div>
+    <div class="trips-grid">
+      <a class="trip-card" href="trips/cambodia-2024.html">
+        <div class="trip-card-img placeholder">🇰🇭</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Cambodia</div>
+          <div class="trip-card-meta">Southeast Asia · 2024</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+      <a class="trip-card" href="trips/ireland-2024.html">
+        <div class="trip-card-img placeholder">🇮🇪</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Ireland</div>
+          <div class="trip-card-meta">2024</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2023 -->
+  <div class="year-block">
+    <div class="year-header">
+      <span class="year-number">2023</span>
+      <span class="year-count">2 trips</span>
+    </div>
+    <div class="trips-grid">
+      <a class="trip-card" href="trips/puerto-rico-2023.html">
+        <div class="trip-card-img placeholder">🇵🇷</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Puerto Rico</div>
+          <div class="trip-card-meta">2023</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+      <a class="trip-card" href="trips/thailand-cambodia-2023.html">
+        <img class="trip-card-img" src="https://images.squarespace-cdn.com/content/v1/61906958b4dd7a051a855dfb/1686867544951-04HU09EH9ORI7795LZII/IMG_0909.jpg" alt="Thailand and Cambodia" loading="lazy">
+        <div class="trip-card-body">
+          <div class="trip-card-name">Thailand & Cambodia</div>
+          <div class="trip-card-meta">Southeast Asia · 2023</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2022 -->
+  <div class="year-block">
+    <div class="year-header">
+      <span class="year-number">2022</span>
+      <span class="year-count">2 trips</span>
+    </div>
+    <div class="trips-grid">
+      <a class="trip-card" href="trips/london-2022.html">
+        <img class="trip-card-img" src="https://images.squarespace-cdn.com/content/v1/61906958b4dd7a051a855dfb/1673389673265-2A7L2JWCWYGZTGNDC3N0/IMG_0136.jpg" alt="London" loading="lazy">
+        <div class="trip-card-body">
+          <div class="trip-card-name">London</div>
+          <div class="trip-card-meta">England · 2022</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+      <a class="trip-card" href="trips/spain-portugal-2022.html">
+        <img class="trip-card-img" src="https://images.squarespace-cdn.com/content/v1/61906958b4dd7a051a855dfb/1673391371519-8NI0QTK1FKT38XZGGWUS/IMG_7634.jpg" alt="Spain and Portugal" loading="lazy">
+        <div class="trip-card-body">
+          <div class="trip-card-name">Spain & Portugal</div>
+          <div class="trip-card-meta">2022</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2019 -->
+  <div class="year-block">
+    <div class="year-header">
+      <span class="year-number">2019</span>
+      <span class="year-count">1 trip</span>
+    </div>
+    <div class="trips-grid">
+      <a class="trip-card" href="trips/spain-2019.html">
+        <img class="trip-card-img" src="https://images.squarespace-cdn.com/content/v1/61906958b4dd7a051a855dfb/1645466741375-U5AHS7WVGMOYVM27KQ8T/mercado1.jpg" alt="Spain 2019" loading="lazy">
+        <div class="trip-card-body">
+          <div class="trip-card-name">Spain</div>
+          <div class="trip-card-meta">2019</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- 2014 -->
+  <div class="year-block">
+    <div class="year-header">
+      <span class="year-number">2014</span>
+      <span class="year-count">1 trip</span>
+    </div>
+    <div class="trips-grid">
+      <a class="trip-card" href="trips/greece-2014.html">
+        <div class="trip-card-img placeholder">🇬🇷</div>
+        <div class="trip-card-body">
+          <div class="trip-card-name">Greece</div>
+          <div class="trip-card-meta">2014</div>
+          <span class="trip-card-link">Read more</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+</section>
+
+<section class="cocktails-section">
+  <h2>Cocktails</h2>
+  <p>Favorite recipes from around the world and home</p>
+  <a href="cocktails/index.html" class="btn-outline">View Recipes</a>
+</section>
+
+<footer>
+  &copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world
+</footer>
+
+</body>
+</html>

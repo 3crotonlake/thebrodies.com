@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Olympic — Brodie Trips</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --cream: #f9f7f3; --ink: #1a1a18; --muted: #7a7a72; --border: #e0ddd8; --accent: #8b3a2a; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); font-weight: 300; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(249,247,243,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .content { max-width: 680px; margin: 0 auto; padding: 140px 2rem 5rem; }
+  .back-link { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 2.5rem; }
+  .back-link:hover { color: var(--ink); }
+  .recipe-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 6vw, 4rem); font-weight: 300; line-height: 1; margin-bottom: 2.5rem; }
+  .ingredients { background: #fff; border: 1px solid var(--border); padding: 1.75rem 2rem; margin-bottom: 2rem; }
+  .section-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .ingredients ul { list-style: none; }
+  .ingredients li { font-size: 0.95rem; line-height: 1.7; padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+  .ingredients li:last-child { border-bottom: none; }
+  .method-title { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .method p { font-size: 1rem; line-height: 1.85; color: var(--ink); }
+  footer { text-align: center; padding: 2.5rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--border); margin-top: 4rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="../index.html">Brodie Trips</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#trips">Trips</a></li>
+    <li><a href="index.html">Cocktails</a></li>
+  </ul>
+</nav>
+
+<div class="content">
+  <a class="back-link" href="index.html">← Cocktails</a>
+  <h1 class="recipe-title">The Olympic</h1>
+
+  <div class="ingredients">
+    <div class="section-label">Ingredients</div>
+    <ul>
+      <li>1 oz brandy</li>
+      <li>1 oz Cointreau</li>
+      <li>1 oz fresh orange juice</li>
+      <li>¼ oz fresh lemon juice</li>
+      <li>Orange twist (for garnish)</li>
+    </ul>
+  </div>
+
+  <div class="method">
+    <div class="method-title">Method</div>
+    <p>Combine all liquid ingredients in a shaker and give it a vigorous ten-second shake. Strain into a chilled cocktail glass. Garnish with an orange twist.</p>
+  </div>
+</div>
+
+<footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cocktails — Brodie Trips</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --cream: #f9f7f3; --ink: #1a1a18; --muted: #7a7a72; --border: #e0ddd8; --accent: #8b3a2a; }
+  body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); font-weight: 300; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(249,247,243,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+  .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .hero { padding: 120px 2rem 3rem; max-width: 900px; margin: 0 auto; }
+  .back-link { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; margin-bottom: 2.5rem; }
+  .back-link:hover { color: var(--ink); }
+  .page-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 300; line-height: 1; margin-bottom: 0.75rem; }
+  .page-subtitle { font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); }
+  .cocktails-grid { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 5rem; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+  .cocktail-card { display: block; text-decoration: none; color: inherit; border: 1px solid var(--border); background: #fff; padding: 2rem; transition: transform 0.25s ease, box-shadow 0.25s ease; }
+  .cocktail-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(26,26,24,0.1); }
+  .cocktail-name { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .cocktail-ingredients { font-size: 0.8rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+  .cocktail-link { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+  footer { text-align: center; padding: 2.5rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="../index.html">Brodie Trips</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#trips">Trips</a></li>
+    <li><a href="index.html">Cocktails</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <a class="back-link" href="../index.html">← Home</a>
+  <h1 class="page-title">Cocktails</h1>
+  <p class="page-subtitle">Favorite recipes from home and abroad</p>
+</div>
+
+<div class="cocktails-grid">
+  <a class="cocktail-card" href="spicy-smokey-margarita.html">
+    <div class="cocktail-name">Spicy Smokey Margarita</div>
+    <div class="cocktail-ingredients">Reposado tequila · Cointreau · Fresh lime juice · Jalapeño · Tajin</div>
+    <span class="cocktail-link">View recipe</span>
+  </a>
+  <a class="cocktail-card" href="the-olympic.html">
+    <div class="cocktail-name">The Olympic</div>
+    <div class="cocktail-ingredients">Brandy · Cointreau · Fresh orange juice · Fresh lemon juice · Orange twist</div>
+    <span class="cocktail-link">View recipe</span>
+  </a>
+</div>
+
+<footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
+</body>
+</html>
