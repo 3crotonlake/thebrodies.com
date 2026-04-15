@@ -35,6 +35,10 @@
   .placeholder-note { font-size: 0.85rem; color: var(--muted); font-style: italic; padding: 2rem; background: #f0ede8; border: 1px dashed var(--border); text-align: center; }
   footer { text-align: center; padding: 2.5rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--border); }
   @media (max-width: 600px) { nav { padding: 1rem 1.5rem; } .hero { padding-left: 1.5rem; padding-right: 1.5rem; } .content { padding-left: 1.5rem; padding-right: 1.5rem; } }
+
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin: 2rem 0; }
+  .photo-grid img { width: 100%; height: 220px; object-fit: cover; display: block; }
+  .photo-caption { font-size: 0.78rem; color: var(--muted); font-style: italic; padding: 0.4rem 0 0.8rem; text-align: center; }
 </style>
 </head>
 <body>
@@ -58,6 +62,10 @@
 <p class="city-text">Church of Saint Jerome the Royal is situated beautifully between the Prado and Retiro Park.</p>
 <p class="city-text">Bodega de los Secretos — a cool wine cellar transformed into a restaurant near our Airbnb. In the 17th century it was at the border of Madrid; restorers found 3 clandestine passageways used to smuggle goods and escape troops during the Napoleonic Wars and Spanish Civil War. The duck was amazing!</p>
 <p class="city-text">Mercado San Miguel — so fun! We are not beer drinkers but LOVED cerveza limón.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1.5rem 0;">
+<figure style="margin:0;"><img src="/images/IMG_3380.jpg" alt="Mercado San Miguel — so fun!" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);"><figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">Mercado San Miguel — so fun!</figcaption></figure>
+<figure style="margin:0;"><img src="/images/IMG_7846.jpg" alt="Cerveza limón — we're not beer drinkers but LOVED it" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);"><figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">Cerveza limón — we're not beer drinkers but LOVED it</figcaption></figure>
+</div>
 </div>
 <div class="city-section">
 <h2 class="city-name">Toledo</h2>
@@ -84,14 +92,50 @@
 <div class="city-section">
 <h2 class="city-name">Sevilla</h2>
 <div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Alcazar — a must see, bring a bag lunch to eat in the gardens. We thought it was even more impressive than the one in Granada</li><li>Mercado El Postigo — an art market on C. Arfe, perfect place to buy gifts</li><li>La Brunilda Restaurant — be sure to make a reservation</li><li>Bar Alfalfa — tiny restaurant on C. Candilejo with great vibe and good food</li><li>You must see a flamenco show — we got tickets to La Casa de Flamenco, a 15th-century home-turned flamenco theater</li><li>SEEBYBIKE Tours — a bike tour is a great way to cover a lot of ground in this big city, our guide was fantastic</li></ul></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1.5rem 0;">
+<figure style="margin:0;"><img src="/images/IMG_7634.jpg" alt="The Alcazar in Seville — even more impressive than the one in Granada" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);"><figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">The Alcazar in Seville — even more impressive than the one in Granada</figcaption></figure>
+<figure style="margin:0;"><img src="/images/IMG_7637.jpg" alt="The Alcazar is surrounded by this impressive wall" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);"><figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">The Alcazar is surrounded by this impressive wall</figcaption></figure>
+<figure style="margin:0;"><img src="/images/IMG_0210.jpg" alt="Seville Cathedral — the largest Gothic Cathedral in the world!" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);"><figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">Seville Cathedral — the largest Gothic Cathedral in the world!</figcaption></figure>
+<figure style="margin:0;"><img src="/images/IMG_7631.jpg" alt="Our Airbnb on Calle Santa Maria la Blanca in the Santa Cruz district" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);"><figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">Our Airbnb on Calle Santa Maria la Blanca in the Santa Cruz district</figcaption></figure>
+</div>
 </div>
 <div class="city-section">
 <h2 class="city-name">Algarve, Portugal</h2>
+<div class="photo-grid">
+  <div><img src="/images/IMG_5482.jpg" alt="Algarve caves"></div>
+  <div><img src="/images/IMG_5466.jpg" alt="Algarve coast"></div>
+  <div><img src="/images/IMG_5467+Copy.jpg" alt="Algarve scenery"></div>
+  <div><img src="/images/IMG_5663.jpg" alt="Algarve beach"></div>
+</div>
+
 <div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Boat ride of caves is a must — make sure the boat is small with rubber sides so you can go inside the caves, or better yet kayak. We used AllBoats</li><li>Albufeira was convenient (walk to the marina) but touristy — wouldn't strongly recommend the town itself</li><li>If you end up in Albufeira, have a meal at Prazeres</li><li>Tavira is a small town on the coast definitely worth a visit</li><li>Bar Portas da Villa — fun place to stop for a drink, owner decorated exterior and interior with shells collected from the beach</li></ul></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1.5rem 0;">
+<figure style="margin:0;"><img src="/images/IMG_0149.jpg" alt="Inside Benagil Cave with AllBoat tour" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);"><figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">Inside Benagil Cave with AllBoat tour</figcaption></figure>
+<figure style="margin:0;"><img src="/images/IMG_7479.jpg" alt="The caves — it's important the boat has rubber sides so you can go inside" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);"><figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">The caves — it's important the boat has rubber sides so you can go inside</figcaption></figure>
+<figure style="margin:0;"><img src="/images/IMG_7474.jpg" alt="Bar Portas da Villa — owner decorated with shells collected on the beach!" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);"><figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">Bar Portas da Villa — owner decorated with shells collected on the beach!</figcaption></figure>
+</div>
 </div>
 <div class="city-section">
 <h2 class="city-name">Lisboa</h2>
-<p class="city-text">The end point of a spectacular road trip through Spain and Portugal. Lisboa (Lisbon) deserves its own extended stay.</p>
+<div class="photo-grid">
+  <div><img src="/images/LisbonwalkScreenshot+2022-04-30+at+6.10.31+PM.jpg" alt="Lisbon walk map"><div class="photo-caption">Our Lisbon walking route</div></div>
+</div>
+
+<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Download the Rick Steves audio walking tour to get the lay of the land</li><li>Have lunch at one of the booths in the Praca da Figueira square — get pastel de nata from Confeitaria Nacional across from the market</li><li>Purchase the 24 hr bus/train pass if there for a short time — buy it from a small tobacco shop</li><li>Wander the cobbled streets of the Alfama district in the evening to hear Fado music</li></ul></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1.5rem 0;">
+<figure style="margin:0;">
+  <img src="/images/castle0.jpg" alt="Rua Augusta Arch — celebrates the reconstruction of Lisbon after the 1755 earthquake" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);">
+  <figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">Rua Augusta Arch — celebrates the reconstruction of Lisbon after the 1755 earthquake</figcaption>
+</figure>
+<figure style="margin:0;">
+  <img src="/images/castle1.jpg" alt="Commerce Square" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);">
+  <figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">Commerce Square</figcaption>
+</figure>
+<figure style="margin:0;">
+  <img src="/images/castle2.jpg" alt="The bronze statue of Joseph I of Portugal" loading="lazy" style="width:100%;height:220px;object-fit:cover;border:1px solid var(--border);">
+  <figcaption style="font-size:0.75rem;color:var(--muted);margin-top:0.4rem;line-height:1.4;">The bronze statue of Joseph I of Portugal</figcaption>
+</figure>
+</div>
 </div>
 
 </div>
