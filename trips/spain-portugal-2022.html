@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Spain & Portugal — Brodie Trips</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  :root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
-  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
-  .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
-  .nav-links{display:flex;gap:2.5rem;list-style:none;}
-  .nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
-  .nav-links a:hover{color:var(--ink);}
-  .hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
-  .back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;}
-  .trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1;letter-spacing:-.01em;margin-bottom:.75rem;}
-  .trip-meta{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
-  .route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
-  .route span{color:var(--accent);}
-  .content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
-  .city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
-  .city-section:last-child{border-bottom:none;}
-  .city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
-  .takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
-  .takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
-  .takeaways ul{list-style:none;}
-  .takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
-  .takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
-  .takeaways li:last-child{border-bottom:none;}
-  .city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;}
-  .hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
-  .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
-  .photo-grid img{width:100%;height:200px;object-fit:cover;display:block;}
-  .photo-caption{font-size:.75rem;color:var(--muted);margin-top:.3rem;font-style:italic;}
-  .placeholder-note{font-size:.85rem;color:var(--muted);font-style:italic;padding:2rem;background:#f0ede8;border:1px dashed var(--border);text-align:center;}
-  footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
-  @media(max-width:600px){nav{padding:1rem 1.5rem;}.hero{padding-left:1.5rem;padding-right:1.5rem;}.content{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"><style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+.hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
+.back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;}
+.trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}
+.trip-meta{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
+.route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
+.route span{color:var(--accent);}
+.content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
+.city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
+.city-section:last-child{border-bottom:none;}
+.city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
+.takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
+.takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+.takeaways ul{list-style:none;}
+.takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
+.takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
+.takeaways li:last-child{border-bottom:none;}
+.city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;}
+.hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
+.photo-grid img{width:100%;height:200px;object-fit:cover;display:block;}
+footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+@media(max-width:600px){nav{padding:1rem 1.5rem;}.hero,.content{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -55,451 +51,235 @@
   <div class="trip-meta">2022</div>
   <div class="route">Madrid <span>··</span> Toledo <span>··</span> Granada <span>··</span> Córdoba <span>··</span> Ardales <span>··</span> Ronda <span>··</span> Sevilla <span>··</span> Albufeira <span>··</span> Lisboa</div>
 </div>
-<div class="content">
-<div class="city-section">
-<h2 class="city-name">Madrid</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5303.jpg" alt="" loading="lazy">
+<div class="content"><div class="city-section"><h2 class="city-name">Madrid</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_5293_Copy_q3c3hp" alt="" loading="lazy">
 <p class="city-text">Bodega de los Secretos — a wine cellar transformed into a restaurant. Restorers found 3 clandestine passageways used to smuggle goods during the Napoleonic Wars. The duck was amazing!</p>
 <p class="city-text">Mercado San Miguel — so fun! We are not beer drinkers but LOVED cerveza limón.</p>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9363.jpg" alt="Church of Saint Jerome the Royal" loading="lazy">
-    <p class="photo-caption">Church of Saint Jerome the Royal</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9359.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5331.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9383.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5287.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/park.jpg" alt="Retiro Park" loading="lazy">
-    <p class="photo-caption">Retiro Park</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/prado.jpg" alt="The Prado" loading="lazy">
-    <p class="photo-caption">The Prado</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/duck.jpg" alt="Bodega de los Secretos — the duck was amazing!" loading="lazy">
-    <p class="photo-caption">Bodega de los Secretos — the duck was amazing!</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/res1.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/madrid1.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9369.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9376.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9384.jpg" alt="Mercado San Miguel" loading="lazy">
-    <p class="photo-caption">Mercado San Miguel</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9387.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9400.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9404.jpg" alt="" loading="lazy">
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/res1_wkwo5l" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_5287_auzjru" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/duck_eczcip" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/prado_wubgpm" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/park_odzmk8" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/mona_rhczrf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/madrid1_knvabv" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_9404_glnsxp" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_9400_zxk4fj" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_9387_tmasys" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_9384_rgcghy" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_9376_rllah0" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_9363_xipsxb" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_9383_jdrdp5" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_5303_ra9yic" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_9369_ylxsac" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_5331_dzzs3g" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/madrid/IMG_9359_opwf9g" alt="" loading="lazy"></div>
 </div>
 </div>
-<div class="city-section">
-<h2 class="city-name">Toledo</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5365.jpg" alt="Toledo Cathedral" loading="lazy">
+<div class="city-section"><h2 class="city-name">Toledo</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5365_gghxjt" alt="" loading="lazy">
 <div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Stop at Mirador del Valle for a fabulous view of the city</li><li>The cathedral and audio guide are a must — bring your own headphones</li><li>You MUST eat at Botero — best meal ever! Make reservations early</li></ul></div>
-<p class="city-text">Toledo Cathedral was begun in 1226 under Ferdinand III — a magnificent example of medieval Gothic architecture.</p>
+<p class="city-text">Toledo Cathedral was begun in 1226 under Ferdinand III — a magnificent example of medieval Gothic architecture. We stayed in 'The Cave' Airbnb — an incredible spot in the old city.</p>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5371.jpg" alt="Toledo Cathedral" loading="lazy">
-    <p class="photo-caption">Toledo Cathedral</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5382-1.jpg" alt="Toledo Cathedral" loading="lazy">
-    <p class="photo-caption">Toledo Cathedral</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5381.jpg" alt="Toledo Cathedral" loading="lazy">
-    <p class="photo-caption">Toledo Cathedral</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5374.jpg" alt="Toledo Cathedral" loading="lazy">
-    <p class="photo-caption">Toledo Cathedral</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5416.jpg" alt="Our Airbnb, The Cave" loading="lazy">
-    <p class="photo-caption">Our Airbnb, The Cave</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5415.jpg" alt="Our Airbnb, The Cave" loading="lazy">
-    <p class="photo-caption">Our Airbnb, The Cave</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5347.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5348.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5350.jpg" alt="" loading="lazy">
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5371_xbewiu" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5336_Copy_Copy_qafora" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5374_z5c3zv" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5382-1_xrnoru" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5354_closvu" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5347_mjg0gf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5381_p2zlys" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5353_hr0arq" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/toledo/IMG_5360_ck8efc" alt="" loading="lazy"></div>
 </div>
 </div>
-<div class="city-section">
-<h2 class="city-name">Granada</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5663.jpg" alt="" loading="lazy">
+<div class="city-section"><h2 class="city-name">Granada</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/granada/IMG_5467_Copy_zvw2wu" alt="" loading="lazy">
 <div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Om Kalsum at C. Jardines, 17 — wonderful Moroccan tapas. Order the meatballs!</li><li>Only city left in Spain where you get a free tapa with each drink</li><li>Stayed at 'The Lover's Workshop' in the old Moorish quarter near the Alhambra</li></ul></div>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/2_granada.jpg" alt="The Alhambra" loading="lazy">
-    <p class="photo-caption">The Alhambra</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/F1D48668-B51D-4B34-92EB-A906F3C9460A.jpg" alt="The Alhambra" loading="lazy">
-    <p class="photo-caption">The Alhambra</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5466.jpg" alt="The Alhambra" loading="lazy">
-    <p class="photo-caption">The Alhambra</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5482.jpg" alt="The Alhambra" loading="lazy">
-    <p class="photo-caption">The Alhambra</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5467 Copy.jpg" alt="The Alhambra" loading="lazy">
-    <p class="photo-caption">The Alhambra</p>
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/granada/IMG_5466_phmjml" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/granada/F1D48668-B51D-4B34-92EB-A906F3C9460A_z7rtwl" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/granada/IMG_5663_kvrtyo" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/granada/IMG_5482_xrcjew" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/granada/2_granada_gjuloh" alt="" loading="lazy"></div>
 </div>
 </div>
-<div class="city-section">
-<h2 class="city-name">Cordoba</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5780.jpg" alt="Hotel" loading="lazy">
+<div class="city-section"><h2 class="city-name">Córdoba</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5780_b3qp3z" alt="" loading="lazy">
+<p class="city-text">A stunning historic city — the Mezquita is breathtaking.</p>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9478.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9477.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5763.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5768.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5754.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5758.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5753.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5760.MOV.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5741.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5728.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5735.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5732.MOV.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5751.MOV.jpg" alt="" loading="lazy">
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5768_uqgvud" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5760.MOV_lsx9z2" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5763_ebj7dc" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5758_ndbgob" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5754_hivh26" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5753_oseavt" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5751.MOV_hxnpvb" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5743_Copy_vwpztk" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5741_u1fsvn" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5735_ml3tcf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5732.MOV_hb2ug2" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5728_ued0ek" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_5722_wx0haw" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_9478_jydh64" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/cordoba/IMG_9477_uvajzc" alt="" loading="lazy"></div>
 </div>
 </div>
-<div class="city-section">
-<h2 class="city-name">Ardales</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5376.jpg" alt="" loading="lazy">
+<div class="city-section"><h2 class="city-name">Ardales</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5416_orffag" alt="" loading="lazy">
 <p class="city-text">A spectacular natural park in Málaga province — incredible hiking and scenery.</p>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5377.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5378.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5383.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5384.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5388-1.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5390.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5393.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5396.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5397.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5398.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5399.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5401.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5402 Copy.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5405.jpg" alt="" loading="lazy">
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5383_beqvrm" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5437_giutus" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5435_kgqoce" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5434-1_b8i4c8" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5432_zweude" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5428_zvwxb2" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5427_vdh5cb" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5393_dqslz6" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5423_jmibl0" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5415_h0dxe8" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5384_cgydhy" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5407_yk0khp" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5388-1_z9axob" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ardales/IMG_5402_Copy_kgokci" alt="" loading="lazy"></div>
 </div>
 </div>
-<div class="city-section">
-<h2 class="city-name">Ronda</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5909.jpg" alt="Our favorite small city in Spain" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Our favorite small city in Spain</li><li>Las Maravillas at Carrera Espanel, 12 — yummy paella, incredible view</li><li>Tragatá at Calle Nueva, 4 — highly recommended, will have to go back!</li></ul></div>
+<div class="city-section"><h2 class="city-name">Ronda</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5915_hsrsb9" alt="" loading="lazy">
+<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Our favorite small city in Spain</li><li>Las Maravillas at Carrera Espanel, 12 — yummy paella, incredible view from our back deck</li><li>Tragatá at Calle Nueva, 4 — highly recommended, will have to go back!</li></ul></div>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6022.jpg" alt="View from our back deck" loading="lazy">
-    <p class="photo-caption">View from our back deck</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9536.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5913.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5915.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6006.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6020.jpg" alt="Yummy paella at Las Maravillas" loading="lazy">
-    <p class="photo-caption">Yummy paella at Las Maravillas</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9552.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5925.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5926.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5948.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5963.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5972.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5974.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_5994 Copy.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6003.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6032.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6037.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6042.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6054.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6055.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6056.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6058.jpg" alt="" loading="lazy">
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5913_prht8u" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5909_sy4bhf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_9552_ivlbp3" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_9536_n5cdei" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6058_j1ncyu" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6056_rxa2mj" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6055_g5cuxb" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6054_hmcpvv" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6042_wxeb4b" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6037_yvvb9b" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6032_hlsqzl" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6022_sqnnlx" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6020_c8xx6y" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6006_cx0yfb" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5925_l7idxn" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_6003_tmywfs" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5948_fgfskl" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5963_fri939" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5972_iwltel" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5974_qoxumi" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5994_Copy_u3sr10" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/ronda/IMG_5926_mjk277" alt="" loading="lazy"></div>
 </div>
 </div>
-<div class="city-section">
-<h2 class="city-name">Sevilla</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6086.jpg" alt="The Alcazar" loading="lazy">
+<div class="city-section"><h2 class="city-name">Sevilla</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6204_zjzy2p" alt="" loading="lazy">
 <div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Alcazar — a must see, bring a bag lunch to eat in the gardens</li><li>Mercado El Postigo — art market on C. Arfe, perfect for gifts</li><li>La Brunilda Restaurant — make a reservation</li><li>Bar Alfalfa — tiny restaurant on C. Candilejo, great vibe</li><li>You must see a flamenco show — La Casa de Flamenco is spectacular</li><li>SEEBYBIKE Tours — fantastic way to see the city</li></ul></div>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6175.jpg" alt="The Alcazar" loading="lazy">
-    <p class="photo-caption">The Alcazar</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6130.jpg" alt="The Alcazar" loading="lazy">
-    <p class="photo-caption">The Alcazar</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6152.jpg" alt="The Alcazar" loading="lazy">
-    <p class="photo-caption">The Alcazar</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6156.jpg" alt="The Alcazar" loading="lazy">
-    <p class="photo-caption">The Alcazar</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6146.jpg" alt="The Alcazar" loading="lazy">
-    <p class="photo-caption">The Alcazar</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9664.jpg" alt="The Cathedral" loading="lazy">
-    <p class="photo-caption">The Cathedral</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6158.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6160.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6164.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6165.jpg" alt="Plaza de España" loading="lazy">
-    <p class="photo-caption">Plaza de España</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6170.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6172.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6178.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6182.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6188.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6192.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6195.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6204.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6206.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6208.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6218.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9668.jpg" alt="Flamenco" loading="lazy">
-    <p class="photo-caption">Flamenco</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9670.jpg" alt="Flamenco" loading="lazy">
-    <p class="photo-caption">Flamenco</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9671.jpg" alt="Flamenco" loading="lazy">
-    <p class="photo-caption">Flamenco</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9676.jpg" alt="Flamenco" loading="lazy">
-    <p class="photo-caption">Flamenco</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9677.jpg" alt="Flamenco" loading="lazy">
-    <p class="photo-caption">Flamenco</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9678.jpg" alt="Flamenco" loading="lazy">
-    <p class="photo-caption">Flamenco</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9679.jpg" alt="Flamenco" loading="lazy">
-    <p class="photo-caption">Flamenco</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9682.jpg" alt="Flamenco" loading="lazy">
-    <p class="photo-caption">Flamenco</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_9998.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0001.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0003.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0006.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0009.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0012.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0015.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0018.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0021.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0024.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0027.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0031.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_0034.jpg" alt="" loading="lazy">
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6122_hf6xjc" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6119_bxiuuf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6113_ihiith" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6108_fneawj" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6105_n2npu8" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6104_dsulrq" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6095_dcwwhf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6093_jwfajw" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6091_icwbfd" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6086_cdfcwj" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_9664_jwaqks" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6218_z7esqq" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6208_wssjoe" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6206_hivcgd" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6195_cbwlf9" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6192_qjeiij" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6188_yfvuwu" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6182_sbcows" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6178_alropx" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6175_glvmhd" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6172_apwqti" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6170_ycztis" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6164_hhq5tw" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6160_aqwvsw" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6158_eppirf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6156_cp0nne" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6152_ydwzw0" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6130_pcqryo" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6129_svqbdn" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6146_p2jbn9" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6125_lwbrir" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/sevilla/IMG_6124_vsfzih" alt="" loading="lazy"></div>
 </div>
 </div>
-<div class="city-section">
-<h2 class="city-name">Algarve, Portugal</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Algarve_Cave01.webp" alt="Inside Benagil Cave" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Boat ride of caves is a must — make sure the boat has rubber sides. We used AllBoats</li><li>If in Albufeira, have a meal at Prazeres</li><li>Tavira is a small coastal town definitely worth a visit</li></ul></div>
+<div class="city-section"><h2 class="city-name">Algarve, Portugal</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Tavira06_yqu10d" alt="" loading="lazy">
+<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Boat ride of caves is a must — make sure the boat has rubber sides. We used AllBoats</li><li>Tavira is a small coastal town definitely worth a visit</li><li>If in Albufeira, have a meal at Prazeres</li></ul></div>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Algarve_Cave02.webp" alt="Inside Benagil Cave" loading="lazy">
-    <p class="photo-caption">Inside Benagil Cave</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Algarve_Cave03.webp" alt="Inside Benagil Cave" loading="lazy">
-    <p class="photo-caption">Inside Benagil Cave</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Algarve_Cave04.webp" alt="Inside Benagil Cave" loading="lazy">
-    <p class="photo-caption">Inside Benagil Cave</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Algarve_Cave05.webp" alt="Inside Benagil Cave" loading="lazy">
-    <p class="photo-caption">Inside Benagil Cave</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_01.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_02.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_03.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_04.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_05.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira__06.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_07.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_08.webp" alt="Bar Portas da Villa" loading="lazy">
-    <p class="photo-caption">Bar Portas da Villa</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_09.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_10.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/Albufeira_11.webp" alt="Albufeira" loading="lazy">
-    <p class="photo-caption">Albufeira</p>
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Tavira05_fj1mv8" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Tavira04_dhefpf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Tavira03_cfnzhb" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Tavira02_joalsm" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Tavira01_dydwqs" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave12_yq058g" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave11_rhpiud" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave10_yog36z" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave09_oazzqq" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave08_tvehws" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave07_xdjrae" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave06_ye034u" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave05_lcwqso" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave04_xow6t2" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave03_zcbx5s" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave02_dch7pw" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Algarve_Cave01_rz38vi" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_11_weexc9" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_10_fuahrt" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_09_pdojto" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_08_gxpiva" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_07_dnfjzc" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_05_mlqabp" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_04_fvjc37" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_02_oiqzxb" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_01_n4res9" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira_03_jyyrma" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/algarve/Albufeira__06_qlm2ql" alt="" loading="lazy"></div>
 </div>
 </div>
-<div class="city-section">
-<h2 class="city-name">Lisboa</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6581.jpg" alt="" loading="lazy">
+<div class="city-section"><h2 class="city-name">Lisboa</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6581_r8eemb" alt="" loading="lazy">
 <p class="city-text">The end point of a spectacular road trip. Lisboa deserves its own extended stay.</p>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6574.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6579.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6592.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6596.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6604.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6609.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6627.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6628.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6632.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6636.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6637.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6654.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6657.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6658.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6661.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6663.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6664.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6665.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6670.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6674.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6680.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6700.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6701.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6703.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6709.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6736.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6737.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6742.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022SpainPortugal/IMG_6745.jpg" alt="" loading="lazy">
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6604_cdtvtg" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6596_hb3rma" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6592_qkahh6" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6579_dy28ry" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6574_xcolk4" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6745_smeyjo" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6742_i1cssq" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6737_sjk1lj" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6736_ugfmwi" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6719_Copy_domtqn" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6709_zh5ztv" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6703_nrxxv4" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6701_yswnzv" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6700_grd98d" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6680_h2u3rg" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6674_azrdpy" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6670_gystr6" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6665_v8wkoq" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6664_ekrijf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6663_fxvswl" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6661_rq5nog" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6658_xaxj2x" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6657_d2vvzm" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6636_bdxzmb" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6627_mtkk07" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6628_udevqg" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6654_ng9kap" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6632_yermtk" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6609_gutocv" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_spain-portugal/lisboa/IMG_6637_nwoub0" alt="" loading="lazy"></div>
 </div>
 </div>
-
 </div>
 <footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
-</body>
-</html>
+</body></html>

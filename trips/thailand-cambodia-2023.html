@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Thailand & Cambodia — Brodie Trips</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  :root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
-  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
-  .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
-  .nav-links{display:flex;gap:2.5rem;list-style:none;}
-  .nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
-  .nav-links a:hover{color:var(--ink);}
-  .hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
-  .back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;}
-  .trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1;letter-spacing:-.01em;margin-bottom:.75rem;}
-  .trip-meta{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
-  .route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
-  .route span{color:var(--accent);}
-  .content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
-  .city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
-  .city-section:last-child{border-bottom:none;}
-  .city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
-  .takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
-  .takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
-  .takeaways ul{list-style:none;}
-  .takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
-  .takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
-  .takeaways li:last-child{border-bottom:none;}
-  .city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;}
-  .hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
-  .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
-  .photo-grid img{width:100%;height:200px;object-fit:cover;display:block;}
-  .photo-caption{font-size:.75rem;color:var(--muted);margin-top:.3rem;font-style:italic;}
-  .placeholder-note{font-size:.85rem;color:var(--muted);font-style:italic;padding:2rem;background:#f0ede8;border:1px dashed var(--border);text-align:center;}
-  footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
-  @media(max-width:600px){nav{padding:1rem 1.5rem;}.hero{padding-left:1.5rem;padding-right:1.5rem;}.content{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"><style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+.hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
+.back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;}
+.trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}
+.trip-meta{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
+.route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
+.route span{color:var(--accent);}
+.content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
+.city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
+.city-section:last-child{border-bottom:none;}
+.city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
+.takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
+.takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+.takeaways ul{list-style:none;}
+.takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
+.takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
+.takeaways li:last-child{border-bottom:none;}
+.city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;}
+.hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
+.photo-grid img{width:100%;height:200px;object-fit:cover;display:block;}
+footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+@media(max-width:600px){nav{padding:1rem 1.5rem;}.hero,.content{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -55,133 +51,54 @@
   <div class="trip-meta">Southeast Asia · 2023</div>
   <div class="route">Bangkok <span>··</span> Chiang Mai <span>··</span> Elephant Nature Park</div>
 </div>
-<div class="content">
-<div class="city-section">
-<h2 class="city-name">Bangkok</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0323.jpg" alt="Bangkok temples" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Hire a tuk tuk driver for the day to take you to the different temples</li><li>Don't shy away from using the SkyTrain — it's really easy</li></ul></div>
+<div class="content"><div class="city-section"><h2 class="city-name">Bangkok</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_2259_hje2w2" alt="" loading="lazy">
+<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Hire a tuk tuk driver for the day to take you to the different temples and wait while you explore</li><li>Don't shy away from using the SkyTrain — it's really easy to figure out</li></ul></div>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0343.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0075.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0089.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0096.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0335.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0079.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0080.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0457.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0460 Copy.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0462.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_2259.jpg" alt="" loading="lazy">
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0462_rnrtey" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0460_Copy_ngnq3y" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0457_yey10i" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0343_idlkyy" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0335_anxstg" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0323_uoqrad" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0089_aqrtzw" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0096_wtmosf" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0080_bhngdy" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0079_pdwvi9" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0075_ky1tsa" alt="" loading="lazy"></div>
 </div>
 </div>
-<div class="city-section">
-<h2 class="city-name">Chiang Mai</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0909.jpg" alt="" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Do not miss hiking the Monk's Trail to Wat Pha Lat</li><li>Sunday Night Market (Tha Pae Walking Market) — starts 4pm, largest of the week</li><li>Night Bazaar takes place every night</li></ul></div>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0958.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0987.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0996.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1005.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1090.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1098.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1101.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1136.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1179.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1216.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1230.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1236.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1236(1).jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1251.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1265.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1309.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_6610.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_6696.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_6706.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_6468.jpg" alt="" loading="lazy">
-  </div>
+<div class="city-section"><h2 class="city-name">Chiang Mai</h2>
+<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Do not miss hiking the Monk's Trail to Wat Pha Lat</li><li>Sunday Night Market (Tha Pae Walking Market) — largest of the week, starts 4pm</li><li>Smaller market on Saturday nights; Night Bazaar takes place every night</li></ul></div>
 </div>
-</div>
-<div class="city-section">
-<h2 class="city-name">Elephant Nature Park</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0909.jpg" alt="" loading="lazy">
+<div class="city-section"><h2 class="city-name">Elephant Nature Park</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0996_em6bgn" alt="" loading="lazy">
 <p class="city-text">Elephant Nature Park is truly a magical place and a must see! Located about an hour north of Chiang Mai, it was established by Saengduean Chailert (Lek) — we even got to meet her!</p>
-<p class="city-text">We did the overnight stay and highly recommend it. The second day was the best — we hiked into the mountains, just the three of us and our guide, and saw many elephants in their natural habitat.</p>
+<p class="city-text">The park has rescued elephants from cruel practices. It felt like Jurassic Park as the elephants wander free!</p>
+<p class="city-text">We did the overnight stay and highly recommend it. The second day was the best — we hiked into the mountains with just our guide and saw many elephants in their natural habitat.</p>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0958.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0987.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_0996.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1005.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1090.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1098.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1101.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1136.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1179.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1216.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1230.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1236.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1236(1).jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1251.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1265.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_1309.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_6610.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_6696.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_6706.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/thailandCambodia/IMG_6468.jpg" alt="" loading="lazy">
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0987_tabnwp" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0958_bygwxl" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_0909_qx58n5" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_6706_mzdzjc" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_6696_trfw1l" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_6610_rhxty7" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_6468_zmzhgj" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1309_tqugvc" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1179_tuisbu" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1265_eirmuj" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1251_qxcw0e" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1236_1_jokxgt" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1236_gb2tyn" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1230_dljisv" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1136_eui9e9" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1005_ucvtfz" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1098_rzmmqq" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1216_x2rn7i" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1101_aqiamt" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2023_thailand-cambodia/IMG_1090_ng7icr" alt="" loading="lazy"></div>
 </div>
 </div>
-
 </div>
 <footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
-</body>
-</html>
+</body></html>

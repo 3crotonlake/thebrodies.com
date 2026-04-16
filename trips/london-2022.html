@@ -1,43 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>London — Brodie Trips</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  :root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
-  body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
-  nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
-  .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
-  .nav-links{display:flex;gap:2.5rem;list-style:none;}
-  .nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
-  .nav-links a:hover{color:var(--ink);}
-  .hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
-  .back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;}
-  .trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1;letter-spacing:-.01em;margin-bottom:.75rem;}
-  .trip-meta{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
-  .route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
-  .route span{color:var(--accent);}
-  .content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
-  .city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
-  .city-section:last-child{border-bottom:none;}
-  .city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
-  .takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
-  .takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
-  .takeaways ul{list-style:none;}
-  .takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
-  .takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
-  .takeaways li:last-child{border-bottom:none;}
-  .city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;}
-  .hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
-  .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
-  .photo-grid img{width:100%;height:200px;object-fit:cover;display:block;}
-  .photo-caption{font-size:.75rem;color:var(--muted);margin-top:.3rem;font-style:italic;}
-  .placeholder-note{font-size:.85rem;color:var(--muted);font-style:italic;padding:2rem;background:#f0ede8;border:1px dashed var(--border);text-align:center;}
-  footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
-  @media(max-width:600px){nav{padding:1rem 1.5rem;}.hero{padding-left:1.5rem;padding-right:1.5rem;}.content{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"><style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
+.nav-links a:hover{color:var(--ink);}
+.hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
+.back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;}
+.trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}
+.trip-meta{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
+.route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
+.route span{color:var(--accent);}
+.content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
+.city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
+.city-section:last-child{border-bottom:none;}
+.city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
+.takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
+.takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+.takeaways ul{list-style:none;}
+.takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
+.takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
+.takeaways li:last-child{border-bottom:none;}
+.city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;}
+.hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
+.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
+.photo-grid img{width:100%;height:200px;object-fit:cover;display:block;}
+footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+@media(max-width:600px){nav{padding:1rem 1.5rem;}.hero,.content{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -55,148 +51,66 @@
   <div class="trip-meta">England · 2022</div>
   
 </div>
-<div class="content">
-<div class="city-section">
-<h2 class="city-name">London</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0136.jpg" alt="Big Ben" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Stay in Covent Garden — great neighborhood for a first visit</li><li>Take a bicycle tour — we booked Classic London Landmarks with Viator</li><li>Eat at Ottolenghi's NOPI — book way in advance</li><li>Dishoom in Covent Garden — gorgeous restaurant, book in advance</li><li>Sky Garden — free but needs reservations (skygarden.london)</li><li>Portobello Market and The Distillery for Portobello Gin are a must</li><li>No need for metro card — use your credit card directly</li><li>Fentiman Arms (64 Fentiman Road) — best pub food ever</li><li>Seven Dials Market (35 Earlham St) — fun multi-level food court</li><li>Cocktail making class at The Alchemist — so fun!</li><li>SUSHISAMBA — highest outdoor dining terrace in Europe</li><li>Tower of London: Beefeater tour free with admission, use Middle Drawbridge entrance</li></ul></div>
+<div class="content"><div class="city-section"><h2 class="city-name">London</h2>
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7825_ieu4ve" alt="" loading="lazy">
+<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Stay in Covent Garden — great neighborhood for a first visit</li><li>Take a bicycle tour — Classic London Landmarks with Viator</li><li>Eat at Ottolenghi's NOPI — book way in advance</li><li>Dishoom in Covent Garden — gorgeous restaurant, book in advance</li><li>Sky Garden — free but needs reservations at skygarden.london</li><li>Portobello Market and The Distillery for Portobello Gin</li><li>No need for metro card — use your credit card directly on the tube</li><li>Fentiman Arms (64 Fentiman Road) — best pub food ever</li><li>Seven Dials Market (35 Earlham St) — fun multi-level food court</li><li>Cocktail making class at The Alchemist — so fun!</li><li>SUSHISAMBA — highest outdoor dining terrace in Europe</li><li>Tower of London: Beefeater tour free with admission, use Middle Drawbridge entrance</li></ul></div>
 <p class="city-text">Our Beefeater at the Tower was the first woman to hold that position — she was fabulous!</p>
 <p class="city-text">Charlotte's friend shared a great insider guide: docs.google.com/document/d/1r7wTG2aMWiRx9oNS9619ifqgbh4QW5tGO8A5Cef-KgA</p>
 <div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0137(1).jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_3380.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0145.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0137.jpg" alt="St Paul's Cathedral" loading="lazy">
-    <p class="photo-caption">St Paul's Cathedral</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7846.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0149.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7482.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7483.jpg" alt="Westminster" loading="lazy">
-    <p class="photo-caption">Westminster</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7710.jpg" alt="Tate Museum" loading="lazy">
-    <p class="photo-caption">Tate Museum</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0172.jpg" alt="House of Parliament" loading="lazy">
-    <p class="photo-caption">House of Parliament</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0167.jpg" alt="Henry Moore sculpture" loading="lazy">
-    <p class="photo-caption">Henry Moore sculpture</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7524.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0146.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7479.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7474.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7804.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7816.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0213.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0253.jpg" alt="Yummy gelato at Anita Gelato" loading="lazy">
-    <p class="photo-caption">Yummy gelato at Anita Gelato</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7466.jpg" alt="Cafe Nata" loading="lazy">
-    <p class="photo-caption">Cafe Nata</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7825.jpg" alt="Amazing scones at Maison Bertaux" loading="lazy">
-    <p class="photo-caption">Amazing scones at Maison Bertaux</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0204.jpg" alt="Cocktail class at The Alchemist" loading="lazy">
-    <p class="photo-caption">Cocktail class at The Alchemist</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0191.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7533.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0203.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7539.jpg" alt="SUSHISAMBA" loading="lazy">
-    <p class="photo-caption">SUSHISAMBA</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7553.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/download.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0122.jpg" alt="Our local bar in Covent Garden" loading="lazy">
-    <p class="photo-caption">Our local bar in Covent Garden</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_3350.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7454.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7674.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7754.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0239.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0222.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0267.jpg" alt="The Distillery at Portobello Market" loading="lazy">
-    <p class="photo-caption">The Distillery at Portobello Market</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7717.jpg" alt="Black Friar pub" loading="lazy">
-    <p class="photo-caption">Black Friar pub</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7723.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7730.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/Londonpub.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7693.jpg" alt="Sky Garden" loading="lazy">
-    <p class="photo-caption">Sky Garden</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7694.jpg" alt="Sky Garden" loading="lazy">
-    <p class="photo-caption">Sky Garden</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7700.jpg" alt="Sky Garden" loading="lazy">
-    <p class="photo-caption">Sky Garden</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7585.jpg" alt="Our Beefeater — first woman to hold that position!" loading="lazy">
-    <p class="photo-caption">Our Beefeater — first woman to hold that position!</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_3645.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_3662.jpg" alt="View of Tower Bridge" loading="lazy">
-    <p class="photo-caption">View of Tower Bridge</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7583.jpg" alt="Enter through the Middle Drawbridge entrance" loading="lazy">
-    <p class="photo-caption">Enter through the Middle Drawbridge entrance</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7588.jpg" alt="The Shard in the background" loading="lazy">
-    <p class="photo-caption">The Shard in the background</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7634.jpg" alt="Ottolenghi NOPI" loading="lazy">
-    <p class="photo-caption">Ottolenghi NOPI</p>
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_0210.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7637.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7643.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_8084.jpg" alt="" loading="lazy">
-  </div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022London/IMG_7631.jpg" alt="Fentiman Arms" loading="lazy">
-    <p class="photo-caption">Fentiman Arms</p>
-  </div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7816_ke6kji" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7804_tb1r15" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7754_dsn4dh" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7730_knvvta" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7723_mqodhb" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7717_nre7qm" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7710_qclrah" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7694_ucv6i9" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7693_vwru1t" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7674_izzfju" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7643_u3woi8" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7637_mq04zc" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7634_z9dtst" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7631_h3pt9r" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7588_uzdw6z" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7585_bxxgba" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7583_ohvwoc" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7553_atfqlx" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7539_gsixui" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7533_aerwhr" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7524_xreylr" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7474_p0zsmd" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7454_pqze0a" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0145_maxnnk" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0137_nxwayp" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7482_do2mhc" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0204_b7oejl" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0191_cnbarm" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7479_w8eyz9" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0253_bqtyb5" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7466_e3aknx" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_3662_qfkudm" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0167_i0zq1e" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7483_mjqhjn" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0213_s7uwhl" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0239_htceac" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0136_isut2u" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0172_nt1hp9" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_3380_aagwmn" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0146_qvyvep" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_3645_ct6qm8" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0149_hfh17v" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0267_lmapdr" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_3350_y1im5u" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0122_eu9gne" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0222_mqbizu" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0203_mwwiaw" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_0210_ec6zch" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_7700_mzcvsr" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/download_id7wad" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/Londonpub_a8jufj" alt="" loading="lazy"></div>
+  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2022_london/IMG_8084_u4udxc" alt="" loading="lazy"></div>
 </div>
 </div>
-
 </div>
 <footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
-</body>
-</html>
+</body></html>
