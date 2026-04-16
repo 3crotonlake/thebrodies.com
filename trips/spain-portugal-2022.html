@@ -1,42 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Spain & Portugal — Brodie Trips</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"><style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
-.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
-.nav-links{display:flex;gap:2.5rem;list-style:none;}
-.nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
-.nav-links a:hover{color:var(--ink);}
-.hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
-.back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;}
-.trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}
-.trip-meta{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
-.route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
-.route span{color:var(--accent);}
-.content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
-.city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
-.city-section:last-child{border-bottom:none;}
-.city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
-.takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
-.takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
-.takeaways ul{list-style:none;}
-.takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
-.takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
-.takeaways li:last-child{border-bottom:none;}
-.city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;}
-.hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
-.photo-grid img{width:100%;height:200px;object-fit:cover;display:block;}
-footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
-@media(max-width:600px){nav{padding:1rem 1.5rem;}.hero,.content{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spain &amp; Portugal — Brodie Trips</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
+    body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+    .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
+    .nav-links a:hover{color:var(--ink);}
+    .hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
+    .back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);display:inline-block;margin-bottom:2rem;transition:color .2s;}
+    .back-link:hover{color:var(--ink);}
+    .trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}
+    .trip-meta{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+    .route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
+    .route span{color:var(--accent);}
+    .hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
+    .content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
+    .city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
+    .city-section:last-child{border-bottom:none;margin-bottom:0;}
+    .city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
+    .takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
+    .takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+    .takeaways ul{list-style:none;}
+    .takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
+    .takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
+    .takeaways li:last-child{border-bottom:none;}
+    .takeaways a{color:var(--accent);text-decoration:none;}
+    .takeaways a:hover{text-decoration:underline;}
+    .city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;color:var(--ink);}
+    .city-text strong{font-weight:500;}
+    .city-text em{font-style:italic;color:var(--muted);}
+    .section-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:2rem 0 .75rem;}
+    .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
+    .photo-grid img{width:100%;height:200px;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s;}
+    .photo-grid img:hover{opacity:.92;}
+    .photo-grid-captioned{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin:1.5rem 0;}
+    .photo-grid-captioned .photo-item img{width:100%;height:200px;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s;}
+    .photo-grid-captioned .photo-item img:hover{opacity:.92;}
+    .photo-grid-captioned .photo-item .caption{font-size:.78rem;letter-spacing:.05em;color:var(--muted);padding:.5rem 0 0;font-style:italic;line-height:1.5;}
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;align-items:center;justify-content:center;}
+    .lightbox.open{display:flex;}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;}
+    .lightbox-close{position:absolute;top:1.5rem;right:2rem;color:#fff;font-size:2rem;cursor:pointer;line-height:1;opacity:.7;transition:opacity .2s;}
+    .lightbox-close:hover{opacity:1;}
+    .lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2rem;cursor:pointer;opacity:.6;transition:opacity .2s;background:none;border:none;padding:.5rem 1rem;}
+    .lightbox-prev:hover,.lightbox-next:hover{opacity:1;}
+    .lightbox-prev{left:1rem;}
+    .lightbox-next{right:1rem;}
+    footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+    @media(max-width:600px){
+      nav{padding:1rem 1.5rem;}
+      .hero,.content{padding-left:1.5rem;padding-right:1.5rem;}
+      .photo-grid,.photo-grid-captioned{grid-template-columns:1fr 1fr;}
+      .trip-title{font-size:clamp(2.5rem,10vw,3.5rem);}
+    }
+  </style>
 </head>
 <body>
+
 <nav>
   <a class="nav-brand" href="../index.html">Brodie Trips</a>
   <ul class="nav-links">
@@ -45,241 +74,981 @@ footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text
     <li><a href="../cocktails/index.html">Cocktails</a></li>
   </ul>
 </nav>
+
 <div class="hero">
   <a class="back-link" href="../index.html">← All Trips</a>
-  <h1 class="trip-title">Spain & Portugal</h1>
+  <h1 class="trip-title">Spain &amp; Portugal</h1>
   <div class="trip-meta">2022</div>
-  <div class="route">Madrid <span>··</span> Toledo <span>··</span> Granada <span>··</span> Córdoba <span>··</span> Ardales <span>··</span> Ronda <span>··</span> Sevilla <span>··</span> Albufeira <span>··</span> Lisboa</div>
+  <div class="route">
+    Madrid <span>··</span> Toledo <span>··</span> Granada <span>··</span> Córdoba <span>··</span> Ronda <span>··</span> Sevilla <span>··</span> Algarve <span>··</span> Lisboa
+  </div>
 </div>
-<div class="content"><div class="city-section"><h2 class="city-name">Madrid</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5293_Copy_q3c3hp.jpg" alt="" loading="lazy">
-<p class="city-text">Bodega de los Secretos — a wine cellar transformed into a restaurant. Restorers found 3 clandestine passageways used to smuggle goods during the Napoleonic Wars. The duck was amazing!</p>
-<p class="city-text">Mercado San Miguel — so fun! We are not beer drinkers but LOVED cerveza limón.</p>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/res1_wkwo5l.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5287_auzjru.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/duck_eczcip.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/prado_wubgpm.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/park_odzmk8.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/mona_rhczrf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/madrid1_knvabv.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9404_glnsxp.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9400_zxk4fj.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9387_tmasys.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9384_rgcghy.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9376_rllah0.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9363_xipsxb.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9383_jdrdp5.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5303_ra9yic.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9369_ylxsac.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5331_dzzs3g.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9359_opwf9g.jpg" alt="" loading="lazy"></div>
+
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5293_Copy_q3c3hp.jpg" alt="Spain & Portugal 2022">
+
+<div class="content">
+
+  <!-- MADRID -->
+  <div class="city-section">
+    <h2 class="city-name">Madrid</h2>
+
+    <div class="city-text">Pick up a rental car at Atocha Station — it's a great central starting point, and there's a beautiful vertical garden by Patrick Blanc right nearby.</div>
+
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5303_ra9yic.jpg" alt="Church of Saint Jerome the Royal">
+        <div class="caption">Church of Saint Jerome the Royal, situated between the Prado and Retiro Park</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9363_xipsxb.jpg" alt="Vertical garden by Patrick Blanc">
+        <div class="caption">Vertical garden by Patrick Blanc — near Atocha Station</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9359_opwf9g.jpg" alt="Giant baby head sculptures at Atocha Station">
+        <div class="caption">Giant baby head sculptures at Atocha Station</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5331_dzzs3g.jpg" alt="Yummy bakery">
+        <div class="caption">Yummy bakery — Calle de San Pedro, 9</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9383_jdrdp5.jpg" alt="Enjoying jamon on our Airbnb rooftop">
+        <div class="caption">Enjoying jamón on our Airbnb rooftop, yum!</div>
+      </div>
+    </div>
+
+    <div class="section-label">Retiro Park</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5287_auzjru.jpg" alt="Retiro Park">
+        <div class="caption">Retiro Park</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5293_Copy_q3c3hp.jpg" alt="Crystal Palace in Retiro Park">
+        <div class="caption">Crystal Palace in Retiro Park</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/park_odzmk8.jpg" alt="Broccoli trees in Retiro Park">
+        <div class="caption">Broccoli trees in Retiro Park</div>
+      </div>
+    </div>
+
+    <div class="section-label">The Prado Museum</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9376_rllah0.jpg" alt="Entrance to the Prado Museum">
+        <div class="caption">Entrance to the Prado Museum</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/prado_wubgpm.jpg" alt="An artist on site">
+        <div class="caption">An artist on site!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/mona_rhczrf.jpg" alt="Da Vinci's Mona Lisa at the Prado">
+        <div class="caption">One of Da Vinci's Mona Lisas is in the Prado</div>
+      </div>
+    </div>
+
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5270_nrgslu.jpg" alt="Royal Palace of Madrid">
+        <div class="caption">Royal Palace of Madrid</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9361_dnjwq2.jpg" alt="Plaza Mayor">
+        <div class="caption">Plaza Mayor — Caluana restaurant nearby is recommended</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5282_zrsrjw.jpg" alt="Picasso's Guernica">
+        <div class="caption">Picasso's Guernica is in the Reina Sofía Museum, near the Prado — a must see!</div>
+      </div>
+    </div>
+
+    <div class="section-label">Bodega de los Secretos</div>
+    <div class="city-text">A cool wine cellar transformed into a restaurant near our Airbnb. <strong>The duck was amazing!</strong> In the 17th century this winery sat at the border of Madrid. Restorers discovered 3 clandestine passageways used to smuggle goods into the city to avoid taxes — and later to escape troops during war.</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9384_rgcghy.jpg" alt="Bodega de los Secretos">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/duck_eczcip.jpg" alt="Duck at Bodega de los Secretos">
+        <div class="caption">The duck was amazing!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/res1_wkwo5l.jpg" alt="Bodega de los Secretos interior">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9387_tmasys.jpg" alt="Bodega de los Secretos">
+      </div>
+    </div>
+
+    <div class="section-label">Mercado San Miguel</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9369_ylxsac.jpg" alt="Mercado San Miguel">
+        <div class="caption">Mercado San Miguel — so fun!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9383_jdrdp5.jpg" alt="Cerveza limón">
+        <div class="caption">We are not beer drinkers but LOVED cerveza limón</div>
+      </div>
+    </div>
+
+    <div class="city-text"><em>Also recommended near the Airbnb: <strong>madrid1</strong> — a great local spot</em></div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/madrid1_knvabv.jpg" alt="Madrid restaurant">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9404_glnsxp.jpg" alt="Madrid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9400_zxk4fj.jpg" alt="Madrid">
+    </div>
+  </div>
+
+  <!-- TOLEDO -->
+  <div class="city-section">
+    <h2 class="city-name">Toledo</h2>
+
+    <div class="takeaways">
+      <div class="takeaways-title">Quick Takeaways</div>
+      <ul>
+        <li>If driving to Toledo, stop at the <strong>Mirador del Valle</strong> overlook on Carretera de Circunvalación — fabulous view of the city, and there's a restaurant for drinks and snacks</li>
+        <li>The cathedral and audio guide are a must — there are two lines: one for your ticket, one for the free audio guide. Bring your own headphones or they'll charge you</li>
+        <li>You MUST eat at <strong>Botero</strong> — best meal ever! Book reservations, it fills up fast</li>
+        <li>Free parking: go to Incurnia Street near the river — look for the orange lines (not green, those are for residents). About €5/day; weekends after 2pm are free</li>
+        <li>Other restaurant recs: Embrujo, Clandestina, La Orza, La Cabala, Venta de Aires, Cardenal, La Cave, Entre 2 Fuegos</li>
+      </ul>
+    </div>
+
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5336_Copy_Copy_qafora.jpg" alt="Toledo overlook">
+        <div class="caption">The view from the Mirador del Valle — stop here on your way in</div>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5365_gghxjt.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5402_Copy_kgokci.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5371_xbewiu.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5382-1_xrnoru.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5381_p2zlys.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5374_z5c3zv.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5416_orffag.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5415_h0dxe8.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5407_yk0khp.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5388-1_z9axob.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5393_dqslz6.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5423_jmibl0.jpg" alt="Toledo">
+    </div>
+
+    <div class="section-label">Toledo Cathedral</div>
+    <div class="city-text">Begun in 1226 under Ferdinand III, built on top of a Muslim mosque. A magnificent example of medieval Gothic architecture.</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5353_hr0arq.jpg" alt="Toledo Cathedral">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5346_mjg0gf.jpg" alt="Toledo Cathedral">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5354_closvu.jpg" alt="Toledo Cathedral">
+    </div>
+
+    <div class="city-text">Our Airbnb, "The Cave" on Calle Pozo Amargo 20, right near the cathedral.</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9400_zxk4fj.jpg" alt="Toledo Airbnb">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5427_vdh5cb.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5428_zvwxb2.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5432_zweude.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5434-1_b8i4c8.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5435_kgqoce.jpg" alt="Toledo">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5437_giutus.jpg" alt="Toledo">
+    </div>
+
+    <div class="section-label">Botero — Best meal in Spain!</div>
+    <div class="city-text">We let the chef cook for us and had the most amazing dishes and drinks — all for about €100.</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5383_beqvrm.jpg" alt="Goat cheese salad from Fazula">
+        <div class="caption">Goat cheese salad from Fazula</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5384_cgydhy.jpg" alt="Botero Toledo">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5445_hnyh5h.jpg" alt="Good bakery by the cathedral">
+        <div class="caption">Good bakery by the cathedral</div>
+      </div>
+    </div>
+
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5347_mjg0gf.jpg" alt="Toledo street">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5360_ck8efc.jpg" alt="Free parking street">
+        <div class="caption">Follow our street down to the river for free parking</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GRANADA -->
+  <div class="city-section">
+    <h2 class="city-name">Granada</h2>
+
+    <div class="takeaways">
+      <div class="takeaways-title">Quick Takeaways</div>
+      <ul>
+        <li><strong>Om Kalsum</strong> at C. Jardines, 17 — wonderful small restaurant serving Moroccan &amp; Middle Eastern tapas. Order the meatballs!</li>
+        <li>Only city left in Spain where you get a <strong>free tapa</strong> with each drink you order</li>
+        <li>Stayed at "The Lover's Workshop" at C. San Juan de los Reyes, 80 in the old Moorish quarter near the Alhambra — getting there with luggage was tough on the winding cobblestone hills</li>
+      </ul>
+    </div>
+
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5663_kvrtyo.jpg" alt="Granada">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/2_granada_gjuloh.jpg" alt="Granada">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/F1D48668-B51D-4B34-92EB-A906F3C9460A_z7rtwl.jpg" alt="Granada">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5466_phmjml.jpg" alt="Granada">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5482_xrcjew.jpg" alt="Granada">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5467_Copy_zvw2wu.jpg" alt="Granada">
+    </div>
+  </div>
+
+  <!-- CÓRDOBA -->
+  <div class="city-section">
+    <h2 class="city-name">Córdoba</h2>
+
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5780_b3qp3z.jpg" alt="Hotel Córdoba">
+        <div class="caption">Hotel</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9478_jydh64.jpg" alt="Córdoba">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9477_uvajzc.jpg" alt="Córdoba">
+      </div>
+    </div>
+
+    <div class="section-label">The Mezquita</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5763_ebj7dc.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5768_uqgvud.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5760.MOV_lsx9z2.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5754_hivh26.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5758_ndbgob.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5753_oseavt.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5751.MOV_hxnpvb.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5743_Copy_vwpztk.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5741_u1fsvn.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5735_ml3tcf.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5732.MOV_iufstz.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5728_ued0ek.jpg" alt="Mezquita Córdoba">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5722_wx0haw.jpg" alt="Interior of the Mezquita">
+    </div>
+  </div>
+
+  <!-- RONDA -->
+  <div class="city-section">
+    <h2 class="city-name">Ronda</h2>
+
+    <div class="city-text"><strong>Our favorite small city in Spain.</strong></div>
+
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5909_sy4bhf.jpg" alt="View from our back deck">
+        <div class="caption">View from our back deck</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6022_sqnnlx.jpg" alt="Narrow streets to our apartment">
+        <div class="caption">Driving through the narrow streets to our apartment — second door on the right</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5994_Copy_u3sr10.jpg" alt="Front door to our Airbnb">
+        <div class="caption">Front door to our Airbnb — Calle Virgen de los Remedios 36</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9536_n5cdei.jpg" alt="Back deck with view of Puente Nuevo">
+        <div class="caption">Back deck with view of the Puente Nuevo</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5913_prht8u.jpg" alt="Interior view of Puente Nuevo">
+        <div class="caption">Interior view of the Puente Nuevo</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5915_hsrsb9.jpg" alt="View from bedroom">
+        <div class="caption">View from bedroom</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6006_cx0yfb.jpg" alt="Night view of the Puente Nuevo">
+        <div class="caption">Night view of the Puente Nuevo</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6020_c8xx6y.jpg" alt="View from apartment below">
+        <div class="caption">View from apartment below</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9552_ivlbp3.jpg" alt="View from opposite side of bridge with rainbow">
+        <div class="caption">View from opposite side of bridge — we even captured the rainbow!</div>
+      </div>
+    </div>
+
+    <div class="section-label">Casa del Rey Moro Gardens</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5926_mjk277.jpg" alt="Casa del Rey Moro gardens entrance">
+        <div class="caption">Outside the Casa del Rey Moro gardens entrance</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5948_fgfskl.jpg" alt="A peacock roaming free">
+        <div class="caption">We saw a peacock roaming free!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5972_iwltel.jpg" alt="Ronda gardens">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5974_qoxumi.jpg" alt="Evan really liked it here">
+        <div class="caption">Evan really liked it here!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5925_l7idxn.jpg" alt="Funny figures on the facade">
+        <div class="caption">Check out the funny figures on the facade</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5963_fri939.jpg" alt="Iglesia de Santa María de la Encarnación la Mayor">
+        <div class="caption">Iglesia de Santa María de la Encarnación la Mayor — converted from a former mosque</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9577_q6xtbm.jpg" alt="Gorgeous countryside leaving Ronda">
+        <div class="caption">As we were leaving Ronda — gorgeous countryside</div>
+      </div>
+    </div>
+
+    <div class="section-label">Las Maravillas — Yummy Paella</div>
+    <div class="city-text"><strong>Yummy paella at Las Maravillas</strong> at Carrera Espanel, 12. <em>Tragatá at Calle Nueva, 4 was highly recommended too but was closed the night we were there — will have to go back!</em></div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6003_tmywfs.jpg" alt="Paella at Las Maravillas">
+    </div>
+  </div>
+
+  <!-- SEVILLA -->
+  <div class="city-section">
+    <h2 class="city-name">Sevilla</h2>
+
+    <div class="takeaways">
+      <div class="takeaways-title">Quick Takeaways</div>
+      <ul>
+        <li><strong>Alcázar</strong> is a must see — bring a bag lunch to eat in the gardens. We thought it was even more impressive than the one in Granada</li>
+        <li>Mercado El Postigo — an art market on C. Arfe, perfect place to buy gifts</li>
+        <li><strong>La Brunilda Restaurant</strong> — be sure to make a reservation</li>
+        <li>Bar Alfalfa — tiny restaurant on C. Candilejo with great vibe and good food</li>
+        <li>You must see a <strong>flamenco show</strong> while in Seville — we got tickets to La Casa de Flamenco, a 15th-century home-turned theater</li>
+        <li>A <strong>bike tour</strong> is a great way to cover a lot of ground in this big city — we used SEEBYBIKE Tours and our guide was fantastic</li>
+      </ul>
+    </div>
+
+    <div class="section-label">The Alcázar</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6086_cdfcwj.jpg" alt="The Alcázar impressive wall">
+        <div class="caption">The Alcázar is surrounded by this impressive wall</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6175_glvmhd.jpg" alt="Second entrance at Puerto del Leon">
+        <div class="caption">Once you go through the Puerto del León entrance you see this second entrance ahead</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6130_pcqryo.jpg" alt="Patio de las Doncellas">
+        <div class="caption">The Patio de las Doncellas looks similar to the one in the Nasrid Palace in Granada</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6152_ydwzw0.jpg" alt="Mudejar architecture">
+        <div class="caption">A celebration of Mudéjar architecture</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6156_cp0nne.jpg" alt="Amazing ornate plaster work">
+        <div class="caption">Amazing ornate plaster work</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6146_p2jbn9.jpg" alt="Alcázar interior">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9664_jwaqks.jpg" alt="Jewish stars in tile work">
+        <div class="caption">Green Jewish stars in the tile work — evidence of Jews and Muslims working together in the Umayyad Caliphate</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6158_eppirf.jpg" alt="Hanging wisteria in the gardens">
+        <div class="caption">As you enter the gardens, hanging wisteria greets you</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6160_aqwvsw.jpg" alt="Bring a picnic to the gardens">
+        <div class="caption">Bring a picnic lunch to enjoy in the lush gardens — you can't do this at the Alhambra!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6164_hhq5tw.jpg" alt="Alcázar gardens">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6170_ycztis.jpg" alt="Maze in the gardens">
+        <div class="caption">There is a maze in the gardens! Much trickier to find your way out when you're shorter than the hedges</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6172_apwqti.jpg" alt="Alcázar gardens">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9660_bfwkwx.jpg" alt="Alcázar">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6226_r1zmek.jpg" alt="Santa Cruz area">
+        <div class="caption">Right next to the Alcázar is the Santa Cruz area — the oldest part of the city</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9649_hmhwmz.jpg" alt="Tile work is everywhere">
+        <div class="caption">If you look closely, tile work is everywhere!</div>
+      </div>
+    </div>
+
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6093_jwfajw.jpg" alt="Evan enjoying Tinto de verano">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6095_dcwwhf.jpg" alt="Tinto de verano summer wine">
+        <div class="caption">Evan enjoying Tinto de verano — red wine mixed with lemon soda and orange &amp; lemon slices. Really refreshing on a hot day!</div>
+      </div>
+    </div>
+
+    <div class="section-label">Seville Cathedral — Largest Gothic Cathedral in the World</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9630_f40obh.jpg" alt="Seville Cathedral">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6178_alropx.jpg" alt="Seville Cathedral">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6129_svqbdn.jpg" alt="Seville Cathedral">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6192_qjeiij.jpg" alt="Giraldillo weathervane replica">
+        <div class="caption">Replica of the 4,500 lb bronze weathervane atop the Giralda tower — "Giraldillo" means "she who turns"</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6208_wssjoe.jpg" alt="Ramps to the top of the Giralda">
+        <div class="caption">You can climb to the top of the Giralda — there are ramps instead of stairs so that horses could be ridden up. No building in Seville is allowed to be taller</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9634_tmfg17.jpg" alt="Seville Cathedral interior">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6182_sbcows.jpg" alt="Flamenco on the streets">
+        <div class="caption">You will see flamenco on the streets — but you should also see a proper show!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6037_yvvb9b.jpg" alt="Seville Cathedral">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6195_cbwlf9.jpg" alt="Interior of the cathedral">
+        <div class="caption">Interior of the cathedral</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6206_hivcgd.jpg" alt="Columbus's tomb">
+        <div class="caption">Columbus' tomb is in this cathedral (forgot to take a pic, lol!)</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6204_zjzy2p.jpg" alt="Seville Cathedral">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9622_qivvap.jpg" alt="Exit with Moorish architecture">
+        <div class="caption">Exit of cathedral with Moorish architecture</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9624_b9u2mg.jpg" alt="Red marks on exterior">
+        <div class="caption">These red marks were discovered when the exterior was cleaned — archaeologists believe they date from the 14th century. Rumor has it they were made of blood!</div>
+      </div>
+    </div>
+
+    <div class="section-label">Our Airbnb &amp; the Neighborhood</div>
+    <div class="city-text">On Calle Santa María la Blanca in the Santa Cruz district — perfect location, and the deck was a great place to relax and take in the city.</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6080_fcpzev.jpg" alt="View from lower roof deck">
+        <div class="caption">View from lower roof deck</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6218_z7esqq.jpg" alt="View from upper roof deck">
+        <div class="caption">View from upper roof deck</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9587_v4fcvp.jpg" alt="Facade of our Airbnb">
+        <div class="caption">Façade of our Airbnb — ours was the top two floors, you can see me waving from a balcony!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6246-1_rfbdby.jpg" alt="Church directly across from us">
+        <div class="caption">Church directly across from us — couldn't help but hear church bells, lol!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6082_qwklhx.jpg" alt="Calle Mateos Gago">
+        <div class="caption">Calle Mateos Gago — the tree and cafe-lined street leading to the Giralda from our Airbnb</div>
+      </div>
+    </div>
+
+    <div class="section-label">Semana Santa</div>
+    <div class="city-text">We were in Seville a few days before Semana Santa — the week leading up to Easter. Huge statues representing the Passion of Christ take to the streets in processions lasting up to 12 hours. Others in the procession wear robes with conical hoods which bear a striking resemblance to the K.K.K. We were assured there is no connection!</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6055_g5cuxb.jpg" alt="Semana Santa procession">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6056_rxa2mj.jpg" alt="Semana Santa procession">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6108_fneawj.jpg" alt="Semana Santa procession">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9656_jcnrub.jpg" alt="Semana Santa">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6124_vsfzih.jpg" alt="School children doing mock parades">
+        <div class="caption">School children do mock parades to learn about the tradition</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6058_j1ncyu.jpg" alt="Semana Santa">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9713_mawvaw.jpg" alt="A bit scary">
+        <div class="caption">A bit scary!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6125_lwbrir.jpg" alt="Display in a store window">
+        <div class="caption">Display in a store window</div>
+      </div>
+    </div>
+
+    <div class="section-label">Bike Tour Highlights</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5186_zohf6o.jpg" alt="Plaza de España">
+        <div class="caption">Plaza de España</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9609_v3wbfh.jpg" alt="Colorful tile work Art Deco Moorish">
+        <div class="caption">Colorful tile work — Art Deco style with Moorish touches</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9602-1_uqhpil.jpg" alt="Tobacco factory turned University">
+        <div class="caption">Tobacco factory turned University — our bike tour guide goes to school here!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6032_hlsqzl.jpg" alt="Interior of a random church">
+        <div class="caption">Interior of a random church</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6116_msmixj.jpg" alt="Plaza Salvador">
+        <div class="caption">Plaza Salvador</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6113_ihiith.jpg" alt="Plaza Alameda de Hercules">
+        <div class="caption">Plaza Alameda de Hércules</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6091_icwbfd.jpg" alt="Using existing column in building">
+        <div class="caption">Using existing column in building</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6104_dsulrq.jpg" alt="Round wheels used to create walls">
+        <div class="caption">We saw those round "wheels" everywhere — they used what they had to create walls</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6054_hmcpvv.jpg" alt="Seville street">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6105_n2npu8.jpg" alt="Random courtyard">
+        <div class="caption">Random courtyard</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9644_bwaymp.jpg" alt="Another beautiful random courtyard">
+        <div class="caption">Another beautiful random courtyard</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6244_tqpxib.jpg" alt="Yellow and white typical of Seville">
+        <div class="caption">Typical yellow and white used throughout Seville</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9720_yydp2m.jpg" alt="Street across from our Airbnb">
+        <div class="caption">Street across from our Airbnb</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6119_bxiuuf.jpg" alt="Exterior of Airbnb">
+        <div class="caption">Exterior of our Airbnb with the yellow and white accents</div>
+      </div>
+    </div>
+
+    <div class="section-label">Restaurants</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6076_c0gqtf.jpg" alt="Bar Baratillo">
+        <div class="caption">Bar Baratillo — great meal with interesting decor!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6042_wxeb4b.jpg" alt="Taberna del Alabardero">
+        <div class="caption">Taberna del Alabardero, C. Zaragoza, 20</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6188_yfvuwu.jpg" alt="Excellent meal at La Brunilda">
+        <div class="caption">Excellent meal at La Brunilda — C. Galera, 5</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6834_bjlmpu.jpg" alt="Restaurant recommendations from bike tour guide">
+        <div class="caption">List of recommended restaurants from our bike tour guide</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ALGARVE, PORTUGAL -->
+  <div class="city-section">
+    <h2 class="city-name">Algarve, Portugal</h2>
+
+    <div class="takeaways">
+      <div class="takeaways-title">Quick Takeaways</div>
+      <ul>
+        <li>Boat ride of the caves is a must — make sure the boat is small with rubber sides so you can go inside the caves, or better yet, kayak. We used <strong>AllBoats</strong></li>
+        <li>Albufeira was convenient because we could walk to the marina, but I wouldn't recommend the town itself — it was touristy</li>
+        <li>If you end up in Albufeira have a meal at <strong>Prazeres</strong></li>
+        <li><strong>Tavira</strong> is a small town on the coast definitely worth a visit</li>
+      </ul>
+    </div>
+
+    <div class="section-label">The Caves!</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave01_rz38vi.jpg" alt="Inside Benagil Cave with AllBoat tour">
+        <div class="caption">Inside Benagil Cave with AllBoat tour</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave02_dch7pw.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave03_zcbx5s.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave04_xow6t2.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave05_lcwqso.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave06_ye034u.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave07_xdjrae.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave08_tvehws.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave09_oazzqq.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave10_yog36z.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave11_rhpiud.jpg" alt="Algarve Caves">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave12_yq058g.jpg" alt="Rubber-sided boat needed for cave access">
+        <div class="caption">It's important that the boat has rubber sides so you can go into the caves</div>
+      </div>
+    </div>
+
+    <div class="section-label">Albufeira</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_01_n4res9.jpg" alt="Bar Portas da Villa">
+        <div class="caption">Bar Portas da Villa — fun place to stop for a drink</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_02_oiqzxb.jpg" alt="Shell-decorated bar">
+        <div class="caption">Owner decorated the exterior and interior with shells he collected on the beach!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_03_jyyrma.jpg" alt="View of old town from tunnel">
+        <div class="caption">View of the old town from on top of the tunnel leading to Praia do Túnel (Tunnel Beach)</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_04_fvjc37.jpg" alt="Albufeira">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_05_mlqabp.jpg" alt="View of the Albufeira Marina">
+        <div class="caption">View of the Albufeira Marina</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira__06_qlm2ql.jpg" alt="View from deck of Airbnb">
+        <div class="caption">View from deck of Airbnb</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_07_dnfjzc.jpg" alt="Our street with colorful tourist train">
+        <div class="caption">Our street with colorful tourist "train"</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_08_gxpiva.jpg" alt="An elevator takes you down to the beach">
+        <div class="caption">An elevator takes you down to the beach!!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_09_pdojto.jpg" alt="Paella and monkfish at Prazeres">
+        <div class="caption">Paella and the most amazing monkfish ever! (Prazeres)</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_10_fuahrt.jpg" alt="Wonderful family owned restaurant">
+        <div class="caption">Wonderful family-owned restaurant</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_11_weexc9.jpg" alt="Sophia the owner's daughter">
+        <div class="caption">That's Sophia, the owner's daughter — she was lovely and the seafood cataplana was delicious</div>
+      </div>
+    </div>
+
+    <div class="section-label">Tavira — Worth a Stop</div>
+    <div class="city-text">We stopped in Tavira for lunch on our way from Seville to Albufeira. Beautiful!</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira01_dydwqs.jpg" alt="Tavira">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira02_joalsm.jpg" alt="Tavira">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira03_cfnzhb.jpg" alt="Tavira">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira04_dhefpf.jpg" alt="Tavira">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira05_fj1mv8.jpg" alt="Tavira">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira06_yqu10d.jpg" alt="Tavira">
+    </div>
+  </div>
+
+  <!-- LISBOA -->
+  <div class="city-section">
+    <h2 class="city-name">Lisboa</h2>
+
+    <div class="takeaways">
+      <div class="takeaways-title">Quick Takeaways</div>
+      <ul>
+        <li>Download the <strong>Rick Steves audio walking tour</strong> to get the lay of the land</li>
+        <li>Have lunch at one of the booths in <strong>Praça da Figueira</strong> — get pastel de nata from Confeitaria Nacional across from the market</li>
+        <li>Purchase the <strong>24-hour bus/train pass</strong> so you can hop on and off with a swipe of the card — buy it at a small tobacco shop</li>
+        <li>Wander the maze of cobbled streets in the <strong>Alfama district</strong> in the evening to hear Fado music</li>
+        <li><strong>LX Factory</strong> — great place to shop and have lunch</li>
+        <li>The <strong>Museu Nacional do Azulejo</strong> (Tile Museum) is a must see, located in the Alfama district</li>
+        <li><strong>Ginja</strong> — a sweet cherry liqueur off Rossio Square, served in chocolate shot glasses by old women all over the Alfama</li>
+      </ul>
+    </div>
+
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6581_r8eemb.jpg" alt="Rua Augusta Arch">
+        <div class="caption">The Rua Augusta Arch celebrates the reconstruction of Lisbon after the 1755 earthquake</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6574_xcolk4.jpg" alt="Commerce Square">
+        <div class="caption">Commerce Square</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6579_dy28ry.jpg" alt="Bronze statue of Joseph I of Portugal">
+        <div class="caption">The bronze statue of Joseph I of Portugal, King during the Great Earthquake</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6592_qkahh6.jpg" alt="Church of St. Dominic">
+        <div class="caption">Church of St. Dominic</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6596_hb3rma.jpg" alt="Star of David outside church of Sao Domingos">
+        <div class="caption">Star of David outside the church of Sao Domingos — honors the hundreds of Jews killed in the 1506 Easter Slaughter</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6604_cdtvtg.jpg" alt="Praça da Figueira">
+        <div class="caption">Praça da Figueira</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6609_gutocv.jpg" alt="Rossio Railway Station">
+        <div class="caption">The gorgeous facade of the Rossio Railway Station</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6627_mtkk07.jpg" alt="A beautiful square with street musician">
+        <div class="caption">A beautiful square where a street musician was playing a Damien Rice song!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6628_udevqg.jpg" alt="Ruins of Carmo Convent">
+        <div class="caption">Ruins of the Carmo Convent — destroyed in the 1755 earthquake, now an archaeological museum</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6632_yermtk.jpg" alt="Santa Justa Lift">
+        <div class="caption">The Santa Justa Lift — gets you from the Baixa neighbourhood to the Bairro Alto district</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6637_nwoub0.jpg" alt="Traditional Lisbon street lamp">
+        <div class="caption">Traditional Lisbon street lamp</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6654_ng9kap.jpg" alt="Night view from our Airbnb in Alfama">
+        <div class="caption">Night view from our Airbnb in the Alfama District</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6709_zh5ztv.jpg" alt="Tagus River in the background">
+        <div class="caption">You can see the Tagus River in the background</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6719_Copy_domtqn.jpg" alt="Near the Sao Jorge Castle with peacocks">
+        <div class="caption">Near the Sao Jorge Castle — great shops, restaurants and peacocks!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6737_sjk1lj.jpg" alt="Orange trees in Lisbon">
+        <div class="caption">Orange trees are here too!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9805_ulsxcp.jpg" alt="About to take the funicular">
+        <div class="caption">About to take the funicular — it beats walking, and you can use the day pass</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9811_maqxal.jpg" alt="Castelo de São Jorge in the background">
+        <div class="caption">Castelo de São Jorge up on the hill in the background</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6584_o0xdgg.jpg" alt="Admiring sights during Rick Steves walking tour">
+        <div class="caption">Admiring the sights during our Rick Steves walking tour!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6736_ugfmwi.jpg" alt="Yellow trams in Lisbon">
+        <div class="caption">The yellow trams are one of the best ways to move around Lisbon</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6745_smeyjo.jpg" alt="24 hr train/bus pass">
+        <div class="caption">24-hr train/bus pass — a must!</div>
+      </div>
+    </div>
+
+    <div class="section-label">LX Factory</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9835_nbujbd.jpg" alt="LX Factory">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6664_ekrijf.jpg" alt="LX Factory">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6665_v8wkoq.jpg" alt="LX Factory">
+    </div>
+
+    <div class="section-label">Portuguese Pavement (Azulejo)</div>
+    <div class="city-text">These tiled streets and sidewalks are in danger of disappearing — not only can they be incredibly slippery, but there are fewer and fewer tradespeople interested in learning the backbreaking art of maintaining them. The word <em>azulejo</em> stems from Arabic roots, meaning "small polished stone."</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6582_mhxpqk.jpg" alt="Portuguese pavement">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6627_mtkk07.jpg" alt="Portuguese pavement">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9828_hucevn.jpg" alt="Portuguese pavement">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9827_nkajrj.jpg" alt="Portuguese pavement">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6657_d2vvzm.jpg" alt="Portuguese pavement">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9821_e9b7rn.jpg" alt="Portuguese pavement">
+    </div>
+
+    <div class="section-label">Tile Museum — Museu Nacional do Azulejo</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6670_gystr6.jpg" alt="Tile Museum">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6674_azrdpy.jpg" alt="Tile Museum">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6680_h2u3rg.jpg" alt="Tile Museum">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6700_grd98d.jpg" alt="Tile Museum">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6701_yswnzv.jpg" alt="Tile Museum">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6703_nrxxv4.jpg" alt="Tile Museum">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9840-1_guvumz.jpg" alt="Tile Museum">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9841-1_t1amou.jpg" alt="Tile Museum">
+    </div>
+
+    <div class="city-text">Tile is everywhere you look!</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6585_cq3qxj.jpg" alt="Lisbon tiles">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6626_aobozz.jpg" alt="Lisbon tiles">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6636_bdxzmb.jpg" alt="Lisbon tiles">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9789_oc1xso.jpg" alt="Lisbon tiles">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9814_e0d1rl.jpg" alt="Lisbon tiles">
+    </div>
+
+    <div class="section-label">Food &amp; Drink</div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6598_i7fjbt.jpg" alt="Ginja bar off Rossio Square">
+        <div class="caption">Ginja bar off Rossio Square — a sweet cherry liqueur. Old women sell it in chocolate shot glasses all over the Alfama section</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6558_ojl5sj.jpg" alt="Pastel de nata">
+        <div class="caption">Pastel de nata — yum! Monks used egg whites to starch the nun's habits and needed a use for all the egg yolks — so these were created!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6588_lkfpih.jpg" alt="Pastel de Nata at Confeitaria Nacional">
+        <div class="caption">We got Pastel de Nata at Confeitaria Nacional bakery</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6591_sdudxm.jpg" alt="Bacalhau dried salted cod">
+        <div class="caption">Bacalhau — dried salted cod. Doesn't look appetizing but once soaked in milk and prepared it is delicious!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9823_cbq7pm.jpg" alt="Cod fritters">
+        <div class="caption">Cod fritters — another tasty treat!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6663_fxvswl.jpg" alt="Wonderful stand at Praça da Figueira Market">
+        <div class="caption">Wonderful stand at the Praça da Figueira Market</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6658_xaxj2x.jpg" alt="Best sandwich of the trip">
+        <div class="caption">Best sandwich of the trip!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6661_rq5nog.jpg" alt="Great cheese from the market">
+        <div class="caption">Great cheese that we bought at the market</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6742_i1cssq.jpg" alt="Roda Viva restaurant">
+        <div class="caption">Lovely meal at tiny Mozambique restaurant Roda Viva in the Alfama section</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- .content -->
+
+<footer>© The Brodies &nbsp;·&nbsp; Adventures around the world</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lb-close">&times;</span>
+  <button class="lightbox-prev" id="lb-prev">&#8592;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">&#8594;</button>
 </div>
-</div>
-<div class="city-section"><h2 class="city-name">Toledo</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5365_gghxjt.jpg" alt="" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Stop at Mirador del Valle for a fabulous view of the city</li><li>The cathedral and audio guide are a must — bring your own headphones</li><li>You MUST eat at Botero — best meal ever! Make reservations early</li></ul></div>
-<p class="city-text">Toledo Cathedral was begun in 1226 under Ferdinand III — a magnificent example of medieval Gothic architecture. We stayed in 'The Cave' Airbnb — an incredible spot in the old city.</p>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5371_xbewiu.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5336_Copy_Copy_qafora.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5374_z5c3zv.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5382-1_xrnoru.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5354_closvu.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5347_mjg0gf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5381_p2zlys.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5353_hr0arq.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5360_ck8efc.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-<div class="city-section"><h2 class="city-name">Granada</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5467_Copy_zvw2wu.jpg" alt="" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Om Kalsum at C. Jardines, 17 — wonderful Moroccan tapas. Order the meatballs!</li><li>Only city left in Spain where you get a free tapa with each drink</li><li>Stayed at 'The Lover's Workshop' in the old Moorish quarter near the Alhambra</li></ul></div>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5466_phmjml.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/F1D48668-B51D-4B34-92EB-A906F3C9460A_z7rtwl.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5663_kvrtyo.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5482_xrcjew.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/2_granada_gjuloh.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-<div class="city-section"><h2 class="city-name">Córdoba</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5780_b3qp3z.jpg" alt="" loading="lazy">
-<p class="city-text">A stunning historic city — the Mezquita is breathtaking.</p>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5768_uqgvud.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5760.MOV_lsx9z2.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5763_ebj7dc.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5758_ndbgob.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5754_hivh26.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5753_oseavt.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5751.MOV_hxnpvb.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5743_Copy_vwpztk.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5741_u1fsvn.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5735_ml3tcf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5732.MOV_hb2ug2.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5728_ued0ek.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5722_wx0haw.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9478_jydh64.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9477_uvajzc.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-<div class="city-section"><h2 class="city-name">Ardales</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5416_orffag.jpg" alt="" loading="lazy">
-<p class="city-text">A spectacular natural park in Málaga province — incredible hiking and scenery.</p>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5383_beqvrm.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5437_giutus.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5435_kgqoce.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5434-1_b8i4c8.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5432_zweude.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5428_zvwxb2.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5427_vdh5cb.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5393_dqslz6.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5423_jmibl0.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5415_h0dxe8.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5384_cgydhy.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5407_yk0khp.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5388-1_z9axob.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5402_Copy_kgokci.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-<div class="city-section"><h2 class="city-name">Ronda</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5915_hsrsb9.jpg" alt="" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Our favorite small city in Spain</li><li>Las Maravillas at Carrera Espanel, 12 — yummy paella, incredible view from our back deck</li><li>Tragatá at Calle Nueva, 4 — highly recommended, will have to go back!</li></ul></div>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5913_prht8u.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5909_sy4bhf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9552_ivlbp3.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9536_n5cdei.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6058_j1ncyu.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6056_rxa2mj.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6055_g5cuxb.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6054_hmcpvv.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6042_wxeb4b.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6037_yvvb9b.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6032_hlsqzl.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6022_sqnnlx.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6020_c8xx6y.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6006_cx0yfb.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5925_l7idxn.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6003_tmywfs.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5948_fgfskl.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5963_fri939.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5972_iwltel.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5974_qoxumi.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5994_Copy_u3sr10.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_5926_mjk277.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-<div class="city-section"><h2 class="city-name">Sevilla</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6204_zjzy2p.jpg" alt="" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Alcazar — a must see, bring a bag lunch to eat in the gardens</li><li>Mercado El Postigo — art market on C. Arfe, perfect for gifts</li><li>La Brunilda Restaurant — make a reservation</li><li>Bar Alfalfa — tiny restaurant on C. Candilejo, great vibe</li><li>You must see a flamenco show — La Casa de Flamenco is spectacular</li><li>SEEBYBIKE Tours — fantastic way to see the city</li></ul></div>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6122_hf6xjc.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6119_bxiuuf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6113_ihiith.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6108_fneawj.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6105_n2npu8.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6104_dsulrq.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6095_dcwwhf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6093_jwfajw.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6091_icwbfd.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6086_cdfcwj.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_9664_jwaqks.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6218_z7esqq.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6208_wssjoe.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6206_hivcgd.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6195_cbwlf9.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6192_qjeiij.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6188_yfvuwu.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6182_sbcows.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6178_alropx.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6175_glvmhd.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6172_apwqti.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6170_ycztis.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6164_hhq5tw.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6160_aqwvsw.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6158_eppirf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6156_cp0nne.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6152_ydwzw0.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6130_pcqryo.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6129_svqbdn.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6146_p2jbn9.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6125_lwbrir.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6124_vsfzih.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-<div class="city-section"><h2 class="city-name">Algarve, Portugal</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira06_yqu10d.jpg" alt="" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Boat ride of caves is a must — make sure the boat has rubber sides. We used AllBoats</li><li>Tavira is a small coastal town definitely worth a visit</li><li>If in Albufeira, have a meal at Prazeres</li></ul></div>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira05_fj1mv8.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira04_dhefpf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira03_cfnzhb.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira02_joalsm.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Tavira01_dydwqs.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave12_yq058g.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave11_rhpiud.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave10_yog36z.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave09_oazzqq.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave08_tvehws.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave07_xdjrae.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave06_ye034u.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave05_lcwqso.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave04_xow6t2.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave03_zcbx5s.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave02_dch7pw.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Algarve_Cave01_rz38vi.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_11_weexc9.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_10_fuahrt.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_09_pdojto.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_08_gxpiva.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_07_dnfjzc.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_05_mlqabp.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_04_fvjc37.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_02_oiqzxb.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_01_n4res9.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira_03_jyyrma.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Albufeira__06_qlm2ql.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-<div class="city-section"><h2 class="city-name">Lisboa</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6581_r8eemb.jpg" alt="" loading="lazy">
-<p class="city-text">The end point of a spectacular road trip. Lisboa deserves its own extended stay.</p>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6604_cdtvtg.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6596_hb3rma.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6592_qkahh6.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6579_dy28ry.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6574_xcolk4.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6745_smeyjo.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6742_i1cssq.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6737_sjk1lj.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6736_ugfmwi.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6719_Copy_domtqn.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6709_zh5ztv.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6703_nrxxv4.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6701_yswnzv.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6700_grd98d.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6680_h2u3rg.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6674_azrdpy.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6670_gystr6.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6665_v8wkoq.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6664_ekrijf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6663_fxvswl.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6661_rq5nog.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6658_xaxj2x.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6657_d2vvzm.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6636_bdxzmb.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6627_mtkk07.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6628_udevqg.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6654_ng9kap.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6632_yermtk.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6609_gutocv.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_6637_nwoub0.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-</div>
-<footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
-</body></html>
+
+<script>
+  const allImgs = Array.from(document.querySelectorAll('.photo-grid img, .photo-grid-captioned img'));
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  let current = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    lbImg.src = allImgs[idx].src;
+    lbImg.alt = allImgs[idx].alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showNext() {
+    current = (current + 1) % allImgs.length;
+    lbImg.src = allImgs[current].src;
+    lbImg.alt = allImgs[current].alt;
+  }
+
+  function showPrev() {
+    current = (current - 1 + allImgs.length) % allImgs.length;
+    lbImg.src = allImgs[current].src;
+    lbImg.alt = allImgs[current].alt;
+  }
+
+  allImgs.forEach((img, idx) => img.addEventListener('click', () => openLightbox(idx)));
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-next').addEventListener('click', showNext);
+  document.getElementById('lb-prev').addEventListener('click', showPrev);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
+</script>
+
+</body>
+</html>
