@@ -1,42 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>London — Brodie Trips</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"><style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
-.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
-.nav-links{display:flex;gap:2.5rem;list-style:none;}
-.nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
-.nav-links a:hover{color:var(--ink);}
-.hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
-.back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;}
-.trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}
-.trip-meta{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
-.route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
-.route span{color:var(--accent);}
-.content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
-.city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
-.city-section:last-child{border-bottom:none;}
-.city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
-.takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
-.takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
-.takeaways ul{list-style:none;}
-.takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
-.takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
-.takeaways li:last-child{border-bottom:none;}
-.city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;}
-.hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
-.photo-grid img{width:100%;height:200px;object-fit:cover;display:block;}
-footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
-@media(max-width:600px){nav{padding:1rem 1.5rem;}.hero,.content{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>London — Brodie Trips</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
+    body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+    .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
+    .nav-links a:hover{color:var(--ink);}
+    .hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
+    .back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);display:inline-block;margin-bottom:2rem;transition:color .2s;}
+    .back-link:hover{color:var(--ink);}
+    .trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}
+    .trip-meta{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;}
+    .hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
+    .content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
+    .takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:3rem;}
+    .takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+    .takeaways ul{list-style:none;}
+    .takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
+    .takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
+    .takeaways li:last-child{border-bottom:none;}
+    .takeaways a{color:var(--accent);text-decoration:none;}
+    .takeaways a:hover{text-decoration:underline;}
+
+    /* Photo sections */
+    .photo-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
+    .photo-section:last-child{border-bottom:none;margin-bottom:0;}
+    .section-intro{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;color:var(--ink);}
+    .section-intro strong{font-weight:500;}
+
+    /* Standard grid */
+    .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
+    .photo-grid img{width:100%;height:200px;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s;}
+    .photo-grid img:hover{opacity:.92;}
+
+    /* Captioned photos — full width with caption below */
+    .photo-captioned{margin:1.5rem 0;}
+    .photo-captioned img{width:100%;max-height:520px;object-fit:cover;display:block;cursor:pointer;}
+    .photo-captioned .caption{font-size:.8rem;letter-spacing:.06em;color:var(--muted);padding:.6rem 0 0;font-style:italic;}
+
+    /* Captioned grid — grid of photos each with their own caption */
+    .photo-grid-captioned{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin:1.5rem 0;}
+    .photo-grid-captioned .photo-item img{width:100%;height:200px;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s;}
+    .photo-grid-captioned .photo-item img:hover{opacity:.92;}
+    .photo-grid-captioned .photo-item .caption{font-size:.78rem;letter-spacing:.05em;color:var(--muted);padding:.5rem 0 0;font-style:italic;line-height:1.5;}
+
+    /* Lightbox */
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;align-items:center;justify-content:center;}
+    .lightbox.open{display:flex;}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;}
+    .lightbox-close{position:absolute;top:1.5rem;right:2rem;color:#fff;font-size:2rem;cursor:pointer;line-height:1;opacity:.7;transition:opacity .2s;}
+    .lightbox-close:hover{opacity:1;}
+    .lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2rem;cursor:pointer;opacity:.6;transition:opacity .2s;background:none;border:none;padding:.5rem 1rem;}
+    .lightbox-prev:hover,.lightbox-next:hover{opacity:1;}
+    .lightbox-prev{left:1rem;}
+    .lightbox-next{right:1rem;}
+
+    footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+    @media(max-width:600px){
+      nav{padding:1rem 1.5rem;}
+      .hero,.content{padding-left:1.5rem;padding-right:1.5rem;}
+      .photo-grid,.photo-grid-captioned{grid-template-columns:1fr 1fr;}
+      .trip-title{font-size:clamp(2.5rem,10vw,3.5rem);}
+    }
+  </style>
 </head>
 <body>
+
 <nav>
   <a class="nav-brand" href="../index.html">Brodie Trips</a>
   <ul class="nav-links">
@@ -45,72 +83,297 @@ footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text
     <li><a href="../cocktails/index.html">Cocktails</a></li>
   </ul>
 </nav>
+
 <div class="hero">
   <a class="back-link" href="../index.html">← All Trips</a>
   <h1 class="trip-title">London</h1>
-  <div class="trip-meta">England · 2022</div>
-  
+  <div class="trip-meta">England &nbsp;·&nbsp; 2022</div>
 </div>
-<div class="content"><div class="city-section"><h2 class="city-name">London</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7825_ieu4ve.jpg" alt="" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Stay in Covent Garden — great neighborhood for a first visit</li><li>Take a bicycle tour — Classic London Landmarks with Viator</li><li>Eat at Ottolenghi's NOPI — book way in advance</li><li>Dishoom in Covent Garden — gorgeous restaurant, book in advance</li><li>Sky Garden — free but needs reservations at skygarden.london</li><li>Portobello Market and The Distillery for Portobello Gin</li><li>No need for metro card — use your credit card directly on the tube</li><li>Fentiman Arms (64 Fentiman Road) — best pub food ever</li><li>Seven Dials Market (35 Earlham St) — fun multi-level food court</li><li>Cocktail making class at The Alchemist — so fun!</li><li>SUSHISAMBA — highest outdoor dining terrace in Europe</li><li>Tower of London: Beefeater tour free with admission, use Middle Drawbridge entrance</li></ul></div>
-<p class="city-text">Our Beefeater at the Tower was the first woman to hold that position — she was fabulous!</p>
-<p class="city-text">Charlotte's friend shared a great insider guide: docs.google.com/document/d/1r7wTG2aMWiRx9oNS9619ifqgbh4QW5tGO8A5Cef-KgA</p>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7816_ke6kji.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7804_tb1r15.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7754_dsn4dh.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7730_knvvta.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7723_mqodhb.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7717_nre7qm.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7710_qclrah.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7694_ucv6i9.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7693_vwru1t.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7674_izzfju.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7643_u3woi8.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7637_mq04zc.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7634_z9dtst.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7631_h3pt9r.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7588_uzdw6z.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7585_bxxgba.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7583_ohvwoc.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7553_atfqlx.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7539_gsixui.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7533_aerwhr.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7524_xreylr.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7474_p0zsmd.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7454_pqze0a.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0145_maxnnk.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0137_nxwayp.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7482_do2mhc.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0204_b7oejl.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0191_cnbarm.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7479_w8eyz9.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0253_bqtyb5.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7466_e3aknx.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_3662_qfkudm.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0167_i0zq1e.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7483_mjqhjn.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0213_s7uwhl.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0239_htceac.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0136_isut2u.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0172_nt1hp9.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_3380_aagwmn.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0146_qvyvep.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_3645_ct6qm8.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0149_hfh17v.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0267_lmapdr.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_3350_y1im5u.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0122_eu9gne.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0222_mqbizu.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0203_mwwiaw.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0210_ec6zch.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7700_mzcvsr.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/download_id7wad.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Londonpub_a8jufj.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_8084_u4udxc.jpg" alt="" loading="lazy"></div>
+
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7825_ieu4ve.jpg" alt="London">
+
+<div class="content">
+
+  <!-- Quick Takeaways -->
+  <div class="takeaways">
+    <div class="takeaways-title">Quick Takeaways</div>
+    <ul>
+      <li>Stay in Covent Garden — a great neighborhood, especially for your first time in the city</li>
+      <li>Take a bicycle tour — we booked the Classic London Landmarks Bicycle Tour with Viator</li>
+      <li>Eat at one of Ottolenghi's restaurants</li>
+      <li>Dishoom (Covent Garden location) — gorgeous restaurant and great food, book way in advance</li>
+      <li>Visit Sky Garden — it's free but you need reservations at <a href="https://skygarden.london/" target="_blank">skygarden.london</a></li>
+      <li>Portobello Market is a must, and so is The Distillery where they make Portobello Gin — <a href="https://www.the-distillery.london" target="_blank">the-distillery.london</a></li>
+      <li>Take advantage of the free museums</li>
+      <li>No need for a metro card — use your credit card directly (use the same card to exit as you used to enter)</li>
+      <li>Fentiman Arms (64 Fentiman Road) — best pub food ever and great atmosphere</li>
+      <li>Seven Dials Market (35 Earlham St) — multi-level food court with dozens of micro-restaurants &amp; bars</li>
+      <li>Cocktail making class at The Alchemist — so fun!</li>
+      <li>SUSHISAMBA — highest outdoor dining terrace in Europe, 38th &amp; 39th floors of the Heron Tower</li>
+      <li>Tower of London: Beefeater tour is free with admission — use the Middle Drawbridge entrance (much less crowded)</li>
+      <li>Charlotte's friend shared a great insider list: <a href="https://docs.google.com/document/d/1r7wTG2aMWiRx9oNS9619ifqgbh4QW5tGO8A5Cef-KgA" target="_blank">Google Doc guide</a></li>
+    </ul>
+  </div>
+
+  <!-- Section 1: Bike Tour -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>Best way to see a city is to take a bike tour.</strong> We booked the Classic London Landmarks Bicycle Tour with Viator — and were lucky enough to catch the changing of the guards along the way!</p>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0136_isut2u.jpg" alt="Big Ben">
+        <div class="caption">Big Ben</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0137_nxwayp.jpg" alt="St Paul's Cathedral">
+        <div class="caption">St Paul's Cathedral</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_3380_aagwmn.jpg" alt="Bike tour">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0145_maxnnk.jpg" alt="Bike tour">
+      </div>
+    </div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0149_hfh17v.jpg" alt="Bike tour">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7482_do2mhc.jpg" alt="Big Ben with London Eye">
+        <div class="caption">Big Ben with London Eye in the background</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7483_mjqhjn.jpg" alt="Westminster">
+        <div class="caption">Westminster</div>
+      </div>
+    </div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0167_i0zq1e.jpg" alt="Henry Moore sculpture">
+        <div class="caption">Henry Moore sculpture with Parliament in background</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0172_nt1hp9.jpg" alt="House of Parliament">
+        <div class="caption">House of Parliament</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7710_qclrah.jpg" alt="Tate Museum">
+        <div class="caption">Tate Museum — underwhelming, and I love modern art</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 2: NOPI -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>Ottolenghi's restaurant NOPI.</strong> Amazing food, drinks and a crazy mirrored bathroom! (Book your reservation way in advance.)</p>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7634_z9dtst.jpg" alt="NOPI">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7637_mq04zc.jpg" alt="NOPI">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0210_ec6zch.jpg" alt="NOPI">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7631_h3pt9r.jpg" alt="NOPI">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7643_u3woi8.jpg" alt="NOPI">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_8084_u4udxc.jpg" alt="NOPI">
+    </div>
+  </div>
+
+  <!-- Section 3: Fentiman Arms -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>Fentiman Arms (64 Fentiman Road)</strong> was the best pub food ever and great atmosphere too! On our walk there we even passed Vauxhall City Farm and got to say hi to the goats and alpacas!</p>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0146_qvyvep.jpg" alt="Fentiman Arms">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7479_w8eyz9.jpg" alt="Fentiman Arms">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7474_p0zsmd.jpg" alt="Vauxhall City Farm">
+    </div>
+  </div>
+
+  <!-- Section 4: Seven Dials Market + food spots -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>Seven Dials Market (35 Earlham St)</strong> was a really fun place to grab lunch — a multi-level food court with dozens of micro-restaurants &amp; bars, plus a bookshop &amp; event space.</p>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7524_xreylr.jpg" alt="Seven Dials Market">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7804_tb1r15.jpg" alt="Seven Dials Market">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7816_ke6kji.jpg" alt="Seven Dials Market">
+    </div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0213_s7uwhl.jpg" alt="Corned beef and pastrami">
+        <div class="caption">Best corned beef and pastrami — Hunter even tried tongue and loved it!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0253_bqtyb5.jpg" alt="Anita Gelato">
+        <div class="caption">Yummy gelato at Anita Gelato (4 Upper St. Martin's Lane)</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7466_e3aknx.jpg" alt="Cafe Nata">
+        <div class="caption">Have a little taste of Portugal at Cafe Nata (25 Old Compton St)</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7825_ieu4ve.jpg" alt="Maison Bertaux">
+        <div class="caption">Amazing scones at Maison Bertaux (28 Greek St.)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 5: The Alchemist -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>Highly recommend taking a cocktail making class at The Alchemist.</strong> So fun!</p>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0204_b7oejl.jpg" alt="The Alchemist">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0191_cnbarm.jpg" alt="The Alchemist">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7533_aerwhr.jpg" alt="The Alchemist">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0203_mwwiaw.jpg" alt="The Alchemist">
+    </div>
+  </div>
+
+  <!-- Section 6: SUSHISAMBA -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>Located on the 38th and 39th floors of the Heron Tower at 110 Bishopsgate, SUSHISAMBA</strong> is the highest outdoor dining terrace in Europe. There is even a glass elevator — and it was right next to The Alchemist!</p>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7539_gsixui.jpg" alt="SUSHISAMBA">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/download_id7wad.jpg" alt="SUSHISAMBA view">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7553_atfqlx.jpg" alt="SUSHISAMBA">
+    </div>
+  </div>
+
+  <!-- Section 7: Pubs -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>We had a great time drinking beer and lots of gin in the pubs.</strong> The flower boxes outside all the pubs were gorgeous and very welcoming!</p>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0122_eu9gne.jpg" alt="Our local bar in Covent Garden">
+        <div class="caption">Our local bar in Covent Garden!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_3350_y1im5u.jpg" alt="London pub">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7454_pqze0a.jpg" alt="London pub">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7674_izzfju.jpg" alt="London pub">
+      </div>
+    </div>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7754_dsn4dh.jpg" alt="London pub">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0239_htceac.jpg" alt="Another Covent Garden fav">
+        <div class="caption">Another Covent Garden fav where Charles Dickens hung out!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0222_mqbizu.jpg" alt="Inside Lamb and Flag">
+        <div class="caption">Inside Lamb and Flag — lucky to nab a table!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_0267_lmapdr.jpg" alt="The Distillery at Portobello Market">
+        <div class="caption">The Distillery at Portobello Market — Roger our bartender taught us tons about gin and lined up shots for taste testing!</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 8: Black Friar -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>Stumbled across the Black Friar at 174 Queen Victoria St</strong> — very cool interior and exterior!</p>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7717_nre7qm.jpg" alt="Black Friar pub">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7723_mqodhb.jpg" alt="Black Friar pub">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7730_knvvta.jpg" alt="Black Friar pub">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Londonpub_a8jufj.jpg" alt="London pub">
+    </div>
+  </div>
+
+  <!-- Section 9: Sky Garden -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>London's highest garden</strong> with fantastic views, restaurants, a bar and garden. It's free but you need to book a time and make a reservation: <a href="https://skygarden.london/" target="_blank">skygarden.london</a></p>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7693_vwru1t.jpg" alt="Sky Garden">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7694_ucv6i9.jpg" alt="Sky Garden">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7700_mzcvsr.jpg" alt="Sky Garden">
+    </div>
+  </div>
+
+  <!-- Section 10: Tower of London -->
+  <div class="photo-section">
+    <p class="section-intro"><strong>Be sure to take a Beefeater tour at The Tower</strong> — it's free with admission. Use the Middle Drawbridge entrance as it is much less crowded.</p>
+    <div class="photo-grid-captioned">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7585_bxxgba.jpg" alt="Our Beefeater">
+        <div class="caption">Our Beefeater is the first woman to hold that position — she was fabulous!</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_3645_ct6qm8.jpg" alt="Tower of London">
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_3662_qfkudm.jpg" alt="Tower Bridge">
+        <div class="caption">View of Tower Bridge</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7583_ohvwoc.jpg" alt="Middle Drawbridge entrance">
+        <div class="caption">Enter through the Middle Drawbridge entrance to avoid the crowds</div>
+      </div>
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7588_uzdw6z.jpg" alt="The Shard">
+        <div class="caption">The Shard in the background</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- .content -->
+
+<footer>© The Brodies &nbsp;·&nbsp; Adventures around the world</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lb-close">&times;</span>
+  <button class="lightbox-prev" id="lb-prev">&#8592;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">&#8594;</button>
 </div>
-</div>
-</div>
-<footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
-</body></html>
+
+<script>
+  const allImgs = Array.from(document.querySelectorAll('.photo-grid img, .photo-grid-captioned img'));
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  let current = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    lbImg.src = allImgs[idx].src;
+    lbImg.alt = allImgs[idx].alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showNext() {
+    current = (current + 1) % allImgs.length;
+    lbImg.src = allImgs[current].src;
+    lbImg.alt = allImgs[current].alt;
+  }
+
+  function showPrev() {
+    current = (current - 1 + allImgs.length) % allImgs.length;
+    lbImg.src = allImgs[current].src;
+    lbImg.alt = allImgs[current].alt;
+  }
+
+  allImgs.forEach((img, idx) => img.addEventListener('click', () => openLightbox(idx)));
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-next').addEventListener('click', showNext);
+  document.getElementById('lb-prev').addEventListener('click', showPrev);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
+</script>
+
+</body>
+</html>
