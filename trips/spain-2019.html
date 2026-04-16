@@ -1,42 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Spain — Brodie Trips</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"><style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
-.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
-.nav-links{display:flex;gap:2.5rem;list-style:none;}
-.nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
-.nav-links a:hover{color:var(--ink);}
-.hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
-.back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2.5rem;}
-.trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}
-.trip-meta{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1.5rem;}
-.route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
-.route span{color:var(--accent);}
-.content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
-.city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
-.city-section:last-child{border-bottom:none;}
-.city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
-.takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
-.takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
-.takeaways ul{list-style:none;}
-.takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
-.takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
-.takeaways li:last-child{border-bottom:none;}
-.city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;}
-.hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
-.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
-.photo-grid img{width:100%;height:200px;object-fit:cover;display:block;}
-footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
-@media(max-width:600px){nav{padding:1rem 1.5rem;}.hero,.content{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spain — Brodie Trips</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}
+    body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}
+    .nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}
+    .nav-links a:hover{color:var(--ink);}
+    .hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}
+    .back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);display:inline-block;margin-bottom:2rem;transition:color .2s;}
+    .back-link:hover{color:var(--ink);}
+    .trip-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}
+    .trip-meta{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}
+    .route{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}
+    .route span{color:var(--accent);}
+    .hero-img{width:100%;height:420px;object-fit:cover;margin-bottom:2rem;}
+    .content{max-width:900px;margin:0 auto;padding:0 2rem 5rem;}
+    .city-section{margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid var(--border);}
+    .city-section:last-child{border-bottom:none;margin-bottom:0;}
+    .city-name{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin-bottom:1.5rem;}
+    .takeaways{background:#fff;border:1px solid var(--border);padding:1.5rem 2rem;margin-bottom:2rem;}
+    .takeaways-title{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:1rem;}
+    .takeaways ul{list-style:none;}
+    .takeaways li{font-size:.95rem;line-height:1.7;padding:.5rem 0;border-bottom:1px solid var(--border);padding-left:1rem;position:relative;}
+    .takeaways li::before{content:'—';position:absolute;left:0;color:var(--accent);}
+    .takeaways li:last-child{border-bottom:none;}
+    .city-text{font-size:1rem;line-height:1.8;margin-bottom:1.5rem;color:var(--ink);}
+    .city-text strong{font-weight:500;}
+    .section-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin:2rem 0 .75rem;}
+    .photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}
+    .photo-grid img{width:100%;height:200px;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s;}
+    .photo-grid img:hover{opacity:.92;}
+    .photo-grid-captioned{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin:1.5rem 0;}
+    .photo-grid-captioned .photo-item img{width:100%;height:200px;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s;}
+    .photo-grid-captioned .photo-item img:hover{opacity:.92;}
+    .photo-grid-captioned .photo-item .caption{font-size:.78rem;letter-spacing:.05em;color:var(--muted);padding:.5rem 0 0;font-style:italic;line-height:1.5;}
+    .photo-single img{width:100%;max-height:560px;object-fit:cover;display:block;cursor:pointer;}
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;align-items:center;justify-content:center;}
+    .lightbox.open{display:flex;}
+    .lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;}
+    .lightbox-close{position:absolute;top:1.5rem;right:2rem;color:#fff;font-size:2rem;cursor:pointer;opacity:.7;transition:opacity .2s;}
+    .lightbox-close:hover{opacity:1;}
+    .lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2rem;cursor:pointer;opacity:.6;transition:opacity .2s;background:none;border:none;padding:.5rem 1rem;}
+    .lightbox-prev:hover,.lightbox-next:hover{opacity:1;}
+    .lightbox-prev{left:1rem;}
+    .lightbox-next{right:1rem;}
+    footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}
+    @media(max-width:600px){
+      nav{padding:1rem 1.5rem;}
+      .hero,.content{padding-left:1.5rem;padding-right:1.5rem;}
+      .photo-grid,.photo-grid-captioned{grid-template-columns:1fr 1fr;}
+      .trip-title{font-size:clamp(2.5rem,10vw,3.5rem);}
+    }
+  </style>
 </head>
 <body>
+
 <nav>
   <a class="nav-brand" href="../index.html">Brodie Trips</a>
   <ul class="nav-links">
@@ -45,58 +72,139 @@ footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text
     <li><a href="../cocktails/index.html">Cocktails</a></li>
   </ul>
 </nav>
+
 <div class="hero">
   <a class="back-link" href="../index.html">← All Trips</a>
   <h1 class="trip-title">Spain</h1>
   <div class="trip-meta">2019</div>
   <div class="route">Madrid <span>··</span> Segovia <span>··</span> Salamanca <span>··</span> Picos de Europa <span>··</span> Alquézar</div>
 </div>
-<div class="content"><div class="city-section"><h2 class="city-name">Madrid</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2873_cmf9sj.jpg" alt="" loading="lazy">
-<div class="takeaways"><div class="takeaways-title">Quick Takeaways</div><ul><li>Stayed at Generator Hostal — stylish with a rooftop deck</li><li>Mercado de San Miguel — a must</li><li>Chocolatería San Ginés (Pasadizo de San Ginés, 5) — great churros</li></ul></div>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2859_mpcalt.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2841_xhkadd.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2867_nmtypg.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2846_p2gpiz.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2853_cz94ek.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2844_ocqjfw.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2851_fanxey.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/mercado3_iagkaf.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Mercado4_uskjf7.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/mercado1_anhb0c.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/Mercado2_wibt71.jpg" alt="" loading="lazy"></div>
+
+<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2873_cmf9sj.jpg" alt="Spain 2019">
+
+<div class="content">
+
+  <!-- MADRID -->
+  <div class="city-section">
+    <h2 class="city-name">Madrid</h2>
+
+    <div class="takeaways">
+      <div class="takeaways-title">Quick Takeaways</div>
+      <ul>
+        <li>Stayed at Generator Hostal — stylish with a rooftop deck</li>
+        <li>Mercado de San Miguel — a must</li>
+        <li>Chocolatería San Ginés (Pasadizo de San Ginés, 5) — great churros</li>
+      </ul>
+    </div>
+
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2873_cmf9sj.jpg" alt="Madrid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2859_mpcalt.jpg" alt="Madrid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2841_xhkadd.jpg" alt="Madrid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2867_nmtypg.jpg" alt="Madrid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2846_p2gpiz.jpg" alt="Madrid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2853_cz94ek.jpg" alt="Madrid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2844_ocqjfw.jpg" alt="Madrid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_2851_fanxey.jpg" alt="Madrid">
+    </div>
+
+    <div class="section-label">Mercado de San Miguel</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/mercado3_iagkaf.jpg" alt="Mercado de San Miguel">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Mercado4_uskjf7.jpg" alt="Mercado de San Miguel">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/mercado1_anhb0c.jpg" alt="Mercado de San Miguel">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/Mercado2_wibt71.jpg" alt="Mercado de San Miguel">
+    </div>
+  </div>
+
+  <!-- SALAMANCA -->
+  <div class="city-section">
+    <h2 class="city-name">Salamanca</h2>
+    <div class="city-text">One of the most beautiful university cities in Spain. The golden sandstone buildings glow at sunset.</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca5_mviqkm.jpg" alt="Salamanca">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca0_rrk84k.jpg" alt="Salamanca">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca3_lfbuyw.jpg" alt="Salamanca">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca1_emustk.jpg" alt="Salamanca">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca4_mferuz.jpg" alt="Salamanca">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca2_nfptac.jpg" alt="Salamanca">
+    </div>
+  </div>
+
+  <!-- CASTILLO DEL BUEN AMOR -->
+  <div class="city-section">
+    <h2 class="city-name">The Castle — Castillo del Buen Amor</h2>
+    <div class="city-text">Our hotel: the remarkable Castillo del Buen Amor, a 15th-century castle turned luxury hotel. An unforgettable stay.</div>
+    <div class="photo-grid">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/castle4_iq3ver.jpg" alt="Castillo del Buen Amor">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/castle3_t3qgqu.jpg" alt="Castillo del Buen Amor">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/castle2_j9vez4.jpg" alt="Castillo del Buen Amor">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/castle0_b2oc9l.jpg" alt="Castillo del Buen Amor">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/castle1_ljhlyt.jpg" alt="Castillo del Buen Amor">
+    </div>
+  </div>
+
+  <!-- PICOS DE EUROPA -->
+  <div class="city-section">
+    <h2 class="city-name">Picos de Europa</h2>
+    <div class="city-text">Spectacular mountain national park in northern Spain — incredible hiking and scenery.</div>
+    <div class="photo-single">
+      <img src="https://res.cloudinary.com/dkybcebbo/image/upload/pico_btdgod.jpg" alt="The family at Picos de Europa">
+    </div>
+  </div>
+
+</div><!-- .content -->
+
+<footer>© The Brodies  ·  Adventures around the world</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lb-close">&times;</span>
+  <button class="lightbox-prev" id="lb-prev">&#8592;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">&#8594;</button>
 </div>
-</div>
-<div class="city-section"><h2 class="city-name">Salamanca</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/castle4_iq3ver.jpg" alt="" loading="lazy">
-<p class="city-text">One of the most beautiful university cities in Spain. The golden sandstone buildings glow at sunset.</p>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/castle3_t3qgqu.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/castle2_j9vez4.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/castle0_b2oc9l.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/castle1_ljhlyt.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-<div class="city-section"><h2 class="city-name">The Castle — Castillo del Buen Amor</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca5_mviqkm.jpg" alt="" loading="lazy">
-<p class="city-text">Our hotel: the remarkable Castillo del Buen Amor, a 15th-century castle turned luxury hotel. An unforgettable stay.</p>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca0_rrk84k.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca3_lfbuyw.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca1_emustk.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca4_mferuz.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/salamanca2_nfptac.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-<div class="city-section"><h2 class="city-name">Picos de Europa</h2>
-<img class="hero-img" src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_4524_o62duc.jpg" alt="" loading="lazy">
-<p class="city-text">Spectacular mountain national park in northern Spain — incredible hiking and scenery.</p>
-<div class="photo-grid">
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/pico_btdgod.jpg" alt="" loading="lazy"></div>
-  <div><img src="https://res.cloudinary.com/dkybcebbo/image/upload/IMG_7168_rgo3zo.jpg" alt="" loading="lazy"></div>
-</div>
-</div>
-</div>
-<footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
-</body></html>
+
+<script>
+  const allImgs = Array.from(document.querySelectorAll('.photo-grid img, .photo-grid-captioned img, .photo-single img'));
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  let current = 0;
+
+  function openLightbox(idx) {
+    current = idx;
+    lbImg.src = allImgs[idx].src;
+    lbImg.alt = allImgs[idx].alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function showNext() {
+    current = (current + 1) % allImgs.length;
+    lbImg.src = allImgs[current].src;
+    lbImg.alt = allImgs[current].alt;
+  }
+  function showPrev() {
+    current = (current - 1 + allImgs.length) % allImgs.length;
+    lbImg.src = allImgs[current].src;
+    lbImg.alt = allImgs[current].alt;
+  }
+
+  allImgs.forEach((img, idx) => img.addEventListener('click', () => openLightbox(idx)));
+  document.getElementById('lb-close').addEventListener('click', closeLightbox);
+  document.getElementById('lb-next').addEventListener('click', showNext);
+  document.getElementById('lb-prev').addEventListener('click', showPrev);
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') showNext();
+    if (e.key === 'ArrowLeft') showPrev();
+  });
+</script>
+
+</body>
+</html>
