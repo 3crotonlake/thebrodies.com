@@ -29,10 +29,10 @@
     nav.scrolled .nav-links a:hover { color:var(--ink); }
 
     /* SPLIT */
-    .split { display:grid; grid-template-columns:52% 48%; min-height:100vh; }
+    .split { display:grid; grid-template-columns:58% 42%; min-height:100vh; }
 
     .split-photo { position:sticky; top:0; height:100vh; overflow:hidden; background:var(--ink); }
-    .split-photo img { width:100%; height:100%; object-fit:contain; object-position:center center; display:block; background:var(--ink); }
+    .split-photo img { width:100%; height:100%; object-fit:contain; object-position:right center; display:block; background:var(--ink); }
     .split-photo::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(16,14,12,0.78) 0%, rgba(16,14,12,0.1) 42%, transparent 62%); }
     .split-title { position:absolute; bottom:3.5rem; left:3.5rem; z-index:2; }
     .split-title h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(4rem,5.5vw,6.5rem); font-weight:300; color:#fff; line-height:0.9; border-left:2px solid var(--accent); padding-left:1.1rem; }
