@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Brodies — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --cream: #f9f7f3;
+  --ink: #1a1a18;
+  --muted: #7a7a72;
+  --border: #e0ddd8;
+  --accent: #8b3a2a;
+  --accent-light: #f3ebe9;
+  --green: #2a6b3a;
+  --green-light: #e9f3eb;
+  --red: #8b2a2a;
+  --red-light: #f3e9e9;
+}
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-weight: 300;
+  min-height: 100vh;
+}
+
+/* ── Login ── */
+#login-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 2rem;
+}
+#login-screen h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+#login-screen p { color: var(--muted); font-size: 0.85rem; letter-spacing: 0.08em; }
+.login-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 320px;
+}
+.login-box input {
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--border);
+  background: white;
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--ink);
+  letter-spacing: 0.05em;
+}
+.login-box input:focus { outline: 2px solid var(--accent); }
+.btn {
+  padding: 0.85rem 1.8rem;
+  border: none;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+.btn:hover { opacity: 0.8; }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.btn-primary { background: var(--ink); color: var(--cream); }
+.btn-danger { background: var(--red); color: white; }
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+#login-error {
+  color: var(--red);
+  font-size: 0.8rem;
+  text-align: center;
+  display: none;
+}
+
+/* ── App shell ── */
+#app { display: none; }
+
+header {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.2rem 3rem;
+  background: rgba(249,247,243,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+header h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+header span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+.main { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+
+/* ── Trip selector ── */
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+#trip-select {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--border);
+  background: white;
+  font-family: 'Jost', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 2.5rem;
+  cursor: pointer;
+}
+#trip-select:focus { outline: 2px solid var(--accent); }
+
+/* ── Status bar ── */
+#status-bar {
+  display: none;
+  padding: 0.9rem 1.4rem;
+  margin-bottom: 2rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-light);
+}
+#status-bar.success { border-color: var(--green); background: var(--green-light); }
+#status-bar.error { border-color: var(--red); background: var(--red-light); }
+
+/* ── Photo grid ── */
+#photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.photo-card {
+  background: white;
+  border: 1px solid var(--border);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.photo-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  background: var(--border);
+}
+.photo-card img.broken { opacity: 0.3; }
+.caption-input {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--border);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--ink);
+  resize: vertical;
+  min-height: 60px;
+}
+.caption-input:focus { outline: 2px solid var(--accent); }
+.photo-card-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+.photo-card-actions .btn { flex: 1; padding: 0.6rem; font-size: 0.68rem; }
+.photo-filename {
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+  word-break: break-all;
+}
+
+/* ── Upload zone ── */
+#upload-section {
+  border: 2px dashed var(--border);
+  padding: 3rem 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+#upload-section.dragover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+#upload-section h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+#upload-section p { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+#file-input { display: none; }
+
+/* ── Save bar ── */
+#save-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  display: none;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 3rem;
+  background: var(--ink);
+  color: var(--cream);
+  z-index: 200;
+}
+#save-bar p { font-size: 0.8rem; letter-spacing: 0.06em; opacity: 0.7; }
+#save-bar .btn-primary {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+/* ── Loading ── */
+.spinner {
+  display: inline-block;
+  width: 18px; height: 18px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+#loading-msg {
+  text-align: center;
+  padding: 4rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div style="text-align:center">
+    <h1>The Brodies</h1>
+    <p style="margin-top:0.5rem">Site Admin</p>
+  </div>
+  <div class="login-box">
+    <input type="password" id="password-input" placeholder="Password" />
+    <button class="btn btn-primary" onclick="login()">Enter</button>
+    <div id="login-error">Incorrect password</div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header>
+    <h1>The Brodies — Admin</h1>
+    <span id="header-trip">Select a trip to begin</span>
+  </header>
+
+  <div class="main">
+    <div class="section-label">Trip</div>
+    <select id="trip-select" onchange="loadTrip()">
+      <option value="">— Select a trip —</option>
+      <option value="iceland-2026">Iceland 2026 (Girls Trip)</option>
+      <option value="memphis-2026">Memphis 2026</option>
+      <option value="edinburgh-york-london-2026">Edinburgh / York / London 2026</option>
+      <option value="london-oxford-paris-2025">London / Oxford / Paris 2025</option>
+      <option value="switzerland-sweden-2025">Switzerland & Sweden 2025</option>
+      <option value="utah-2025">Utah 2025 (Mighty 5)</option>
+      <option value="florence-rome-2025">Florence / Rome 2025</option>
+      <option value="charleston-2025">Charleston 2025</option>
+      <option value="belize-2025">Belize 2025</option>
+      <option value="cambodia-2024">Cambodia 2024</option>
+      <option value="ireland-2024">Ireland 2024</option>
+      <option value="mont-tremblant-2024">Mont Tremblant 2024</option>
+      <option value="sedona-2023">Sedona & Grand Canyon 2023</option>
+      <option value="puerto-rico-2023">Puerto Rico 2023</option>
+      <option value="thailand-cambodia-2023">Thailand & Cambodia 2023</option>
+      <option value="london-2022">London 2022</option>
+      <option value="spain-portugal-2022">Spain & Portugal 2022</option>
+      <option value="acadia-2021">Acadia 2021</option>
+      <option value="spain-2019">Spain 2019</option>
+    </select>
+
+    <div id="status-bar"></div>
+    <div id="loading-msg">Loading trip…</div>
+
+    <div id="trip-editor" style="display:none">
+      <!-- Upload zone -->
+      <div class="section-label">Add Photos</div>
+      <div id="upload-section"
+           onclick="document.getElementById('file-input').click()"
+           ondragover="handleDragOver(event)"
+           ondragleave="handleDragLeave(event)"
+           ondrop="handleDrop(event)">
+        <h3>Drop photos here</h3>
+        <p>or click to browse — JPG, PNG, WEBP accepted</p>
+        <button class="btn btn-primary" onclick="event.stopPropagation();document.getElementById('file-input').click()">Choose Photos</button>
+        <input type="file" id="file-input" multiple accept="image/*" onchange="handleFileSelect(event)" />
+      </div>
+
+      <!-- Existing photos -->
+      <div class="section-label" style="margin-bottom:1rem">Photos on this page (<span id="photo-count">0</span>)</div>
+      <div id="photo-grid"></div>
+    </div>
+  </div>
+
+  <!-- Save bar -->
+  <div id="save-bar">
+    <p><span id="pending-count">0</span> unsaved changes</p>
+    <button class="btn btn-primary" id="save-btn" onclick="saveChanges()">Save & Publish</button>
+  </div>
+</div>
+
+<script>
+// ── Config ──
+const GITHUB_TOKEN = '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';
+const REPO = '3crotonlake/thebrodies.com';
+const PASSWORD = 'brodies2024';
+
+// ── State ──
+let currentTrip = null;
+let currentHTML = '';
+let currentSHA = '';
+let photoData = []; // [{src, caption, element, deleted, newFile}]
+let pendingChanges = 0;
+
+// ── Login ──
+function login() {
+  const pw = document.getElementById('password-input').value;
+  if (pw === PASSWORD) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  } else {
+    document.getElementById('login-error').style.display = 'block';
+  }
+}
+document.getElementById('password-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') login();
+});
+
+// ── Load trip ──
+async function loadTrip() {
+  const select = document.getElementById('trip-select');
+  const trip = select.value;
+  if (!trip) return;
+
+  currentTrip = trip;
+  document.getElementById('header-trip').textContent = select.options[select.selectedIndex].text;
+  document.getElementById('trip-editor').style.display = 'none';
+  document.getElementById('loading-msg').style.display = 'block';
+  document.getElementById('photo-grid').innerHTML = '';
+  pendingChanges = 0;
+  updateSaveBar();
+
+  try {
+    const res = await ghGet(`contents/trips/${trip}.html`);
+    currentSHA = res.sha;
+    currentHTML = atob(res.content.replace(/\n/g,''));
+
+    parsePhotos();
+    renderGrid();
+    document.getElementById('loading-msg').style.display = 'none';
+    document.getElementById('trip-editor').style.display = 'block';
+  } catch(e) {
+    showStatus('Could not load trip: ' + e.message, 'error');
+    document.getElementById('loading-msg').style.display = 'none';
+  }
+}
+
+// ── Parse photos from HTML ──
+function parsePhotos() {
+  photoData = [];
+  // Match <img src="..." alt="..."> optionally followed by caption in <p> or <figcaption>
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(currentHTML, 'text/html');
+  const imgs = doc.querySelectorAll('img');
+
+  imgs.forEach(img => {
+    const src = img.getAttribute('src') || '';
+    if (!src || src.startsWith('http') && !src.includes('thebrodies')) return;
+
+    // Find caption — look for next sibling p, figcaption, or em
+    let caption = img.getAttribute('alt') || '';
+    let captionEl = null;
+    let next = img.nextElementSibling;
+    if (!next) next = img.parentElement?.nextElementSibling;
+    if (next && ['P','FIGCAPTION','EM'].includes(next.tagName)) {
+      caption = next.textContent.trim();
+      captionEl = next;
+    }
+
+    photoData.push({ src, caption, originalCaption: caption, deleted: false, newFile: null });
+  });
+
+  document.getElementById('photo-count').textContent = photoData.length;
+}
+
+// ── Render photo grid ──
+function renderGrid() {
+  const grid = document.getElementById('photo-grid');
+  grid.innerHTML = '';
+
+  photoData.forEach((photo, idx) => {
+    if (photo.deleted) return;
+
+    const card = document.createElement('div');
+    card.className = 'photo-card';
+    card.dataset.idx = idx;
+
+    const img = document.createElement('img');
+    // Resolve src for display
+    const displaySrc = photo.newFile
+      ? URL.createObjectURL(photo.newFile)
+      : (photo.src.startsWith('/') ? photo.src : '/' + photo.src);
+    img.src = displaySrc;
+    img.alt = photo.caption;
+    img.onerror = () => img.classList.add('broken');
+
+    const filename = document.createElement('div');
+    filename.className = 'photo-filename';
+    filename.textContent = photo.src.split('/').pop();
+
+    const captionInput = document.createElement('textarea');
+    captionInput.className = 'caption-input';
+    captionInput.placeholder = 'Add a caption…';
+    captionInput.value = photo.caption;
+    captionInput.addEventListener('input', () => {
+      photoData[idx].caption = captionInput.value;
+      markChanged();
+    });
+
+    const actions = document.createElement('div');
+    actions.className = 'photo-card-actions';
+
+    const delBtn = document.createElement('button');
+    delBtn.className = 'btn btn-danger';
+    delBtn.textContent = 'Remove';
+    delBtn.onclick = () => {
+      if (confirm('Remove this photo from the page?')) {
+        photoData[idx].deleted = true;
+        card.remove();
+        document.getElementById('photo-count').textContent =
+          photoData.filter(p => !p.deleted).length;
+        markChanged();
+      }
+    };
+
+    actions.appendChild(delBtn);
+    card.appendChild(img);
+    card.appendChild(filename);
+    card.appendChild(captionInput);
+    card.appendChild(actions);
+    grid.appendChild(card);
+  });
+}
+
+// ── File upload handling ──
+function handleDragOver(e) {
+  e.preventDefault();
+  document.getElementById('upload-section').classList.add('dragover');
+}
+function handleDragLeave(e) {
+  document.getElementById('upload-section').classList.remove('dragover');
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-section').classList.remove('dragover');
+  addFiles(Array.from(e.dataTransfer.files));
+}
+function handleFileSelect(e) {
+  addFiles(Array.from(e.target.files));
+  e.target.value = '';
+}
+
+function addFiles(files) {
+  if (!currentTrip) { showStatus('Select a trip first', 'error'); return; }
+  const imageFiles = files.filter(f => f.type.startsWith('image/'));
+  if (!imageFiles.length) { showStatus('No image files found', 'error'); return; }
+
+  imageFiles.forEach(file => {
+    photoData.push({
+      src: `/images/${tripFolder()}/${file.name}`,
+      caption: '',
+      originalCaption: null,
+      deleted: false,
+      newFile: file
+    });
+  });
+
+  document.getElementById('photo-count').textContent = photoData.filter(p => !p.deleted).length;
+  renderGrid();
+  markChanged();
+  showStatus(`${imageFiles.length} photo${imageFiles.length > 1 ? 's' : ''} added — click Save & Publish when ready`, '');
+}
+
+function tripFolder() {
+  // Map trip slug to image folder name
+  const map = {
+    'iceland-2026': '2026_iceland',
+    'memphis-2026': '2026_Memphis',
+    'edinburgh-york-london-2026': '2026_edinburgh',
+    'london-oxford-paris-2025': '2025_london-oxford-paris',
+    'switzerland-sweden-2025': '2025_switzerland-sweden',
+    'utah-2025': '2025_utah',
+    'florence-rome-2025': '2025_FlorenceRome',
+    'charleston-2025': '2025_charleston',
+    'belize-2025': '2025_Belize',
+    'cambodia-2024': '2024_cambodia',
+    'ireland-2024': '2024_ireland',
+    'mont-tremblant-2024': '2024_MontTremblant',
+    'sedona-2023': '2023_sedona',
+    'puerto-rico-2023': '2023_PuertoRico',
+    'thailand-cambodia-2023': '2023_thailand-cambodia',
+    'london-2022': '2022_london',
+    'spain-portugal-2022': '2022_spain-portugal',
+    'acadia-2021': '2021_acadia',
+    'spain-2019': '2019_spain',
+  };
+  return map[currentTrip] || currentTrip;
+}
+
+// ── Save changes ──
+async function saveChanges() {
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Saving…';
+
+  try {
+    // 1. Upload any new image files to GitHub
+    const newPhotos = photoData.filter(p => p.newFile && !p.deleted);
+    for (const photo of newPhotos) {
+      showStatus(`Uploading ${photo.newFile.name}…`, '');
+      const b64 = await fileToBase64(photo.newFile);
+      const path = `images/${tripFolder()}/${photo.newFile.name}`;
+      await ghPut(path, b64, `Add ${photo.newFile.name}`);
+      photo.newFile = null; // mark as uploaded
+    }
+
+    // 2. Rebuild the HTML with updated captions and removed photos
+    const newHTML = rebuildHTML();
+
+    // 3. Push updated HTML to GitHub
+    showStatus('Saving page…', '');
+    const b64HTML = btoa(unescape(encodeURIComponent(newHTML)));
+    await ghPut(`trips/${currentTrip}.html`, b64HTML, `Update ${currentTrip} photos/captions`, currentSHA);
+
+    // 4. Refresh state
+    const res = await ghGet(`contents/trips/${currentTrip}.html`);
+    currentSHA = res.sha;
+    currentHTML = newHTML;
+    pendingChanges = 0;
+    updateSaveBar();
+
+    showStatus('Saved! Site will update in about 1 minute.', 'success');
+  } catch(e) {
+    showStatus('Error: ' + e.message, 'error');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = 'Save & Publish';
+}
+
+// ── Rebuild HTML with edits ──
+function rebuildHTML() {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(currentHTML, 'text/html');
+  const imgs = Array.from(doc.querySelectorAll('img'));
+
+  let dataIdx = 0;
+  imgs.forEach(img => {
+    const src = img.getAttribute('src') || '';
+    if (!src) return;
+
+    // Find corresponding photoData entry
+    const photo = photoData.find(p => p.src === src || p.src.endsWith(src.split('/').pop()));
+    if (!photo) return;
+
+    if (photo.deleted) {
+      // Remove img and its caption sibling
+      let next = img.nextElementSibling;
+      if (!next) next = img.parentElement?.nextElementSibling;
+      if (next && ['P','FIGCAPTION','EM'].includes(next.tagName)) next.remove();
+      img.parentElement?.removeChild(img);
+      return;
+    }
+
+    // Update src
+    img.setAttribute('src', photo.src);
+    img.setAttribute('alt', photo.caption);
+
+    // Update caption
+    let next = img.nextElementSibling;
+    if (!next) next = img.parentElement?.nextElementSibling;
+    if (next && ['P','FIGCAPTION','EM'].includes(next.tagName)) {
+      next.textContent = photo.caption;
+    }
+  });
+
+  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+}
+
+// ── GitHub API helpers ──
+async function ghGet(path) {
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    headers: {
+      'Authorization': `token ${GITHUB_TOKEN}`,
+      'Accept': 'application/vnd.github.v3+json'
+    }
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+async function ghPut(path, content, message, sha) {
+  const body = { message, content };
+  if (sha) body.sha = sha;
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      'Authorization': `token ${GITHUB_TOKEN}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+// ── UI helpers ──
+function markChanged() {
+  pendingChanges++;
+  updateSaveBar();
+}
+
+function updateSaveBar() {
+  const bar = document.getElementById('save-bar');
+  const count = document.getElementById('pending-count');
+  if (pendingChanges > 0) {
+    bar.style.display = 'flex';
+    count.textContent = pendingChanges;
+  } else {
+    bar.style.display = 'none';
+  }
+}
+
+function showStatus(msg, type) {
+  const bar = document.getElementById('status-bar');
+  bar.textContent = msg;
+  bar.className = type || '';
+  bar.style.display = msg ? 'block' : 'none';
+}
+</script>
+</body>
+</html>
