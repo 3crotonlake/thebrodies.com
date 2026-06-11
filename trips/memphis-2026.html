@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memphis — Brodie Trips</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --cream: #f9f7f3; --ink: #1a1a18; --muted: #7a7a72; --border: #e0ddd8; --accent: #8b3a2a; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); font-weight: 300; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(249,247,243,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .hero { padding-top: 120px; padding-bottom: 3rem; max-width: 900px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
+    .back-link { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; margin-bottom: 2.5rem; }
+    .back-link:hover { color: var(--ink); }
+    .trip-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 7vw, 5.5rem); font-weight: 300; line-height: 1; margin-bottom: .75rem; }
+    .trip-meta { font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+    .route { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--muted); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; margin-bottom: 3rem; }
+    .route span { color: var(--accent); }
+    .content { max-width: 900px; margin: 0 auto; padding: 0 2rem 5rem; }
+    .intro { font-size: 1rem; line-height: 1.8; margin-bottom: 3rem; color: var(--ink); }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .photo-item { display: flex; flex-direction: column; }
+    .photo-item img { width: 100%; height: 220px; object-fit: cover; display: block; cursor: pointer; transition: opacity .2s; }
+    .photo-item img:hover { opacity: .9; }
+    .photo-caption { font-size: .78rem; color: var(--muted); font-style: italic; padding: .4rem 0 .2rem; text-align: center; line-height: 1.5; }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 1000; align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 88vh; object-fit: contain; }
+    .lightbox-close { position: absolute; top: 1.5rem; right: 2rem; color: #fff; font-size: 2rem; cursor: pointer; opacity: .7; }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; font-size: 2rem; cursor: pointer; opacity: .6; background: none; border: none; padding: .5rem 1rem; }
+    .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
+    .lightbox-prev { left: 1rem; } .lightbox-next { right: 1rem; }
+    footer { text-align: center; padding: 2.5rem; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--border); }
+    @media (max-width: 600px) { nav { padding: 1rem 1.5rem; } .hero { padding-left: 1.5rem; padding-right: 1.5rem; } .content { padding-left: 1.5rem; padding-right: 1.5rem; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="../index.html">Brodie Trips</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#trips">Trips</a></li>
+    <li><a href="../cocktails/index.html">Cocktails</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <a class="back-link" href="../index.html">← All Trips</a>
+  <h1 class="trip-title">Memphis</h1>
+  <div class="trip-meta">March 2026 &nbsp;·&nbsp; 72 Hours</div>
+  <div class="route">
+    <span>The Peabody</span> · Beale Street · Graceland · Stax Studio · <span>Lorraine Motel</span>
+  </div>
+</div>
+
+<div class="content">
+  <p class="intro">72 Hours in Memphis — Cocktails &amp; Ducks at The Peabody / BBQ at Rendezvous / B.B. King's Blues Club on Beale Street / The Beauty Shop / Graceland / Croce Plays Croce / The National Civil Rights Museum at the Lorraine Motel / Stax Studio / Gus's World Famous Fried Chicken / Diana Ross at the Orpheum</p>
+
+  <div class="photo-grid" id="photo-grid">
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650757115_10163183472893780_5611327961116735115_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">The Peabody Hotel</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650525245_10163183472733780_8190233137693535789_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">Cocktails &amp; ducks at The Peabody</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650396950_10163183472468780_5840829629171003010_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/651167143_10163183472193780_286611619489310815_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649686377_10163183472283780_216752931015975093_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/651888271_10163183472038780_1814024799798607525_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650295124_10163183471653780_3645155553928368015_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649280056_10163183471443780_279552447631600277_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">BBQ at Rendezvous</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/653797011_10163185568738780_5828113820693590724_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649275270_10163183471103780_8263039909242321864_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649846480_10163185568338780_5819904033379399688_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">B.B. King's Blues Club on Beale Street</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649740493_10163183470073780_7370931976583321690_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650290750_10163185567938780_1413765023689960784_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/653053519_10163185440698780_8238048087022685704_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650797099_10163185441018780_7357722707455947080_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">I AM A MAN — Civil Rights protest sign, Memphis 1968</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649638947_10163183468423780_4328806091782758757_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">Graceland</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649631449_10163183468068780_3854086694910675132_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/651389970_10163183467738780_3528924834089061783_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650292091_10163183466878780_7880012078061358664_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649426716_10163183466688780_6272017146017684062_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650257071_10163183465778780_7702760493328222047_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">Stax Studio</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/651017752_10163185567488780_9381180780474995930_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/652620374_10163183465548780_4898026038769369492_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650378427_10163183465163780_6277115051443890267_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">Gus's World Famous Fried Chicken</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650400581_10163183464783780_5415628582777700598_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649821519_10163183464588780_5483236981454612445_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/651901388_10163183464503780_4962105519936934580_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">The National Civil Rights Museum at the Lorraine Motel</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/652194967_10163183464273780_8243630845594704204_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/649777425_10163183463953780_8313450214862465755_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/651164290_10163183463413780_5888409173652026151_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">Diana Ross at the Orpheum</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/651754294_10163185768338780_1188341530895572920_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/651156239_10163183462698780_1003699219454597156_n.jpg" alt="Memphis" loading="lazy">
+        <p class="photo-caption">Croce Plays Croce</p>
+      </div>
+
+      <div class="photo-item">
+        <img src="https://res.cloudinary.com/dkybcebbo/image/upload/26_memphis/650406853_10163183463178780_1111165526795853011_n.jpg" alt="Memphis" loading="lazy">
+      </div>
+
+  </div>
+</div>
+
+<footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lb-close">&times;</span>
+  <button class="lightbox-prev" id="lb-prev">&#8592;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">&#8594;</button>
+</div>
+
+<script>
+  const imgs = [...document.querySelectorAll('#photo-grid img')];
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  let cur = 0;
+  function open(i) { cur = i; lbImg.src = imgs[i].src; lb.classList.add('open'); }
+  function close() { lb.classList.remove('open'); }
+  imgs.forEach((img, i) => img.addEventListener('click', () => open(i)));
+  document.getElementById('lb-close').addEventListener('click', close);
+  document.getElementById('lb-prev').addEventListener('click', () => open((cur - 1 + imgs.length) % imgs.length));
+  document.getElementById('lb-next').addEventListener('click', () => open((cur + 1) % imgs.length));
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') open((cur-1+imgs.length)%imgs.length);
+    if (e.key === 'ArrowRight') open((cur+1)%imgs.length);
+  });
+</script>
+</body>
+</html>

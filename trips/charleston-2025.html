@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charleston — Brodie Trips</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --cream: #f9f7f3; --ink: #1a1a18; --muted: #7a7a72; --border: #e0ddd8; --accent: #8b3a2a; }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); font-weight: 300; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.4rem 3rem; background: rgba(249,247,243,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--ink); }
+    .hero { padding-top: 120px; padding-bottom: 3rem; max-width: 900px; margin: 0 auto; padding-left: 2rem; padding-right: 2rem; }
+    .back-link { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; gap: .4rem; margin-bottom: 2.5rem; }
+    .back-link:hover { color: var(--ink); }
+    .trip-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 7vw, 5.5rem); font-weight: 300; line-height: 1; margin-bottom: .75rem; }
+    .trip-meta { font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+    .route { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--muted); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1rem 0; margin-bottom: 3rem; }
+    .route span { color: var(--accent); }
+    .content { max-width: 900px; margin: 0 auto; padding: 0 2rem 5rem; }
+    .section { margin-bottom: 4rem; padding-bottom: 4rem; border-bottom: 1px solid var(--border); }
+    .section:last-child { border-bottom: none; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; margin-bottom: .4rem; }
+    .section-date { font-size: .7rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.5rem; }
+    .post-text { font-size: 1rem; line-height: 1.8; margin-bottom: 2rem; color: var(--ink); }
+    .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .photo-item { display: flex; flex-direction: column; }
+    .photo-item img { width: 100%; height: 220px; object-fit: cover; display: block; cursor: pointer; transition: opacity .2s; }
+    .photo-item img:hover { opacity: .9; }
+    .photo-caption { font-size: .78rem; color: var(--muted); font-style: italic; padding: .4rem 0 .2rem; text-align: center; line-height: 1.5; }
+    .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.92); z-index: 1000; align-items: center; justify-content: center; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 88vh; object-fit: contain; }
+    .lightbox-close { position: absolute; top: 1.5rem; right: 2rem; color: #fff; font-size: 2rem; cursor: pointer; opacity: .7; }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; font-size: 2rem; cursor: pointer; opacity: .6; background: none; border: none; padding: .5rem 1rem; }
+    .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
+    .lightbox-prev { left: 1rem; } .lightbox-next { right: 1rem; }
+    footer { text-align: center; padding: 2.5rem; font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--border); }
+    @media (max-width: 600px) { nav { padding: 1rem 1.5rem; } .hero { padding-left: 1.5rem; padding-right: 1.5rem; } .content { padding-left: 1.5rem; padding-right: 1.5rem; } }
+  </style>
+</head>
+<body>
+<nav>
+  <a class="nav-brand" href="../index.html">Brodie Trips</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../index.html#trips">Trips</a></li>
+    <li><a href="../cocktails/index.html">Cocktails</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <a class="back-link" href="../index.html">← All Trips</a>
+  <h1 class="trip-title">Charleston</h1>
+  <div class="trip-meta">March 2025 &nbsp;·&nbsp; South Carolina</div>
+  <div class="route">
+    <span>Historic District</span> · Rainbow Row · Fort Sumter · <span>Hot Little Biscuit</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <h2 class="section-title">Charleston, South Carolina</h2>
+    <div class="section-date">March 3, 2025</div>
+    <p class="post-text">Charleston, South Carolina — "Great weekend!" — Caroline</p>
+    <div class="photo-grid" id="photo-grid">
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/476640790_10161588839803780_6395111533902958055_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/476348012_10161588839623780_4727017960464834133_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/478772075_10161588839378780_3176404987332957989_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/476373526_10161588838978780_1553841637779663258_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481080710_10161588838763780_1777224033646905785_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481080350_10161588838518780_2069555103661729627_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481289063_10161588836628780_2510315719153389194_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481277482_10161588839888780_2067949264379021594_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/478634870_10161588837868780_5407459036630445495_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481469758_10161588883328780_4936349716199617760_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481069664_10161588883183780_2986071084963885463_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481129313_10161588882953780_7881267806143423229_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481222748_10161588882838780_4247237355662794412_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/482215719_10161588882733780_4099612740448819710_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481076957_10161588882623780_4669322562551404649_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/475408029_10161588882458780_3103883242876045330_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481206737_10161588882258780_4391699814698013721_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481215566_10161588882073780_6392025135768479171_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/478716190_10161588881928780_7433426762419203394_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/482030721_10161588879828780_8721322157927615621_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481263201_10161588883863780_4191204613246314258_n.jpg" alt="Stax Studio" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481069972_10161588879728780_7793122163873520158_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481298856_10161588881303780_8799493230866306839_n.jpg" alt="Charleston" loading="lazy"></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481672532_10161588881123780_7998450391358027212_n.jpg" alt="Welcome to Charleston" loading="lazy"><p class="photo-caption">Welcome to Charleston, South Carolina</p></div>
+      <div class="photo-item"><img src="https://res.cloudinary.com/dkybcebbo/image/upload/v1781016742/481054469_10161588883678780_7612794297074115822_n.jpg" alt="Charleston" loading="lazy"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
+
+<div class="lightbox" id="lightbox">
+  <span class="lightbox-close" id="lb-close">&times;</span>
+  <button class="lightbox-prev" id="lb-prev">&#8592;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lightbox-next" id="lb-next">&#8594;</button>
+</div>
+<script>
+  const imgs = [...document.querySelectorAll('#photo-grid img')];
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  let cur = 0;
+  function open(i) { cur = i; lbImg.src = imgs[i].src; lb.classList.add('open'); }
+  function close() { lb.classList.remove('open'); }
+  imgs.forEach((img, i) => img.addEventListener('click', () => open(i)));
+  document.getElementById('lb-close').addEventListener('click', close);
+  document.getElementById('lb-prev').addEventListener('click', () => open((cur - 1 + imgs.length) % imgs.length));
+  document.getElementById('lb-next').addEventListener('click', () => open((cur + 1) % imgs.length));
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') open((cur-1+imgs.length)%imgs.length);
+    if (e.key === 'ArrowRight') open((cur+1)%imgs.length);
+  });
+</script>
+</body>
+</html>

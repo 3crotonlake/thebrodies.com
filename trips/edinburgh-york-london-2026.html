@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edinburgh, York & London — Brodie Trips</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --gold: #c9a84c;
+      --cream: #f9f6f0;
+      --text: #2c2c2c;
+      --muted: #6b6b6b;
+      --border: #e0dbd0;
+      --planning-bg: #fff8e6;
+      --planning-border: #e8c84a;
+      --planning-text: #7a5c00;
+    }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      font-weight: 300;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      background: var(--navy);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a.brand {
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    nav ul a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--gold); }
+
+    /* PLANNING BANNER */
+    .planning-banner {
+      background: var(--planning-bg);
+      border-bottom: 2px solid var(--planning-border);
+      padding: 0.75rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .planning-pill {
+      background: var(--planning-border);
+      color: var(--planning-text);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .planning-banner p {
+      font-size: 0.88rem;
+      color: var(--planning-text);
+    }
+
+    /* BACK LINK */
+    .back-link {
+      display: inline-block;
+      padding: 1.5rem 2rem 0;
+      color: var(--navy);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+    }
+    .back-link:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      padding: 2rem 2rem 0;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.15;
+    }
+    .hero .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 0.4rem;
+    }
+
+    /* ITINERARY STRIP */
+    .itinerary-strip {
+      max-width: 860px;
+      margin: 2rem auto 0;
+      padding: 0 2rem;
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+    .itin-stop {
+      flex: 1;
+      min-width: 140px;
+      border-top: 3px solid var(--border);
+      padding-top: 0.75rem;
+      padding-right: 1rem;
+    }
+    .itin-stop.active { border-top-color: var(--navy); }
+    .itin-stop .dates { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.05em; text-transform: uppercase; }
+    .itin-stop .city { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); margin-top: 0.2rem; }
+    .itin-stop .nights { font-size: 0.78rem; color: var(--muted); }
+
+    /* MAIN CONTENT */
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+
+    /* SECTION HEADINGS */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 3rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    /* TAKEAWAYS */
+    .takeaways {
+      background: var(--cream);
+      border-left: 3px solid var(--navy);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 2rem;
+    }
+    .takeaways strong {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .takeaways ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .takeaways ul li {
+      font-size: 0.92rem;
+      padding-left: 1.25rem;
+      position: relative;
+      color: var(--text);
+    }
+    .takeaways ul li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 0.8rem;
+      top: 0.05em;
+    }
+
+    /* CARDS */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.1rem 1.25rem;
+      background: #fff;
+    }
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--navy);
+      margin-bottom: 0.25rem;
+    }
+    .card-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+    .card-detail {
+      font-size: 0.85rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .card-price {
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .card-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-bottom: 0.5rem;
+    }
+    .badge-pick { background: #e8f4e8; color: #2a6b2a; }
+    .badge-consider { background: #e8eef8; color: #1a3a6b; }
+
+    /* RESTAURANT LIST */
+    .resto-list { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.5rem; }
+    .resto-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      gap: 1rem;
+    }
+    .resto-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.98rem;
+      color: var(--navy);
+    }
+    .resto-desc { font-size: 0.83rem; color: var(--muted); margin-top: 0.2rem; }
+    .resto-area {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+      padding-top: 0.15rem;
+    }
+
+    /* TRIP SUMMARY TABLE */
+    .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 1.5rem; }
+    .summary-table th {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .summary-table td {
+      font-size: 0.88rem;
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .summary-table .date-col { color: var(--muted); font-size: 0.82rem; white-space: nowrap; }
+    .summary-table .place { font-weight: 600; color: var(--navy); }
+
+    /* DAY TRIPS */
+    .daytrip-list { display: flex; flex-direction: column; gap: 0.6rem; }
+    .daytrip-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .daytrip-name { font-weight: 600; font-size: 0.9rem; color: var(--navy); min-width: 140px; }
+    .daytrip-detail { font-size: 0.85rem; color: var(--muted); }
+
+    /* PROSE */
+    p { font-size: 0.95rem; line-height: 1.8; margin-bottom: 1rem; color: var(--text); }
+    strong { font-weight: 600; color: var(--navy); }
+
+    /* FOOTER */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="brand" href="/index.html">Brodie Trips</a>
+  <ul>
+    <li><a href="/index.html">Home</a></li>
+    <li><a href="/index.html#trips">Trips</a></li>
+    <li><a href="/cocktails/index.html">Cocktails</a></li>
+  </ul>
+</nav>
+
+<!-- PLANNING BANNER -->
+<div class="planning-banner">
+  <span class="planning-pill">Planning</span>
+  <p>This trip is in the planning stage — we haven't gone yet. Notes and research below.</p>
+</div>
+
+<!-- BACK LINK -->
+<a class="back-link" href="/index.html">← All Trips</a>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Edinburgh, York & London</h1>
+  <p class="subtitle">Scotland & England · June 2026</p>
+</div>
+
+<!-- ITINERARY STRIP -->
+<div class="itinerary-strip">
+  <div class="itin-stop active">
+    <div class="dates">Jun 17 – 21</div>
+    <div class="city">Edinburgh</div>
+    <div class="nights">4 nights</div>
+  </div>
+  <div class="itin-stop active">
+    <div class="dates">Jun 21 – 22</div>
+    <div class="city">York</div>
+    <div class="nights">1 night</div>
+  </div>
+  <div class="itin-stop active">
+    <div class="dates">Jun 22 – 24</div>
+    <div class="city">London</div>
+    <div class="nights">2 nights</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- QUICK TAKEAWAYS -->
+  <div class="takeaways" style="margin-top: 2rem;">
+    <strong>Quick Takeaways</strong>
+    <ul>
+      <li>No car needed — Edinburgh Old Town is completely walkable</li>
+      <li>Stay at Market Street Hotel — steps from Waverley station, rooftop bar with castle views</li>
+      <li>Train Edinburgh → York (09:08, CrossCountry) → London King's Cross (10:08, Grand Central)</li>
+      <li>One night at Judge's Lodging in York — steps from the Minster, great restaurant</li>
+      <li>Book restaurants well in advance — June is busy in Edinburgh</li>
+      <li>Day trip to Pitlochry from Edinburgh — 1h45 by ScotRail, beautiful Highland town</li>
+      <li>Edinburgh Castle, Arthur's Seat, National Museum of Scotland — all must-dos</li>
+      <li>Noto on Thistle Street — the special night out in Edinburgh</li>
+      <li>The Standard at King's Cross for London — already know it, great location for Sophia</li>
+    </ul>
+  </div>
+
+  <!-- FULL ITINERARY -->
+  <div class="section-label">Full Itinerary</div>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Where</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="date-col">Tue Jun 17</td>
+        <td class="place">Fly JFK → Edinburgh</td>
+        <td>United overnight flight · arrive EDI morning Jun 18</td>
+      </tr>
+      <tr>
+        <td class="date-col">Jun 18 – 21</td>
+        <td class="place">Edinburgh</td>
+        <td>4 nights · Market Street Hotel · Old Town</td>
+      </tr>
+      <tr>
+        <td class="date-col">Sat Jun 21</td>
+        <td class="place">Train to York</td>
+        <td>09:08 Edinburgh Waverley → 11:37 York · CrossCountry XC1651</td>
+      </tr>
+      <tr>
+        <td class="date-col">Jun 21 – 22</td>
+        <td class="place">York</td>
+        <td>1 night · Judge's Lodging · 9 Lendal · steps from the Minster</td>
+      </tr>
+      <tr>
+        <td class="date-col">Sun Jun 22</td>
+        <td class="place">Train to London</td>
+        <td>10:08 York → 12:07 London King's Cross · Grand Central GC8520</td>
+      </tr>
+      <tr>
+        <td class="date-col">Jun 22 – 24</td>
+        <td class="place">London</td>
+        <td>2 nights · The Standard · King's Cross · see Hunter & Sophia</td>
+      </tr>
+      <tr>
+        <td class="date-col">Tue Jun 24</td>
+        <td class="place">Fly LHR → JFK</td>
+        <td>AA105 · American Airlines · with Hunter's bags</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- EDINBURGH -->
+  <div class="section-label">Edinburgh</div>
+  <h2>Where to Stay</h2>
+
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-badge badge-pick">Our Pick</span>
+      <div class="card-title">Market Street Hotel</div>
+      <div class="card-sub">Market Street · Old Town · steps from Waverley</div>
+      <div class="card-detail">Design hotel right at the foot of the Royal Mile. Rooftop Nor' Loft champagne bar with panoramic castle views. 9.3 rating, 9.8 couples location score.</div>
+      <div class="card-price">~£1,062 · 3 nights · flexible/free cancellation</div>
+    </div>
+    <div class="card">
+      <span class="card-badge badge-consider">Also considered</span>
+      <div class="card-title">Aparthotel Adagio Royal Mile</div>
+      <div class="card-sub">231 Canongate · on the Royal Mile</div>
+      <div class="card-detail">Studio apartments with kitchenette, halfway between Edinburgh Castle and Holyrood Palace. 8.8 rating, 6,478 reviews. Great value and free cancellation.</div>
+      <div class="card-price">~$1,041 · 3 nights · AA Hotels portal</div>
+    </div>
+  </div>
+
+  <h2>Things to Do</h2>
+  <p><strong>In the city — all walkable from Old Town:</strong></p>
+  <div class="daytrip-list" style="margin-bottom: 1.5rem;">
+    <div class="daytrip-item"><span class="daytrip-name">Edinburgh Castle</span><span class="daytrip-detail">Top of the Royal Mile — Crown Jewels, One O'Clock Gun, stunning views. Budget half a day.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">Arthur's Seat</span><span class="daytrip-detail">Volcanic hill hike right in the city. 90 min to the top, incredible views. Do it any evening — light until 10pm in June.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">Royal Mile</span><span class="daytrip-detail">Walk end to end — Castle to Holyrood Palace. Take the closes (alleyways) off to the sides.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">Palace of Holyroodhouse</span><span class="daytrip-detail">The King's official Scottish residence. Beautiful state rooms and grounds.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">National Museum of Scotland</span><span class="daytrip-detail">Free, genuinely world-class. Easily half a day. Right next to Grassmarket.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">Victoria Street & Grassmarket</span><span class="daytrip-detail">The curved medieval street that inspired Diagon Alley. Cobblestones, great shops and restaurants below.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">Calton Hill</span><span class="daytrip-detail">Easy 10-min walk from hotel, great panoramic city views. Best at sunset.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">Greyfriars Kirkyard</span><span class="daytrip-detail">Famous atmospheric cemetery, historically fascinating, free.</span></div>
+  </div>
+
+  <p><strong>Day trips — no car needed:</strong></p>
+  <div class="daytrip-list" style="margin-bottom: 1.5rem;">
+    <div class="daytrip-item"><span class="daytrip-name">Pitlochry</span><span class="daytrip-detail">1h45 by ScotRail direct from Waverley. Highland town, Blair Athol Distillery, fish ladder, Ben Vrackie hike. The best easy day trip.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">Stirling Castle</span><span class="daytrip-detail">45 min by train. Rivals Edinburgh Castle and far less crowded. Wallace Monument nearby.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">Rosslyn Chapel</span><span class="daytrip-detail">30 min by bus. The Da Vinci Code chapel — genuinely beautiful and mysterious.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">St Andrews</span><span class="daytrip-detail">Train to Leuchars then bus. Cathedral ruins, golf, beautiful coastal town. ~1.5hrs each way.</span></div>
+  </div>
+
+  <h2>Where to Eat</h2>
+  <div class="resto-list">
+    <div class="resto-item">
+      <div>
+        <div class="resto-name">Noto</div>
+        <div class="resto-desc">Asian small plates — sashimi, pork belly skewers, standout cocktails. One of Edinburgh's most exciting kitchens. Behind an unassuming Thistle Street door. <strong>Book well ahead.</strong></div>
+      </div>
+      <div class="resto-area">New Town · Special night</div>
+    </div>
+    <div class="resto-item">
+      <div>
+        <div class="resto-name">The Mussel & Steak Bar</div>
+        <div class="resto-desc">Fresh lobster, mussels, Scottish beef — bottom of Victoria Street. Classy but relaxed, genuinely local. Castle views from the window.</div>
+      </div>
+      <div class="resto-area">Victoria St</div>
+    </div>
+    <div class="resto-item">
+      <div>
+        <div class="resto-name">Timberyard</div>
+        <div class="resto-desc">Farm-to-table creative Scottish cooking in a converted warehouse near Grassmarket. Most ambitious kitchen in the Old Town area. Book first — fills up fast.</div>
+      </div>
+      <div class="resto-area">Grassmarket</div>
+    </div>
+    <div class="resto-item">
+      <div>
+        <div class="resto-name">Howies Victoria Street</div>
+        <div class="resto-desc">Traditional Scottish cuisine using the best seasonal local produce. Relaxed, local feel, great value. Where Edinburgh residents actually eat.</div>
+      </div>
+      <div class="resto-area">Victoria St</div>
+    </div>
+    <div class="resto-item">
+      <div>
+        <div class="resto-name">Nor' Loft (Market Street Hotel)</div>
+        <div class="resto-desc">Our own hotel's rooftop bar — small plates, champagne, panoramic city views. Perfect pre-dinner drink watching the castle lit up.</div>
+      </div>
+      <div class="resto-area">On-site · Rooftop</div>
+    </div>
+    <div class="resto-item">
+      <div>
+        <div class="resto-name">Petit Paris</div>
+        <div class="resto-desc">Charming French bistro in the Grassmarket. Great set menu deals and daily specials. Perfect for a relaxed evening after a big sightseeing day.</div>
+      </div>
+      <div class="resto-area">Grassmarket</div>
+    </div>
+  </div>
+
+  <p style="font-size:0.85rem; color: var(--muted);">Note: Ondine and Aizle — both previously excellent — have permanently closed. Avoid tourist traps on the Royal Mile itself; the best food is always just off the main drag on Victoria Street, Grassmarket, and the New Town.</p>
+
+  <!-- YORK -->
+  <div class="section-label">York</div>
+  <h2>One Night Stop</h2>
+  <p>York is the perfect overnight stop between Edinburgh and London. Arrive by 11:37am with a full afternoon to explore — the city is compact and walkable. Leave the next morning at 10:08 and you're in London by noon.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-badge badge-pick">Our Pick</span>
+      <div class="card-title">Judge's Lodging</div>
+      <div class="card-sub">9 Lendal · City Centre · steps from the Minster</div>
+      <div class="card-detail">21-room boutique hotel in a historic building, excellent à la carte restaurant, great bar. 9.8 couples location score. Note: lots of stairs — no lift.</div>
+      <div class="card-price">~£150–200 · 1 night · book direct at judgeslodgingyork.co.uk</div>
+    </div>
+    <div class="card">
+      <span class="card-badge badge-consider">Also considered</span>
+      <div class="card-title">Grays Court Hotel</div>
+      <div class="card-sub">Chapter House Street · behind the Minster</div>
+      <div class="card-detail">Only 12 rooms, tucked right behind the Minster. The Bow Room restaurant is outstanding. The most special option in York — but at a price.</div>
+      <div class="card-price">~£300–350 · 1 night</div>
+    </div>
+  </div>
+
+  <h2>What to Do in York</h2>
+  <div class="daytrip-list" style="margin-bottom: 1.5rem;">
+    <div class="daytrip-item"><span class="daytrip-name">York Minster</span><span class="daytrip-detail">One of the great Gothic cathedrals in Europe. Climb the tower for views. Budget 1.5–2 hours.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">City Walls Walk</span><span class="daytrip-detail">Walk the full circuit on top of the medieval walls — about 3km. Great way to arrive and orient yourself.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">The Shambles</span><span class="daytrip-detail">Genuinely medieval overhanging street — touristy but worth 20 minutes.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">The Blue Bell</span><span class="daytrip-detail">Tiny unchanged Victorian pub — worth a pint. Fossgate.</span></div>
+    <div class="daytrip-item"><span class="daytrip-name">Yorkshire Museum</span><span class="daytrip-detail">Roman and Viking artifacts in beautiful gardens. If there's time.</span></div>
+  </div>
+
+  <!-- TRAINS -->
+  <div class="section-label">Getting Around</div>
+  <h2>Trains</h2>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Route</th>
+        <th>Departure</th>
+        <th>Arrival</th>
+        <th>Operator</th>
+        <th>Cost (2 people)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="place">Edinburgh → York</td>
+        <td>09:08 Jun 21</td>
+        <td>11:37</td>
+        <td>CrossCountry XC1651</td>
+        <td>$75.50 incl. fees</td>
+      </tr>
+      <tr>
+        <td class="place">York → London</td>
+        <td>10:08 Jun 22</td>
+        <td>12:07</td>
+        <td>Grand Central GC8520</td>
+        <td>$79.50 incl. fees</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.85rem; color:var(--muted);">Book at raileurope.com · Both are Standard Non-Flexible Advance fares — book after flights are confirmed. Day trips within Scotland book at scotrail.co.uk. Pitlochry: Edinburgh Waverley direct, aim for 08:50 or 09:20 departure.</p>
+
+  <!-- LONDON -->
+  <div class="section-label">London</div>
+  <h2>Two Nights — See Hunter & Sophia</h2>
+  <p>Quick London stop to see Hunter (finishing at Oxford, heading to Norway) and Sophia. Collect Hunter's bags to bring home. Sophia's flat: Flat 23, Handel Mansions, 13 Handel Street, WC1N 1PA — a 10-minute walk or one Tube stop from the hotel.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <span class="card-badge badge-pick">Our Pick</span>
+      <div class="card-title">The Standard London</div>
+      <div class="card-sub">King's Cross · St Pancras · stayed here before</div>
+      <div class="card-detail">Right across from St Pancras International. 10-minute walk to Sophia. Excellent design hotel, great rooftop bar. We know it works.</div>
+      <div class="card-price">~£180–280/night · 2 nights · standardhotels.com</div>
+    </div>
+  </div>
+
+  <!-- FLIGHTS -->
+  <div class="section-label">Flights</div>
+  <table class="summary-table">
+    <thead>
+      <tr>
+        <th>Route</th>
+        <th>Flight</th>
+        <th>Date</th>
+        <th>Miles</th>
+        <th>Cash</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="place">JFK → EDI</td>
+        <td>United overnight</td>
+        <td>Jun 17</td>
+        <td>36,000 United</td>
+        <td>+ $5.60</td>
+      </tr>
+      <tr>
+        <td class="place">LHR → JFK</td>
+        <td>AA105</td>
+        <td>Jun 24</td>
+        <td>68,000 AA</td>
+        <td>+ ~$448</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.85rem; color:var(--muted);">Transfer Chase/Citi/Amex points to United MileagePlus for outbound. Use existing AA AAdvantage miles for return. AA card covers bags and seat selection on AA105.</p>
+
+</main>
+
+<footer>© The Brodies · Adventures around the world</footer>
+
+</body>
+</html>
