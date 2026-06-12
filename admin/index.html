@@ -6,92 +6,59 @@
 <title>The Brodies — Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --cream: #f9f7f3; --ink: #1a1a18; --muted: #7a7a72;
-  --border: #e0ddd8; --accent: #8b3a2a; --accent-light: #f3ebe9;
-  --green: #2a6b3a; --green-light: #e9f3eb;
-  --red: #8b2a2a; --red-light: #f3e9e9;
-}
-body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); font-weight: 300; min-height: 100vh; }
-
-#login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 2rem; }
-#login-screen h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 600; letter-spacing: 0.05em; }
-.login-box { display: flex; flex-direction: column; gap: 1rem; width: 340px; }
-.login-box input { padding: 0.9rem 1.2rem; border: 1px solid var(--border); background: white; font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 300; color: var(--ink); }
-.login-box input:focus { outline: 2px solid var(--accent); }
-.btn { padding: 0.75rem 1.5rem; border: none; cursor: pointer; font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: opacity 0.2s; }
-.btn:hover { opacity: 0.8; } .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn-primary { background: var(--ink); color: var(--cream); }
-.btn-danger { background: var(--red); color: white; }
-.btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
-.btn-green { background: var(--green); color: white; }
-#login-error { color: var(--red); font-size: 0.8rem; text-align: center; display: none; }
-
-#app { display: none; padding-bottom: 100px; }
-header { position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(249,247,243,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
-.header-right { display: flex; gap: 1rem; align-items: center; }
-.back-link { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
-.back-link:hover { color: var(--ink); }
-.main { max-width: 900px; margin: 0 auto; padding: 2rem; }
-.section-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
-
-#trip-select { width: 100%; max-width: 400px; padding: 0.9rem 1.2rem; border: 1px solid var(--border); background: white; font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 300; color: var(--ink); margin-bottom: 2rem; cursor: pointer; }
-
-#status-bar { display: none; padding: 0.9rem 1.4rem; margin-bottom: 1.5rem; font-size: 0.82rem; border-left: 3px solid var(--accent); background: var(--accent-light); }
-#status-bar.success { border-color: var(--green); background: var(--green-light); }
-#status-bar.error { border-color: var(--red); background: var(--red-light); }
-#loading-msg { text-align: center; padding: 3rem; color: var(--muted); font-size: 0.85rem; display: none; }
-
-/* Items list */
-#items-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
-
-.item-row {
-  background: white; border: 1px solid var(--border);
-  display: flex; align-items: flex-start; gap: 0.8rem;
-  padding: 0.8rem; cursor: grab; user-select: none;
-  transition: box-shadow 0.15s, opacity 0.15s;
-}
-.item-row:active { cursor: grabbing; }
-.item-row.dragging { opacity: 0.4; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
-.item-row.drag-over { border-color: var(--accent); border-style: dashed; }
-
-.drag-handle { color: var(--border); font-size: 1.2rem; padding-top: 2px; cursor: grab; flex-shrink: 0; }
-.item-thumb { width: 80px; height: 60px; object-fit: cover; flex-shrink: 0; background: var(--border); }
-.item-thumb.broken { opacity: 0.3; }
-.item-body { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
-.item-filename { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.04em; }
-.item-caption { width: 100%; padding: 0.5rem 0.7rem; border: 1px solid var(--border); font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 300; color: var(--ink); resize: none; min-height: 50px; }
-.item-caption:focus { outline: 2px solid var(--accent); }
-.item-actions { display: flex; gap: 0.4rem; flex-shrink: 0; flex-direction: column; }
-.item-actions .btn { padding: 0.4rem 0.7rem; font-size: 0.62rem; }
-
-/* Heading rows */
-.heading-row {
-  background: var(--cream); border: 1px solid var(--border); border-left: 3px solid var(--accent);
-  display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 0.8rem;
-  cursor: grab; user-select: none;
-}
-.heading-input { flex: 1; border: none; background: transparent; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--ink); letter-spacing: 0.05em; }
-.heading-input:focus { outline: none; border-bottom: 1px solid var(--accent); }
-
-/* Add buttons */
-.add-bar { display: flex; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-
-/* Upload zone */
-#upload-section { border: 2px dashed var(--border); padding: 2rem; text-align: center; margin-bottom: 1.5rem; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
-#upload-section.dragover { border-color: var(--accent); background: var(--accent-light); }
-#upload-section p { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
-#file-input { display: none; }
-
-/* Save bar */
-#save-bar { position: fixed; bottom: 0; left: 0; right: 0; display: none; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: var(--ink); color: var(--cream); z-index: 200; }
-#save-bar p { font-size: 0.78rem; opacity: 0.7; }
-
-.spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.new-badge { font-size: 0.58rem; background: var(--green); color: white; padding: 0.15rem 0.4rem; letter-spacing: 0.08em; text-transform: uppercase; margin-left: 0.3rem; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;--accent-light:#f3ebe9;--green:#2a6b3a;--green-light:#e9f3eb;--red:#8b2a2a;--red-light:#f3e9e9}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;min-height:100vh}
+#login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:2rem}
+#login-screen h1{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;letter-spacing:.05em}
+.login-box{display:flex;flex-direction:column;gap:1rem;width:340px}
+.login-box input{padding:.9rem 1.2rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:1rem;font-weight:300;color:var(--ink)}
+.login-box input:focus{outline:2px solid var(--accent)}
+.btn{padding:.75rem 1.5rem;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:opacity .2s}
+.btn:hover{opacity:.8}.btn:disabled{opacity:.4;cursor:not-allowed}
+.btn-primary{background:var(--ink);color:var(--cream)}
+.btn-danger{background:var(--red);color:white}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
+#login-error{color:var(--red);font-size:.8rem;text-align:center;display:none}
+#app{display:none;padding-bottom:100px}
+header{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(249,247,243,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+.header-right{display:flex;gap:1rem;align-items:center}
+.back-link{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none}
+.back-link:hover{color:var(--ink)}
+.main{max-width:900px;margin:0 auto;padding:2rem}
+.section-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem}
+#trip-select{width:100%;max-width:400px;padding:.9rem 1.2rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:1rem;font-weight:300;color:var(--ink);margin-bottom:2rem;cursor:pointer}
+#status-bar{display:none;padding:.9rem 1.4rem;margin-bottom:1.5rem;font-size:.82rem;border-left:3px solid var(--accent);background:var(--accent-light)}
+#status-bar.success{border-color:var(--green);background:var(--green-light)}
+#status-bar.error{border-color:var(--red);background:var(--red-light)}
+#loading-msg{text-align:center;padding:3rem;color:var(--muted);font-size:.85rem;display:none}
+#items-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem}
+.item-row{background:white;border:1px solid var(--border);display:flex;align-items:flex-start;gap:.8rem;padding:.8rem;cursor:grab;user-select:none;transition:box-shadow .15s,opacity .15s}
+.item-row.dragging{opacity:.4;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.item-row.drag-over{border-color:var(--accent);border-style:dashed}
+.heading-row{background:var(--cream);border:1px solid var(--border);border-left:3px solid var(--accent);display:flex;align-items:center;gap:.8rem;padding:.7rem .8rem;cursor:grab;user-select:none}
+.heading-row.drag-over{border-color:var(--green);border-style:dashed}
+.drag-handle{color:var(--border);font-size:1.2rem;padding-top:2px;cursor:grab;flex-shrink:0}
+.item-thumb{width:80px;height:60px;object-fit:cover;flex-shrink:0;background:var(--border)}
+.item-thumb.broken{opacity:.3}
+.item-body{flex:1;display:flex;flex-direction:column;gap:.5rem}
+.item-filename{font-size:.62rem;color:var(--muted);letter-spacing:.04em}
+.item-caption{width:100%;padding:.5rem .7rem;border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:.82rem;font-weight:300;color:var(--ink);resize:none;min-height:50px}
+.item-caption:focus{outline:2px solid var(--accent)}
+.item-actions{display:flex;gap:.4rem;flex-shrink:0;flex-direction:column}
+.heading-input{flex:1;border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);letter-spacing:.05em}
+.heading-input:focus{outline:none;border-bottom:1px solid var(--accent)}
+.add-bar{display:flex;gap:.8rem;margin-bottom:1.5rem;flex-wrap:wrap}
+#upload-section{border:2px dashed var(--border);padding:2rem;text-align:center;margin-bottom:1.5rem;cursor:pointer;transition:border-color .2s,background .2s}
+#upload-section.dragover{border-color:var(--accent);background:var(--accent-light)}
+#upload-section p{font-size:.82rem;color:var(--muted);margin-bottom:1rem}
+#file-input{display:none}
+#save-bar{position:fixed;bottom:0;left:0;right:0;display:none;justify-content:space-between;align-items:center;padding:1rem 2rem;background:var(--ink);color:var(--cream);z-index:200}
+#save-bar p{font-size:.78rem;opacity:.7}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.new-badge{font-size:.58rem;background:var(--green);color:white;padding:.15rem .4rem;letter-spacing:.08em;text-transform:uppercase;margin-left:.3rem}
 </style>
 </head>
 <body>
@@ -99,10 +66,10 @@ header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weig
 <div id="login-screen">
   <div style="text-align:center">
     <h1>The Brodies</h1>
-    <p style="margin-top:0.4rem;font-size:0.8rem;letter-spacing:0.08em;color:#7a7a72;">Site Admin</p>
+    <p style="margin-top:.4rem;font-size:.8rem;letter-spacing:.08em;color:#7a7a72">Site Admin</p>
   </div>
   <div class="login-box">
-    <input type="password" id="password-input" placeholder="Password" />
+    <input type="password" id="password-input" placeholder="Password">
     <button class="btn btn-primary" onclick="login()">Enter</button>
     <div id="login-error">Incorrect password</div>
   </div>
@@ -112,11 +79,10 @@ header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weig
   <header>
     <h1>The Brodies — Admin</h1>
     <div class="header-right">
-      <span id="header-trip" style="font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;"></span>
+      <span id="header-trip" style="font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase"></span>
       <a href="/" class="back-link">← Back to site</a>
     </div>
   </header>
-
   <div class="main">
     <div class="section-label">Select Trip</div>
     <select id="trip-select" onchange="loadTrip()">
@@ -141,29 +107,21 @@ header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weig
       <option value="acadia-2021">Acadia 2021</option>
       <option value="spain-2019">Spain 2019</option>
     </select>
-
     <div id="status-bar"></div>
     <div id="loading-msg">Loading trip…</div>
-
     <div id="trip-editor" style="display:none">
-      <!-- Upload -->
-      <div id="upload-section" onclick="document.getElementById('file-input').click()"
-           ondragover="ev(event,'dragover')" ondragleave="ev(event,'dragleave')" ondrop="ev(event,'drop')">
+      <div id="upload-section" onclick="document.getElementById('file-input').click()" ondragover="uploadDrag(event,'over')" ondragleave="uploadDrag(event,'leave')" ondrop="uploadDrag(event,'drop')">
         <p>Drop photos here or click to browse</p>
         <button class="btn btn-primary" onclick="event.stopPropagation();document.getElementById('file-input').click()">Choose Photos</button>
-        <input type="file" id="file-input" multiple accept="image/*" onchange="handleFiles(event)" />
+        <input type="file" id="file-input" multiple accept="image/*" onchange="handleFiles(event.target.files)">
       </div>
-
-      <!-- Add heading button -->
       <div class="add-bar">
         <button class="btn btn-ghost" onclick="addHeading()">+ Add Section Heading</button>
-        <span style="font-size:0.72rem;color:var(--muted);align-self:center;">Drag rows to reorder · Edit captions inline</span>
+        <span style="font-size:.72rem;color:var(--muted);align-self:center">Drag ⠿ to reorder · Edit captions inline</span>
       </div>
-
       <div id="items-list"></div>
     </div>
   </div>
-
   <div id="save-bar">
     <p id="save-status">No changes yet</p>
     <button class="btn btn-primary" id="save-btn" onclick="saveChanges()">Save &amp; Publish</button>
@@ -171,37 +129,46 @@ header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weig
 </div>
 
 <script>
-const REPO = '3crotonlake/thebrodies.com';
-const PASSWORD = '10520';
-const T = ['ghp_D7r6L','55hqPWTQk','SD1M3FWAY','zALQj773Cq4hq'].join('');
+var REPO = '3crotonlake/thebrodies.com';
+var PW = '10520';
+var T = ['ghp_D7r6L','55hqPWTQk','SD1M3FWAY','zALQj773Cq4hq'].join('');
 
-let currentTrip = null, currentSHA = '', originalHTML = '', items = [], dirty = false;
+var currentTrip = null;
+var currentSHA = '';
+var originalHTML = '';
+var items = [];
+var dirty = false;
 
-// LOGIN
+// ── LOGIN ──────────────────────────────────────────
 function login() {
-  if (document.getElementById('password-input').value === PASSWORD) {
+  if (document.getElementById('password-input').value === PW) {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
   } else {
     document.getElementById('login-error').style.display = 'block';
   }
 }
-document.getElementById('password-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
+document.getElementById('password-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') login();
+});
 
-// LOAD TRIP
+// ── LOAD TRIP ──────────────────────────────────────
 async function loadTrip() {
-  const sel = document.getElementById('trip-select');
+  var sel = document.getElementById('trip-select');
   currentTrip = sel.value;
   if (!currentTrip) return;
   document.getElementById('header-trip').textContent = sel.options[sel.selectedIndex].text;
   document.getElementById('trip-editor').style.display = 'none';
   document.getElementById('loading-msg').style.display = 'block';
-  hideStatus(); dirty = false; items = [];
+  hideStatus();
+  dirty = false;
+  items = [];
 
   try {
-    const data = await ghGet('trips/' + currentTrip + '.html');
+    var data = await ghGet('trips/' + currentTrip + '.html');
     currentSHA = data.sha;
-    originalHTML = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))/g,''))));
+    var raw = data.content.split('\n').join('');
+    originalHTML = decodeURIComponent(escape(atob(raw)));
     items = parseItems(originalHTML);
     renderList();
     document.getElementById('loading-msg').style.display = 'none';
@@ -213,20 +180,22 @@ async function loadTrip() {
   }
 }
 
-// PARSE - extract photos and city headings from HTML
+// ── PARSE ──────────────────────────────────────────
 function parseItems(html) {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  const result = [];
+  var doc = new DOMParser().parseFromString(html, 'text/html');
+  var result = [];
   function walk(el) {
-    for (const child of Array.from(el.children)) {
-      const tag = child.tagName;
-      if (tag === 'IMG' && child.src && !child.classList.contains('hero-img')) {
-        let caption = child.getAttribute('alt') || '';
-        const next = child.nextElementSibling;
-        if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName)) {
+    var children = Array.from(el.children);
+    for (var i = 0; i < children.length; i++) {
+      var child = children[i];
+      var tag = child.tagName;
+      if (tag === 'IMG' && child.getAttribute('src') && !child.classList.contains('hero-img')) {
+        var caption = child.getAttribute('alt') || '';
+        var next = child.nextElementSibling;
+        if (next && ['P','FIGCAPTION','EM','SPAN'].indexOf(next.tagName) >= 0) {
           caption = next.textContent.trim();
         }
-        result.push({ type:'photo', src: child.getAttribute('src'), caption, newFile: null });
+        result.push({ type:'photo', src: child.getAttribute('src'), caption: caption, newFile: null });
       } else if ((tag === 'H2' || tag === 'H3') && child.classList.contains('city-name')) {
         result.push({ type:'heading', text: child.textContent.trim() });
       } else {
@@ -238,41 +207,45 @@ function parseItems(html) {
   return result;
 }
 
-// RENDER - key insight: use data-idx on row, never bake idx into onclick strings
+// ── RENDER ──────────────────────────────────────────
 function renderList() {
-  const list = document.getElementById('items-list');
+  var list = document.getElementById('items-list');
   list.innerHTML = '';
-  items.forEach((item, idx) => {
-    const row = item.type === 'heading' ? makeHeadingRow(item, idx) : makePhotoRow(item, idx);
+  for (var i = 0; i < items.length; i++) {
+    var row = items[i].type === 'heading' ? makeHeadingRow(i) : makePhotoRow(i);
     list.appendChild(row);
-  });
+  }
 }
 
-function makeHeadingRow(item, idx) {
-  const row = document.createElement('div');
+function makeHeadingRow(idx) {
+  var row = document.createElement('div');
   row.className = 'heading-row';
   row.draggable = true;
   row.dataset.idx = idx;
   addDragEvents(row);
 
-  const handle = document.createElement('span');
+  var handle = document.createElement('span');
   handle.className = 'drag-handle';
   handle.textContent = '⠿';
 
-  const input = document.createElement('input');
+  var input = document.createElement('input');
   input.className = 'heading-input';
-  input.value = item.text;
+  input.value = items[idx].text;
   input.placeholder = 'Section heading (e.g. London, Oxford…)';
-  input.addEventListener('input', () => {
-    items[parseInt(row.dataset.idx)].text = input.value;
-    markDirty();
-  });
+  (function(r) {
+    input.addEventListener('input', function() {
+      items[parseInt(r.dataset.idx)].text = input.value;
+      markDirty();
+    });
+  })(row);
 
-  const del = document.createElement('button');
+  var del = document.createElement('button');
   del.className = 'btn btn-danger';
-  del.style.cssText = 'padding:0.3rem 0.6rem;font-size:0.6rem';
+  del.style.cssText = 'padding:.3rem .6rem;font-size:.6rem';
   del.textContent = '✕';
-  del.addEventListener('click', () => removeItem(parseInt(row.dataset.idx)));
+  (function(r) {
+    del.addEventListener('click', function() { removeItem(parseInt(r.dataset.idx)); });
+  })(row);
 
   row.appendChild(handle);
   row.appendChild(input);
@@ -280,56 +253,61 @@ function makeHeadingRow(item, idx) {
   return row;
 }
 
-function makePhotoRow(item, idx) {
-  const row = document.createElement('div');
+function makePhotoRow(idx) {
+  var item = items[idx];
+  var row = document.createElement('div');
   row.className = 'item-row';
   row.draggable = true;
   row.dataset.idx = idx;
   addDragEvents(row);
 
-  const handle = document.createElement('span');
+  var handle = document.createElement('span');
   handle.className = 'drag-handle';
   handle.textContent = '⠿';
 
-  const img = document.createElement('img');
+  var img = document.createElement('img');
   img.className = 'item-thumb';
   img.src = item.newFile ? URL.createObjectURL(item.newFile) : item.src;
-  img.onerror = () => img.classList.add('broken');
+  img.onerror = function() { img.classList.add('broken'); };
 
-  const body = document.createElement('div');
+  var body = document.createElement('div');
   body.className = 'item-body';
 
-  const fname = document.createElement('div');
+  var fname = document.createElement('div');
   fname.className = 'item-filename';
   fname.textContent = item.src.split('/').pop();
   if (item.newFile) {
-    const badge = document.createElement('span');
+    var badge = document.createElement('span');
     badge.className = 'new-badge';
     badge.textContent = 'New';
     fname.appendChild(badge);
   }
 
-  const cap = document.createElement('textarea');
+  var cap = document.createElement('textarea');
   cap.className = 'item-caption';
   cap.placeholder = 'Caption…';
   cap.value = item.caption;
-  cap.addEventListener('input', () => {
-    items[parseInt(row.dataset.idx)].caption = cap.value;
-    markDirty();
-  });
+  (function(r) {
+    cap.addEventListener('input', function() {
+      items[parseInt(r.dataset.idx)].caption = cap.value;
+      markDirty();
+    });
+  })(row);
 
   body.appendChild(fname);
   body.appendChild(cap);
 
-  const actions = document.createElement('div');
+  var actions = document.createElement('div');
   actions.className = 'item-actions';
-  const del = document.createElement('button');
+  var del = document.createElement('button');
   del.className = 'btn btn-danger';
   del.textContent = 'Remove';
-  del.addEventListener('click', () => {
-    if (!confirm('Remove this photo?')) return;
-    removeItem(parseInt(row.dataset.idx));
-  });
+  (function(r) {
+    del.addEventListener('click', function() {
+      if (!confirm('Remove this photo?')) return;
+      removeItem(parseInt(r.dataset.idx));
+    });
+  })(row);
   actions.appendChild(del);
 
   row.appendChild(handle);
@@ -339,151 +317,159 @@ function makePhotoRow(item, idx) {
   return row;
 }
 
-// DRAG & DROP
+// ── DRAG & DROP ────────────────────────────────────
 function addDragEvents(row) {
-  row.addEventListener('dragstart', e => {
+  row.addEventListener('dragstart', function(e) {
     e.dataTransfer.setData('text/plain', row.dataset.idx);
     e.dataTransfer.effectAllowed = 'move';
-    setTimeout(() => row.classList.add('dragging'), 0);
+    setTimeout(function() { row.classList.add('dragging'); }, 0);
   });
-  row.addEventListener('dragend', () => row.classList.remove('dragging'));
-  row.addEventListener('dragover', e => { e.preventDefault(); row.classList.add('drag-over'); });
-  row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
-  row.addEventListener('drop', e => {
+  row.addEventListener('dragend', function() { row.classList.remove('dragging'); });
+  row.addEventListener('dragover', function(e) { e.preventDefault(); row.classList.add('drag-over'); });
+  row.addEventListener('dragleave', function() { row.classList.remove('drag-over'); });
+  row.addEventListener('drop', function(e) {
     e.preventDefault();
     row.classList.remove('drag-over');
-    const srcIdx = parseInt(e.dataTransfer.getData('text/plain'));
-    const dropIdx = parseInt(row.dataset.idx);
-    if (isNaN(srcIdx) || srcIdx === dropIdx) return;
-    const moved = items.splice(srcIdx, 1)[0];
-    items.splice(srcIdx < dropIdx ? dropIdx - 1 : dropIdx, 0, moved);
+    var src = parseInt(e.dataTransfer.getData('text/plain'));
+    var dst = parseInt(row.dataset.idx);
+    if (isNaN(src) || src === dst) return;
+    var moved = items.splice(src, 1)[0];
+    items.splice(src < dst ? dst - 1 : dst, 0, moved);
     markDirty();
     renderList();
   });
 }
 
-// ADD HEADING
+// ── ADD / REMOVE ───────────────────────────────────
 function addHeading() {
   items.push({ type:'heading', text:'' });
   markDirty();
   renderList();
-  const inputs = document.querySelectorAll('.heading-input');
-  if (inputs.length) inputs[inputs.length-1].focus();
+  var inputs = document.querySelectorAll('.heading-input');
+  if (inputs.length) inputs[inputs.length - 1].focus();
 }
 
-// REMOVE ITEM
 function removeItem(idx) {
   items.splice(idx, 1);
   markDirty();
   renderList();
 }
 
-// FILE UPLOAD
-function ev(e, type) {
+// ── FILE UPLOAD ────────────────────────────────────
+function uploadDrag(e, type) {
   e.preventDefault();
-  const sec = document.getElementById('upload-section');
-  if (type === 'dragover') sec.classList.add('dragover');
-  else if (type === 'dragleave') sec.classList.remove('dragover');
-  else { sec.classList.remove('dragover'); handleFiles(null, e.dataTransfer.files); }
+  var sec = document.getElementById('upload-section');
+  if (type === 'over') sec.classList.add('dragover');
+  else if (type === 'leave') sec.classList.remove('dragover');
+  else { sec.classList.remove('dragover'); handleFiles(e.dataTransfer.files); }
 }
-function handleFiles(e, fileList) {
-  const files = Array.from(fileList || e.target.files).filter(f => f.type.startsWith('image/'));
+
+function handleFiles(fileList) {
+  var files = Array.from(fileList).filter(function(f) { return f.type.indexOf('image/') === 0; });
   if (!files.length) return;
-  const folder = folderMap[currentTrip] || currentTrip;
-  files.forEach(f => items.push({ type:'photo', src:'/images/' + folder + '/' + f.name, caption:'', newFile:f }));
+  var folder = FOLDER_MAP[currentTrip] || currentTrip;
+  files.forEach(function(f) {
+    items.push({ type:'photo', src:'/images/' + folder + '/' + f.name, caption:'', newFile:f });
+  });
   markDirty();
   renderList();
-  if (e) document.getElementById('file-input').value = '';
-  showStatus(files.length + ' photo' + (files.length>1?'s':'') + ' added — click Save & Publish when ready', '');
+  document.getElementById('file-input').value = '';
+  showStatus(files.length + ' photo' + (files.length > 1 ? 's' : '') + ' added — click Save & Publish when ready', '');
 }
 
-const folderMap = {
-  'iceland-2026':'2026_iceland','memphis-2026':'2026_Memphis','edinburgh-york-london-2026':'2026_edinburgh',
-  'london-oxford-paris-2025':'2025_london-oxford-paris','switzerland-sweden-2025':'2025_switzerland-sweden',
-  'utah-2025':'2025_utah','florence-rome-2025':'2025_FlorenceRome','charleston-2025':'2025_charleston',
+var FOLDER_MAP = {
+  'iceland-2026':'2026_iceland','memphis-2026':'2026_Memphis',
+  'edinburgh-york-london-2026':'2026_edinburgh','london-oxford-paris-2025':'2025_london-oxford-paris',
+  'switzerland-sweden-2025':'2025_switzerland-sweden','utah-2025':'2025_utah',
+  'florence-rome-2025':'2025_FlorenceRome','charleston-2025':'2025_charleston',
   'belize-2025':'2025_Belize','cambodia-2024':'2024_cambodia','ireland-2024':'2024_ireland',
-  'mont-tremblant-2024':'2024_MontTremblant','sedona-2023':'2023_sedona','puerto-rico-2023':'2023_PuertoRico',
-  'thailand-cambodia-2023':'2023_thailand-cambodia','london-2022':'2022_london',
-  'spain-portugal-2022':'2022_spain-portugal','acadia-2021':'2021_acadia','spain-2019':'2019_spain'
+  'mont-tremblant-2024':'2024_MontTremblant','sedona-2023':'2023_sedona',
+  'puerto-rico-2023':'2023_PuertoRico','thailand-cambodia-2023':'2023_thailand-cambodia',
+  'london-2022':'2022_london','spain-portugal-2022':'2022_spain-portugal',
+  'acadia-2021':'2021_acadia','spain-2019':'2019_spain'
 };
 
-// SAVE
+// ── SAVE ───────────────────────────────────────────
 async function saveChanges() {
-  const btn = document.getElementById('save-btn');
+  var btn = document.getElementById('save-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Saving…';
 
   try {
-    // 1. Upload any new image files
-    for (const item of items.filter(i => i.newFile)) {
+    // Upload new images first
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i];
+      if (!item.newFile) continue;
       showStatus('Uploading ' + item.newFile.name + '…', '');
-      const b64 = await toB64(item.newFile);
-      const folder = folderMap[currentTrip] || currentTrip;
-      await ghPut('images/' + folder + '/' + item.newFile.name, b64, 'Add ' + item.newFile.name);
+      var imgB64 = await toB64(item.newFile);
+      var folder = FOLDER_MAP[currentTrip] || currentTrip;
+      await ghPut('images/' + folder + '/' + item.newFile.name, imgB64, 'Add ' + item.newFile.name, null);
       item.newFile = null;
     }
 
-    // 2. Rebuild the trip HTML with current items order/captions
+    // Rebuild and save HTML
     showStatus('Saving page…', '');
-    const newHTML = rebuildHTML(originalHTML);
+    var newHTML = rebuildHTML(originalHTML);
+    var htmlB64 = btoa(unescape(encodeURIComponent(newHTML)));
+    await ghPut('trips/' + currentTrip + '.html', htmlB64, 'Update ' + currentTrip, currentSHA);
 
-    // 3. Push to GitHub
-    const b64html = btoa(unescape(encodeURIComponent(newHTML)));
-    await ghPut('trips/' + currentTrip + '.html', b64html, 'Update ' + currentTrip, currentSHA);
-
-    // 4. Refresh state
-    const fresh = await ghGet('trips/' + currentTrip + '.html');
+    // Refresh SHA and originalHTML
+    var fresh = await ghGet('trips/' + currentTrip + '.html');
     currentSHA = fresh.sha;
-    originalHTML = decodeURIComponent(escape(atob(fresh.content.replace(/\n/g,''))/g,''))));
+    var freshRaw = fresh.content.split('\n').join('');
+    originalHTML = decodeURIComponent(escape(atob(freshRaw)));
 
     dirty = false;
+    document.getElementById('save-status').textContent = 'All saved ✓';
     showStatus('Saved! Site updates in about 1 minute.', 'success');
-    document.getElementById('save-status').textContent = 'All saved';
   } catch(e) {
-    showStatus('Error saving: ' + e.message, 'error');
+    showStatus('Error: ' + e.message, 'error');
   }
 
   btn.disabled = false;
   btn.innerHTML = 'Save &amp; Publish';
 }
 
-// REBUILD HTML - surgically replace photos/headings, keep everything else intact
+// ── REBUILD HTML ───────────────────────────────────
 function rebuildHTML(html) {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
+  var doc = new DOMParser().parseFromString(html, 'text/html');
 
-  // Remove existing content photos and city headings
-  doc.querySelectorAll('h2.city-name, h3.city-name').forEach(el => el.remove());
-  doc.querySelectorAll('img:not(.hero-img)').forEach(el => {
-    const next = el.nextElementSibling;
-    if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName) && next.classList.contains('caption')) {
+  // Remove existing content images (not hero) and their captions
+  var imgs = Array.from(doc.querySelectorAll('img'));
+  imgs.forEach(function(el) {
+    if (el.classList.contains('hero-img')) return;
+    var next = el.nextElementSibling;
+    if (next && ['P','FIGCAPTION','EM','SPAN'].indexOf(next.tagName) >= 0 && next.classList.contains('caption')) {
       next.remove();
     }
     el.remove();
   });
 
-  // Find where to insert - after hero-img or after the first <hr> or at end of main
-  let insertPoint = doc.querySelector('.hero-img');
-  if (!insertPoint) insertPoint = doc.querySelector('hr');
-  if (!insertPoint) insertPoint = doc.querySelector('main') || doc.body.lastElementChild;
+  // Remove existing city headings
+  var headings = Array.from(doc.querySelectorAll('h2.city-name, h3.city-name'));
+  headings.forEach(function(el) { el.remove(); });
 
-  const parent = insertPoint ? insertPoint.parentElement : doc.body;
-  const insertBefore = insertPoint ? insertPoint.nextSibling : null;
+  // Find insert point
+  var hero = doc.querySelector('.hero-img');
+  var insertAfter = hero || doc.querySelector('hr');
+  var parent = insertAfter ? insertAfter.parentElement : (doc.querySelector('main') || doc.body);
+  var insertBefore = insertAfter ? insertAfter.nextSibling : null;
 
-  // Build fragment
-  const frag = doc.createDocumentFragment();
-  items.forEach(item => {
+  // Build and insert new content
+  var frag = doc.createDocumentFragment();
+  items.forEach(function(item) {
     if (item.type === 'heading') {
-      const h = doc.createElement('h2');
+      var h = doc.createElement('h2');
       h.className = 'city-name';
       h.textContent = item.text;
       frag.appendChild(h);
     } else {
-      const img = doc.createElement('img');
+      var img = doc.createElement('img');
       img.setAttribute('src', item.src);
       img.setAttribute('alt', item.caption || '');
       frag.appendChild(img);
       if (item.caption) {
-        const p = doc.createElement('p');
+        var p = doc.createElement('p');
         p.className = 'caption';
         p.textContent = item.caption;
         frag.appendChild(p);
@@ -492,22 +478,22 @@ function rebuildHTML(html) {
   });
 
   parent.insertBefore(frag, insertBefore);
-  return '<!DOCTYPE html>
-' + doc.documentElement.outerHTML;
+  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
 }
 
-// GitHub API helpers
+// ── GITHUB API ─────────────────────────────────────
 async function ghGet(path) {
-  const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
+  var res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
     headers: { 'Authorization': 'token ' + T, 'Accept': 'application/vnd.github.v3+json' }
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
+
 async function ghPut(path, content, message, sha) {
-  const body = { message, content };
+  var body = { message: message, content: content };
   if (sha) body.sha = sha;
-  const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
+  var res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
     method: 'PUT',
     headers: { 'Authorization': 'token ' + T, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
@@ -515,15 +501,17 @@ async function ghPut(path, content, message, sha) {
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
+
 function toB64(file) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(r.result.split(',')[1]);
-    r.onerror = rej;
+  return new Promise(function(resolve, reject) {
+    var r = new FileReader();
+    r.onload = function() { resolve(r.result.split(',')[1]); };
+    r.onerror = reject;
     r.readAsDataURL(file);
   });
 }
 
+// ── UI HELPERS ─────────────────────────────────────
 function markDirty() {
   dirty = true;
   document.getElementById('save-status').textContent = 'Unsaved changes';
@@ -533,8 +521,10 @@ function updateSaveBar() {
   document.getElementById('save-bar').style.display = currentTrip ? 'flex' : 'none';
 }
 function showStatus(msg, type) {
-  const b = document.getElementById('status-bar');
-  b.textContent = msg; b.className = type || ''; b.style.display = 'block';
+  var b = document.getElementById('status-bar');
+  b.textContent = msg;
+  b.className = type || '';
+  b.style.display = 'block';
 }
 function hideStatus() { document.getElementById('status-bar').style.display = 'none'; }
 </script>
