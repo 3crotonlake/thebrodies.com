@@ -34,12 +34,12 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
 #status-bar.error{border-color:var(--red);background:var(--red-light)}
 #loading-msg{text-align:center;padding:3rem;color:var(--muted);font-size:.85rem;display:none}
 #items-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem}
-.item-row{background:white;border:1px solid var(--border);display:flex;align-items:flex-start;gap:.8rem;padding:.8rem;cursor:grab;user-select:none;transition:box-shadow .15s,opacity .15s}
+.item-row{background:white;border:1px solid var(--border);display:flex;align-items:flex-start;gap:.8rem;padding:.8rem;cursor:grab;user-select:none}
 .item-row.dragging{opacity:.4;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 .item-row.drag-over{border-color:var(--accent);border-style:dashed}
 .heading-row{background:var(--cream);border:1px solid var(--border);border-left:3px solid var(--accent);display:flex;align-items:center;gap:.8rem;padding:.7rem .8rem;cursor:grab;user-select:none}
-.heading-row.drag-over{border-color:var(--green);border-style:dashed}
-.drag-handle{color:var(--border);font-size:1.2rem;padding-top:2px;cursor:grab;flex-shrink:0}
+.heading-row.drag-over{border-top:2px solid var(--green)}
+.drag-handle{color:#ccc;font-size:1.2rem;cursor:grab;flex-shrink:0}
 .item-thumb{width:80px;height:60px;object-fit:cover;flex-shrink:0;background:var(--border)}
 .item-thumb.broken{opacity:.3}
 .item-body{flex:1;display:flex;flex-direction:column;gap:.5rem}
@@ -80,7 +80,7 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
     <h1>The Brodies — Admin</h1>
     <div class="header-right">
       <span id="header-trip" style="font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase"></span>
-      <a href="/" class="back-link">← Back to site</a>
+      <a id="back-link" href="/" class="back-link">← Back to site</a>
     </div>
   </header>
   <div class="main">
@@ -117,7 +117,7 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
       </div>
       <div class="add-bar">
         <button class="btn btn-ghost" onclick="addHeading()">+ Add Section Heading</button>
-        <span style="font-size:.72rem;color:var(--muted);align-self:center">Drag ⠿ to reorder · Edit captions inline</span>
+        <span style="font-size:.72rem;color:var(--muted);align-self:center">Drag ⠿ to reorder · Edit captions inline · Click Save &amp; Publish when done</span>
       </div>
       <div id="items-list"></div>
     </div>
@@ -139,7 +139,40 @@ var originalHTML = '';
 var items = [];
 var dirty = false;
 
-// ── LOGIN ──────────────────────────────────────────
+var TRIP_URLS = {
+  'iceland-2026':'/trips/iceland-2026.html',
+  'memphis-2026':'/trips/memphis-2026.html',
+  'edinburgh-york-london-2026':'/trips/edinburgh-york-london-2026.html',
+  'london-oxford-paris-2025':'/trips/london-oxford-paris-2025.html',
+  'switzerland-sweden-2025':'/trips/switzerland-sweden-2025.html',
+  'utah-2025':'/trips/utah-2025.html',
+  'florence-rome-2025':'/trips/florence-rome-2025.html',
+  'charleston-2025':'/trips/charleston-2025.html',
+  'belize-2025':'/trips/belize-2025.html',
+  'cambodia-2024':'/trips/cambodia-2024.html',
+  'ireland-2024':'/trips/ireland-2024.html',
+  'mont-tremblant-2024':'/trips/mont-tremblant-2024.html',
+  'sedona-2023':'/trips/sedona-2023.html',
+  'puerto-rico-2023':'/trips/puerto-rico-2023.html',
+  'thailand-cambodia-2023':'/trips/thailand-cambodia-2023.html',
+  'london-2022':'/trips/london-2022.html',
+  'spain-portugal-2022':'/trips/spain-portugal-2022.html',
+  'acadia-2021':'/trips/acadia-2021.html',
+  'spain-2019':'/trips/spain-2019.html'
+};
+
+var FOLDER_MAP = {
+  'iceland-2026':'2026_iceland','memphis-2026':'2026_Memphis',
+  'edinburgh-york-london-2026':'2026_edinburgh','london-oxford-paris-2025':'2025_london-oxford-paris',
+  'switzerland-sweden-2025':'2025_switzerland-sweden','utah-2025':'2025_utah',
+  'florence-rome-2025':'2025_FlorenceRome','charleston-2025':'2025_charleston',
+  'belize-2025':'2025_Belize','cambodia-2024':'2024_cambodia','ireland-2024':'2024_ireland',
+  'mont-tremblant-2024':'2024_MontTremblant','sedona-2023':'2023_sedona',
+  'puerto-rico-2023':'2023_PuertoRico','thailand-cambodia-2023':'2023_thailand-cambodia',
+  'london-2022':'2022_london','spain-portugal-2022':'2022_spain-portugal',
+  'acadia-2021':'2021_acadia','spain-2019':'2019_spain'
+};
+
 function login() {
   if (document.getElementById('password-input').value === PW) {
     document.getElementById('login-screen').style.display = 'none';
@@ -152,11 +185,16 @@ document.getElementById('password-input').addEventListener('keydown', function(e
   if (e.key === 'Enter') login();
 });
 
-// ── LOAD TRIP ──────────────────────────────────────
 async function loadTrip() {
   var sel = document.getElementById('trip-select');
   currentTrip = sel.value;
   if (!currentTrip) return;
+
+  // Update back link to go to the specific trip page
+  var backLink = document.getElementById('back-link');
+  backLink.href = TRIP_URLS[currentTrip] || '/';
+  backLink.textContent = '← View trip page';
+
   document.getElementById('header-trip').textContent = sel.options[sel.selectedIndex].text;
   document.getElementById('trip-editor').style.display = 'none';
   document.getElementById('loading-msg').style.display = 'block';
@@ -180,34 +218,65 @@ async function loadTrip() {
   }
 }
 
-// ── PARSE ──────────────────────────────────────────
 function parseItems(html) {
   var doc = new DOMParser().parseFromString(html, 'text/html');
   var result = [];
+
   function walk(el) {
     var children = Array.from(el.children);
     for (var i = 0; i < children.length; i++) {
       var child = children[i];
       var tag = child.tagName;
-      if (tag === 'IMG' && child.getAttribute('src') && !child.classList.contains('hero-img')) {
+
+      // Photo inside a photo-item div
+      if (tag === 'DIV' && child.classList.contains('photo-item')) {
+        var img = child.querySelector('img');
+        var capEl = child.querySelector('p');
+        if (img) {
+          result.push({
+            type: 'photo',
+            src: img.getAttribute('src'),
+            caption: capEl ? capEl.textContent.trim() : (img.getAttribute('alt') || ''),
+            newFile: null
+          });
+        }
+        continue;
+      }
+
+      // Bare img (not inside photo-item, not hero)
+      if (tag === 'IMG' && !child.classList.contains('hero-img')) {
         var caption = child.getAttribute('alt') || '';
         var next = child.nextElementSibling;
-        if (next && ['P','FIGCAPTION','EM','SPAN'].indexOf(next.tagName) >= 0) {
+        if (next && ['P','FIGCAPTION','EM'].indexOf(next.tagName) >= 0) {
           caption = next.textContent.trim();
         }
         result.push({ type:'photo', src: child.getAttribute('src'), caption: caption, newFile: null });
-      } else if ((tag === 'H2' || tag === 'H3') && child.classList.contains('city-name')) {
+        continue;
+      }
+
+      // City heading
+      if ((tag === 'H2' || tag === 'H3') && child.classList.contains('city-name')) {
         result.push({ type:'heading', text: child.textContent.trim() });
-      } else {
+        continue;
+      }
+
+      // photo-grid div - walk inside it
+      if (tag === 'DIV' && child.classList.contains('photo-grid')) {
+        walk(child);
+        continue;
+      }
+
+      // Recurse into other containers
+      if (['SECTION','ARTICLE','MAIN','DIV'].indexOf(tag) >= 0) {
         walk(child);
       }
     }
   }
+
   walk(doc.body);
   return result;
 }
 
-// ── RENDER ──────────────────────────────────────────
 function renderList() {
   var list = document.getElementById('items-list');
   list.innerHTML = '';
@@ -317,7 +386,6 @@ function makePhotoRow(idx) {
   return row;
 }
 
-// ── DRAG & DROP ────────────────────────────────────
 function addDragEvents(row) {
   row.addEventListener('dragstart', function(e) {
     e.dataTransfer.setData('text/plain', row.dataset.idx);
@@ -340,7 +408,6 @@ function addDragEvents(row) {
   });
 }
 
-// ── ADD / REMOVE ───────────────────────────────────
 function addHeading() {
   items.push({ type:'heading', text:'' });
   markDirty();
@@ -355,7 +422,6 @@ function removeItem(idx) {
   renderList();
 }
 
-// ── FILE UPLOAD ────────────────────────────────────
 function uploadDrag(e, type) {
   e.preventDefault();
   var sec = document.getElementById('upload-section');
@@ -377,26 +443,13 @@ function handleFiles(fileList) {
   showStatus(files.length + ' photo' + (files.length > 1 ? 's' : '') + ' added — click Save & Publish when ready', '');
 }
 
-var FOLDER_MAP = {
-  'iceland-2026':'2026_iceland','memphis-2026':'2026_Memphis',
-  'edinburgh-york-london-2026':'2026_edinburgh','london-oxford-paris-2025':'2025_london-oxford-paris',
-  'switzerland-sweden-2025':'2025_switzerland-sweden','utah-2025':'2025_utah',
-  'florence-rome-2025':'2025_FlorenceRome','charleston-2025':'2025_charleston',
-  'belize-2025':'2025_Belize','cambodia-2024':'2024_cambodia','ireland-2024':'2024_ireland',
-  'mont-tremblant-2024':'2024_MontTremblant','sedona-2023':'2023_sedona',
-  'puerto-rico-2023':'2023_PuertoRico','thailand-cambodia-2023':'2023_thailand-cambodia',
-  'london-2022':'2022_london','spain-portugal-2022':'2022_spain-portugal',
-  'acadia-2021':'2021_acadia','spain-2019':'2019_spain'
-};
-
-// ── SAVE ───────────────────────────────────────────
 async function saveChanges() {
   var btn = document.getElementById('save-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Saving…';
 
   try {
-    // Upload new images first
+    // Upload new images
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
       if (!item.newFile) continue;
@@ -407,13 +460,11 @@ async function saveChanges() {
       item.newFile = null;
     }
 
-    // Rebuild and save HTML
     showStatus('Saving page…', '');
     var newHTML = rebuildHTML(originalHTML);
     var htmlB64 = btoa(unescape(encodeURIComponent(newHTML)));
     await ghPut('trips/' + currentTrip + '.html', htmlB64, 'Update ' + currentTrip, currentSHA);
 
-    // Refresh SHA and originalHTML
     var fresh = await ghGet('trips/' + currentTrip + '.html');
     currentSHA = fresh.sha;
     var freshRaw = fresh.content.split('\n').join('');
@@ -430,50 +481,61 @@ async function saveChanges() {
   btn.innerHTML = 'Save &amp; Publish';
 }
 
-// ── REBUILD HTML ───────────────────────────────────
+// Rebuild HTML - preserves page structure, replaces photo-grid and city headings
 function rebuildHTML(html) {
   var doc = new DOMParser().parseFromString(html, 'text/html');
 
-  // Remove existing content images (not hero) and their captions
-  var imgs = Array.from(doc.querySelectorAll('img'));
-  imgs.forEach(function(el) {
-    if (el.classList.contains('hero-img')) return;
+  // Find all photo-grids and remove their contents
+  var grids = Array.from(doc.querySelectorAll('.photo-grid'));
+  grids.forEach(function(g) { g.remove(); });
+
+  // Remove bare content images (not hero)
+  Array.from(doc.querySelectorAll('img:not(.hero-img)')).forEach(function(el) {
     var next = el.nextElementSibling;
-    if (next && ['P','FIGCAPTION','EM','SPAN'].indexOf(next.tagName) >= 0 && next.classList.contains('caption')) {
-      next.remove();
-    }
+    if (next && ['P','FIGCAPTION','EM'].indexOf(next.tagName) >= 0) next.remove();
     el.remove();
   });
 
   // Remove existing city headings
-  var headings = Array.from(doc.querySelectorAll('h2.city-name, h3.city-name'));
-  headings.forEach(function(el) { el.remove(); });
+  Array.from(doc.querySelectorAll('h2.city-name, h3.city-name')).forEach(function(el) { el.remove(); });
 
-  // Find insert point
-  var hero = doc.querySelector('.hero-img');
-  var insertAfter = hero || doc.querySelector('hr');
-  var parent = insertAfter ? insertAfter.parentElement : (doc.querySelector('main') || doc.body);
-  var insertBefore = insertAfter ? insertAfter.nextSibling : null;
+  // Find insert point - after hero section or last nav element
+  var insertPoint = doc.querySelector('.hero') || doc.querySelector('nav');
+  var parent = insertPoint ? insertPoint.parentElement : doc.body;
+  var insertBefore = insertPoint ? insertPoint.nextSibling : null;
 
-  // Build and insert new content
+  // Build new content - group photos between headings into photo-grids
   var frag = doc.createDocumentFragment();
+  var currentGrid = null;
+
   items.forEach(function(item) {
     if (item.type === 'heading') {
+      currentGrid = null; // reset grid on heading
       var h = doc.createElement('h2');
       h.className = 'city-name';
       h.textContent = item.text;
       frag.appendChild(h);
     } else {
+      // Start new grid if needed
+      if (!currentGrid) {
+        currentGrid = doc.createElement('div');
+        currentGrid.className = 'photo-grid';
+        frag.appendChild(currentGrid);
+      }
+      var photoItem = doc.createElement('div');
+      photoItem.className = 'photo-item';
       var img = doc.createElement('img');
       img.setAttribute('src', item.src);
       img.setAttribute('alt', item.caption || '');
-      frag.appendChild(img);
+      img.setAttribute('loading', 'lazy');
+      photoItem.appendChild(img);
       if (item.caption) {
         var p = doc.createElement('p');
-        p.className = 'caption';
+        p.className = 'photo-caption';
         p.textContent = item.caption;
-        frag.appendChild(p);
+        photoItem.appendChild(p);
       }
+      currentGrid.appendChild(photoItem);
     }
   });
 
@@ -481,7 +543,6 @@ function rebuildHTML(html) {
   return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
 }
 
-// ── GITHUB API ─────────────────────────────────────
 async function ghGet(path) {
   var res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
     headers: { 'Authorization': 'token ' + T, 'Accept': 'application/vnd.github.v3+json' }
@@ -511,7 +572,6 @@ function toB64(file) {
   });
 }
 
-// ── UI HELPERS ─────────────────────────────────────
 function markDirty() {
   dirty = true;
   document.getElementById('save-status').textContent = 'Unsaved changes';
@@ -522,9 +582,7 @@ function updateSaveBar() {
 }
 function showStatus(msg, type) {
   var b = document.getElementById('status-bar');
-  b.textContent = msg;
-  b.className = type || '';
-  b.style.display = 'block';
+  b.textContent = msg; b.className = type || ''; b.style.display = 'block';
 }
 function hideStatus() { document.getElementById('status-bar').style.display = 'none'; }
 </script>
