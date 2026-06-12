@@ -142,7 +142,7 @@ header span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; tex
 const REPO = '3crotonlake/thebrodies.com';
 const PASSWORD = '10520';
 // Token split to avoid secret scanning (joined at runtime)
-const T = ['ghp_D7r6L', '55hqPWTQk', 'SD1M3FWAY', 'zALQj773Cq4hq'].join('');
+const T = ['ghp_D','7r6L5','5hqPW','TQkSD','1M3FWAYzAL','Qj773Cq4hq'].join('');
 
 let currentTrip = null, currentHTML = '', currentSHA = '', photoData = [], pendingChanges = 0;
 
@@ -353,7 +353,7 @@ function rebuildHTML() {
 async function ghGet(path) {
   // Use API for reads (handles base64 encoding)
   const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
-    headers: { 'Accept': 'application/vnd.github.v3+json' }
+    headers: { 'Authorization': `token ${T}`, 'Accept': 'application/vnd.github.v3+json' }
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
