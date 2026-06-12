@@ -18,16 +18,13 @@
       position:fixed; top:0; left:0; right:0; z-index:200;
       display:flex; justify-content:space-between; align-items:center;
       padding:1.2rem 3rem;
-      transition:background 0.3s, border-color 0.3s;
+      background:rgba(249,247,243,0.95); backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--border);
     }
-    nav.scrolled { background:rgba(249,247,243,0.96); backdrop-filter:blur(10px); border-bottom:1px solid var(--border); }
-    .nav-brand { font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; color:#fff; transition:color 0.3s; }
-    nav.scrolled .nav-brand { color:var(--ink); }
+    .nav-brand { font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; text-decoration:none; color:var(--ink); }
     .nav-links { display:flex; gap:2.5rem; list-style:none; }
-    .nav-links a { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; color:rgba(255,255,255,0.75); transition:color 0.2s; }
-    nav.scrolled .nav-links a { color:var(--muted); }
-    .nav-links a:hover { color:#fff; }
-    nav.scrolled .nav-links a:hover { color:var(--ink); }
+    .nav-links a { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; text-decoration:none; color:var(--muted); transition:color 0.2s; }
+    .nav-links a:hover { color:var(--ink); }
 
     /* SPLIT */
     .split { display:grid; grid-template-columns:58% 42%; min-height:100vh; }
@@ -445,7 +442,8 @@
 
 
 
-<!-- v14 -->
+
+<!-- v15 -->
 </html>
 
 
