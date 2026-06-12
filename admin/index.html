@@ -351,8 +351,9 @@ function rebuildHTML() {
 }
 
 async function ghGet(path) {
+  // Use API for reads (handles base64 encoding)
   const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
-    headers: { 'Authorization': `token ${T}`, 'Accept': 'application/vnd.github.v3+json' }
+    headers: { 'Accept': 'application/vnd.github.v3+json' }
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
