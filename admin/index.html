@@ -257,7 +257,7 @@ function makeHeadingRow(item, idx) {
   row.innerHTML = `
     <span class="drag-handle">⠿</span>
     <input class="heading-input" value="${item.text}" placeholder="Section heading (e.g. London, Oxford…)"
-      oninput="items[${idx}].text=this.value;markDirty()" />
+      data-idx="${idx}" oninput="updateHeading(this)" />
     <button class="btn btn-danger" style="padding:0.3rem 0.6rem;font-size:0.6rem" onclick="removeItem(${idx})">✕</button>
   `;
   return row;
@@ -279,7 +279,7 @@ function makePhotoRow(item, idx) {
     <img class="item-thumb" src="${displaySrc}" onerror="this.classList.add('broken')" />
     <div class="item-body">
       <div class="item-filename">${fname}${newBadge}</div>
-      <textarea class="item-caption" placeholder="Caption…" oninput="items[${idx}].caption=this.value;markDirty()">${item.caption}</textarea>
+      <textarea class="item-caption" placeholder="Caption…" data-idx="${idx}" oninput="updateCaption(this)">${item.caption}</textarea>
     </div>
     <div class="item-actions">
       <button class="btn btn-danger" onclick="removeItem(${idx})">Remove</button>
@@ -467,6 +467,18 @@ function toB64(file) {
   return new Promise((res,rej) => { const r=new FileReader(); r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(file); });
 }
 
+function updateCaption(el) {
+  const row = el.closest('.item-row');
+  const idx = parseInt(row.dataset.idx);
+  if (!isNaN(idx)) items[idx].caption = el.value;
+  markDirty();
+}
+function updateHeading(el) {
+  const row = el.closest('.heading-row');
+  const idx = parseInt(row.dataset.idx);
+  if (!isNaN(idx)) items[idx].text = el.value;
+  markDirty();
+}
 function markDirty() { dirty = true; updateSaveBar(); document.getElementById('save-status').textContent = 'Unsaved changes'; }
 function updateSaveBar() { document.getElementById('save-bar').style.display = currentTrip ? 'flex' : 'none'; }
 function showStatus(msg, type) { const b=document.getElementById('status-bar'); b.textContent=msg; b.className=type||''; b.style.display='block'; }
