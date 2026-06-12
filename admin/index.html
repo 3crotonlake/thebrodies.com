@@ -7,58 +7,103 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;--accent-light:#f3ebe9;--green:#2a6b3a;--green-light:#e9f3eb;--red:#8b2a2a;--red-light:#f3e9e9}
+:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;--accent-light:#f3ebe9;--green:#2a6b3a;--green-light:#e9f3eb;--red:#8b2a2a;--red-light:#f3e9e9;--gold:#c9a84c}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;min-height:100vh}
+
+/* LOGIN */
 #login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:2rem}
 #login-screen h1{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;letter-spacing:.05em}
-.login-box{display:flex;flex-direction:column;gap:1rem;width:340px}
-.login-box input{padding:.9rem 1.2rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:1rem;font-weight:300;color:var(--ink)}
+.login-box{display:flex;flex-direction:column;gap:1rem;width:320px}
+.login-box input{padding:.9rem 1.2rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:1rem;color:var(--ink)}
 .login-box input:focus{outline:2px solid var(--accent)}
-.btn{padding:.75rem 1.5rem;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.72rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;transition:opacity .2s}
+#login-error{color:var(--red);font-size:.8rem;text-align:center;display:none}
+
+/* BUTTONS */
+.btn{padding:.65rem 1.4rem;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:opacity .2s;white-space:nowrap}
 .btn:hover{opacity:.8}.btn:disabled{opacity:.4;cursor:not-allowed}
 .btn-primary{background:var(--ink);color:var(--cream)}
-.btn-danger{background:var(--red);color:white}
+.btn-danger{background:var(--red);color:white;padding:.4rem .7rem;font-size:.62rem}
 .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
-#login-error{color:var(--red);font-size:.8rem;text-align:center;display:none}
-#app{display:none;padding-bottom:100px}
-header{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(249,247,243,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
-.header-right{display:flex;gap:1.5rem;align-items:center}
-.back-link{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none}
-.back-link:hover{color:var(--ink)}
-.main{max-width:900px;margin:0 auto;padding:2rem}
-.section-label{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem}
-#trip-select{width:100%;max-width:400px;padding:.9rem 1.2rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:1rem;font-weight:300;color:var(--ink);margin-bottom:2rem;cursor:pointer}
-#status-bar{display:none;padding:.9rem 1.4rem;margin-bottom:1.5rem;font-size:.82rem;border-left:3px solid var(--accent);background:var(--accent-light)}
-#status-bar.success{border-color:var(--green);background:var(--green-light)}
-#status-bar.error{border-color:var(--red);background:var(--red-light)}
-#loading-msg{text-align:center;padding:3rem;color:var(--muted);font-size:.85rem;display:none}
-#items-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:2rem}
-.item-row{background:white;border:1px solid var(--border);display:flex;align-items:flex-start;gap:.8rem;padding:.8rem;cursor:grab;user-select:none}
-.item-row.dragging{opacity:.4;box-shadow:0 4px 20px rgba(0,0,0,.15)}
-.item-row.drag-over{border-color:var(--accent);border-style:dashed}
-.heading-row{background:var(--cream);border:1px solid var(--border);border-left:3px solid var(--accent);display:flex;align-items:center;gap:.8rem;padding:.7rem .8rem;cursor:grab;user-select:none}
-.heading-row.drag-over{border-top:3px solid var(--green)}
-.drag-handle{color:#ccc;font-size:1.2rem;cursor:grab;flex-shrink:0;padding-top:2px}
-.item-thumb{width:80px;height:60px;object-fit:cover;flex-shrink:0;background:var(--border)}
-.item-thumb.broken{opacity:.3}
-.item-body{flex:1;display:flex;flex-direction:column;gap:.5rem}
-.item-filename{font-size:.62rem;color:var(--muted);letter-spacing:.04em}
-.item-caption{width:100%;padding:.5rem .7rem;border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:.82rem;font-weight:300;color:var(--ink);resize:none;min-height:50px}
-.item-caption:focus{outline:2px solid var(--accent)}
-.item-actions{display:flex;gap:.4rem;flex-shrink:0;flex-direction:column}
-.heading-input{flex:1;border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);letter-spacing:.05em}
-.heading-input:focus{outline:none;border-bottom:1px solid var(--accent)}
-.add-bar{display:flex;gap:.8rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
-#upload-section{border:2px dashed var(--border);padding:2rem;text-align:center;margin-bottom:1.5rem;cursor:pointer;transition:border-color .2s,background .2s}
-#upload-section.dragover{border-color:var(--accent);background:var(--accent-light)}
-#upload-section p{font-size:.82rem;color:var(--muted);margin-bottom:1rem}
+.btn-green{background:var(--green);color:white}
+.btn-gold{background:var(--gold);color:white}
+.btn-sm{padding:.35rem .7rem;font-size:.62rem}
+
+/* APP SHELL */
+#app{display:none;padding-bottom:2rem}
+header{position:sticky;top:0;z-index:100;background:rgba(249,247,243,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+.header-center{display:flex;align-items:center;gap:.8rem;flex:1;max-width:600px}
+#trip-select{flex:1;padding:.5rem .8rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:.85rem;color:var(--ink);cursor:pointer}
+.header-right{display:flex;align-items:center;gap:.8rem}
+#status-indicator{font-size:.7rem;letter-spacing:.06em;color:var(--muted);min-width:80px}
+#status-indicator.saving{color:var(--accent)}
+#status-indicator.saved{color:var(--green)}
+#status-indicator.error{color:var(--red)}
+.sort-toggle{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;text-decoration:underline;white-space:nowrap}
+.sort-toggle:hover{color:var(--ink)}
+
+/* MAIN CONTENT */
+.main{max-width:860px;margin:0 auto;padding:1.5rem 2rem}
+
+/* STATUS BAR */
+#page-status{display:none;padding:.8rem 1.2rem;margin-bottom:1.5rem;font-size:.82rem;border-left:3px solid var(--accent);background:var(--accent-light)}
+#page-status.success{border-color:var(--green);background:var(--green-light)}
+#page-status.error{border-color:var(--red);background:var(--red-light)}
+
+/* TRIP META */
+#trip-meta{display:none;margin-bottom:1.5rem;padding:1rem 1.2rem;background:white;border:1px solid var(--border);display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.meta-label{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+#planning-toggle{display:flex;align-items:center;gap:.6rem}
+.toggle-switch{position:relative;width:40px;height:22px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:var(--border);border-radius:22px;cursor:pointer;transition:.3s}
+.toggle-slider:before{content:'';position:absolute;width:16px;height:16px;left:3px;top:3px;background:white;border-radius:50%;transition:.3s}
+input:checked + .toggle-slider{background:var(--green)}
+input:checked + .toggle-slider:before{transform:translateX(18px)}
+.toggle-label{font-size:.78rem;color:var(--muted)}
+
+/* UPLOAD ZONE */
+#upload-section{border:2px dashed var(--border);padding:1.5rem;text-align:center;margin-bottom:1.5rem;cursor:pointer;transition:all .2s;border-radius:2px}
+#upload-section:hover,#upload-section.dragover{border-color:var(--accent);background:var(--accent-light)}
+#upload-section p{font-size:.8rem;color:var(--muted);margin-bottom:.8rem}
 #file-input{display:none}
-#save-bar{position:fixed;bottom:0;left:0;right:0;display:none;justify-content:space-between;align-items:center;padding:1rem 2rem;background:var(--ink);color:var(--cream);z-index:200}
-#save-bar p{font-size:.78rem;opacity:.7}
-.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+
+/* SECTION GROUPS */
+.section-group{margin-bottom:2rem;border:1px solid var(--border);background:white}
+.section-header{display:flex;align-items:center;gap:.8rem;padding:.7rem 1rem;background:var(--cream);border-bottom:1px solid var(--border)}
+.section-title-input{flex:1;border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--ink);letter-spacing:.04em;padding:.2rem 0}
+.section-title-input:focus{outline:none;border-bottom:1px solid var(--accent)}
+.section-title-input::placeholder{color:var(--border)}
+.section-actions{display:flex;gap:.5rem;flex-shrink:0}
+
+/* PHOTO GRID IN ADMIN */
+.admin-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border)}
+.admin-photo-item{background:white;padding:.8rem;display:flex;flex-direction:column;gap:.5rem;cursor:grab;position:relative}
+.admin-photo-item.dragging{opacity:.4}
+.admin-photo-item.drag-over{outline:2px dashed var(--accent)}
+.admin-thumb{width:100%;height:140px;object-fit:cover;display:block;background:var(--cream)}
+.admin-thumb.broken{opacity:.3;filter:grayscale(1)}
+.admin-filename{font-size:.6rem;color:var(--muted);letter-spacing:.03em;word-break:break-all}
+.admin-caption{width:100%;padding:.4rem .6rem;border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:.78rem;color:var(--ink);resize:none;min-height:44px;background:var(--cream)}
+.admin-caption:focus{outline:2px solid var(--accent);background:white}
+.admin-delete{position:absolute;top:.4rem;right:.4rem;background:var(--red);color:white;border:none;width:20px;height:20px;cursor:pointer;font-size:.7rem;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.admin-photo-item:hover .admin-delete{opacity:1}
+
+/* SECTION ADD PHOTO */
+.section-add-photo{padding:.8rem 1rem;border-top:1px solid var(--border);display:flex;align-items:center;gap:.6rem}
+.section-add-photo input[type=file]{display:none}
+.section-add-label{font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:.4rem .8rem;border:1px dashed var(--border);transition:all .2s}
+.section-add-label:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ADD SECTION */
+#add-section-bar{margin-bottom:1.5rem}
+
+/* LOADING */
+#loading-msg{text-align:center;padding:3rem;color:var(--muted);font-size:.85rem;display:none}
+
+.spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,.15);border-top-color:var(--ink);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:4px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.new-badge{font-size:.58rem;background:var(--green);color:white;padding:.15rem .4rem;letter-spacing:.08em;text-transform:uppercase;margin-left:.3rem;vertical-align:middle}
+.new-badge{font-size:.55rem;background:var(--green);color:white;padding:.1rem .35rem;letter-spacing:.08em;text-transform:uppercase;margin-left:.3rem;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -70,61 +115,60 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
   </div>
   <div class="login-box">
     <input type="password" id="password-input" placeholder="Password">
-    <button class="btn btn-primary" onclick="login()">Enter</button>
+    <button class="btn btn-primary" onclick="login()" style="padding:.9rem">Enter</button>
     <div id="login-error">Incorrect password</div>
   </div>
 </div>
 
 <div id="app">
   <header>
-    <h1>The Brodies — Admin</h1>
+    <h1>Brodies Admin</h1>
+    <div class="header-center">
+      <select id="trip-select" onchange="loadTrip()">
+        <option value="">— Select a trip —</option>
+      </select>
+      <span class="sort-toggle" onclick="toggleSort()" id="sort-label">Sort: Newest</span>
+    </div>
     <div class="header-right">
-      <span id="header-trip" style="font-size:.7rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase"></span>
-      <a id="back-link" href="/" class="back-link">← Back to site</a>
+      <span id="status-indicator"></span>
+      <a id="view-trip-btn" href="#" target="_blank" class="btn btn-ghost btn-sm" style="display:none">View page ↗</a>
     </div>
   </header>
+
   <div class="main">
-    <div class="section-label">Select Trip</div>
-    <select id="trip-select" onchange="loadTrip()">
-      <option value="">— Choose a trip —</option>
-      <option value="iceland-2026">Iceland 2026 (Girls Trip)</option>
-      <option value="memphis-2026">Memphis 2026</option>
-      <option value="edinburgh-york-london-2026">Edinburgh / York / London 2026</option>
-      <option value="london-oxford-paris-2025">London / Oxford / Paris 2025</option>
-      <option value="switzerland-sweden-2025">Switzerland &amp; Sweden 2025</option>
-      <option value="utah-2025">Utah 2025 (Mighty 5)</option>
-      <option value="florence-rome-2025">Florence / Rome 2025</option>
-      <option value="charleston-2025">Charleston 2025</option>
-      <option value="belize-2025">Belize 2025</option>
-      <option value="cambodia-2024">Cambodia 2024</option>
-      <option value="ireland-2024">Ireland 2024</option>
-      <option value="mont-tremblant-2024">Mont Tremblant 2024</option>
-      <option value="sedona-2023">Sedona &amp; Grand Canyon 2023</option>
-      <option value="puerto-rico-2023">Puerto Rico 2023</option>
-      <option value="thailand-cambodia-2023">Thailand &amp; Cambodia 2023</option>
-      <option value="london-2022">London 2022</option>
-      <option value="spain-portugal-2022">Spain &amp; Portugal 2022</option>
-      <option value="acadia-2021">Acadia 2021</option>
-      <option value="spain-2019">Spain 2019</option>
-    </select>
-    <div id="status-bar"></div>
+    <div id="page-status"></div>
     <div id="loading-msg">Loading trip…</div>
+
     <div id="trip-editor" style="display:none">
+
+      <!-- Trip meta: planning toggle -->
+      <div id="trip-meta">
+        <div id="planning-toggle">
+          <span class="meta-label">Status:</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="planning-checkbox" onchange="togglePlanning()">
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="toggle-label" id="planning-label">Planning</span>
+        </div>
+      </div>
+
+      <!-- Upload zone (global - adds to last section or creates new) -->
       <div id="upload-section" onclick="document.getElementById('file-input').click()" ondragover="uploadDrag(event,'over')" ondragleave="uploadDrag(event,'leave')" ondrop="uploadDrag(event,'drop')">
-        <p>Drop photos here or click to browse — they'll be added at the bottom</p>
-        <button class="btn btn-primary" onclick="event.stopPropagation();document.getElementById('file-input').click()">Choose Photos</button>
-        <input type="file" id="file-input" multiple accept="image/*" onchange="handleFiles(event.target.files)">
+        <p>Drop photos here — they'll be added to the last section</p>
+        <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();document.getElementById('file-input').click()">Choose Photos</button>
+        <input type="file" id="file-input" multiple accept="image/*" onchange="handleGlobalUpload(event.target.files)">
       </div>
-      <div class="add-bar">
-        <button class="btn btn-ghost" onclick="addHeading()">+ Add Section Heading</button>
-        <span style="font-size:.72rem;color:var(--muted)">Drag ⠿ to reorder · Edit captions inline</span>
+
+      <!-- Add section button -->
+      <div id="add-section-bar">
+        <button class="btn btn-ghost" onclick="addSection()">+ Add Section Heading</button>
       </div>
-      <div id="items-list"></div>
+
+      <!-- Sections rendered here -->
+      <div id="sections-container"></div>
+
     </div>
-  </div>
-  <div id="save-bar">
-    <p id="save-status">No changes yet</p>
-    <button class="btn btn-primary" id="save-btn" onclick="saveChanges()">Save &amp; Publish</button>
   </div>
 </div>
 
@@ -132,39 +176,39 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
 var REPO = '3crotonlake/thebrodies.com';
 var PW = '10520';
 var T = ['ghp_D7r6L','55hqPWTQk','SD1M3FWAY','zALQj773Cq4hq'].join('');
-var SESSION_KEY = 'brodies_admin_auth';
 
 var currentTrip = null;
 var currentSHA = '';
-var originalHTML = '';
-var items = [];
-var dirty = false;
+var sortNewest = true;
+var saveTimer = null;
 
-var TRIP_URLS = {
-  'iceland-2026':'/trips/iceland-2026.html',
-  'memphis-2026':'/trips/memphis-2026.html',
-  'edinburgh-york-london-2026':'/trips/edinburgh-york-london-2026.html',
-  'london-oxford-paris-2025':'/trips/london-oxford-paris-2025.html',
-  'switzerland-sweden-2025':'/trips/switzerland-sweden-2025.html',
-  'utah-2025':'/trips/utah-2025.html',
-  'florence-rome-2025':'/trips/florence-rome-2025.html',
-  'charleston-2025':'/trips/charleston-2025.html',
-  'belize-2025':'/trips/belize-2025.html',
-  'cambodia-2024':'/trips/cambodia-2024.html',
-  'ireland-2024':'/trips/ireland-2024.html',
-  'mont-tremblant-2024':'/trips/mont-tremblant-2024.html',
-  'sedona-2023':'/trips/sedona-2023.html',
-  'puerto-rico-2023':'/trips/puerto-rico-2023.html',
-  'thailand-cambodia-2023':'/trips/thailand-cambodia-2023.html',
-  'london-2022':'/trips/london-2022.html',
-  'spain-portugal-2022':'/trips/spain-portugal-2022.html',
-  'acadia-2021':'/trips/acadia-2021.html',
-  'spain-2019':'/trips/spain-2019.html'
-};
+var TRIPS = [
+  {val:'iceland-2026',    label:'Iceland 2026 (Girls Trip)',     year:2026},
+  {val:'memphis-2026',    label:'Memphis 2026',                  year:2026},
+  {val:'edinburgh-york-london-2026', label:'Edinburgh / York / London 2026', year:2026},
+  {val:'oxford-2026',     label:'Oxford 2026',                   year:2026},
+  {val:'london-oxford-paris-2025', label:'London / Oxford / Paris 2025', year:2025},
+  {val:'switzerland-sweden-2025', label:'Switzerland & Sweden 2025', year:2025},
+  {val:'utah-2025',       label:'Utah 2025 (Mighty 5)',          year:2025},
+  {val:'florence-rome-2025', label:'Florence / Rome 2025',       year:2025},
+  {val:'charleston-2025', label:'Charleston 2025',               year:2025},
+  {val:'belize-2025',     label:'Belize 2025',                   year:2025},
+  {val:'cambodia-2024',   label:'Cambodia 2024',                 year:2024},
+  {val:'ireland-2024',    label:'Ireland 2024',                  year:2024},
+  {val:'mont-tremblant-2024', label:'Mont Tremblant 2024',       year:2024},
+  {val:'sedona-2023',     label:'Sedona & Grand Canyon 2023',    year:2023},
+  {val:'puerto-rico-2023',label:'Puerto Rico 2023',              year:2023},
+  {val:'thailand-cambodia-2023', label:'Thailand & Cambodia 2023', year:2023},
+  {val:'london-2022',     label:'London 2022',                   year:2022},
+  {val:'spain-portugal-2022', label:'Spain & Portugal 2022',     year:2022},
+  {val:'acadia-2021',     label:'Acadia 2021',                   year:2021},
+  {val:'spain-2019',      label:'Spain 2019',                    year:2019}
+];
 
 var FOLDER_MAP = {
   'iceland-2026':'2026_iceland','memphis-2026':'2026_Memphis',
-  'edinburgh-york-london-2026':'2026_edinburgh','london-oxford-paris-2025':'2025_london-oxford-paris',
+  'edinburgh-york-london-2026':'2026_edinburgh','oxford-2026':'2026_oxford',
+  'london-oxford-paris-2025':'2025_london-oxford-paris',
   'switzerland-sweden-2025':'2025_switzerland-sweden','utah-2025':'2025_utah',
   'florence-rome-2025':'2025_FlorenceRome','charleston-2025':'2025_charleston',
   'belize-2025':'2025_Belize','cambodia-2024':'2024_cambodia','ireland-2024':'2024_ireland',
@@ -174,16 +218,10 @@ var FOLDER_MAP = {
   'acadia-2021':'2021_acadia','spain-2019':'2019_spain'
 };
 
-// ── SESSION: stay logged in until browser closes ──
-function checkSession() {
-  return sessionStorage.getItem(SESSION_KEY) === 'ok';
-}
-function setSession() {
-  sessionStorage.setItem(SESSION_KEY, 'ok');
-}
-
+// ── SESSION ──
 window.addEventListener('load', function() {
-  if (checkSession()) {
+  populateDropdown();
+  if (sessionStorage.getItem('brodies_auth') === 'ok') {
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
   }
@@ -191,7 +229,7 @@ window.addEventListener('load', function() {
 
 function login() {
   if (document.getElementById('password-input').value === PW) {
-    setSession();
+    sessionStorage.setItem('brodies_auth', 'ok');
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
   } else {
@@ -202,84 +240,153 @@ document.getElementById('password-input').addEventListener('keydown', function(e
   if (e.key === 'Enter') login();
 });
 
+// ── DROPDOWN ──
+function populateDropdown() {
+  var sel = document.getElementById('trip-select');
+  var sorted = TRIPS.slice().sort(function(a,b) {
+    return sortNewest ? b.year - a.year || a.label.localeCompare(b.label)
+                      : a.label.localeCompare(b.label);
+  });
+  var cur = sel.value;
+  sel.innerHTML = '<option value="">— Select a trip —</option>';
+  sorted.forEach(function(t) {
+    var opt = document.createElement('option');
+    opt.value = t.val;
+    opt.textContent = t.label;
+    if (t.val === cur) opt.selected = true;
+    sel.appendChild(opt);
+  });
+}
+
+function toggleSort() {
+  sortNewest = !sortNewest;
+  document.getElementById('sort-label').textContent = sortNewest ? 'Sort: Newest' : 'Sort: A–Z';
+  populateDropdown();
+}
+
 // ── LOAD TRIP ──
 async function loadTrip() {
   var sel = document.getElementById('trip-select');
   currentTrip = sel.value;
   if (!currentTrip) return;
 
-  document.getElementById('back-link').href = TRIP_URLS[currentTrip] || '/';
-  document.getElementById('back-link').textContent = '← View trip page';
-  document.getElementById('header-trip').textContent = sel.options[sel.selectedIndex].text;
+  var tripUrl = '/trips/' + currentTrip + '.html';
+  var viewBtn = document.getElementById('view-trip-btn');
+  viewBtn.href = tripUrl;
+  viewBtn.style.display = 'block';
+
   document.getElementById('trip-editor').style.display = 'none';
   document.getElementById('loading-msg').style.display = 'block';
-  hideStatus();
-  dirty = false;
-  items = [];
+  hidePageStatus();
+  setStatus('');
 
   try {
     var data = await ghGet('trips/' + currentTrip + '.html');
     currentSHA = data.sha;
-    var raw = data.content.split('\n').join('');
-    originalHTML = decodeURIComponent(escape(atob(raw)));
-    items = parseItems(originalHTML);
-    renderList();
+    var html = decodeBase64(data.content);
+    renderSections(html);
+    renderPlanningToggle(html);
     document.getElementById('loading-msg').style.display = 'none';
     document.getElementById('trip-editor').style.display = 'block';
-    updateSaveBar();
+    document.getElementById('trip-meta').style.display = 'flex';
   } catch(e) {
-    showStatus('Could not load trip: ' + e.message, 'error');
+    showPageStatus('Could not load trip: ' + e.message, 'error');
     document.getElementById('loading-msg').style.display = 'none';
   }
 }
 
-// ── PARSE: extract flat list of {heading, photo} items in DOM order ──
-function parseItems(html) {
-  var doc = new DOMParser().parseFromString(html, 'text/html');
-  var result = [];
+// ── PLANNING TOGGLE ──
+function renderPlanningToggle(html) {
+  var isPlanning = html.indexOf('badge-plan') >= 0 || html.indexOf('Planning') >= 0;
+  var cb = document.getElementById('planning-checkbox');
+  cb.checked = isPlanning;
+  document.getElementById('planning-label').textContent = isPlanning ? 'Planning (not live)' : 'Live';
+}
 
-  // Walk the entire document tree, collecting headings and photos in order
+async function togglePlanning() {
+  var isPlanning = document.getElementById('planning-checkbox').checked;
+  document.getElementById('planning-label').textContent = isPlanning ? 'Planning (not live)' : 'Live';
+  // Update index.html to toggle the badge-plan class
+  setStatus('Saving…');
+  try {
+    var data = await ghGet('index.html');
+    var html = decodeBase64(data.content);
+    if (isPlanning) {
+      // Add Planning badge to this trip in index
+      html = html.replace(
+        new RegExp('(href="trips/' + currentTrip + '\\.html"[^>]*>[\\s\\S]*?<div class="thumb-name">)([^<]+)(</div>)', 'g'),
+        '$1$2<span class="badge-plan">Planning</span>$3'
+      );
+    } else {
+      // Remove Planning badge
+      html = html.replace(/<span class="badge-plan">Planning<\/span>/g, '');
+    }
+    var b64 = encodeBase64(html);
+    var res = await ghPut('index.html', b64, 'Toggle planning: ' + currentTrip, data.sha);
+    setStatus('Saved ✓', 'saved');
+  } catch(e) {
+    setStatus('Error', 'error');
+  }
+}
+
+// ── RENDER SECTIONS ──
+function renderSections(html) {
+  var doc = new DOMParser().parseFromString(html, 'text/html');
+  var container = document.getElementById('sections-container');
+  container.innerHTML = '';
+
+  // Find all city-name headings and group photos that follow each
+  var sections = extractSections(doc);
+
+  // If no sections, create a default one with all photos
+  if (sections.length === 0) {
+    var allPhotos = extractPhotos(doc);
+    if (allPhotos.length > 0) {
+      sections = [{ heading: null, photos: allPhotos }];
+    }
+  }
+
+  sections.forEach(function(section, si) {
+    container.appendChild(makeSectionEl(section, si));
+  });
+}
+
+function extractSections(doc) {
+  var sections = [];
+  var currentSection = null;
+
   function walk(el) {
     var children = Array.from(el.children);
     for (var i = 0; i < children.length; i++) {
       var child = children[i];
       var tag = child.tagName;
 
-      // City heading - capture and continue (don't recurse)
       if ((tag === 'H2' || tag === 'H3') && child.classList.contains('city-name')) {
-        result.push({ type:'heading', text: child.textContent.trim() });
+        currentSection = { heading: child.textContent.trim(), photos: [] };
+        sections.push(currentSection);
         continue;
       }
 
-      // photo-item div - extract image and caption
-      if (tag === 'DIV' && child.classList.contains('photo-item')) {
-        var img = child.querySelector('img');
-        if (img && img.getAttribute('src')) {
-          var capEl = child.querySelector('p.photo-caption, p.caption, figcaption');
-          var caption = capEl ? capEl.textContent.trim() : (img.getAttribute('alt') || '');
-          result.push({ type:'photo', src: img.getAttribute('src'), caption: caption, newFile: null });
-        }
-        continue;
-      }
-
-      // photo-grid div - recurse into it
       if (tag === 'DIV' && child.classList.contains('photo-grid')) {
-        walk(child);
-        continue;
-      }
-
-      // Bare img (fallback for older pages)
-      if (tag === 'IMG' && !child.classList.contains('hero-img') && child.getAttribute('src')) {
-        var caption = child.getAttribute('alt') || '';
-        var next = child.nextElementSibling;
-        if (next && ['P','FIGCAPTION','EM'].indexOf(next.tagName) >= 0) {
-          caption = next.textContent.trim();
+        if (!currentSection) {
+          currentSection = { heading: null, photos: [] };
+          sections.push(currentSection);
         }
-        result.push({ type:'photo', src: child.getAttribute('src'), caption: caption, newFile: null });
+        var photoItems = child.querySelectorAll('.photo-item');
+        photoItems.forEach(function(item) {
+          var img = item.querySelector('img');
+          if (img && img.getAttribute('src')) {
+            var capEl = item.querySelector('p.photo-caption, p.caption, div.caption, figcaption');
+            currentSection.photos.push({
+              src: img.getAttribute('src'),
+              caption: capEl ? capEl.textContent.trim() : (img.getAttribute('alt') || ''),
+              newFile: null
+            });
+          }
+        });
         continue;
       }
 
-      // Recurse into containers (but not nav, header, footer, script, style)
       if (['NAV','HEADER','FOOTER','SCRIPT','STYLE'].indexOf(tag) < 0) {
         walk(child);
       }
@@ -287,79 +394,101 @@ function parseItems(html) {
   }
 
   walk(doc.body);
-  return result;
+  return sections;
 }
 
-// ── RENDER ──
-function renderList() {
-  var list = document.getElementById('items-list');
-  list.innerHTML = '';
-  for (var i = 0; i < items.length; i++) {
-    var row = items[i].type === 'heading' ? makeHeadingRow(i) : makePhotoRow(i);
-    list.appendChild(row);
+function extractPhotos(doc) {
+  var photos = [];
+  doc.querySelectorAll('.photo-item').forEach(function(item) {
+    var img = item.querySelector('img');
+    if (img && img.getAttribute('src')) {
+      var capEl = item.querySelector('p.photo-caption, p.caption, div.caption, figcaption');
+      photos.push({
+        src: img.getAttribute('src'),
+        caption: capEl ? capEl.textContent.trim() : (img.getAttribute('alt') || ''),
+        newFile: null
+      });
+    }
+  });
+  return photos;
+}
+
+// ── MAKE SECTION ELEMENT ──
+function makeSectionEl(section, sIdx) {
+  var div = document.createElement('div');
+  div.className = 'section-group';
+  div.dataset.sIdx = sIdx;
+
+  // Header with editable title
+  var hdr = document.createElement('div');
+  hdr.className = 'section-header';
+
+  if (section.heading !== null) {
+    var titleInput = document.createElement('input');
+    titleInput.className = 'section-title-input';
+    titleInput.value = section.heading;
+    titleInput.placeholder = 'Section name…';
+    titleInput.addEventListener('blur', function() { autoSave(); });
+    hdr.appendChild(titleInput);
+
+    var delSec = document.createElement('button');
+    delSec.className = 'btn btn-danger btn-sm';
+    delSec.textContent = 'Remove section';
+    delSec.onclick = function() {
+      if (!confirm('Remove this section and all its photos?')) return;
+      div.remove();
+      autoSave();
+    };
+    hdr.appendChild(delSec);
+  } else {
+    var noHead = document.createElement('span');
+    noHead.style.cssText = 'font-size:.72rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase';
+    noHead.textContent = 'Photos';
+    hdr.appendChild(noHead);
   }
+  div.appendChild(hdr);
+
+  // Photo grid
+  var grid = document.createElement('div');
+  grid.className = 'admin-photo-grid';
+  section.photos.forEach(function(photo, pIdx) {
+    grid.appendChild(makePhotoEl(photo, sIdx, pIdx));
+  });
+  div.appendChild(grid);
+
+  // Add photo to this section
+  var addBar = document.createElement('div');
+  addBar.className = 'section-add-photo';
+  var fileInput = document.createElement('input');
+  fileInput.type = 'file';
+  fileInput.multiple = true;
+  fileInput.accept = 'image/*';
+  fileInput.addEventListener('change', function() { handleSectionUpload(fileInput.files, grid); });
+  var addLabel = document.createElement('label');
+  addLabel.className = 'section-add-label';
+  addLabel.textContent = '+ Add photos to this section';
+  addLabel.appendChild(fileInput);
+  addBar.appendChild(addLabel);
+  div.appendChild(addBar);
+
+  return div;
 }
 
-function makeHeadingRow(idx) {
-  var row = document.createElement('div');
-  row.className = 'heading-row';
-  row.draggable = true;
-  row.dataset.idx = idx;
-  addDragEvents(row);
-
-  var handle = document.createElement('span');
-  handle.className = 'drag-handle';
-  handle.textContent = '⠿';
-
-  var input = document.createElement('input');
-  input.className = 'heading-input';
-  input.value = items[idx].text;
-  input.placeholder = 'Section heading (e.g. London, Oxford…)';
-  (function(r) {
-    input.addEventListener('input', function() {
-      items[parseInt(r.dataset.idx)].text = input.value;
-      markDirty();
-    });
-  })(row);
-
-  var del = document.createElement('button');
-  del.className = 'btn btn-danger';
-  del.style.cssText = 'padding:.3rem .6rem;font-size:.6rem;flex-shrink:0';
-  del.textContent = '✕';
-  (function(r) {
-    del.addEventListener('click', function() { removeItem(parseInt(r.dataset.idx)); });
-  })(row);
-
-  row.appendChild(handle);
-  row.appendChild(input);
-  row.appendChild(del);
-  return row;
-}
-
-function makePhotoRow(idx) {
-  var item = items[idx];
-  var row = document.createElement('div');
-  row.className = 'item-row';
-  row.draggable = true;
-  row.dataset.idx = idx;
-  addDragEvents(row);
-
-  var handle = document.createElement('span');
-  handle.className = 'drag-handle';
-  handle.textContent = '⠿';
+// ── MAKE PHOTO ELEMENT ──
+function makePhotoEl(photo, sIdx, pIdx) {
+  var item = document.createElement('div');
+  item.className = 'admin-photo-item';
+  item.draggable = true;
 
   var img = document.createElement('img');
-  img.className = 'item-thumb';
-  img.src = item.newFile ? URL.createObjectURL(item.newFile) : item.src;
+  img.className = 'admin-thumb';
+  img.src = photo.newFile ? URL.createObjectURL(photo.newFile) : photo.src;
   img.onerror = function() { img.classList.add('broken'); };
 
-  var body = document.createElement('div');
-  body.className = 'item-body';
-
   var fname = document.createElement('div');
-  fname.className = 'item-filename';
-  fname.textContent = item.src.split('/').pop();
-  if (item.newFile) {
+  fname.className = 'admin-filename';
+  fname.textContent = photo.src.split('/').pop();
+  if (photo.newFile) {
     var badge = document.createElement('span');
     badge.className = 'new-badge';
     badge.textContent = 'New';
@@ -367,202 +496,232 @@ function makePhotoRow(idx) {
   }
 
   var cap = document.createElement('textarea');
-  cap.className = 'item-caption';
-  cap.placeholder = 'Caption…';
-  cap.value = item.caption;
-  (function(r) {
-    cap.addEventListener('input', function() {
-      items[parseInt(r.dataset.idx)].caption = cap.value;
-      markDirty();
-    });
-  })(row);
+  cap.className = 'admin-caption';
+  cap.placeholder = 'Add caption…';
+  cap.value = photo.caption;
+  cap.rows = 2;
+  cap.addEventListener('blur', function() { autoSave(); });
 
-  body.appendChild(fname);
-  body.appendChild(cap);
-
-  var actions = document.createElement('div');
-  actions.className = 'item-actions';
   var del = document.createElement('button');
-  del.className = 'btn btn-danger';
-  del.textContent = 'Remove';
-  (function(r) {
-    del.addEventListener('click', function() {
-      if (!confirm('Remove this photo?')) return;
-      removeItem(parseInt(r.dataset.idx));
-    });
-  })(row);
-  actions.appendChild(del);
+  del.className = 'admin-delete';
+  del.textContent = '✕';
+  del.title = 'Remove photo';
+  del.onclick = function(e) {
+    e.stopPropagation();
+    if (!confirm('Remove this photo from the page?')) return;
+    item.remove();
+    autoSave();
+  };
 
-  row.appendChild(handle);
-  row.appendChild(img);
-  row.appendChild(body);
-  row.appendChild(actions);
-  return row;
-}
-
-// ── DRAG & DROP ──
-function addDragEvents(row) {
-  row.addEventListener('dragstart', function(e) {
-    e.dataTransfer.setData('text/plain', row.dataset.idx);
+  // Drag within section
+  item.addEventListener('dragstart', function(e) {
+    e.dataTransfer.setData('text/plain', 'photo');
     e.dataTransfer.effectAllowed = 'move';
-    setTimeout(function() { row.classList.add('dragging'); }, 0);
+    item._dragSrc = true;
+    setTimeout(function() { item.classList.add('dragging'); }, 0);
   });
-  row.addEventListener('dragend', function() { row.classList.remove('dragging'); });
-  row.addEventListener('dragover', function(e) { e.preventDefault(); row.classList.add('drag-over'); });
-  row.addEventListener('dragleave', function() { row.classList.remove('drag-over'); });
-  row.addEventListener('drop', function(e) {
+  item.addEventListener('dragend', function() {
+    item.classList.remove('dragging');
+    item._dragSrc = false;
+  });
+  item.addEventListener('dragover', function(e) {
     e.preventDefault();
-    row.classList.remove('drag-over');
-    var src = parseInt(e.dataTransfer.getData('text/plain'));
-    var dst = parseInt(row.dataset.idx);
-    if (isNaN(src) || src === dst) return;
-    var moved = items.splice(src, 1)[0];
-    // Insert at correct position accounting for splice
-    var insertAt = src < dst ? dst - 1 : dst;
-    items.splice(insertAt, 0, moved);
-    markDirty();
-    renderList();
+    item.classList.add('drag-over');
   });
+  item.addEventListener('dragleave', function() { item.classList.remove('drag-over'); });
+  item.addEventListener('drop', function(e) {
+    e.preventDefault();
+    item.classList.remove('drag-over');
+    // Find dragging element in same grid
+    var grid = item.closest('.admin-photo-grid');
+    var dragging = grid.querySelector('.admin-photo-item.dragging');
+    if (!dragging || dragging === item) return;
+    var items = Array.from(grid.children);
+    var srcIdx = items.indexOf(dragging);
+    var dstIdx = items.indexOf(item);
+    if (srcIdx < dstIdx) {
+      grid.insertBefore(dragging, item.nextSibling);
+    } else {
+      grid.insertBefore(dragging, item);
+    }
+    autoSave();
+  });
+
+  item.appendChild(del);
+  item.appendChild(img);
+  item.appendChild(fname);
+  item.appendChild(cap);
+  return item;
 }
 
-function addHeading() {
-  items.push({ type:'heading', text:'' });
-  markDirty();
-  renderList();
-  var inputs = document.querySelectorAll('.heading-input');
-  if (inputs.length) inputs[inputs.length - 1].focus();
+// ── ADD SECTION ──
+function addSection() {
+  var container = document.getElementById('sections-container');
+  var newSection = { heading: '', photos: [] };
+  var sIdx = container.children.length;
+  var el = makeSectionEl(newSection, sIdx);
+  container.appendChild(el);
+  el.querySelector('.section-title-input').focus();
 }
 
-function removeItem(idx) {
-  items.splice(idx, 1);
-  markDirty();
-  renderList();
-}
-
-// ── FILE UPLOAD ──
+// ── UPLOAD ──
 function uploadDrag(e, type) {
   e.preventDefault();
   var sec = document.getElementById('upload-section');
   if (type === 'over') sec.classList.add('dragover');
   else if (type === 'leave') sec.classList.remove('dragover');
-  else { sec.classList.remove('dragover'); handleFiles(e.dataTransfer.files); }
+  else { sec.classList.remove('dragover'); handleGlobalUpload(e.dataTransfer.files); }
 }
 
-function handleFiles(fileList) {
+async function handleGlobalUpload(fileList) {
   var files = Array.from(fileList).filter(function(f) { return f.type.indexOf('image/') === 0; });
   if (!files.length) return;
-  var folder = FOLDER_MAP[currentTrip] || currentTrip;
-  files.forEach(function(f) {
-    items.push({ type:'photo', src:'/images/' + folder + '/' + f.name, caption:'', newFile:f });
-  });
-  markDirty();
-  renderList();
-  document.getElementById('file-input').value = '';
-  showStatus(files.length + ' photo' + (files.length > 1 ? 's' : '') + ' added at bottom — drag to reorder, then Save & Publish', '');
-}
 
-// ── SAVE ──
-async function saveChanges() {
-  var btn = document.getElementById('save-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Saving…';
-
-  try {
-    // Upload new images first
-    for (var i = 0; i < items.length; i++) {
-      var item = items[i];
-      if (!item.newFile) continue;
-      showStatus('Uploading ' + item.newFile.name + '…', '');
-      var imgB64 = await toB64(item.newFile);
-      var folder = FOLDER_MAP[currentTrip] || currentTrip;
-      await ghPut('images/' + folder + '/' + item.newFile.name, imgB64, 'Add ' + item.newFile.name, null);
-      item.newFile = null;
-    }
-
-    showStatus('Saving page…', '');
-    var newHTML = rebuildHTML(originalHTML);
-    var htmlB64 = btoa(unescape(encodeURIComponent(newHTML)));
-    await ghPut('trips/' + currentTrip + '.html', htmlB64, 'Update ' + currentTrip, currentSHA);
-
-    // Refresh state
-    var fresh = await ghGet('trips/' + currentTrip + '.html');
-    currentSHA = fresh.sha;
-    var freshRaw = fresh.content.split('\n').join('');
-    originalHTML = decodeURIComponent(escape(atob(freshRaw)));
-    // Re-parse to keep items in sync with saved state
-    items = parseItems(originalHTML);
-    renderList();
-
-    dirty = false;
-    document.getElementById('save-status').textContent = 'All saved ✓';
-    showStatus('Saved! Site updates in about 1 minute.', 'success');
-  } catch(e) {
-    showStatus('Error: ' + e.message, 'error');
+  // Add to last section, or create one
+  var container = document.getElementById('sections-container');
+  var sections = container.querySelectorAll('.section-group');
+  var targetGrid;
+  if (sections.length > 0) {
+    targetGrid = sections[sections.length - 1].querySelector('.admin-photo-grid');
+  } else {
+    // Create a default section
+    var el = makeSectionEl({ heading: null, photos: [] }, 0);
+    container.appendChild(el);
+    targetGrid = el.querySelector('.admin-photo-grid');
   }
 
-  btn.disabled = false;
-  btn.innerHTML = 'Save &amp; Publish';
+  await uploadFilesToGrid(files, targetGrid);
 }
 
-// ── REBUILD HTML ──
-// Finds the content area (after hero, before footer) and replaces it
-// with properly structured photo-grids grouped by city headings
-function rebuildHTML(html) {
-  var doc = new DOMParser().parseFromString(html, 'text/html');
+async function handleSectionUpload(fileList, grid) {
+  var files = Array.from(fileList).filter(function(f) { return f.type.indexOf('image/') === 0; });
+  if (!files.length) return;
+  await uploadFilesToGrid(files, grid);
+}
 
-  // Remove all existing city headings, photo-grids, and bare content images
+async function uploadFilesToGrid(files, grid) {
+  var folder = FOLDER_MAP[currentTrip] || currentTrip;
+  setStatus('Uploading…', 'saving');
+
+  for (var i = 0; i < files.length; i++) {
+    var f = files[i];
+    try {
+      var b64 = await toB64(f);
+      await ghPut('images/' + folder + '/' + f.name, b64, 'Add ' + f.name, null);
+      var photo = { src: '/images/' + folder + '/' + f.name, caption: '', newFile: null };
+      grid.appendChild(makePhotoEl(photo, 0, grid.children.length));
+      showPageStatus('Photo uploaded: ' + f.name, 'success');
+    } catch(e) {
+      showPageStatus('Upload failed: ' + e.message, 'error');
+    }
+  }
+
+  document.getElementById('file-input').value = '';
+  await autoSave();
+}
+
+// ── AUTO SAVE ──
+var saving = false;
+async function autoSave() {
+  if (!currentTrip) return;
+  if (saving) {
+    // Queue another save after current one
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(autoSave, 500);
+    return;
+  }
+  saving = true;
+  setStatus('Saving…', 'saving');
+
+  try {
+    // Read current HTML from GitHub for the base
+    var data = await ghGet('trips/' + currentTrip + '.html');
+    currentSHA = data.sha;
+    var baseHTML = decodeBase64(data.content);
+
+    // Build new HTML from current DOM state
+    var newHTML = buildHTML(baseHTML);
+    var b64 = encodeBase64(newHTML);
+    var res = await ghPut('trips/' + currentTrip + '.html', b64, 'Update ' + currentTrip, currentSHA);
+    currentSHA = res.content.sha;
+    setStatus('Saved ✓', 'saved');
+  } catch(e) {
+    setStatus('Error saving', 'error');
+    showPageStatus('Save error: ' + e.message, 'error');
+  }
+  saving = false;
+}
+
+// ── BUILD HTML FROM DOM ──
+function buildHTML(baseHTML) {
+  var doc = new DOMParser().parseFromString(baseHTML, 'text/html');
+
+  // Remove all existing content photos, grids, and city headings
   Array.from(doc.querySelectorAll('h2.city-name, h3.city-name')).forEach(function(el) { el.remove(); });
   Array.from(doc.querySelectorAll('.photo-grid')).forEach(function(el) { el.remove(); });
   Array.from(doc.querySelectorAll('img:not(.hero-img)')).forEach(function(el) {
     var next = el.nextElementSibling;
-    if (next && ['P','FIGCAPTION','EM'].indexOf(next.tagName) >= 0 &&
-        (next.classList.contains('caption') || next.classList.contains('photo-caption'))) {
-      next.remove();
-    }
+    if (next && (next.classList.contains('caption') || next.classList.contains('photo-caption'))) next.remove();
     el.remove();
   });
 
-  // Find the right insertion point - after hero div or after route div
+  // Find insert point
   var hero = doc.querySelector('.hero');
-  var insertParent = hero ? hero.parentElement : doc.body;
+  var parent = hero ? hero.parentElement : doc.body;
   var insertBefore = hero ? hero.nextSibling : null;
 
-  // Build new content — group consecutive photos into photo-grids
+  // Build from admin DOM
+  var container = document.getElementById('sections-container');
+  var sectionEls = Array.from(container.querySelectorAll('.section-group'));
   var frag = doc.createDocumentFragment();
-  var currentGrid = null;
 
-  items.forEach(function(item) {
-    if (item.type === 'heading') {
-      currentGrid = null; // end current grid
+  sectionEls.forEach(function(sEl) {
+    var titleInput = sEl.querySelector('.section-title-input');
+    if (titleInput && titleInput.value.trim()) {
       var h = doc.createElement('h2');
       h.className = 'city-name';
-      h.textContent = item.text;
+      h.textContent = titleInput.value.trim();
       frag.appendChild(h);
-    } else {
-      // Start a new grid if needed
-      if (!currentGrid) {
-        currentGrid = doc.createElement('div');
-        currentGrid.className = 'photo-grid';
-        frag.appendChild(currentGrid);
-      }
-      var photoItem = doc.createElement('div');
-      photoItem.className = 'photo-item';
-      var img = doc.createElement('img');
-      img.setAttribute('src', item.src);
-      img.setAttribute('alt', item.caption || '');
-      img.setAttribute('loading', 'lazy');
-      photoItem.appendChild(img);
-      if (item.caption) {
-        var p = doc.createElement('p');
-        p.className = 'photo-caption';
-        p.textContent = item.caption;
-        photoItem.appendChild(p);
-      }
-      currentGrid.appendChild(photoItem);
+    }
+
+    var photoItems = Array.from(sEl.querySelectorAll('.admin-photo-item'));
+    if (photoItems.length > 0) {
+      var grid = doc.createElement('div');
+      grid.className = 'photo-grid';
+
+      photoItems.forEach(function(pEl) {
+        var imgEl = pEl.querySelector('.admin-thumb');
+        var capEl = pEl.querySelector('.admin-caption');
+        if (!imgEl) return;
+
+        var src = imgEl.src;
+        // Convert absolute URL back to relative path
+        if (src.indexOf('blob:') === 0) return; // skip uncommitted blobs
+        src = src.replace(window.location.origin, '');
+
+        var caption = capEl ? capEl.value.trim() : '';
+
+        var item = doc.createElement('div');
+        item.className = 'photo-item';
+        var img = doc.createElement('img');
+        img.setAttribute('src', src);
+        img.setAttribute('alt', caption);
+        img.setAttribute('loading', 'lazy');
+        item.appendChild(img);
+        if (caption) {
+          var p = doc.createElement('p');
+          p.className = 'photo-caption';
+          p.textContent = caption;
+          item.appendChild(p);
+        }
+        grid.appendChild(item);
+      });
+
+      frag.appendChild(grid);
     }
   });
 
-  insertParent.insertBefore(frag, insertBefore);
+  parent.insertBefore(frag, insertBefore);
   return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
 }
 
@@ -587,28 +746,32 @@ async function ghPut(path, content, message, sha) {
   return res.json();
 }
 
+function decodeBase64(b64) {
+  return decodeURIComponent(escape(atob(b64.split('\n').join(''))));
+}
+function encodeBase64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
 function toB64(file) {
-  return new Promise(function(resolve, reject) {
+  return new Promise(function(res, rej) {
     var r = new FileReader();
-    r.onload = function() { resolve(r.result.split(',')[1]); };
-    r.onerror = reject;
+    r.onload = function() { res(r.result.split(',')[1]); };
+    r.onerror = rej;
     r.readAsDataURL(file);
   });
 }
 
-function markDirty() {
-  dirty = true;
-  document.getElementById('save-status').textContent = 'Unsaved changes';
-  updateSaveBar();
+function setStatus(msg, cls) {
+  var el = document.getElementById('status-indicator');
+  el.textContent = msg;
+  el.className = cls || '';
 }
-function updateSaveBar() {
-  document.getElementById('save-bar').style.display = currentTrip ? 'flex' : 'none';
+function showPageStatus(msg, cls) {
+  var el = document.getElementById('page-status');
+  el.textContent = msg; el.className = cls || ''; el.style.display = 'block';
+  setTimeout(function() { el.style.display = 'none'; }, 4000);
 }
-function showStatus(msg, type) {
-  var b = document.getElementById('status-bar');
-  b.textContent = msg; b.className = type || ''; b.style.display = 'block';
-}
-function hideStatus() { document.getElementById('status-bar').style.display = 'none'; }
+function hidePageStatus() { document.getElementById('page-status').style.display = 'none'; }
 </script>
 </body>
 </html>
