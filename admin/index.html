@@ -201,8 +201,7 @@ async function loadTrip() {
   try {
     const data = await ghGet('trips/' + currentTrip + '.html');
     currentSHA = data.sha;
-    originalHTML = decodeURIComponent(escape(atob(data.content.replace(/
-/g,''))));
+    originalHTML = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))/g,''))));
     items = parseItems(originalHTML);
     renderList();
     document.getElementById('loading-msg').style.display = 'none';
@@ -435,8 +434,7 @@ async function saveChanges() {
     // 4. Refresh state
     const fresh = await ghGet('trips/' + currentTrip + '.html');
     currentSHA = fresh.sha;
-    originalHTML = decodeURIComponent(escape(atob(fresh.content.replace(/
-/g,''))));
+    originalHTML = decodeURIComponent(escape(atob(fresh.content.replace(/\n/g,''))/g,''))));
 
     dirty = false;
     showStatus('Saved! Site updates in about 1 minute.', 'success');
