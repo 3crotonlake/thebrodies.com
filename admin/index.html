@@ -165,7 +165,7 @@ header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weig
   </div>
 
   <div id="save-bar">
-    <p>Unsaved changes</p>
+    <p id="save-status">No changes yet</p>
     <button class="btn btn-primary" id="save-btn" onclick="saveChanges()">Save &amp; Publish</button>
   </div>
 </div>
@@ -206,6 +206,7 @@ async function loadTrip() {
     renderList();
     document.getElementById('loading-msg').style.display = 'none';
     document.getElementById('trip-editor').style.display = 'block';
+    updateSaveBar();
   } catch(e) {
     showStatus('Could not load trip: ' + e.message, 'error');
     document.getElementById('loading-msg').style.display = 'none';
@@ -291,6 +292,7 @@ function makePhotoRow(item, idx) {
 function addDragEvents(row) {
   row.addEventListener('dragstart', e => {
     dragSrc = parseInt(row.dataset.idx);
+    e.dataTransfer.setData('text/plain', dragSrc);
     row.classList.add('dragging');
     e.dataTransfer.effectAllowed = 'move';
   });
@@ -300,10 +302,12 @@ function addDragEvents(row) {
   row.addEventListener('drop', e => {
     e.preventDefault();
     row.classList.remove('drag-over');
+    const srcIdx = parseInt(e.dataTransfer.getData('text/plain'));
     const dropIdx = parseInt(row.dataset.idx);
-    if (dragSrc === null || dragSrc === dropIdx) return;
-    const moved = items.splice(dragSrc, 1)[0];
-    items.splice(dropIdx, 0, moved);
+    if (isNaN(srcIdx) || srcIdx === dropIdx) return;
+    const moved = items.splice(srcIdx, 1)[0];
+    const newIdx = srcIdx < dropIdx ? dropIdx - 1 : dropIdx;
+    items.splice(newIdx, 0, moved);
     dragSrc = null;
     markDirty();
     renderList();
@@ -463,8 +467,8 @@ function toB64(file) {
   return new Promise((res,rej) => { const r=new FileReader(); r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(file); });
 }
 
-function markDirty() { dirty = true; updateSaveBar(); }
-function updateSaveBar() { document.getElementById('save-bar').style.display = dirty ? 'flex' : 'none'; }
+function markDirty() { dirty = true; updateSaveBar(); document.getElementById('save-status').textContent = 'Unsaved changes'; }
+function updateSaveBar() { document.getElementById('save-bar').style.display = currentTrip ? 'flex' : 'none'; }
 function showStatus(msg, type) { const b=document.getElementById('status-bar'); b.textContent=msg; b.className=type||''; b.style.display='block'; }
 function hideStatus() { document.getElementById('status-bar').style.display='none'; }
 </script>
