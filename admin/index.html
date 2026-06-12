@@ -167,6 +167,8 @@ async function loadTrip() {
   pendingChanges = 0; updateSaveBar(); hideStatus();
 
   try {
+    const debugUrl = `https://api.github.com/repos/${REPO}/contents/trips/${currentTrip}.html`;
+    showStatus('Fetching: ' + debugUrl, '');
     const res = await ghGet(`contents/trips/${currentTrip}.html`);
     currentSHA = res.sha;
     currentHTML = decodeURIComponent(escape(atob(res.content.replace(/\n/g,''))));
