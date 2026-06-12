@@ -175,7 +175,7 @@ const REPO = '3crotonlake/thebrodies.com';
 const PASSWORD = '10520';
 const T = ['ghp_D7r6L','55hqPWTQk','SD1M3FWAY','zALQj773Cq4hq'].join('');
 
-let currentTrip = null, currentSHA = '', items = [], dragSrc = null, dirty = false;
+let currentTrip = null, currentSHA = '', originalHTML = '', items = [], dirty = false;
 
 // LOGIN
 function login() {
@@ -196,13 +196,14 @@ async function loadTrip() {
   document.getElementById('header-trip').textContent = sel.options[sel.selectedIndex].text;
   document.getElementById('trip-editor').style.display = 'none';
   document.getElementById('loading-msg').style.display = 'block';
-  hideStatus(); dirty = false; updateSaveBar();
+  hideStatus(); dirty = false; items = [];
 
   try {
-    const data = await ghGet(`trips/${currentTrip}.html`);
+    const data = await ghGet('trips/' + currentTrip + '.html');
     currentSHA = data.sha;
-    const html = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
-    items = parseItems(html);
+    originalHTML = decodeURIComponent(escape(atob(data.content.replace(/
+/g,''))));
+    items = parseItems(originalHTML);
     renderList();
     document.getElementById('loading-msg').style.display = 'none';
     document.getElementById('trip-editor').style.display = 'block';
@@ -213,20 +214,21 @@ async function loadTrip() {
   }
 }
 
-// PARSE HTML into items array [{type:'photo'|'heading', src, caption, text}]
+// PARSE - extract photos and city headings from HTML
 function parseItems(html) {
   const doc = new DOMParser().parseFromString(html, 'text/html');
   const result = [];
-  // Walk body children looking for imgs and headings
   function walk(el) {
-    for (const child of el.children) {
-      if (child.tagName === 'IMG' && child.getAttribute('src') && !child.classList.contains('hero-img')) {
-        // Get caption from next sibling
+    for (const child of Array.from(el.children)) {
+      const tag = child.tagName;
+      if (tag === 'IMG' && child.src && !child.classList.contains('hero-img')) {
         let caption = child.getAttribute('alt') || '';
-        let next = child.nextElementSibling;
-        if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName)) caption = next.textContent.trim();
+        const next = child.nextElementSibling;
+        if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName)) {
+          caption = next.textContent.trim();
+        }
         result.push({ type:'photo', src: child.getAttribute('src'), caption, newFile: null });
-      } else if (['H2','H3'].includes(child.tagName) && child.className === 'city-name') {
+      } else if ((tag === 'H2' || tag === 'H3') && child.classList.contains('city-name')) {
         result.push({ type:'heading', text: child.textContent.trim() });
       } else {
         walk(child);
@@ -237,7 +239,7 @@ function parseItems(html) {
   return result;
 }
 
-// RENDER
+// RENDER - key insight: use data-idx on row, never bake idx into onclick strings
 function renderList() {
   const list = document.getElementById('items-list');
   list.innerHTML = '';
@@ -254,12 +256,28 @@ function makeHeadingRow(item, idx) {
   row.dataset.idx = idx;
   addDragEvents(row);
 
-  row.innerHTML = `
-    <span class="drag-handle">⠿</span>
-    <input class="heading-input" value="${item.text}" placeholder="Section heading (e.g. London, Oxford…)"
-      data-idx="${idx}" oninput="updateHeading(this)" />
-    <button class="btn btn-danger" style="padding:0.3rem 0.6rem;font-size:0.6rem" onclick="removeItem(${idx})">✕</button>
-  `;
+  const handle = document.createElement('span');
+  handle.className = 'drag-handle';
+  handle.textContent = '⠿';
+
+  const input = document.createElement('input');
+  input.className = 'heading-input';
+  input.value = item.text;
+  input.placeholder = 'Section heading (e.g. London, Oxford…)';
+  input.addEventListener('input', () => {
+    items[parseInt(row.dataset.idx)].text = input.value;
+    markDirty();
+  });
+
+  const del = document.createElement('button');
+  del.className = 'btn btn-danger';
+  del.style.cssText = 'padding:0.3rem 0.6rem;font-size:0.6rem';
+  del.textContent = '✕';
+  del.addEventListener('click', () => removeItem(parseInt(row.dataset.idx)));
+
+  row.appendChild(handle);
+  row.appendChild(input);
+  row.appendChild(del);
   return row;
 }
 
@@ -270,31 +288,64 @@ function makePhotoRow(item, idx) {
   row.dataset.idx = idx;
   addDragEvents(row);
 
-  const displaySrc = item.newFile ? URL.createObjectURL(item.newFile) : item.src;
-  const fname = item.src.split('/').pop();
-  const newBadge = item.newFile ? '<span class="new-badge">New</span>' : '';
+  const handle = document.createElement('span');
+  handle.className = 'drag-handle';
+  handle.textContent = '⠿';
 
-  row.innerHTML = `
-    <span class="drag-handle">⠿</span>
-    <img class="item-thumb" src="${displaySrc}" onerror="this.classList.add('broken')" />
-    <div class="item-body">
-      <div class="item-filename">${fname}${newBadge}</div>
-      <textarea class="item-caption" placeholder="Caption…" data-idx="${idx}" oninput="updateCaption(this)">${item.caption}</textarea>
-    </div>
-    <div class="item-actions">
-      <button class="btn btn-danger" onclick="removeItem(${idx})">Remove</button>
-    </div>
-  `;
+  const img = document.createElement('img');
+  img.className = 'item-thumb';
+  img.src = item.newFile ? URL.createObjectURL(item.newFile) : item.src;
+  img.onerror = () => img.classList.add('broken');
+
+  const body = document.createElement('div');
+  body.className = 'item-body';
+
+  const fname = document.createElement('div');
+  fname.className = 'item-filename';
+  fname.textContent = item.src.split('/').pop();
+  if (item.newFile) {
+    const badge = document.createElement('span');
+    badge.className = 'new-badge';
+    badge.textContent = 'New';
+    fname.appendChild(badge);
+  }
+
+  const cap = document.createElement('textarea');
+  cap.className = 'item-caption';
+  cap.placeholder = 'Caption…';
+  cap.value = item.caption;
+  cap.addEventListener('input', () => {
+    items[parseInt(row.dataset.idx)].caption = cap.value;
+    markDirty();
+  });
+
+  body.appendChild(fname);
+  body.appendChild(cap);
+
+  const actions = document.createElement('div');
+  actions.className = 'item-actions';
+  const del = document.createElement('button');
+  del.className = 'btn btn-danger';
+  del.textContent = 'Remove';
+  del.addEventListener('click', () => {
+    if (!confirm('Remove this photo?')) return;
+    removeItem(parseInt(row.dataset.idx));
+  });
+  actions.appendChild(del);
+
+  row.appendChild(handle);
+  row.appendChild(img);
+  row.appendChild(body);
+  row.appendChild(actions);
   return row;
 }
 
-// DRAG & DROP reorder
+// DRAG & DROP
 function addDragEvents(row) {
   row.addEventListener('dragstart', e => {
-    dragSrc = parseInt(row.dataset.idx);
-    e.dataTransfer.setData('text/plain', dragSrc);
-    row.classList.add('dragging');
+    e.dataTransfer.setData('text/plain', row.dataset.idx);
     e.dataTransfer.effectAllowed = 'move';
+    setTimeout(() => row.classList.add('dragging'), 0);
   });
   row.addEventListener('dragend', () => row.classList.remove('dragging'));
   row.addEventListener('dragover', e => { e.preventDefault(); row.classList.add('drag-over'); });
@@ -306,9 +357,7 @@ function addDragEvents(row) {
     const dropIdx = parseInt(row.dataset.idx);
     if (isNaN(srcIdx) || srcIdx === dropIdx) return;
     const moved = items.splice(srcIdx, 1)[0];
-    const newIdx = srcIdx < dropIdx ? dropIdx - 1 : dropIdx;
-    items.splice(newIdx, 0, moved);
-    dragSrc = null;
+    items.splice(srcIdx < dropIdx ? dropIdx - 1 : dropIdx, 0, moved);
     markDirty();
     renderList();
   });
@@ -316,17 +365,15 @@ function addDragEvents(row) {
 
 // ADD HEADING
 function addHeading() {
-  items.push({ type: 'heading', text: '' });
+  items.push({ type:'heading', text:'' });
   markDirty();
   renderList();
-  // Focus the new heading input
   const inputs = document.querySelectorAll('.heading-input');
   if (inputs.length) inputs[inputs.length-1].focus();
 }
 
 // REMOVE ITEM
 function removeItem(idx) {
-  if (items[idx].type === 'photo' && !confirm('Remove this photo?')) return;
   items.splice(idx, 1);
   markDirty();
   renderList();
@@ -338,15 +385,17 @@ function ev(e, type) {
   const sec = document.getElementById('upload-section');
   if (type === 'dragover') sec.classList.add('dragover');
   else if (type === 'dragleave') sec.classList.remove('dragover');
-  else if (type === 'drop') { sec.classList.remove('dragover'); handleFiles(e, e.dataTransfer.files); }
+  else { sec.classList.remove('dragover'); handleFiles(null, e.dataTransfer.files); }
 }
 function handleFiles(e, fileList) {
   const files = Array.from(fileList || e.target.files).filter(f => f.type.startsWith('image/'));
   if (!files.length) return;
-  files.forEach(f => items.push({ type:'photo', src:`/images/${folderMap[currentTrip]||currentTrip}/${f.name}`, caption:'', newFile:f }));
-  markDirty(); renderList();
-  document.getElementById('file-input').value = '';
-  showStatus(`${files.length} photo${files.length>1?'s':''} added — click Save & Publish when ready`, '');
+  const folder = folderMap[currentTrip] || currentTrip;
+  files.forEach(f => items.push({ type:'photo', src:'/images/' + folder + '/' + f.name, caption:'', newFile:f }));
+  markDirty();
+  renderList();
+  if (e) document.getElementById('file-input').value = '';
+  showStatus(files.length + ' photo' + (files.length>1?'s':'') + ' added — click Save & Publish when ready', '');
 }
 
 const folderMap = {
@@ -362,55 +411,67 @@ const folderMap = {
 // SAVE
 async function saveChanges() {
   const btn = document.getElementById('save-btn');
-  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Saving…';
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span>Saving…';
 
   try {
-    // Upload new images
+    // 1. Upload any new image files
     for (const item of items.filter(i => i.newFile)) {
-      showStatus(`Uploading ${item.newFile.name}…`, '');
+      showStatus('Uploading ' + item.newFile.name + '…', '');
       const b64 = await toB64(item.newFile);
-      await ghPut(`images/${folderMap[currentTrip]||currentTrip}/${item.newFile.name}`, b64, `Add ${item.newFile.name}`);
+      const folder = folderMap[currentTrip] || currentTrip;
+      await ghPut('images/' + folder + '/' + item.newFile.name, b64, 'Add ' + item.newFile.name);
       item.newFile = null;
     }
 
-    // Rebuild HTML - fetch fresh copy and update it
+    // 2. Rebuild the trip HTML with current items order/captions
     showStatus('Saving page…', '');
-    const freshData = await ghGet(`trips/${currentTrip}.html`);
-    currentSHA = freshData.sha;
-    const originalHTML = decodeURIComponent(escape(atob(freshData.content.replace(/\n/g,''))));
-    const newHTML = await rebuildHTMLAsync(originalHTML);
-    const b64 = btoa(unescape(encodeURIComponent(newHTML)));
-    await ghPut(`trips/${currentTrip}.html`, b64, `Update ${currentTrip}`, currentSHA);
+    const newHTML = rebuildHTML(originalHTML);
 
-    // Refresh SHA
-    const fresh2 = await ghGet(`trips/${currentTrip}.html`);
-    currentSHA = fresh2.sha;
-    dirty = false; updateSaveBar();
-    showStatus('Saved! Site updates in ~1 minute.', 'success');
+    // 3. Push to GitHub
+    const b64html = btoa(unescape(encodeURIComponent(newHTML)));
+    await ghPut('trips/' + currentTrip + '.html', b64html, 'Update ' + currentTrip, currentSHA);
+
+    // 4. Refresh state
+    const fresh = await ghGet('trips/' + currentTrip + '.html');
+    currentSHA = fresh.sha;
+    originalHTML = decodeURIComponent(escape(atob(fresh.content.replace(/
+/g,''))));
+
+    dirty = false;
+    showStatus('Saved! Site updates in about 1 minute.', 'success');
+    document.getElementById('save-status').textContent = 'All saved';
   } catch(e) {
-    showStatus('Error: ' + e.message, 'error');
+    showStatus('Error saving: ' + e.message, 'error');
   }
-  btn.disabled = false; btn.innerHTML = 'Save &amp; Publish';
+
+  btn.disabled = false;
+  btn.innerHTML = 'Save &amp; Publish';
 }
 
-// REBUILD HTML — fetch original, replace photo/heading section with reordered items
-async function rebuildHTMLAsync(originalHTML) {
-  const doc = new DOMParser().parseFromString(originalHTML, 'text/html');
-  
-  // Find all existing photo imgs and headings and remove them
+// REBUILD HTML - surgically replace photos/headings, keep everything else intact
+function rebuildHTML(html) {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+
+  // Remove existing content photos and city headings
+  doc.querySelectorAll('h2.city-name, h3.city-name').forEach(el => el.remove());
   doc.querySelectorAll('img:not(.hero-img)').forEach(el => {
-    // Also remove caption siblings
-    let next = el.nextElementSibling;
-    if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName)) next.remove();
+    const next = el.nextElementSibling;
+    if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName) && next.classList.contains('caption')) {
+      next.remove();
+    }
     el.remove();
   });
-  doc.querySelectorAll('h2.city-name, h3.city-name').forEach(el => el.remove());
-  
-  // Find insertion point - after hero img or at end of main content
-  const hero = doc.querySelector('.hero-img') || doc.querySelector('img');
-  const insertAfter = hero ? hero.parentElement : doc.querySelector('main') || doc.body;
-  
-  // Build new elements
+
+  // Find where to insert - after hero-img or after the first <hr> or at end of main
+  let insertPoint = doc.querySelector('.hero-img');
+  if (!insertPoint) insertPoint = doc.querySelector('hr');
+  if (!insertPoint) insertPoint = doc.querySelector('main') || doc.body.lastElementChild;
+
+  const parent = insertPoint ? insertPoint.parentElement : doc.body;
+  const insertBefore = insertPoint ? insertPoint.nextSibling : null;
+
+  // Build fragment
   const frag = doc.createDocumentFragment();
   items.forEach(item => {
     if (item.type === 'heading') {
@@ -420,8 +481,8 @@ async function rebuildHTMLAsync(originalHTML) {
       frag.appendChild(h);
     } else {
       const img = doc.createElement('img');
-      img.src = item.src;
-      img.alt = item.caption || '';
+      img.setAttribute('src', item.src);
+      img.setAttribute('alt', item.caption || '');
       frag.appendChild(img);
       if (item.caption) {
         const p = doc.createElement('p');
@@ -431,23 +492,16 @@ async function rebuildHTMLAsync(originalHTML) {
       }
     }
   });
-  
-  // Insert after hero or append to body
-  if (hero) {
-    hero.parentElement.insertBefore(frag, hero.nextSibling);
-  } else {
-    insertAfter.appendChild(frag);
-  }
-  
-  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+
+  parent.insertBefore(frag, insertBefore);
+  return '<!DOCTYPE html>
+' + doc.documentElement.outerHTML;
 }
 
-function rebuildHTML() { return ''; } // placeholder, use async version
-
-// GitHub API
+// GitHub API helpers
 async function ghGet(path) {
-  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
-    headers: { 'Authorization': `token ${T}`, 'Accept': 'application/vnd.github.v3+json' }
+  const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
+    headers: { 'Authorization': 'token ' + T, 'Accept': 'application/vnd.github.v3+json' }
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
@@ -455,34 +509,36 @@ async function ghGet(path) {
 async function ghPut(path, content, message, sha) {
   const body = { message, content };
   if (sha) body.sha = sha;
-  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
+  const res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
     method: 'PUT',
-    headers: { 'Authorization': `token ${T}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+    headers: { 'Authorization': 'token ' + T, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
     body: JSON.stringify(body)
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
 function toB64(file) {
-  return new Promise((res,rej) => { const r=new FileReader(); r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(file); });
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
 }
 
-function updateCaption(el) {
-  const row = el.closest('.item-row');
-  const idx = parseInt(row.dataset.idx);
-  if (!isNaN(idx)) items[idx].caption = el.value;
-  markDirty();
+function markDirty() {
+  dirty = true;
+  document.getElementById('save-status').textContent = 'Unsaved changes';
+  updateSaveBar();
 }
-function updateHeading(el) {
-  const row = el.closest('.heading-row');
-  const idx = parseInt(row.dataset.idx);
-  if (!isNaN(idx)) items[idx].text = el.value;
-  markDirty();
+function updateSaveBar() {
+  document.getElementById('save-bar').style.display = currentTrip ? 'flex' : 'none';
 }
-function markDirty() { dirty = true; updateSaveBar(); document.getElementById('save-status').textContent = 'Unsaved changes'; }
-function updateSaveBar() { document.getElementById('save-bar').style.display = currentTrip ? 'flex' : 'none'; }
-function showStatus(msg, type) { const b=document.getElementById('status-bar'); b.textContent=msg; b.className=type||''; b.style.display='block'; }
-function hideStatus() { document.getElementById('status-bar').style.display='none'; }
+function showStatus(msg, type) {
+  const b = document.getElementById('status-bar');
+  b.textContent = msg; b.className = type || ''; b.style.display = 'block';
+}
+function hideStatus() { document.getElementById('status-bar').style.display = 'none'; }
 </script>
 </body>
 </html>
