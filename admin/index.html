@@ -85,6 +85,7 @@ header span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; tex
   <header>
     <h1>The Brodies — Admin</h1>
     <span id="header-trip">Select a trip to begin</span>
+    <a href="/" style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;">← Back to site</a>
   </header>
   <div class="main">
     <div class="section-label">Trip</div>
@@ -168,7 +169,6 @@ async function loadTrip() {
 
   try {
     const debugUrl = `https://api.github.com/repos/${REPO}/contents/trips/${currentTrip}.html`;
-    showStatus('Fetching: ' + debugUrl, '');
     const res = await ghGet(`trips/${currentTrip}.html`);
     currentSHA = res.sha;
     currentHTML = decodeURIComponent(escape(atob(res.content.replace(/\n/g,''))));
