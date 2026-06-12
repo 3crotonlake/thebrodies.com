@@ -39,3 +39,24 @@ nav {
   text-decoration: none; color: var(--muted); transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--ink); }
+
+/* Admin-generated captions and section headings */
+p.caption {
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  color: #7a7a72;
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin: 0.4rem 0 1.2rem;
+  font-style: italic;
+}
+h2.city-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #1a1a18;
+  margin: 2.5rem 0 1rem;
+  border-bottom: 1px solid #e0ddd8;
+  padding-bottom: 0.5rem;
+}
