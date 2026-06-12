@@ -412,8 +412,23 @@ function makePhotoRow(photo, si, pi, listEl) {
   row.appendChild(thumb);
 
   // Info: filename + caption
+  // Info block: section dropdown (top) + filename + caption
   var info = document.createElement('div');
   info.className = 'photo-info';
+
+  // Section dropdown - at top of info
+  var secSel = document.createElement('select');
+  secSel.className = 'section-select';
+  secSel.dataset.role = 'section-select';
+  rebuildSecDropdown(secSel, si);
+  secSel.addEventListener('change', function() {
+    var newSi = parseInt(secSel.value);
+    if (newSi === si) return;
+    sections[si].photos.splice(pi, 1);
+    sections[newSi].photos.push(photo);
+    renderEditor();
+    markChanged();
+  });
 
   var fname = document.createElement('div');
   fname.className = 'photo-filename';
@@ -436,43 +451,24 @@ function makePhotoRow(photo, si, pi, listEl) {
     markChanged();
   });
 
+  info.appendChild(secSel);
   info.appendChild(fname);
   info.appendChild(cap);
   row.appendChild(info);
 
-  // Controls: section dropdown + delete
-  var controls = document.createElement('div');
-  controls.className = 'photo-controls';
-
-  // Section dropdown
-  var secSel = document.createElement('select');
-  secSel.className = 'section-select';
-  secSel.dataset.role = 'section-select';
-  rebuildSecDropdown(secSel, si);
-  secSel.addEventListener('change', function() {
-    var newSi = parseInt(secSel.value);
-    if (newSi === si) return;
-    // Move photo to new section
-    sections[si].photos.splice(pi, 1);
-    sections[newSi].photos.push(photo);
-    renderEditor();
-    markChanged();
-  });
-
+  // Delete button - far right
   var delBtn = document.createElement('button');
   delBtn.className = 'del-btn';
   delBtn.title = 'Remove photo';
   delBtn.textContent = '✕';
+  delBtn.style.cssText = 'margin-left:auto;align-self:center;flex-shrink:0';
   delBtn.onclick = function() {
     if (!confirm('Remove this photo from the page?')) return;
     sections[si].photos.splice(pi, 1);
     renderEditor();
     markChanged();
   };
-
-  controls.appendChild(secSel);
-  controls.appendChild(delBtn);
-  row.appendChild(controls);
+  row.appendChild(delBtn);
 
   // Drag within same section
   row.addEventListener('dragstart', function(e) {
