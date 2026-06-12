@@ -23,7 +23,7 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font
 #app{display:none;padding-bottom:100px}
 header{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:rgba(249,247,243,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
 header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
-.header-right{display:flex;gap:1rem;align-items:center}
+.header-right{display:flex;gap:1.5rem;align-items:center}
 .back-link{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none}
 .back-link:hover{color:var(--ink)}
 .main{max-width:900px;margin:0 auto;padding:2rem}
@@ -38,8 +38,8 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
 .item-row.dragging{opacity:.4;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 .item-row.drag-over{border-color:var(--accent);border-style:dashed}
 .heading-row{background:var(--cream);border:1px solid var(--border);border-left:3px solid var(--accent);display:flex;align-items:center;gap:.8rem;padding:.7rem .8rem;cursor:grab;user-select:none}
-.heading-row.drag-over{border-top:2px solid var(--green)}
-.drag-handle{color:#ccc;font-size:1.2rem;cursor:grab;flex-shrink:0}
+.heading-row.drag-over{border-top:3px solid var(--green)}
+.drag-handle{color:#ccc;font-size:1.2rem;cursor:grab;flex-shrink:0;padding-top:2px}
 .item-thumb{width:80px;height:60px;object-fit:cover;flex-shrink:0;background:var(--border)}
 .item-thumb.broken{opacity:.3}
 .item-body{flex:1;display:flex;flex-direction:column;gap:.5rem}
@@ -49,7 +49,7 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
 .item-actions{display:flex;gap:.4rem;flex-shrink:0;flex-direction:column}
 .heading-input{flex:1;border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--ink);letter-spacing:.05em}
 .heading-input:focus{outline:none;border-bottom:1px solid var(--accent)}
-.add-bar{display:flex;gap:.8rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.add-bar{display:flex;gap:.8rem;margin-bottom:1.5rem;flex-wrap:wrap;align-items:center}
 #upload-section{border:2px dashed var(--border);padding:2rem;text-align:center;margin-bottom:1.5rem;cursor:pointer;transition:border-color .2s,background .2s}
 #upload-section.dragover{border-color:var(--accent);background:var(--accent-light)}
 #upload-section p{font-size:.82rem;color:var(--muted);margin-bottom:1rem}
@@ -58,7 +58,7 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
 #save-bar p{font-size:.78rem;opacity:.7}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.new-badge{font-size:.58rem;background:var(--green);color:white;padding:.15rem .4rem;letter-spacing:.08em;text-transform:uppercase;margin-left:.3rem}
+.new-badge{font-size:.58rem;background:var(--green);color:white;padding:.15rem .4rem;letter-spacing:.08em;text-transform:uppercase;margin-left:.3rem;vertical-align:middle}
 </style>
 </head>
 <body>
@@ -111,13 +111,13 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
     <div id="loading-msg">Loading trip…</div>
     <div id="trip-editor" style="display:none">
       <div id="upload-section" onclick="document.getElementById('file-input').click()" ondragover="uploadDrag(event,'over')" ondragleave="uploadDrag(event,'leave')" ondrop="uploadDrag(event,'drop')">
-        <p>Drop photos here or click to browse</p>
+        <p>Drop photos here or click to browse — they'll be added at the bottom</p>
         <button class="btn btn-primary" onclick="event.stopPropagation();document.getElementById('file-input').click()">Choose Photos</button>
         <input type="file" id="file-input" multiple accept="image/*" onchange="handleFiles(event.target.files)">
       </div>
       <div class="add-bar">
         <button class="btn btn-ghost" onclick="addHeading()">+ Add Section Heading</button>
-        <span style="font-size:.72rem;color:var(--muted);align-self:center">Drag ⠿ to reorder · Edit captions inline · Click Save &amp; Publish when done</span>
+        <span style="font-size:.72rem;color:var(--muted)">Drag ⠿ to reorder · Edit captions inline</span>
       </div>
       <div id="items-list"></div>
     </div>
@@ -132,6 +132,7 @@ header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
 var REPO = '3crotonlake/thebrodies.com';
 var PW = '10520';
 var T = ['ghp_D7r6L','55hqPWTQk','SD1M3FWAY','zALQj773Cq4hq'].join('');
+var SESSION_KEY = 'brodies_admin_auth';
 
 var currentTrip = null;
 var currentSHA = '';
@@ -173,8 +174,24 @@ var FOLDER_MAP = {
   'acadia-2021':'2021_acadia','spain-2019':'2019_spain'
 };
 
+// ── SESSION: stay logged in until browser closes ──
+function checkSession() {
+  return sessionStorage.getItem(SESSION_KEY) === 'ok';
+}
+function setSession() {
+  sessionStorage.setItem(SESSION_KEY, 'ok');
+}
+
+window.addEventListener('load', function() {
+  if (checkSession()) {
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  }
+});
+
 function login() {
   if (document.getElementById('password-input').value === PW) {
+    setSession();
     document.getElementById('login-screen').style.display = 'none';
     document.getElementById('app').style.display = 'block';
   } else {
@@ -185,16 +202,14 @@ document.getElementById('password-input').addEventListener('keydown', function(e
   if (e.key === 'Enter') login();
 });
 
+// ── LOAD TRIP ──
 async function loadTrip() {
   var sel = document.getElementById('trip-select');
   currentTrip = sel.value;
   if (!currentTrip) return;
 
-  // Update back link to go to the specific trip page
-  var backLink = document.getElementById('back-link');
-  backLink.href = TRIP_URLS[currentTrip] || '/';
-  backLink.textContent = '← View trip page';
-
+  document.getElementById('back-link').href = TRIP_URLS[currentTrip] || '/';
+  document.getElementById('back-link').textContent = '← View trip page';
   document.getElementById('header-trip').textContent = sel.options[sel.selectedIndex].text;
   document.getElementById('trip-editor').style.display = 'none';
   document.getElementById('loading-msg').style.display = 'block';
@@ -218,33 +233,43 @@ async function loadTrip() {
   }
 }
 
+// ── PARSE: extract flat list of {heading, photo} items in DOM order ──
 function parseItems(html) {
   var doc = new DOMParser().parseFromString(html, 'text/html');
   var result = [];
 
+  // Walk the entire document tree, collecting headings and photos in order
   function walk(el) {
     var children = Array.from(el.children);
     for (var i = 0; i < children.length; i++) {
       var child = children[i];
       var tag = child.tagName;
 
-      // Photo inside a photo-item div
+      // City heading - capture and continue (don't recurse)
+      if ((tag === 'H2' || tag === 'H3') && child.classList.contains('city-name')) {
+        result.push({ type:'heading', text: child.textContent.trim() });
+        continue;
+      }
+
+      // photo-item div - extract image and caption
       if (tag === 'DIV' && child.classList.contains('photo-item')) {
         var img = child.querySelector('img');
-        var capEl = child.querySelector('p');
-        if (img) {
-          result.push({
-            type: 'photo',
-            src: img.getAttribute('src'),
-            caption: capEl ? capEl.textContent.trim() : (img.getAttribute('alt') || ''),
-            newFile: null
-          });
+        if (img && img.getAttribute('src')) {
+          var capEl = child.querySelector('p.photo-caption, p.caption, figcaption');
+          var caption = capEl ? capEl.textContent.trim() : (img.getAttribute('alt') || '');
+          result.push({ type:'photo', src: img.getAttribute('src'), caption: caption, newFile: null });
         }
         continue;
       }
 
-      // Bare img (not inside photo-item, not hero)
-      if (tag === 'IMG' && !child.classList.contains('hero-img')) {
+      // photo-grid div - recurse into it
+      if (tag === 'DIV' && child.classList.contains('photo-grid')) {
+        walk(child);
+        continue;
+      }
+
+      // Bare img (fallback for older pages)
+      if (tag === 'IMG' && !child.classList.contains('hero-img') && child.getAttribute('src')) {
         var caption = child.getAttribute('alt') || '';
         var next = child.nextElementSibling;
         if (next && ['P','FIGCAPTION','EM'].indexOf(next.tagName) >= 0) {
@@ -254,20 +279,8 @@ function parseItems(html) {
         continue;
       }
 
-      // City heading
-      if ((tag === 'H2' || tag === 'H3') && child.classList.contains('city-name')) {
-        result.push({ type:'heading', text: child.textContent.trim() });
-        continue;
-      }
-
-      // photo-grid div - walk inside it
-      if (tag === 'DIV' && child.classList.contains('photo-grid')) {
-        walk(child);
-        continue;
-      }
-
-      // Recurse into other containers
-      if (['SECTION','ARTICLE','MAIN','DIV'].indexOf(tag) >= 0) {
+      // Recurse into containers (but not nav, header, footer, script, style)
+      if (['NAV','HEADER','FOOTER','SCRIPT','STYLE'].indexOf(tag) < 0) {
         walk(child);
       }
     }
@@ -277,6 +290,7 @@ function parseItems(html) {
   return result;
 }
 
+// ── RENDER ──
 function renderList() {
   var list = document.getElementById('items-list');
   list.innerHTML = '';
@@ -310,7 +324,7 @@ function makeHeadingRow(idx) {
 
   var del = document.createElement('button');
   del.className = 'btn btn-danger';
-  del.style.cssText = 'padding:.3rem .6rem;font-size:.6rem';
+  del.style.cssText = 'padding:.3rem .6rem;font-size:.6rem;flex-shrink:0';
   del.textContent = '✕';
   (function(r) {
     del.addEventListener('click', function() { removeItem(parseInt(r.dataset.idx)); });
@@ -386,6 +400,7 @@ function makePhotoRow(idx) {
   return row;
 }
 
+// ── DRAG & DROP ──
 function addDragEvents(row) {
   row.addEventListener('dragstart', function(e) {
     e.dataTransfer.setData('text/plain', row.dataset.idx);
@@ -402,7 +417,9 @@ function addDragEvents(row) {
     var dst = parseInt(row.dataset.idx);
     if (isNaN(src) || src === dst) return;
     var moved = items.splice(src, 1)[0];
-    items.splice(src < dst ? dst - 1 : dst, 0, moved);
+    // Insert at correct position accounting for splice
+    var insertAt = src < dst ? dst - 1 : dst;
+    items.splice(insertAt, 0, moved);
     markDirty();
     renderList();
   });
@@ -422,6 +439,7 @@ function removeItem(idx) {
   renderList();
 }
 
+// ── FILE UPLOAD ──
 function uploadDrag(e, type) {
   e.preventDefault();
   var sec = document.getElementById('upload-section');
@@ -440,16 +458,17 @@ function handleFiles(fileList) {
   markDirty();
   renderList();
   document.getElementById('file-input').value = '';
-  showStatus(files.length + ' photo' + (files.length > 1 ? 's' : '') + ' added — click Save & Publish when ready', '');
+  showStatus(files.length + ' photo' + (files.length > 1 ? 's' : '') + ' added at bottom — drag to reorder, then Save & Publish', '');
 }
 
+// ── SAVE ──
 async function saveChanges() {
   var btn = document.getElementById('save-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Saving…';
 
   try {
-    // Upload new images
+    // Upload new images first
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
       if (!item.newFile) continue;
@@ -465,10 +484,14 @@ async function saveChanges() {
     var htmlB64 = btoa(unescape(encodeURIComponent(newHTML)));
     await ghPut('trips/' + currentTrip + '.html', htmlB64, 'Update ' + currentTrip, currentSHA);
 
+    // Refresh state
     var fresh = await ghGet('trips/' + currentTrip + '.html');
     currentSHA = fresh.sha;
     var freshRaw = fresh.content.split('\n').join('');
     originalHTML = decodeURIComponent(escape(atob(freshRaw)));
+    // Re-parse to keep items in sync with saved state
+    items = parseItems(originalHTML);
+    renderList();
 
     dirty = false;
     document.getElementById('save-status').textContent = 'All saved ✓';
@@ -481,42 +504,42 @@ async function saveChanges() {
   btn.innerHTML = 'Save &amp; Publish';
 }
 
-// Rebuild HTML - preserves page structure, replaces photo-grid and city headings
+// ── REBUILD HTML ──
+// Finds the content area (after hero, before footer) and replaces it
+// with properly structured photo-grids grouped by city headings
 function rebuildHTML(html) {
   var doc = new DOMParser().parseFromString(html, 'text/html');
 
-  // Find all photo-grids and remove their contents
-  var grids = Array.from(doc.querySelectorAll('.photo-grid'));
-  grids.forEach(function(g) { g.remove(); });
-
-  // Remove bare content images (not hero)
+  // Remove all existing city headings, photo-grids, and bare content images
+  Array.from(doc.querySelectorAll('h2.city-name, h3.city-name')).forEach(function(el) { el.remove(); });
+  Array.from(doc.querySelectorAll('.photo-grid')).forEach(function(el) { el.remove(); });
   Array.from(doc.querySelectorAll('img:not(.hero-img)')).forEach(function(el) {
     var next = el.nextElementSibling;
-    if (next && ['P','FIGCAPTION','EM'].indexOf(next.tagName) >= 0) next.remove();
+    if (next && ['P','FIGCAPTION','EM'].indexOf(next.tagName) >= 0 &&
+        (next.classList.contains('caption') || next.classList.contains('photo-caption'))) {
+      next.remove();
+    }
     el.remove();
   });
 
-  // Remove existing city headings
-  Array.from(doc.querySelectorAll('h2.city-name, h3.city-name')).forEach(function(el) { el.remove(); });
+  // Find the right insertion point - after hero div or after route div
+  var hero = doc.querySelector('.hero');
+  var insertParent = hero ? hero.parentElement : doc.body;
+  var insertBefore = hero ? hero.nextSibling : null;
 
-  // Find insert point - after hero section or last nav element
-  var insertPoint = doc.querySelector('.hero') || doc.querySelector('nav');
-  var parent = insertPoint ? insertPoint.parentElement : doc.body;
-  var insertBefore = insertPoint ? insertPoint.nextSibling : null;
-
-  // Build new content - group photos between headings into photo-grids
+  // Build new content — group consecutive photos into photo-grids
   var frag = doc.createDocumentFragment();
   var currentGrid = null;
 
   items.forEach(function(item) {
     if (item.type === 'heading') {
-      currentGrid = null; // reset grid on heading
+      currentGrid = null; // end current grid
       var h = doc.createElement('h2');
       h.className = 'city-name';
       h.textContent = item.text;
       frag.appendChild(h);
     } else {
-      // Start new grid if needed
+      // Start a new grid if needed
       if (!currentGrid) {
         currentGrid = doc.createElement('div');
         currentGrid.className = 'photo-grid';
@@ -539,10 +562,11 @@ function rebuildHTML(html) {
     }
   });
 
-  parent.insertBefore(frag, insertBefore);
+  insertParent.insertBefore(frag, insertBefore);
   return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
 }
 
+// ── GITHUB API ──
 async function ghGet(path) {
   var res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
     headers: { 'Authorization': 'token ' + T, 'Accept': 'application/vnd.github.v3+json' }
