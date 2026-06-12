@@ -169,7 +169,7 @@ async function loadTrip() {
   try {
     const debugUrl = `https://api.github.com/repos/${REPO}/contents/trips/${currentTrip}.html`;
     showStatus('Fetching: ' + debugUrl, '');
-    const res = await ghGet(`contents/trips/${currentTrip}.html`);
+    const res = await ghGet(`trips/${currentTrip}.html`);
     currentSHA = res.sha;
     currentHTML = decodeURIComponent(escape(atob(res.content.replace(/\n/g,''))));
     parseAndRender();
@@ -292,7 +292,7 @@ async function saveChanges() {
     await ghPut(`trips/${currentTrip}.html`, b64, `Update ${currentTrip} photos/captions`, currentSHA);
 
     // Refresh SHA
-    const res = await ghGet(`contents/trips/${currentTrip}.html`);
+    const res = await ghGet(`trips/${currentTrip}.html`);
     currentSHA = res.sha;
     currentHTML = newHTML;
     pendingChanges = 0; updateSaveBar();
