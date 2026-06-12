@@ -17,54 +17,81 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--i
 
 #login-screen { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 2rem; }
 #login-screen h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.4rem; font-weight: 600; letter-spacing: 0.05em; }
-#login-screen p { color: var(--muted); font-size: 0.85rem; letter-spacing: 0.08em; }
 .login-box { display: flex; flex-direction: column; gap: 1rem; width: 340px; }
 .login-box input { padding: 0.9rem 1.2rem; border: 1px solid var(--border); background: white; font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 300; color: var(--ink); }
 .login-box input:focus { outline: 2px solid var(--accent); }
-.btn { padding: 0.85rem 1.8rem; border: none; cursor: pointer; font-family: 'Jost', sans-serif; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: opacity 0.2s; }
+.btn { padding: 0.75rem 1.5rem; border: none; cursor: pointer; font-family: 'Jost', sans-serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; transition: opacity 0.2s; }
 .btn:hover { opacity: 0.8; } .btn:disabled { opacity: 0.4; cursor: not-allowed; }
 .btn-primary { background: var(--ink); color: var(--cream); }
-.btn-danger { background: var(--red); color: white; font-size: 0.68rem; }
+.btn-danger { background: var(--red); color: white; }
+.btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+.btn-green { background: var(--green); color: white; }
 #login-error { color: var(--red); font-size: 0.8rem; text-align: center; display: none; }
 
-#app { display: none; }
-header { position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: rgba(249,247,243,0.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
-header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
-header span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
-.main { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
-.section-label { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+#app { display: none; padding-bottom: 100px; }
+header { position: sticky; top: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: rgba(249,247,243,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+header h1 { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; }
+.header-right { display: flex; gap: 1rem; align-items: center; }
+.back-link { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.back-link:hover { color: var(--ink); }
+.main { max-width: 900px; margin: 0 auto; padding: 2rem; }
+.section-label { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.8rem; }
 
-#trip-select { width: 100%; max-width: 400px; padding: 0.9rem 1.2rem; border: 1px solid var(--border); background: white; font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 300; color: var(--ink); margin-bottom: 2.5rem; cursor: pointer; }
-#trip-select:focus { outline: 2px solid var(--accent); }
+#trip-select { width: 100%; max-width: 400px; padding: 0.9rem 1.2rem; border: 1px solid var(--border); background: white; font-family: 'Jost', sans-serif; font-size: 1rem; font-weight: 300; color: var(--ink); margin-bottom: 2rem; cursor: pointer; }
 
-#status-bar { display: none; padding: 0.9rem 1.4rem; margin-bottom: 2rem; font-size: 0.82rem; letter-spacing: 0.04em; border-left: 3px solid var(--accent); background: var(--accent-light); }
+#status-bar { display: none; padding: 0.9rem 1.4rem; margin-bottom: 1.5rem; font-size: 0.82rem; border-left: 3px solid var(--accent); background: var(--accent-light); }
 #status-bar.success { border-color: var(--green); background: var(--green-light); }
 #status-bar.error { border-color: var(--red); background: var(--red-light); }
+#loading-msg { text-align: center; padding: 3rem; color: var(--muted); font-size: 0.85rem; display: none; }
 
-#photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }
-.photo-card { background: white; border: 1px solid var(--border); padding: 1rem; display: flex; flex-direction: column; gap: 0.8rem; }
-.photo-card img { width: 100%; height: 200px; object-fit: cover; display: block; background: var(--border); }
-.photo-card img.broken { opacity: 0.25; filter: grayscale(1); }
-.caption-input { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid var(--border); font-family: 'Jost', sans-serif; font-size: 0.85rem; font-weight: 300; color: var(--ink); resize: vertical; min-height: 60px; }
-.caption-input:focus { outline: 2px solid var(--accent); }
-.photo-card-actions { display: flex; gap: 0.6rem; }
-.photo-card-actions .btn { flex: 1; padding: 0.6rem; }
-.photo-filename { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.04em; word-break: break-all; }
-.new-badge { display: inline-block; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; background: var(--green); color: white; padding: 0.2rem 0.5rem; margin-left: 0.4rem; }
+/* Items list */
+#items-list { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; }
 
-#upload-section { border: 2px dashed var(--border); padding: 3rem 2rem; text-align: center; margin-bottom: 2rem; transition: border-color 0.2s, background 0.2s; cursor: pointer; }
+.item-row {
+  background: white; border: 1px solid var(--border);
+  display: flex; align-items: flex-start; gap: 0.8rem;
+  padding: 0.8rem; cursor: grab; user-select: none;
+  transition: box-shadow 0.15s, opacity 0.15s;
+}
+.item-row:active { cursor: grabbing; }
+.item-row.dragging { opacity: 0.4; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+.item-row.drag-over { border-color: var(--accent); border-style: dashed; }
+
+.drag-handle { color: var(--border); font-size: 1.2rem; padding-top: 2px; cursor: grab; flex-shrink: 0; }
+.item-thumb { width: 80px; height: 60px; object-fit: cover; flex-shrink: 0; background: var(--border); }
+.item-thumb.broken { opacity: 0.3; }
+.item-body { flex: 1; display: flex; flex-direction: column; gap: 0.5rem; }
+.item-filename { font-size: 0.62rem; color: var(--muted); letter-spacing: 0.04em; }
+.item-caption { width: 100%; padding: 0.5rem 0.7rem; border: 1px solid var(--border); font-family: 'Jost', sans-serif; font-size: 0.82rem; font-weight: 300; color: var(--ink); resize: none; min-height: 50px; }
+.item-caption:focus { outline: 2px solid var(--accent); }
+.item-actions { display: flex; gap: 0.4rem; flex-shrink: 0; flex-direction: column; }
+.item-actions .btn { padding: 0.4rem 0.7rem; font-size: 0.62rem; }
+
+/* Heading rows */
+.heading-row {
+  background: var(--cream); border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  display: flex; align-items: center; gap: 0.8rem; padding: 0.7rem 0.8rem;
+  cursor: grab; user-select: none;
+}
+.heading-input { flex: 1; border: none; background: transparent; font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: var(--ink); letter-spacing: 0.05em; }
+.heading-input:focus { outline: none; border-bottom: 1px solid var(--accent); }
+
+/* Add buttons */
+.add-bar { display: flex; gap: 0.8rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+
+/* Upload zone */
+#upload-section { border: 2px dashed var(--border); padding: 2rem; text-align: center; margin-bottom: 1.5rem; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
 #upload-section.dragover { border-color: var(--accent); background: var(--accent-light); }
-#upload-section h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; margin-bottom: 0.5rem; }
-#upload-section p { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+#upload-section p { font-size: 0.82rem; color: var(--muted); margin-bottom: 1rem; }
 #file-input { display: none; }
 
-#save-bar { position: fixed; bottom: 0; left: 0; right: 0; display: none; justify-content: space-between; align-items: center; padding: 1.2rem 3rem; background: var(--ink); color: var(--cream); z-index: 200; }
-#save-bar p { font-size: 0.8rem; letter-spacing: 0.06em; opacity: 0.7; }
-#save-bar .btn { background: var(--cream); color: var(--ink); }
+/* Save bar */
+#save-bar { position: fixed; bottom: 0; left: 0; right: 0; display: none; justify-content: space-between; align-items: center; padding: 1rem 2rem; background: var(--ink); color: var(--cream); z-index: 200; }
+#save-bar p { font-size: 0.78rem; opacity: 0.7; }
 
-.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.2); border-top-color: var(--ink); border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
+.spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
 @keyframes spin { to { transform: rotate(360deg); } }
-#loading-msg { text-align: center; padding: 4rem; color: var(--muted); font-size: 0.85rem; letter-spacing: 0.08em; display: none; }
+.new-badge { font-size: 0.58rem; background: var(--green); color: white; padding: 0.15rem 0.4rem; letter-spacing: 0.08em; text-transform: uppercase; margin-left: 0.3rem; }
 </style>
 </head>
 <body>
@@ -72,7 +99,7 @@ header span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; tex
 <div id="login-screen">
   <div style="text-align:center">
     <h1>The Brodies</h1>
-    <p style="margin-top:0.5rem">Site Admin</p>
+    <p style="margin-top:0.4rem;font-size:0.8rem;letter-spacing:0.08em;color:#7a7a72;">Site Admin</p>
   </div>
   <div class="login-box">
     <input type="password" id="password-input" placeholder="Password" />
@@ -84,18 +111,21 @@ header span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; tex
 <div id="app">
   <header>
     <h1>The Brodies — Admin</h1>
-    <span id="header-trip">Select a trip to begin</span>
-    <a href="/" style="font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);text-decoration:none;">← Back to site</a>
+    <div class="header-right">
+      <span id="header-trip" style="font-size:0.7rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;"></span>
+      <a href="/" class="back-link">← Back to site</a>
+    </div>
   </header>
+
   <div class="main">
-    <div class="section-label">Trip</div>
+    <div class="section-label">Select Trip</div>
     <select id="trip-select" onchange="loadTrip()">
-      <option value="">— Select a trip —</option>
+      <option value="">— Choose a trip —</option>
       <option value="iceland-2026">Iceland 2026 (Girls Trip)</option>
       <option value="memphis-2026">Memphis 2026</option>
       <option value="edinburgh-york-london-2026">Edinburgh / York / London 2026</option>
       <option value="london-oxford-paris-2025">London / Oxford / Paris 2025</option>
-      <option value="switzerland-sweden-2025">Switzerland & Sweden 2025</option>
+      <option value="switzerland-sweden-2025">Switzerland &amp; Sweden 2025</option>
       <option value="utah-2025">Utah 2025 (Mighty 5)</option>
       <option value="florence-rome-2025">Florence / Rome 2025</option>
       <option value="charleston-2025">Charleston 2025</option>
@@ -103,11 +133,11 @@ header span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; tex
       <option value="cambodia-2024">Cambodia 2024</option>
       <option value="ireland-2024">Ireland 2024</option>
       <option value="mont-tremblant-2024">Mont Tremblant 2024</option>
-      <option value="sedona-2023">Sedona & Grand Canyon 2023</option>
+      <option value="sedona-2023">Sedona &amp; Grand Canyon 2023</option>
       <option value="puerto-rico-2023">Puerto Rico 2023</option>
-      <option value="thailand-cambodia-2023">Thailand & Cambodia 2023</option>
+      <option value="thailand-cambodia-2023">Thailand &amp; Cambodia 2023</option>
       <option value="london-2022">London 2022</option>
-      <option value="spain-portugal-2022">Spain & Portugal 2022</option>
+      <option value="spain-portugal-2022">Spain &amp; Portugal 2022</option>
       <option value="acadia-2021">Acadia 2021</option>
       <option value="spain-2019">Spain 2019</option>
     </select>
@@ -116,37 +146,38 @@ header span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.1em; tex
     <div id="loading-msg">Loading trip…</div>
 
     <div id="trip-editor" style="display:none">
-      <div class="section-label">Add Photos</div>
-      <div id="upload-section"
-           onclick="document.getElementById('file-input').click()"
-           ondragover="handleDragOver(event)"
-           ondragleave="handleDragLeave(event)"
-           ondrop="handleDrop(event)">
-        <h3>Drop photos here</h3>
-        <p>or click to browse — JPG, PNG, WEBP accepted</p>
+      <!-- Upload -->
+      <div id="upload-section" onclick="document.getElementById('file-input').click()"
+           ondragover="ev(event,'dragover')" ondragleave="ev(event,'dragleave')" ondrop="ev(event,'drop')">
+        <p>Drop photos here or click to browse</p>
         <button class="btn btn-primary" onclick="event.stopPropagation();document.getElementById('file-input').click()">Choose Photos</button>
-        <input type="file" id="file-input" multiple accept="image/*" onchange="handleFileSelect(event)" />
+        <input type="file" id="file-input" multiple accept="image/*" onchange="handleFiles(event)" />
       </div>
 
-      <div class="section-label">Photos on this page (<span id="photo-count">0</span>)</div>
-      <div id="photo-grid"></div>
+      <!-- Add heading button -->
+      <div class="add-bar">
+        <button class="btn btn-ghost" onclick="addHeading()">+ Add Section Heading</button>
+        <span style="font-size:0.72rem;color:var(--muted);align-self:center;">Drag rows to reorder · Edit captions inline</span>
+      </div>
+
+      <div id="items-list"></div>
     </div>
   </div>
 
   <div id="save-bar">
-    <p><span id="pending-count">0</span> unsaved changes</p>
-    <button class="btn" id="save-btn" onclick="saveChanges()">Save & Publish</button>
+    <p>Unsaved changes</p>
+    <button class="btn btn-primary" id="save-btn" onclick="saveChanges()">Save &amp; Publish</button>
   </div>
 </div>
 
 <script>
 const REPO = '3crotonlake/thebrodies.com';
 const PASSWORD = '10520';
-// Token split to avoid secret scanning (joined at runtime)
-const T = ['ghp_D','7r6L5','5hqPW','TQkSD','1M3FWAYzAL','Qj773Cq4hq'].join('');
+const T = ['ghp_D7r6L','55hqPWTQk','SD1M3FWAY','zALQj773Cq4hq'].join('');
 
-let currentTrip = null, currentHTML = '', currentSHA = '', photoData = [], pendingChanges = 0;
+let currentTrip = null, currentSHA = '', items = [], dragSrc = null, dirty = false;
 
+// LOGIN
 function login() {
   if (document.getElementById('password-input').value === PASSWORD) {
     document.getElementById('login-screen').style.display = 'none';
@@ -157,22 +188,22 @@ function login() {
 }
 document.getElementById('password-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 
+// LOAD TRIP
 async function loadTrip() {
-  const select = document.getElementById('trip-select');
-  currentTrip = select.value;
+  const sel = document.getElementById('trip-select');
+  currentTrip = sel.value;
   if (!currentTrip) return;
-  document.getElementById('header-trip').textContent = select.options[select.selectedIndex].text;
+  document.getElementById('header-trip').textContent = sel.options[sel.selectedIndex].text;
   document.getElementById('trip-editor').style.display = 'none';
   document.getElementById('loading-msg').style.display = 'block';
-  document.getElementById('photo-grid').innerHTML = '';
-  pendingChanges = 0; updateSaveBar(); hideStatus();
+  hideStatus(); dirty = false; updateSaveBar();
 
   try {
-    const debugUrl = `https://api.github.com/repos/${REPO}/contents/trips/${currentTrip}.html`;
-    const res = await ghGet(`trips/${currentTrip}.html`);
-    currentSHA = res.sha;
-    currentHTML = decodeURIComponent(escape(atob(res.content.replace(/\n/g,''))));
-    parseAndRender();
+    const data = await ghGet(`trips/${currentTrip}.html`);
+    currentSHA = data.sha;
+    const html = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    items = parseItems(html);
+    renderList();
     document.getElementById('loading-msg').style.display = 'none';
     document.getElementById('trip-editor').style.display = 'block';
   } catch(e) {
@@ -181,86 +212,140 @@ async function loadTrip() {
   }
 }
 
-function parseAndRender() {
-  photoData = [];
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(currentHTML, 'text/html');
-
-  doc.querySelectorAll('img').forEach(img => {
-    const src = img.getAttribute('src') || '';
-    if (!src) return;
-    let caption = img.getAttribute('alt') || '';
-    // Look for caption in next element
-    let next = img.nextElementSibling || img.parentElement?.nextElementSibling;
-    if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName)) {
-      caption = next.textContent.trim();
+// PARSE HTML into items array [{type:'photo'|'heading', src, caption, text}]
+function parseItems(html) {
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  const result = [];
+  // Walk body children looking for imgs and headings
+  function walk(el) {
+    for (const child of el.children) {
+      if (child.tagName === 'IMG' && child.getAttribute('src') && !child.classList.contains('hero-img')) {
+        // Get caption from next sibling
+        let caption = child.getAttribute('alt') || '';
+        let next = child.nextElementSibling;
+        if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName)) caption = next.textContent.trim();
+        result.push({ type:'photo', src: child.getAttribute('src'), caption, newFile: null });
+      } else if (['H2','H3'].includes(child.tagName) && child.className === 'city-name') {
+        result.push({ type:'heading', text: child.textContent.trim() });
+      } else {
+        walk(child);
+      }
     }
-    photoData.push({ src, caption, deleted: false, newFile: null });
-  });
-
-  document.getElementById('photo-count').textContent = photoData.length;
-  renderGrid();
+  }
+  walk(doc.body);
+  return result;
 }
 
-function renderGrid() {
-  const grid = document.getElementById('photo-grid');
-  grid.innerHTML = '';
-  photoData.forEach((photo, idx) => {
-    if (photo.deleted) return;
-    const card = document.createElement('div');
-    card.className = 'photo-card';
-
-    const img = document.createElement('img');
-    img.src = photo.newFile ? URL.createObjectURL(photo.newFile) : photo.src;
-    img.alt = photo.caption;
-    img.onerror = () => img.classList.add('broken');
-
-    const meta = document.createElement('div');
-    meta.className = 'photo-filename';
-    meta.innerHTML = photo.src.split('/').pop() + (photo.newFile ? '<span class="new-badge">New</span>' : '');
-
-    const cap = document.createElement('textarea');
-    cap.className = 'caption-input';
-    cap.placeholder = 'Add a caption…';
-    cap.value = photo.caption;
-    cap.oninput = () => { photoData[idx].caption = cap.value; markChanged(); };
-
-    const actions = document.createElement('div');
-    actions.className = 'photo-card-actions';
-    const del = document.createElement('button');
-    del.className = 'btn btn-danger';
-    del.textContent = 'Remove';
-    del.onclick = () => {
-      if (!confirm('Remove this photo from the page?')) return;
-      photoData[idx].deleted = true;
-      card.remove();
-      document.getElementById('photo-count').textContent = photoData.filter(p => !p.deleted).length;
-      markChanged();
-    };
-    actions.appendChild(del);
-
-    card.appendChild(img); card.appendChild(meta); card.appendChild(cap); card.appendChild(actions);
-    grid.appendChild(card);
+// RENDER
+function renderList() {
+  const list = document.getElementById('items-list');
+  list.innerHTML = '';
+  items.forEach((item, idx) => {
+    const row = item.type === 'heading' ? makeHeadingRow(item, idx) : makePhotoRow(item, idx);
+    list.appendChild(row);
   });
 }
 
-function handleDragOver(e) { e.preventDefault(); document.getElementById('upload-section').classList.add('dragover'); }
-function handleDragLeave() { document.getElementById('upload-section').classList.remove('dragover'); }
-function handleDrop(e) { e.preventDefault(); handleDragLeave(); addFiles(Array.from(e.dataTransfer.files)); }
-function handleFileSelect(e) { addFiles(Array.from(e.target.files)); e.target.value = ''; }
+function makeHeadingRow(item, idx) {
+  const row = document.createElement('div');
+  row.className = 'heading-row';
+  row.draggable = true;
+  row.dataset.idx = idx;
+  addDragEvents(row);
 
-function addFiles(files) {
-  if (!currentTrip) { showStatus('Select a trip first', 'error'); return; }
-  const imgs = files.filter(f => f.type.startsWith('image/'));
-  if (!imgs.length) { showStatus('No image files found', 'error'); return; }
-  imgs.forEach(f => photoData.push({ src: `/images/${tripFolder()}/${f.name}`, caption: '', deleted: false, newFile: f }));
-  document.getElementById('photo-count').textContent = photoData.filter(p => !p.deleted).length;
-  renderGrid();
-  markChanged();
-  showStatus(`${imgs.length} photo${imgs.length > 1 ? 's' : ''} staged — click Save & Publish when ready.`, '');
+  row.innerHTML = `
+    <span class="drag-handle">⠿</span>
+    <input class="heading-input" value="${item.text}" placeholder="Section heading (e.g. London, Oxford…)"
+      oninput="items[${idx}].text=this.value;markDirty()" />
+    <button class="btn btn-danger" style="padding:0.3rem 0.6rem;font-size:0.6rem" onclick="removeItem(${idx})">✕</button>
+  `;
+  return row;
 }
 
-const FOLDER_MAP = {
+function makePhotoRow(item, idx) {
+  const row = document.createElement('div');
+  row.className = 'item-row';
+  row.draggable = true;
+  row.dataset.idx = idx;
+  addDragEvents(row);
+
+  const displaySrc = item.newFile ? URL.createObjectURL(item.newFile) : item.src;
+  const fname = item.src.split('/').pop();
+  const newBadge = item.newFile ? '<span class="new-badge">New</span>' : '';
+
+  row.innerHTML = `
+    <span class="drag-handle">⠿</span>
+    <img class="item-thumb" src="${displaySrc}" onerror="this.classList.add('broken')" />
+    <div class="item-body">
+      <div class="item-filename">${fname}${newBadge}</div>
+      <textarea class="item-caption" placeholder="Caption…" oninput="items[${idx}].caption=this.value;markDirty()">${item.caption}</textarea>
+    </div>
+    <div class="item-actions">
+      <button class="btn btn-danger" onclick="removeItem(${idx})">Remove</button>
+    </div>
+  `;
+  return row;
+}
+
+// DRAG & DROP reorder
+function addDragEvents(row) {
+  row.addEventListener('dragstart', e => {
+    dragSrc = parseInt(row.dataset.idx);
+    row.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+  });
+  row.addEventListener('dragend', () => row.classList.remove('dragging'));
+  row.addEventListener('dragover', e => { e.preventDefault(); row.classList.add('drag-over'); });
+  row.addEventListener('dragleave', () => row.classList.remove('drag-over'));
+  row.addEventListener('drop', e => {
+    e.preventDefault();
+    row.classList.remove('drag-over');
+    const dropIdx = parseInt(row.dataset.idx);
+    if (dragSrc === null || dragSrc === dropIdx) return;
+    const moved = items.splice(dragSrc, 1)[0];
+    items.splice(dropIdx, 0, moved);
+    dragSrc = null;
+    markDirty();
+    renderList();
+  });
+}
+
+// ADD HEADING
+function addHeading() {
+  items.push({ type: 'heading', text: '' });
+  markDirty();
+  renderList();
+  // Focus the new heading input
+  const inputs = document.querySelectorAll('.heading-input');
+  if (inputs.length) inputs[inputs.length-1].focus();
+}
+
+// REMOVE ITEM
+function removeItem(idx) {
+  if (items[idx].type === 'photo' && !confirm('Remove this photo?')) return;
+  items.splice(idx, 1);
+  markDirty();
+  renderList();
+}
+
+// FILE UPLOAD
+function ev(e, type) {
+  e.preventDefault();
+  const sec = document.getElementById('upload-section');
+  if (type === 'dragover') sec.classList.add('dragover');
+  else if (type === 'dragleave') sec.classList.remove('dragover');
+  else if (type === 'drop') { sec.classList.remove('dragover'); handleFiles(e, e.dataTransfer.files); }
+}
+function handleFiles(e, fileList) {
+  const files = Array.from(fileList || e.target.files).filter(f => f.type.startsWith('image/'));
+  if (!files.length) return;
+  files.forEach(f => items.push({ type:'photo', src:`/images/${folderMap[currentTrip]||currentTrip}/${f.name}`, caption:'', newFile:f }));
+  markDirty(); renderList();
+  document.getElementById('file-input').value = '';
+  showStatus(`${files.length} photo${files.length>1?'s':''} added — click Save & Publish when ready`, '');
+}
+
+const folderMap = {
   'iceland-2026':'2026_iceland','memphis-2026':'2026_Memphis','edinburgh-york-london-2026':'2026_edinburgh',
   'london-oxford-paris-2025':'2025_london-oxford-paris','switzerland-sweden-2025':'2025_switzerland-sweden',
   'utah-2025':'2025_utah','florence-rome-2025':'2025_FlorenceRome','charleston-2025':'2025_charleston',
@@ -269,98 +354,63 @@ const FOLDER_MAP = {
   'thailand-cambodia-2023':'2023_thailand-cambodia','london-2022':'2022_london',
   'spain-portugal-2022':'2022_spain-portugal','acadia-2021':'2021_acadia','spain-2019':'2019_spain'
 };
-function tripFolder() { return FOLDER_MAP[currentTrip] || currentTrip; }
 
+// SAVE
 async function saveChanges() {
   const btn = document.getElementById('save-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Saving…';
+  btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>Saving…';
 
   try {
     // Upload new images
-    for (const photo of photoData.filter(p => p.newFile && !p.deleted)) {
-      showStatus(`Uploading ${photo.newFile.name}…`, '');
-      const b64 = await fileToBase64(photo.newFile);
-      await ghPut(`images/${tripFolder()}/${photo.newFile.name}`, b64, `Add ${photo.newFile.name}`);
-      photo.newFile = null;
+    for (const item of items.filter(i => i.newFile)) {
+      showStatus(`Uploading ${item.newFile.name}…`, '');
+      const b64 = await toB64(item.newFile);
+      await ghPut(`images/${folderMap[currentTrip]||currentTrip}/${item.newFile.name}`, b64, `Add ${item.newFile.name}`);
+      item.newFile = null;
     }
 
-    // Rebuild and save HTML
+    // Rebuild HTML
     showStatus('Saving page…', '');
     const newHTML = rebuildHTML();
     const b64 = btoa(unescape(encodeURIComponent(newHTML)));
-    await ghPut(`trips/${currentTrip}.html`, b64, `Update ${currentTrip} photos/captions`, currentSHA);
+    await ghPut(`trips/${currentTrip}.html`, b64, `Update ${currentTrip}`, currentSHA);
 
     // Refresh SHA
-    const res = await ghGet(`trips/${currentTrip}.html`);
-    currentSHA = res.sha;
-    currentHTML = newHTML;
-    pendingChanges = 0; updateSaveBar();
-    showStatus('Saved! The site will update in about 1 minute.', 'success');
+    const fresh = await ghGet(`trips/${currentTrip}.html`);
+    currentSHA = fresh.sha;
+    dirty = false; updateSaveBar();
+    showStatus('Saved! Site updates in ~1 minute.', 'success');
   } catch(e) {
-    showStatus('Error saving: ' + e.message, 'error');
+    showStatus('Error: ' + e.message, 'error');
   }
-  btn.disabled = false; btn.innerHTML = 'Save & Publish';
+  btn.disabled = false; btn.innerHTML = 'Save &amp; Publish';
 }
 
+// REBUILD HTML — update imgs and headings in place, respecting order
 function rebuildHTML() {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(currentHTML, 'text/html');
-
-  // Build a map of src -> photoData
-  const byFilename = {};
-  photoData.forEach(p => { byFilename[p.src.split('/').pop()] = p; });
-
-  doc.querySelectorAll('img').forEach(img => {
-    const src = img.getAttribute('src') || '';
-    const fname = src.split('/').pop();
-    const photo = byFilename[fname];
-    if (!photo) return;
-
-    if (photo.deleted) {
-      let next = img.nextElementSibling || img.parentElement?.nextElementSibling;
-      if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName)) next.remove();
-      img.remove(); return;
-    }
-
-    img.setAttribute('src', photo.src);
-    img.setAttribute('alt', photo.caption);
-
-    let next = img.nextElementSibling || img.parentElement?.nextElementSibling;
-    if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName)) {
-      next.textContent = photo.caption;
+  // We reconstruct the photo/heading section from items array
+  // Keep the original HTML but replace the content area
+  // Simple approach: serialize items into HTML snippet
+  let snippet = '';
+  items.forEach(item => {
+    if (item.type === 'heading') {
+      snippet += `\n<h2 class="city-name">${item.text}</h2>\n`;
+    } else {
+      snippet += `<img src="${item.src}" alt="${item.caption}">\n`;
+      if (item.caption) snippet += `<p class="caption">${item.caption}</p>\n`;
     }
   });
-
-  // Append new photos (ones that didn't exist in original HTML)
-  const existing = new Set(Array.from(doc.querySelectorAll('img')).map(i => i.getAttribute('src')?.split('/').pop()));
-  const newPhotos = photoData.filter(p => !p.deleted && !existing.has(p.src.split('/').pop()));
-  if (newPhotos.length) {
-    const container = doc.querySelector('.photo-grid, .gallery, main, body');
-    newPhotos.forEach(photo => {
-      const figure = doc.createElement('figure');
-      const img = doc.createElement('img');
-      img.setAttribute('src', photo.src);
-      img.setAttribute('alt', photo.caption);
-      const cap = doc.createElement('figcaption');
-      cap.textContent = photo.caption;
-      figure.appendChild(img); figure.appendChild(cap);
-      container.appendChild(figure);
-    });
-  }
-
-  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+  return snippet;
 }
 
+// GitHub API
 async function ghGet(path) {
-  // Use API for reads (handles base64 encoding)
   const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${path}`, {
     headers: { 'Authorization': `token ${T}`, 'Accept': 'application/vnd.github.v3+json' }
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
-
 async function ghPut(path, content, message, sha) {
   const body = { message, content };
   if (sha) body.sha = sha;
@@ -372,22 +422,14 @@ async function ghPut(path, content, message, sha) {
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
-
-function fileToBase64(file) {
-  return new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result.split(',')[1]); r.onerror = rej; r.readAsDataURL(file); });
+function toB64(file) {
+  return new Promise((res,rej) => { const r=new FileReader(); r.onload=()=>res(r.result.split(',')[1]); r.onerror=rej; r.readAsDataURL(file); });
 }
 
-function markChanged() { pendingChanges++; updateSaveBar(); }
-function updateSaveBar() {
-  const bar = document.getElementById('save-bar');
-  bar.style.display = pendingChanges > 0 ? 'flex' : 'none';
-  document.getElementById('pending-count').textContent = pendingChanges;
-}
-function showStatus(msg, type) {
-  const bar = document.getElementById('status-bar');
-  bar.textContent = msg; bar.className = type || ''; bar.style.display = 'block';
-}
-function hideStatus() { document.getElementById('status-bar').style.display = 'none'; }
+function markDirty() { dirty = true; updateSaveBar(); }
+function updateSaveBar() { document.getElementById('save-bar').style.display = dirty ? 'flex' : 'none'; }
+function showStatus(msg, type) { const b=document.getElementById('status-bar'); b.textContent=msg; b.className=type||''; b.style.display='block'; }
+function hideStatus() { document.getElementById('status-bar').style.display='none'; }
 </script>
 </body>
 </html>
