@@ -369,15 +369,18 @@ async function saveChanges() {
       item.newFile = null;
     }
 
-    // Rebuild HTML
+    // Rebuild HTML - fetch fresh copy and update it
     showStatus('Saving page…', '');
-    const newHTML = rebuildHTML();
+    const freshData = await ghGet(`trips/${currentTrip}.html`);
+    currentSHA = freshData.sha;
+    const originalHTML = decodeURIComponent(escape(atob(freshData.content.replace(/\n/g,''))));
+    const newHTML = await rebuildHTMLAsync(originalHTML);
     const b64 = btoa(unescape(encodeURIComponent(newHTML)));
     await ghPut(`trips/${currentTrip}.html`, b64, `Update ${currentTrip}`, currentSHA);
 
     // Refresh SHA
-    const fresh = await ghGet(`trips/${currentTrip}.html`);
-    currentSHA = fresh.sha;
+    const fresh2 = await ghGet(`trips/${currentTrip}.html`);
+    currentSHA = fresh2.sha;
     dirty = false; updateSaveBar();
     showStatus('Saved! Site updates in ~1 minute.', 'success');
   } catch(e) {
@@ -386,22 +389,56 @@ async function saveChanges() {
   btn.disabled = false; btn.innerHTML = 'Save &amp; Publish';
 }
 
-// REBUILD HTML — update imgs and headings in place, respecting order
-function rebuildHTML() {
-  // We reconstruct the photo/heading section from items array
-  // Keep the original HTML but replace the content area
-  // Simple approach: serialize items into HTML snippet
-  let snippet = '';
+// REBUILD HTML — fetch original, replace photo/heading section with reordered items
+async function rebuildHTMLAsync(originalHTML) {
+  const doc = new DOMParser().parseFromString(originalHTML, 'text/html');
+  
+  // Find all existing photo imgs and headings and remove them
+  doc.querySelectorAll('img:not(.hero-img)').forEach(el => {
+    // Also remove caption siblings
+    let next = el.nextElementSibling;
+    if (next && ['P','FIGCAPTION','EM','SPAN'].includes(next.tagName)) next.remove();
+    el.remove();
+  });
+  doc.querySelectorAll('h2.city-name, h3.city-name').forEach(el => el.remove());
+  
+  // Find insertion point - after hero img or at end of main content
+  const hero = doc.querySelector('.hero-img') || doc.querySelector('img');
+  const insertAfter = hero ? hero.parentElement : doc.querySelector('main') || doc.body;
+  
+  // Build new elements
+  const frag = doc.createDocumentFragment();
   items.forEach(item => {
     if (item.type === 'heading') {
-      snippet += `\n<h2 class="city-name">${item.text}</h2>\n`;
+      const h = doc.createElement('h2');
+      h.className = 'city-name';
+      h.textContent = item.text;
+      frag.appendChild(h);
     } else {
-      snippet += `<img src="${item.src}" alt="${item.caption}">\n`;
-      if (item.caption) snippet += `<p class="caption">${item.caption}</p>\n`;
+      const img = doc.createElement('img');
+      img.src = item.src;
+      img.alt = item.caption || '';
+      frag.appendChild(img);
+      if (item.caption) {
+        const p = doc.createElement('p');
+        p.className = 'caption';
+        p.textContent = item.caption;
+        frag.appendChild(p);
+      }
     }
   });
-  return snippet;
+  
+  // Insert after hero or append to body
+  if (hero) {
+    hero.parentElement.insertBefore(frag, hero.nextSibling);
+  } else {
+    insertAfter.appendChild(frag);
+  }
+  
+  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
 }
+
+function rebuildHTML() { return ''; } // placeholder, use async version
 
 // GitHub API
 async function ghGet(path) {
