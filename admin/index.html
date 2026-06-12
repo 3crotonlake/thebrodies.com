@@ -634,56 +634,56 @@ async function saveChanges() {
 
 // ── BUILD HTML ──────────────────────────────────────────────
 function buildHTML(baseHTML) {
-  var doc = new DOMParser().parseFromString(baseHTML, 'text/html');
-
-  // Remove existing content
-  Array.from(doc.querySelectorAll('h2.city-name, h3.city-name')).forEach(function(el) { el.remove(); });
-  Array.from(doc.querySelectorAll('.photo-grid')).forEach(function(el) { el.remove(); });
-  Array.from(doc.querySelectorAll('img:not(.hero-img)')).forEach(function(el) {
-    var next = el.nextElementSibling;
-    if (next && (next.classList.contains('caption') || next.classList.contains('photo-caption'))) next.remove();
-    el.remove();
-  });
-
-  // Find insert point
-  var hero = doc.querySelector('.hero');
-  var parent = hero ? hero.parentElement : doc.body;
-  var insertBefore = hero ? hero.nextSibling : null;
-
-  // Build from sections
-  var frag = doc.createDocumentFragment();
+  // Build new content block from sections array
+  var newContent = '';
   sections.forEach(function(sec) {
     if (sec.name) {
-      var h = doc.createElement('h2');
-      h.className = 'city-name';
-      h.textContent = sec.name;
-      frag.appendChild(h);
+      newContent += '<h2 class="city-name">' + escHtml(sec.name) + '</h2>\n';
     }
     if (sec.photos.length > 0) {
-      var grid = doc.createElement('div');
-      grid.className = 'photo-grid';
+      newContent += '<div class="photo-grid">\n';
       sec.photos.forEach(function(photo) {
-        var item = doc.createElement('div');
-        item.className = 'photo-item';
-        var img = doc.createElement('img');
-        img.setAttribute('src', photo.src);
-        img.setAttribute('alt', photo.caption || '');
-        img.setAttribute('loading', 'lazy');
-        item.appendChild(img);
+        newContent += '<div class="photo-item">';
+        newContent += '<img src="' + photo.src + '" alt="' + escHtml(photo.caption || '') + '" loading="lazy">';
         if (photo.caption) {
-          var p = doc.createElement('p');
-          p.className = 'photo-caption';
-          p.textContent = photo.caption;
-          item.appendChild(p);
+          newContent += '<p class="photo-caption">' + escHtml(photo.caption) + '</p>';
         }
-        grid.appendChild(item);
+        newContent += '</div>\n';
       });
-      frag.appendChild(grid);
+      newContent += '</div>\n';
     }
   });
 
-  parent.insertBefore(frag, insertBefore);
-  return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+  // Remove all existing city headings, photo-grids, and bare content imgs using regex
+  // Remove city headings
+  var html = baseHTML.replace(/<h[23] class="city-name">[^<]*<\/h[23]>/g, '');
+  // Remove photo-grids (including all content)
+  html = html.replace(/<div class="photo-grid">[\s\S]*?<\/div>(?!\s*<\/div>)/g, function(match) {
+    // Only remove if it contains photo-items
+    if (match.indexOf('photo-item') >= 0) return '';
+    return match;
+  });
+  // Remove any remaining bare content imgs (not hero)
+  html = html.replace(/<img(?![^>]*class="hero-img")[^>]*loading="lazy"[^>]*>/g, '');
+  // Remove orphaned photo-captions
+  html = html.replace(/<p class="photo-caption">[^<]*<\/p>/g, '');
+
+  // Find insertion point - after </div> that closes .hero div
+  // Look for the hero div close, then insert after it
+  var heroMatch = html.match(/<div class="hero">[\s\S]*?<\/div>/);
+  if (heroMatch) {
+    var heroEnd = html.indexOf(heroMatch[0]) + heroMatch[0].length;
+    html = html.slice(0, heroEnd) + '\n' + newContent + html.slice(heroEnd);
+  } else {
+    // Fallback: insert before </body>
+    html = html.replace('</body>', newContent + '</body>');
+  }
+
+  return html;
+}
+
+function escHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 // ── VIEW BUTTON ──────────────────────────────────────────────
