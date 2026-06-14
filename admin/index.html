@@ -724,6 +724,8 @@ async function saveChanges() {
 
     document.getElementById('save-status').style.display = 'block';
     setTimeout(function(){ document.getElementById('save-status').style.display='none'; }, 5000);
+    // Trigger Cloudflare deploy
+    fetch('https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/2a328602-f7bb-476d-9cd3-7b07d570bad7', {method:'POST'}).catch(function(){});
 
   } catch(e) {
     showMsg('Save error: ' + e.message, 'error');
