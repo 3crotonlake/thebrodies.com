@@ -666,6 +666,15 @@ function onDragUpload(e, type) {
   else { z.classList.remove('over'); onFileSelect(e.dataTransfer.files); }
 }
 
+
+// Sanitize filename: remove spaces/special chars
+function sanitizeFilename(name) {
+  var ext = name.lastIndexOf('.') >= 0 ? name.slice(name.lastIndexOf('.')) : '';
+  var base = name.slice(0, name.length - ext.length);
+  base = base.replace(/[^a-zA-Z0-9_-]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+  return base + ext.toLowerCase();
+}
+
 async function onFileSelect(fileList) {
   var files = Array.from(fileList).filter(function(f){ return f.type.indexOf('image/')===0; });
   if (!files.length) return;
@@ -686,9 +695,10 @@ async function onFileSelect(fileList) {
     var f = files[i];
     showMsg('Uploading ' + f.name + ' (' + (i+1) + '/' + files.length + ')…');
     try {
+      var safeName = sanitizeFilename(f.name);
       var b64img = await toB64(f);
-      await ghPut('images/'+folder+'/'+f.name, b64img, 'Add '+f.name, null);
-      sections[targetSi].photos.push({src:'/images/'+folder+'/'+f.name, caption:'', isNew:true});
+      await ghPut('images/'+folder+'/'+safeName, b64img, 'Add '+safeName, null);
+      sections[targetSi].photos.push({src:'/images/'+folder+'/'+safeName, caption:'', isNew:true});
     } catch(e) {
       showMsg('Upload failed: '+f.name+' — '+e.message, 'error');
     }
@@ -724,6 +734,9 @@ async function saveChanges() {
 
     document.getElementById('save-status').style.display = 'block';
     setTimeout(function(){ document.getElementById('save-status').style.display='none'; }, 5000);
+    // Re-parse saved HTML to keep admin in sync
+    sections = parseHTML(newHTML);
+    renderEditor();
     // Trigger Cloudflare deploy
     fetch('https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/2a328602-f7bb-476d-9cd3-7b07d570bad7', {method:'POST'}).catch(function(){});
 
