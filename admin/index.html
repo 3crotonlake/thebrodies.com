@@ -258,7 +258,15 @@ var FOLDERS = {
 // ── SESSION ──────────────────────────────────────────────────
 window.addEventListener('load', function() {
   buildDropdown();
-  if (sessionStorage.getItem('brodies_auth') === 'ok') showApp();
+  if (localStorage.getItem('brodies_auth') === 'ok') {
+    showApp();
+    var lastTrip = localStorage.getItem('brodies_last_trip');
+    if (lastTrip) {
+      var sel = document.getElementById('trip-select');
+      sel.value = lastTrip;
+      if (sel.value === lastTrip) loadTrip();
+    }
+  }
 });
 function showApp() {
   document.getElementById('login-screen').style.display = 'none';
@@ -266,7 +274,7 @@ function showApp() {
 }
 function login() {
   if (document.getElementById('password-input').value === PW) {
-    sessionStorage.setItem('brodies_auth', 'ok');
+    localStorage.setItem('brodies_auth', 'ok');
     showApp();
   } else {
     document.getElementById('login-error').style.display = 'block';
@@ -295,6 +303,7 @@ async function loadTrip() {
   closePanel();
   if (!currentTrip) return;
 
+  localStorage.setItem('brodies_last_trip', currentTrip);
   var url = '/trips/' + currentTrip + '.html';
   document.getElementById('view-btn').href = url;
   document.getElementById('view-btn').style.display = 'block';
