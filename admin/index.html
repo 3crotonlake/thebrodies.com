@@ -38,7 +38,7 @@ header{position:sticky;top:0;z-index:200;background:rgba(249,247,243,.97);backdr
 header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;margin-right:.5rem}
 #trip-select{padding:.5rem .8rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:.85rem;color:var(--ink);cursor:pointer;min-width:220px}
 .header-spacer{flex:1}
-#save-btn-wrap{display:none;align-items:center;gap:.8rem}
+#save-btn-wrap{display:flex;align-items:center;gap:.8rem}
 #changes-label{font-size:.75rem;color:var(--accent);white-space:nowrap}
 #save-status{font-size:.72rem;color:var(--green);display:none;white-space:nowrap}
 
@@ -146,7 +146,7 @@ input:checked+.toggle-track:before{transform:translateX(17px)}
     <a id="view-btn" href="#" target="_blank" style="display:none" class="btn btn-ghost btn-sm">View page ↗</a>
     <div id="save-btn-wrap">
       <span id="changes-label"></span>
-      <button class="btn btn-save" id="save-btn" onclick="saveChanges()">Save &amp; Publish</button>
+      <button class="btn btn-save" id="save-btn" onclick="saveChanges()" disabled style="opacity:.35;cursor:not-allowed">Save &amp; Publish</button>
     </div>
     <span id="save-status">✓ Saved — live in ~1 min</span>
   </header>
@@ -280,6 +280,12 @@ function login() {
     document.getElementById('login-error').style.display = 'block';
   }
 }
+window.addEventListener('beforeunload', function(e) {
+  if (changes > 0) {
+    e.preventDefault();
+    e.returnValue = 'You have unsaved changes. Save & Publish before leaving.';
+  }
+});
 document.getElementById('password-input').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') login();
 });
@@ -791,12 +797,15 @@ function escHtml(str) {
 function markChanged() {
   changes++;
   document.getElementById('changes-label').textContent = changes + ' unsaved change' + (changes===1?'':'s');
-  document.getElementById('save-btn-wrap').style.display = 'flex';
+  var btn = document.getElementById('save-btn');
+  btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
   document.getElementById('save-status').style.display = 'none';
 }
 function resetChanges() {
   changes = 0;
-  document.getElementById('save-btn-wrap').style.display = 'none';
+  document.getElementById('changes-label').textContent = '';
+  var btn = document.getElementById('save-btn');
+  btn.disabled = true; btn.style.opacity = '.35'; btn.style.cursor = 'not-allowed';
 }
 
 // ── HELPERS ──────────────────────────────────────────────────────
