@@ -7,7 +7,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;--accent-light:#f3ebe9;--green:#2a6b3a;--green-light:#e9f3eb;--red:#8b2a2a;--red-light:#f3e9e9;--gold:#c9a84c}
+:root{
+  --cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;
+  --accent:#8b3a2a;--accent-light:#f3ebe9;--green:#2a6b3a;--green-light:#e9f3eb;
+  --red:#8b2a2a;--red-light:#f3e9e9;--blue:#2a4a8b;--blue-light:#e9eef3;
+}
 body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;min-height:100vh}
 
 /* LOGIN */
@@ -26,80 +30,96 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font
 .btn-danger{background:var(--red);color:white}
 .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
 .btn-sm{padding:.4rem .8rem;font-size:.65rem}
+.btn-green{background:var(--green);color:white}
 
-/* APP */
+/* APP SHELL */
 #app{display:none}
-header{position:sticky;top:0;z-index:100;background:rgba(249,247,243,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+header{position:sticky;top:0;z-index:200;background:rgba(249,247,243,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
 header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;margin-right:.5rem}
 #trip-select{padding:.5rem .8rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:.85rem;color:var(--ink);cursor:pointer;min-width:220px}
-.sort-btn{font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);cursor:pointer;text-decoration:underline;white-space:nowrap;background:none;border:none;font-family:'Jost',sans-serif}
-.sort-btn:hover{color:var(--ink)}
 .header-spacer{flex:1}
-#view-btn{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;white-space:nowrap}
-#view-btn:hover{color:var(--ink)}
 #save-btn-wrap{display:none;align-items:center;gap:.8rem}
-#changes-count{font-size:.75rem;color:var(--accent)}
-#save-status{font-size:.72rem;color:var(--green);display:none}
+#changes-label{font-size:.75rem;color:var(--accent);white-space:nowrap}
+#save-status{font-size:.72rem;color:var(--green);display:none;white-space:nowrap}
 
-/* MAIN */
-.main{max-width:840px;margin:0 auto;padding:1.5rem 2rem 4rem}
-.section-label{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem}
-
-#page-msg{display:none;padding:.8rem 1.2rem;margin-bottom:1.2rem;font-size:.82rem;border-left:3px solid var(--accent);background:var(--accent-light)}
-#page-msg.success{border-color:var(--green);background:var(--green-light)}
-#page-msg.error{border-color:var(--red);background:var(--red-light)}
-#loading-msg{padding:3rem;text-align:center;color:var(--muted);font-size:.85rem;display:none}
-
-/* TRIP META BAR */
-#trip-meta{display:none;margin-bottom:1.5rem;padding:.8rem 1.2rem;background:white;border:1px solid var(--border);display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
-.meta-item{display:flex;align-items:center;gap:.6rem;font-size:.78rem}
+/* STATUS BAR */
+#status-bar{display:none;padding:.6rem 2rem;background:white;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
 .toggle-wrap{position:relative;width:38px;height:21px;flex-shrink:0}
 .toggle-wrap input{opacity:0;width:0;height:0;position:absolute}
 .toggle-track{position:absolute;inset:0;background:var(--border);border-radius:21px;cursor:pointer;transition:.25s}
 .toggle-track:before{content:'';position:absolute;width:15px;height:15px;left:3px;top:3px;background:white;border-radius:50%;transition:.25s}
-input:checked + .toggle-track{background:var(--green)}
-input:checked + .toggle-track:before{transform:translateX(17px)}
+input:checked+.toggle-track{background:var(--green)}
+input:checked+.toggle-track:before{transform:translateX(17px)}
+.status-item{display:flex;align-items:center;gap:.6rem;font-size:.78rem}
 
-/* ADD SECTION */
-.add-section-row{display:flex;gap:.8rem;align-items:center;margin-bottom:1.5rem}
-.new-section-input{padding:.6rem .9rem;border:1px solid var(--border);background:white;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--ink);flex:1;max-width:300px}
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:1.5rem 2rem 6rem}
+#page-msg{display:none;padding:.8rem 1.2rem;margin-bottom:1rem;font-size:.82rem;border-left:3px solid var(--accent);background:var(--accent-light)}
+#page-msg.success{border-color:var(--green);background:var(--green-light)}
+#page-msg.error{border-color:var(--red);background:var(--red-light)}
+#loading-msg{padding:3rem;text-align:center;color:var(--muted);font-size:.85rem;display:none}
+
+/* TOOLBAR */
+#toolbar{display:none;margin-bottom:1.5rem;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+#toolbar{display:none}
+.new-section-input{padding:.6rem .9rem;border:1px solid var(--border);background:white;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--ink);width:240px}
 .new-section-input:focus{outline:2px solid var(--accent)}
 
-/* UPLOAD */
-#upload-zone{border:2px dashed var(--border);padding:1.2rem;text-align:center;margin-bottom:1.5rem;cursor:pointer;transition:all .2s}
+/* UPLOAD ZONE */
+#upload-zone{border:2px dashed var(--border);padding:1rem 1.5rem;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:1.5rem;display:none}
 #upload-zone:hover,#upload-zone.over{border-color:var(--accent);background:var(--accent-light)}
-#upload-zone p{font-size:.8rem;color:var(--muted);margin-bottom:.6rem}
+#upload-zone p{font-size:.8rem;color:var(--muted);margin-bottom:.5rem}
 #file-input{display:none}
 
-/* SECTION BLOCKS */
-.section-block{margin-bottom:1.5rem}
-.section-heading-row{display:flex;align-items:center;gap:.6rem;padding:.5rem 0;border-bottom:1px solid var(--border);margin-bottom:.5rem}
-.section-name-input{flex:1;border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:var(--ink);letter-spacing:.04em}
+/* SECTIONS */
+.section-block{margin-bottom:2.5rem}
+.section-header{display:flex;align-items:center;gap:.8rem;padding:.5rem 0;border-bottom:2px solid var(--border);margin-bottom:1rem}
+.section-name-input{flex:1;border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--ink);letter-spacing:.04em;min-width:0}
 .section-name-input:focus{outline:none;border-bottom:2px solid var(--accent)}
 .section-name-input.unsaved{color:var(--accent)}
+.section-photo-count{font-size:.7rem;color:var(--muted);letter-spacing:.08em;white-space:nowrap}
 
-/* PHOTO ROWS */
-.photo-row{display:flex;align-items:flex-start;gap:.8rem;padding:.7rem;background:white;border:1px solid var(--border);margin-bottom:4px;transition:background .15s}
-.photo-row:hover{background:#faf9f7}
-.photo-row.dragging{opacity:.4;box-shadow:0 2px 12px rgba(0,0,0,.12)}
-.photo-row.drag-over{border-color:var(--accent);border-style:dashed}
-.drag-handle{color:#ccc;font-size:1.1rem;cursor:grab;flex-shrink:0;padding-top:4px;user-select:none}
-.photo-thumb{width:72px;height:56px;object-fit:cover;flex-shrink:0;background:var(--border)}
-.photo-thumb.broken{opacity:.3;filter:grayscale(1)}
-.photo-info{flex:1;display:flex;flex-direction:column;gap:.4rem;min-width:0}
-.photo-filename{font-size:.6rem;color:var(--muted);letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.photo-caption-input{width:100%;padding:.4rem .6rem;border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:.8rem;color:var(--ink);resize:none;min-height:42px;background:var(--cream)}
-.photo-caption-input:focus{outline:2px solid var(--accent);background:white}
-.photo-caption-input.unsaved{border-color:var(--accent)}
-.photo-controls{display:flex;flex-direction:column;gap:.4rem;flex-shrink:0;align-items:flex-end}
-.section-select{padding:.4rem .5rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:.72rem;color:var(--ink);cursor:pointer;max-width:140px}
-.section-select:focus{outline:2px solid var(--accent)}
-.del-btn{background:none;border:none;color:#ccc;cursor:pointer;font-size:.9rem;padding:.2rem;transition:color .15s}
-.del-btn:hover{color:var(--red)}
-.new-badge{font-size:.55rem;background:var(--green);color:white;padding:.1rem .35rem;letter-spacing:.08em;text-transform:uppercase;margin-left:.3rem}
+/* PHOTO GRID */
+.photo-grid-admin{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px;min-height:60px}
+.photo-grid-admin.drag-active .photo-card:not(.dragging){border:2px dashed var(--border)}
+
+/* PHOTO CARD */
+.photo-card{position:relative;cursor:pointer;background:white;border:2px solid transparent;transition:border-color .15s}
+.photo-card:hover{border-color:var(--accent)}
+.photo-card.selected{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.photo-card.dragging{opacity:.3}
+.photo-card.drag-over{border-color:var(--blue)!important;border-style:dashed!important}
+.photo-card img{width:100%;height:120px;object-fit:cover;display:block}
+.photo-card img.broken{opacity:.3;filter:grayscale(1)}
+.card-caption{font-size:.65rem;color:var(--muted);padding:3px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:22px;background:#faf9f7}
+.card-caption.has-caption{color:var(--ink)}
+.card-new-badge{position:absolute;top:4px;left:4px;background:var(--green);color:white;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 5px}
+.card-del{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.55);color:white;border:none;cursor:pointer;font-size:.75rem;width:20px;height:20px;display:none;align-items:center;justify-content:center;border-radius:2px}
+.photo-card:hover .card-del{display:flex}
+.drag-handle-card{position:absolute;bottom:24px;left:3px;color:rgba(255,255,255,.7);font-size:.9rem;cursor:grab;text-shadow:0 1px 2px rgba(0,0,0,.5);user-select:none}
+
+/* EDIT PANEL */
+#edit-panel{position:fixed;bottom:0;left:0;right:0;z-index:300;background:white;border-top:2px solid var(--accent);padding:1rem 2rem;display:none;align-items:flex-start;gap:1.5rem;box-shadow:0 -4px 20px rgba(0,0,0,.1);flex-wrap:wrap}
+#edit-panel.open{display:flex}
+#panel-thumb{width:80px;height:64px;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
+#panel-filename{font-size:.6rem;color:var(--muted);margin-top:3px;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.panel-field{display:flex;flex-direction:column;gap:.3rem;flex:1;min-width:200px}
+.panel-label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+#panel-caption{width:100%;padding:.5rem .7rem;border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:.85rem;color:var(--ink);resize:none;height:60px;background:var(--cream)}
+#panel-caption:focus{outline:2px solid var(--accent);background:white}
+#panel-section{padding:.5rem .7rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:.85rem;color:var(--ink);cursor:pointer;width:100%}
+#panel-close{background:none;border:none;cursor:pointer;font-size:1.3rem;color:var(--muted);flex-shrink:0;align-self:flex-start;margin-left:auto;padding:.2rem}
+#panel-close:hover{color:var(--ink)}
+#panel-note{font-size:.72rem;color:var(--muted);align-self:center}
+
+/* ADD PHOTO PLACEHOLDER */
+.add-photo-card{border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;height:144px;cursor:pointer;transition:all .2s;color:var(--muted);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;flex-direction:column;gap:.4rem}
+.add-photo-card:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
 
 .spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,.15);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:5px}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+.empty-section{font-size:.75rem;color:var(--muted);font-style:italic;padding:.5rem;letter-spacing:.05em}
 </style>
 </head>
 <body>
@@ -122,52 +142,68 @@ input:checked + .toggle-track:before{transform:translateX(17px)}
     <select id="trip-select" onchange="loadTrip()">
       <option value="">— Select a trip —</option>
     </select>
-    <button class="sort-btn" id="sort-btn" onclick="toggleSort()">Sort: Newest first</button>
     <div class="header-spacer"></div>
     <a id="view-btn" href="#" target="_blank" style="display:none" class="btn btn-ghost btn-sm">View page ↗</a>
     <div id="save-btn-wrap">
-      <span id="changes-count"></span>
+      <span id="changes-label"></span>
       <button class="btn btn-save" id="save-btn" onclick="saveChanges()">Save &amp; Publish</button>
     </div>
-    <span id="save-status">Saved ✓ — live in ~1 min</span>
+    <span id="save-status">✓ Saved — live in ~1 min</span>
   </header>
+
+  <div id="status-bar">
+    <div class="status-item">
+      <span style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Status:</span>
+      <label class="toggle-wrap">
+        <input type="checkbox" id="live-toggle" onchange="toggleLive()">
+        <span class="toggle-track"></span>
+      </label>
+      <span id="live-label" style="font-size:.78rem;color:var(--muted)">Planning</span>
+    </div>
+    <a id="view-btn2" href="#" target="_blank" style="font-size:.72rem;color:var(--muted);text-decoration:underline;display:none">View live page ↗</a>
+  </div>
 
   <div class="main">
     <div id="page-msg"></div>
     <div id="loading-msg">Loading trip…</div>
-
     <div id="trip-editor" style="display:none">
 
-      <!-- Planning toggle -->
-      <div id="trip-meta">
-        <div class="meta-item">
-          <span style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Status:</span>
-          <label class="toggle-wrap">
-            <input type="checkbox" id="live-toggle" onchange="toggleLive()">
-            <span class="toggle-track"></span>
-          </label>
-          <span id="live-label" style="font-size:.78rem;color:var(--muted)">Planning</span>
+      <!-- Toolbar: upload + add section -->
+      <div id="toolbar">
+        <div id="upload-zone" onclick="document.getElementById('file-input').click()"
+             ondragover="onDragUpload(event,'over')" ondragleave="onDragUpload(event,'leave')" ondrop="onDragUpload(event,'drop')">
+          <p>Drop photos here or click to browse</p>
+          <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();document.getElementById('file-input').click()">Choose Photos</button>
+        </div>
+        <input type="file" id="file-input" multiple accept="image/*" onchange="onFileSelect(event.target.files)">
+
+        <div style="display:flex;gap:.6rem;align-items:center">
+          <input class="new-section-input" id="new-section-input" placeholder="New section name (e.g. Paris)…" onkeydown="if(event.key==='Enter')addSection()">
+          <button class="btn btn-ghost btn-sm" onclick="addSection()">+ Add Section</button>
         </div>
       </div>
 
-      <!-- Upload zone -->
-      <div id="upload-zone" onclick="document.getElementById('file-input').click()" ondragover="onDragUpload(event,'over')" ondragleave="onDragUpload(event,'leave')" ondrop="onDragUpload(event,'drop')">
-        <p>Drop new photos here or click to browse</p>
-        <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();document.getElementById('file-input').click()">Choose Photos</button>
-        <input type="file" id="file-input" multiple accept="image/*" onchange="onFileSelect(event.target.files)">
-      </div>
-
-      <!-- Add section -->
-      <div class="add-section-row">
-        <input class="new-section-input" id="new-section-input" placeholder="New section name (e.g. Paris)…">
-        <button class="btn btn-ghost btn-sm" onclick="addSection()">+ Add Section</button>
-      </div>
-
-      <!-- Sections -->
+      <!-- Sections rendered here -->
       <div id="editor-body"></div>
-
     </div>
   </div>
+</div>
+
+<!-- Edit panel (bottom drawer) -->
+<div id="edit-panel">
+  <div style="flex-shrink:0;text-align:center">
+    <img id="panel-thumb" src="" alt="">
+    <div id="panel-filename"></div>
+  </div>
+  <div class="panel-field">
+    <label class="panel-label">Caption / Note</label>
+    <textarea id="panel-caption" placeholder="Add a caption or note…" oninput="onPanelCaptionInput()"></textarea>
+  </div>
+  <div class="panel-field" style="min-width:160px;max-width:220px">
+    <label class="panel-label">Move to section</label>
+    <select id="panel-section" onchange="onPanelSectionChange()"></select>
+  </div>
+  <button id="panel-close" onclick="closePanel()">×</button>
 </div>
 
 <script>
@@ -178,32 +214,32 @@ var T = ['ghp_D7r6L','55hqPWTQk','SD1M3FWAY','zALQj773Cq4hq'].join('');
 // State
 var currentTrip = null;
 var currentSHA = '';
-var sections = [];   // [{name: string|null, photos: [{src, caption, isNew}]}]
+var sections = [];   // [{name:string, photos:[{src,caption,isNew}]}]
 var changes = 0;
-var sortNewest = true;
-var previewWin = null;
+var selectedCard = null;  // {si, pi} of selected photo
+var dragState = null;
 
 var TRIPS = [
-  {v:'iceland-2026',      l:'Iceland 2026 (Girls Trip)',         y:2026},
-  {v:'memphis-2026',      l:'Memphis 2026',                      y:2026},
+  {v:'iceland-2026',      l:'Iceland 2026 (Girls Trip)',               y:2026},
+  {v:'memphis-2026',      l:'Memphis 2026',                            y:2026},
   {v:'edinburgh-york-london-2026', l:'Edinburgh / York / London 2026', y:2026},
-  {v:'oxford-2026',       l:'Oxford 2026',                       y:2026},
-  {v:'london-oxford-paris-2025', l:'London / Oxford / Paris 2025', y:2025},
-  {v:'switzerland-sweden-2025', l:'Switzerland & Sweden 2025',   y:2025},
-  {v:'utah-2025',         l:'Utah 2025 (Mighty 5)',              y:2025},
-  {v:'florence-rome-2025',l:'Florence / Rome 2025',              y:2025},
-  {v:'charleston-2025',   l:'Charleston 2025',                   y:2025},
-  {v:'belize-2025',       l:'Belize 2025',                       y:2025},
-  {v:'cambodia-2024',     l:'Cambodia 2024',                     y:2024},
-  {v:'ireland-2024',      l:'Ireland 2024',                      y:2024},
-  {v:'mont-tremblant-2024',l:'Mont Tremblant 2024',              y:2024},
-  {v:'sedona-2023',       l:'Sedona & Grand Canyon 2023',        y:2023},
-  {v:'puerto-rico-2023',  l:'Puerto Rico 2023',                  y:2023},
-  {v:'thailand-cambodia-2023', l:'Thailand & Cambodia 2023',     y:2023},
-  {v:'london-2022',       l:'London 2022',                       y:2022},
-  {v:'spain-portugal-2022',l:'Spain & Portugal 2022',            y:2022},
-  {v:'acadia-2021',       l:'Acadia 2021',                       y:2021},
-  {v:'spain-2019',        l:'Spain 2019',                        y:2019}
+  {v:'oxford-2026',       l:'Oxford 2026',                             y:2026},
+  {v:'london-oxford-paris-2025',   l:'London / Oxford / Paris 2025',   y:2025},
+  {v:'switzerland-sweden-2025',    l:'Switzerland & Sweden 2025',      y:2025},
+  {v:'utah-2025',         l:'Utah 2025 (Mighty 5)',                    y:2025},
+  {v:'florence-rome-2025',l:'Florence / Rome 2025',                    y:2025},
+  {v:'charleston-2025',   l:'Charleston 2025',                         y:2025},
+  {v:'belize-2025',       l:'Belize 2025',                             y:2025},
+  {v:'cambodia-2024',     l:'Cambodia 2024',                           y:2024},
+  {v:'ireland-2024',      l:'Ireland 2024',                            y:2024},
+  {v:'mont-tremblant-2024',l:'Mont Tremblant 2024',                   y:2024},
+  {v:'sedona-2023',       l:'Sedona & Grand Canyon 2023',              y:2023},
+  {v:'puerto-rico-2023',  l:'Puerto Rico 2023',                        y:2023},
+  {v:'thailand-cambodia-2023', l:'Thailand & Cambodia 2023',           y:2023},
+  {v:'london-2022',       l:'London 2022',                             y:2022},
+  {v:'spain-portugal-2022',l:'Spain & Portugal 2022',                  y:2022},
+  {v:'acadia-2021',       l:'Acadia 2021',                             y:2021},
+  {v:'spain-2019',        l:'Spain 2019',                              y:2019}
 ];
 
 var FOLDERS = {
@@ -219,20 +255,19 @@ var FOLDERS = {
   'acadia-2021':'2021_acadia','spain-2019':'2019_spain'
 };
 
-// ── SESSION ──────────────────────────────────────────────
+// ── SESSION ──────────────────────────────────────────────────
 window.addEventListener('load', function() {
   buildDropdown();
-  if (sessionStorage.getItem('brodies_auth') === 'ok') {
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-  }
+  if (sessionStorage.getItem('brodies_auth') === 'ok') showApp();
 });
-
+function showApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+}
 function login() {
   if (document.getElementById('password-input').value === PW) {
     sessionStorage.setItem('brodies_auth', 'ok');
-    document.getElementById('login-screen').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
+    showApp();
   } else {
     document.getElementById('login-error').style.display = 'block';
   }
@@ -241,41 +276,34 @@ document.getElementById('password-input').addEventListener('keydown', function(e
   if (e.key === 'Enter') login();
 });
 
-// ── DROPDOWN ──────────────────────────────────────────────
+// ── DROPDOWN ──────────────────────────────────────────────────
 function buildDropdown() {
   var sel = document.getElementById('trip-select');
-  var cur = sel.value;
-  var sorted = TRIPS.slice().sort(function(a, b) {
-    return sortNewest ? (b.y - a.y || a.l.localeCompare(b.l)) : a.l.localeCompare(b.l);
-  });
+  var sorted = TRIPS.slice().sort(function(a,b){ return b.y-a.y || a.l.localeCompare(b.l); });
   sel.innerHTML = '<option value="">— Select a trip —</option>';
   sorted.forEach(function(t) {
     var o = document.createElement('option');
     o.value = t.v; o.textContent = t.l;
-    if (t.v === cur) o.selected = true;
     sel.appendChild(o);
   });
 }
 
-function toggleSort() {
-  sortNewest = !sortNewest;
-  document.getElementById('sort-btn').textContent = sortNewest ? 'Sort: Newest first' : 'Sort: A–Z';
-  buildDropdown();
-}
-
-// ── LOAD TRIP ──────────────────────────────────────────────
+// ── LOAD TRIP ──────────────────────────────────────────────────
 async function loadTrip() {
   var sel = document.getElementById('trip-select');
   currentTrip = sel.value;
+  closePanel();
   if (!currentTrip) return;
 
-  document.getElementById('view-btn').href = '/trips/' + currentTrip + '.html';
+  var url = '/trips/' + currentTrip + '.html';
+  document.getElementById('view-btn').href = url;
   document.getElementById('view-btn').style.display = 'block';
+  document.getElementById('view-btn2').href = url;
+  document.getElementById('view-btn2').style.display = 'inline';
   document.getElementById('trip-editor').style.display = 'none';
   document.getElementById('loading-msg').style.display = 'block';
-  document.getElementById('trip-meta').style.display = 'none';
-  hideMsg();
-  resetChanges();
+  document.getElementById('status-bar').style.display = 'none';
+  hideMsg(); resetChanges();
 
   try {
     var data = await ghGet('trips/' + currentTrip + '.html');
@@ -286,49 +314,52 @@ async function loadTrip() {
     renderLiveToggle(html);
     document.getElementById('loading-msg').style.display = 'none';
     document.getElementById('trip-editor').style.display = 'block';
-    document.getElementById('trip-meta').style.display = 'flex';
+    document.getElementById('status-bar').style.display = 'flex';
+    document.getElementById('toolbar').style.display = 'flex';
+    document.getElementById('upload-zone').style.display = 'block';
   } catch(e) {
     showMsg('Could not load: ' + e.message, 'error');
     document.getElementById('loading-msg').style.display = 'none';
   }
 }
 
-// ── PARSE HTML ──────────────────────────────────────────────
+// ── PARSE HTML ──────────────────────────────────────────────────
+// Robust parser: scan ALL elements in document order
 function parseHTML(html) {
   var doc = new DOMParser().parseFromString(html, 'text/html');
   var result = [];
   var current = null;
 
-  function walk(el) {
-    Array.from(el.children).forEach(function(child) {
-      var tag = child.tagName;
-      if ((tag === 'H2' || tag === 'H3') && child.classList.contains('city-name')) {
-        current = { name: child.textContent.trim(), photos: [] };
-        result.push(current);
-        return;
-      }
-      if (tag === 'DIV' && child.classList.contains('photo-grid')) {
-        if (!current) { current = { name: null, photos: [] }; result.push(current); }
-        child.querySelectorAll('.photo-item').forEach(function(item) {
-          var img = item.querySelector('img');
-          if (!img || !img.getAttribute('src')) return;
-          var capEl = item.querySelector('p.photo-caption, p.caption, div.caption, figcaption');
-          current.photos.push({
-            src: img.getAttribute('src'),
-            caption: capEl ? capEl.textContent.trim() : (img.getAttribute('alt') || ''),
-            isNew: false
-          });
-        });
-        return;
-      }
-      if (['NAV','HEADER','FOOTER','SCRIPT','STYLE'].indexOf(tag) < 0) walk(child);
-    });
-  }
-  walk(doc.body);
+  // Flatten all elements in document order
+  var all = Array.from(doc.body.querySelectorAll('*'));
+  all.forEach(function(el) {
+    var tag = el.tagName;
+    // Skip nav, header, footer, script, style
+    if (['NAV','SCRIPT','STYLE','FOOTER','HEADER'].indexOf(tag) >= 0) return;
+    if (el.closest('nav,header,footer,script,style')) return;
+
+    if ((tag==='H2'||tag==='H3') && el.classList.contains('city-name')) {
+      current = { name: el.textContent.trim(), photos: [] };
+      result.push(current);
+      return;
+    }
+    if (tag==='DIV' && el.classList.contains('photo-grid')) {
+      if (!current) { current={name:null,photos:[]}; result.push(current); }
+      el.querySelectorAll('.photo-item').forEach(function(item) {
+        var img = item.querySelector('img');
+        if (!img) return;
+        var src = img.getAttribute('src');
+        if (!src) return;
+        var capEl = item.querySelector('p.photo-caption,p.caption,figcaption');
+        var cap = capEl ? capEl.textContent.trim() : (img.getAttribute('alt')||'');
+        current.photos.push({src:src, caption:cap, isNew:false});
+      });
+    }
+  });
   return result;
 }
 
-// ── RENDER EDITOR ──────────────────────────────────────────
+// ── RENDER EDITOR ──────────────────────────────────────────────
 function renderEditor() {
   var body = document.getElementById('editor-body');
   body.innerHTML = '';
@@ -337,18 +368,14 @@ function renderEditor() {
   });
 }
 
-function getSectionNames() {
-  return sections.map(function(s) { return s.name || '(no heading)'; });
-}
-
 function makeSectionBlock(sec, si) {
   var block = document.createElement('div');
   block.className = 'section-block';
   block.dataset.si = si;
 
-  // Heading row
-  var headRow = document.createElement('div');
-  headRow.className = 'section-heading-row';
+  // Header row
+  var hdr = document.createElement('div');
+  hdr.className = 'section-header';
 
   if (sec.name !== null) {
     var nameInput = document.createElement('input');
@@ -359,167 +386,224 @@ function makeSectionBlock(sec, si) {
       sec.name = nameInput.value;
       nameInput.classList.add('unsaved');
       markChanged();
-      // Rebuild all section dropdowns
-      updateSectionDropdowns();
+      refreshPanelSectionDropdown();
     });
-    headRow.appendChild(nameInput);
+    hdr.appendChild(nameInput);
+  }
 
+  var countEl = document.createElement('span');
+  countEl.className = 'section-photo-count';
+  countEl.textContent = sec.photos.length + ' photo' + (sec.photos.length===1?'':'s');
+  hdr.appendChild(countEl);
+
+  if (sec.name !== null) {
     var delSecBtn = document.createElement('button');
     delSecBtn.className = 'btn btn-danger btn-sm';
     delSecBtn.textContent = 'Remove section';
     delSecBtn.onclick = function() {
-      if (!confirm('Remove "' + sec.name + '" and all its photos?')) return;
+      if (!confirm('Remove "' + sec.name + '" and all its photos from this page?')) return;
       sections.splice(si, 1);
+      closePanel();
       renderEditor();
       markChanged();
     };
-    headRow.appendChild(delSecBtn);
-  } else {
-    var lbl = document.createElement('span');
-    lbl.style.cssText = 'font-size:.68rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase';
-    lbl.textContent = 'Photos';
-    headRow.appendChild(lbl);
+    hdr.appendChild(delSecBtn);
   }
-  block.appendChild(headRow);
+  block.appendChild(hdr);
 
-  // Photo rows
-  var photoList = document.createElement('div');
-  photoList.dataset.si = si;
+  // Photo grid
+  var grid = document.createElement('div');
+  grid.className = 'photo-grid-admin';
+  grid.dataset.si = si;
+
   sec.photos.forEach(function(photo, pi) {
-    photoList.appendChild(makePhotoRow(photo, si, pi, photoList));
+    grid.appendChild(makePhotoCard(photo, si, pi));
   });
-  block.appendChild(photoList);
 
+  // Add photo tile
+  var addTile = document.createElement('div');
+  addTile.className = 'add-photo-card';
+  addTile.innerHTML = '<span style="font-size:1.5rem;opacity:.4">+</span><span>Add photos</span>';
+  addTile.onclick = function() {
+    // Set target section for upload
+    window._uploadTargetSi = si;
+    document.getElementById('file-input').click();
+  };
+  grid.appendChild(addTile);
+
+  block.appendChild(grid);
   return block;
 }
 
-function makePhotoRow(photo, si, pi, listEl) {
-  var row = document.createElement('div');
-  row.className = 'photo-row';
-  row.draggable = true;
+function makePhotoCard(photo, si, pi) {
+  var card = document.createElement('div');
+  card.className = 'photo-card';
+  card.dataset.si = si;
+  card.dataset.pi = pi;
+  card.draggable = true;
 
-  // Drag handle
+  var img = document.createElement('img');
+  img.src = photo.src;
+  img.onerror = function() { img.classList.add('broken'); };
+  card.appendChild(img);
+
   var handle = document.createElement('span');
-  handle.className = 'drag-handle';
+  handle.className = 'drag-handle-card';
   handle.textContent = '⠿';
-  row.appendChild(handle);
+  handle.title = 'Drag to reorder';
+  card.appendChild(handle);
 
-  // Thumb
-  var thumb = document.createElement('img');
-  thumb.className = 'photo-thumb';
-  thumb.src = photo.src;
-  thumb.onerror = function() { thumb.classList.add('broken'); };
-  row.appendChild(thumb);
-
-  // Info: filename + caption
-  // Info block: section dropdown (top) + filename + caption
-  var info = document.createElement('div');
-  info.className = 'photo-info';
-
-  // Section dropdown - at top of info
-  var secSel = document.createElement('select');
-  secSel.className = 'section-select';
-  secSel.dataset.role = 'section-select';
-  rebuildSecDropdown(secSel, si);
-  secSel.addEventListener('change', function() {
-    var newSi = parseInt(secSel.value);
-    if (newSi === si) return;
-    sections[si].photos.splice(pi, 1);
-    sections[newSi].photos.push(photo);
-    renderEditor();
-    markChanged();
-  });
-
-  var fname = document.createElement('div');
-  fname.className = 'photo-filename';
-  fname.textContent = photo.src.split('/').pop();
   if (photo.isNew) {
-    var badge = document.createElement('span');
-    badge.className = 'new-badge';
+    var badge = document.createElement('div');
+    badge.className = 'card-new-badge';
     badge.textContent = 'New';
-    fname.appendChild(badge);
+    card.appendChild(badge);
   }
 
-  var cap = document.createElement('textarea');
-  cap.className = 'photo-caption-input';
-  cap.placeholder = 'Add caption…';
-  cap.value = photo.caption;
-  cap.rows = 2;
-  cap.addEventListener('input', function() {
-    photo.caption = cap.value;
-    cap.classList.add('unsaved');
-    markChanged();
-  });
-
-  info.appendChild(secSel);
-  info.appendChild(fname);
-  info.appendChild(cap);
-  row.appendChild(info);
-
-  // Delete button - far right
   var delBtn = document.createElement('button');
-  delBtn.className = 'del-btn';
+  delBtn.className = 'card-del';
   delBtn.title = 'Remove photo';
   delBtn.textContent = '✕';
-  delBtn.style.cssText = 'margin-left:auto;align-self:center;flex-shrink:0';
-  delBtn.onclick = function() {
+  delBtn.onclick = function(e) {
+    e.stopPropagation();
     if (!confirm('Remove this photo from the page?')) return;
     sections[si].photos.splice(pi, 1);
+    if (selectedCard && selectedCard.si===si && selectedCard.pi===pi) closePanel();
     renderEditor();
     markChanged();
   };
-  row.appendChild(delBtn);
+  card.appendChild(delBtn);
 
-  // Drag within same section
-  row.addEventListener('dragstart', function(e) {
-    e.dataTransfer.setData('text/plain', String(pi));
-    e.dataTransfer.effectAllowed = 'move';
-    setTimeout(function() { row.classList.add('dragging'); }, 0);
+  var capBar = document.createElement('div');
+  capBar.className = 'card-caption' + (photo.caption ? ' has-caption' : '');
+  capBar.textContent = photo.caption || 'tap to add caption…';
+  card.appendChild(capBar);
+
+  // Click to select / open panel
+  card.addEventListener('click', function(e) {
+    if (e.target === delBtn) return;
+    selectCard(si, pi, card);
   });
-  row.addEventListener('dragend', function() { row.classList.remove('dragging'); });
-  row.addEventListener('dragover', function(e) { e.preventDefault(); row.classList.add('drag-over'); });
-  row.addEventListener('dragleave', function() { row.classList.remove('drag-over'); });
-  row.addEventListener('drop', function(e) {
+
+  // Drag events (within grid reorder)
+  card.addEventListener('dragstart', function(e) {
+    dragState = {si:si, pi:pi};
+    e.dataTransfer.effectAllowed = 'move';
+    setTimeout(function(){ card.classList.add('dragging'); }, 0);
+    card.closest('.photo-grid-admin').classList.add('drag-active');
+  });
+  card.addEventListener('dragend', function() {
+    card.classList.remove('dragging');
+    card.closest('.photo-grid-admin') && card.closest('.photo-grid-admin').classList.remove('drag-active');
+    document.querySelectorAll('.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
+    dragState = null;
+  });
+  card.addEventListener('dragover', function(e) {
     e.preventDefault();
-    row.classList.remove('drag-over');
-    var srcPi = parseInt(e.dataTransfer.getData('text/plain'));
-    var dstPi = pi;
-    if (isNaN(srcPi) || srcPi === dstPi) return;
-    var moved = sections[si].photos.splice(srcPi, 1)[0];
-    sections[si].photos.splice(srcPi < dstPi ? dstPi - 1 : dstPi, 0, moved);
+    if (!dragState) return;
+    card.classList.add('drag-over');
+  });
+  card.addEventListener('dragleave', function() { card.classList.remove('drag-over'); });
+  card.addEventListener('drop', function(e) {
+    e.preventDefault();
+    card.classList.remove('drag-over');
+    if (!dragState) return;
+    var srcSi = dragState.si, srcPi = dragState.pi;
+    var dstSi = si, dstPi = pi;
+    if (srcSi===dstSi && srcPi===dstPi) return;
+
+    var moved = sections[srcSi].photos.splice(srcPi, 1)[0];
+    if (srcSi===dstSi) {
+      var adjDst = srcPi < dstPi ? dstPi-1 : dstPi;
+      sections[dstSi].photos.splice(adjDst, 0, moved);
+    } else {
+      sections[dstSi].photos.splice(dstPi, 0, moved);
+    }
+    closePanel();
     renderEditor();
     markChanged();
   });
 
-  return row;
+  return card;
 }
 
-function rebuildSecDropdown(sel, currentSi) {
+// ── SELECT CARD / PANEL ──────────────────────────────────────────
+function selectCard(si, pi, cardEl) {
+  // Deselect previous
+  document.querySelectorAll('.photo-card.selected').forEach(function(c){ c.classList.remove('selected'); });
+
+  if (selectedCard && selectedCard.si===si && selectedCard.pi===pi) {
+    // Toggle off
+    closePanel();
+    return;
+  }
+
+  selectedCard = {si:si, pi:pi};
+  cardEl.classList.add('selected');
+
+  var photo = sections[si].photos[pi];
+  var panel = document.getElementById('edit-panel');
+
+  document.getElementById('panel-thumb').src = photo.src;
+  document.getElementById('panel-filename').textContent = photo.src.split('/').pop();
+  document.getElementById('panel-caption').value = photo.caption || '';
+
+  // Build section dropdown
+  refreshPanelSectionDropdown();
+  document.getElementById('panel-section').value = si;
+
+  panel.classList.add('open');
+}
+
+function refreshPanelSectionDropdown() {
+  var sel = document.getElementById('panel-section');
+  var curVal = sel.value;
   sel.innerHTML = '';
   sections.forEach(function(s, i) {
     var opt = document.createElement('option');
     opt.value = i;
     opt.textContent = s.name || '(no heading)';
-    if (i === currentSi) opt.selected = true;
     sel.appendChild(opt);
   });
+  if (selectedCard) sel.value = selectedCard.si;
 }
 
-function updateSectionDropdowns() {
-  document.querySelectorAll('[data-role="section-select"]').forEach(function(sel) {
-    var curVal = sel.value;
-    sel.innerHTML = '';
-    sections.forEach(function(s, i) {
-      var opt = document.createElement('option');
-      opt.value = i;
-      opt.textContent = s.name || '(no heading)';
-      if (String(i) === curVal) opt.selected = true;
-      sel.appendChild(opt);
-    });
-  });
+function onPanelCaptionInput() {
+  if (!selectedCard) return;
+  var val = document.getElementById('panel-caption').value;
+  sections[selectedCard.si].photos[selectedCard.pi].caption = val;
+  // Update caption bar on card without full re-render
+  var card = document.querySelector('.photo-card.selected');
+  if (card) {
+    var capBar = card.querySelector('.card-caption');
+    if (capBar) {
+      capBar.textContent = val || 'tap to add caption…';
+      capBar.className = 'card-caption' + (val ? ' has-caption' : '');
+    }
+  }
+  markChanged();
 }
 
-// ── ADD SECTION ──────────────────────────────────────────────
+function onPanelSectionChange() {
+  if (!selectedCard) return;
+  var newSi = parseInt(document.getElementById('panel-section').value);
+  var oldSi = selectedCard.si;
+  if (newSi === oldSi) return;
+
+  var photo = sections[oldSi].photos.splice(selectedCard.pi, 1)[0];
+  sections[newSi].photos.push(photo);
+  closePanel();
+  renderEditor();
+  markChanged();
+}
+
+function closePanel() {
+  selectedCard = null;
+  document.querySelectorAll('.photo-card.selected').forEach(function(c){ c.classList.remove('selected'); });
+  document.getElementById('edit-panel').classList.remove('open');
+}
+
+// ── ADD SECTION ──────────────────────────────────────────────────
 function addSection() {
   var input = document.getElementById('new-section-input');
   var name = input.value.trim();
@@ -528,97 +612,103 @@ function addSection() {
   input.value = '';
   renderEditor();
   markChanged();
+  // Scroll to new section
+  var blocks = document.querySelectorAll('.section-block');
+  if (blocks.length) blocks[blocks.length-1].scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-// ── LIVE TOGGLE ──────────────────────────────────────────────
+// ── LIVE TOGGLE ──────────────────────────────────────────────────
 function renderLiveToggle(html) {
   var isPlanning = html.indexOf('badge-plan') >= 0;
   var cb = document.getElementById('live-toggle');
   cb.checked = !isPlanning;
-  document.getElementById('live-label').textContent = isPlanning ? 'Planning (hidden)' : 'Live ✓';
+  document.getElementById('live-label').textContent = isPlanning ? 'Planning (hidden from home)' : 'Live ✓';
 }
 
 async function toggleLive() {
   var isLive = document.getElementById('live-toggle').checked;
-  document.getElementById('live-label').textContent = isLive ? 'Live ✓' : 'Planning (hidden)';
+  document.getElementById('live-label').textContent = isLive ? 'Live ✓' : 'Planning (hidden from home)';
   try {
     var data = await ghGet('index.html');
     var html = decodeB64(data.content);
     if (isLive) {
       html = html.replace(/<span class="badge-plan">Planning<\/span>/g, '');
     } else {
-      // Find this trip's card and add badge if missing
       var re = new RegExp('(href="trips/' + currentTrip + '\\.html"[\\s\\S]*?class="thumb-name">)((?!.*badge-plan)[^<]*)(</div>)');
       html = html.replace(re, '$1$2<span class="badge-plan">Planning</span>$3');
     }
-    await ghPut('index.html', encodeB64(html), (isLive ? 'Mark live: ' : 'Mark planning: ') + currentTrip, data.sha);
+    await ghPut('index.html', encodeB64(html), (isLive?'Mark live: ':'Mark planning: ')+currentTrip, data.sha);
     showMsg(isLive ? 'Trip is now live on the homepage.' : 'Trip marked as Planning.', 'success');
-  } catch(e) {
-    showMsg('Error: ' + e.message, 'error');
-  }
+  } catch(e) { showMsg('Error: '+e.message, 'error'); }
 }
 
-// ── FILE UPLOAD ──────────────────────────────────────────────
+// ── FILE UPLOAD ──────────────────────────────────────────────────
 function onDragUpload(e, type) {
   e.preventDefault();
   var z = document.getElementById('upload-zone');
-  if (type === 'over') z.classList.add('over');
-  else if (type === 'leave') z.classList.remove('over');
+  if (type==='over') z.classList.add('over');
+  else if (type==='leave') z.classList.remove('over');
   else { z.classList.remove('over'); onFileSelect(e.dataTransfer.files); }
 }
 
 async function onFileSelect(fileList) {
-  var files = Array.from(fileList).filter(function(f) { return f.type.indexOf('image/') === 0; });
+  var files = Array.from(fileList).filter(function(f){ return f.type.indexOf('image/')===0; });
   if (!files.length) return;
   document.getElementById('file-input').value = '';
 
-  var folder = FOLDERS[currentTrip] || currentTrip;
-  var lastSec = sections.length > 0 ? sections[sections.length - 1] : null;
-  if (!lastSec) { sections.push({ name: null, photos: [] }); lastSec = sections[0]; }
+  // Determine target section
+  var targetSi = (window._uploadTargetSi !== undefined) ? window._uploadTargetSi : (sections.length > 0 ? sections.length-1 : -1);
+  window._uploadTargetSi = undefined;
 
-  for (var i = 0; i < files.length; i++) {
+  if (targetSi < 0 || !sections[targetSi]) {
+    sections.push({name:null, photos:[]});
+    targetSi = 0;
+  }
+
+  var folder = FOLDERS[currentTrip] || currentTrip;
+
+  for (var i=0; i<files.length; i++) {
     var f = files[i];
-    showMsg('Uploading ' + f.name + '…', '');
+    showMsg('Uploading ' + f.name + ' (' + (i+1) + '/' + files.length + ')…');
     try {
       var b64img = await toB64(f);
-      await ghPut('images/' + folder + '/' + f.name, b64img, 'Add ' + f.name, null);
-      lastSec.photos.push({ src: '/images/' + folder + '/' + f.name, caption: '', isNew: true });
-      showMsg('Uploaded: ' + f.name + ' — scroll down to see it', 'success');
+      await ghPut('images/'+folder+'/'+f.name, b64img, 'Add '+f.name, null);
+      sections[targetSi].photos.push({src:'/images/'+folder+'/'+f.name, caption:'', isNew:true});
     } catch(e) {
-      showMsg('Upload failed: ' + e.message, 'error');
+      showMsg('Upload failed: '+f.name+' — '+e.message, 'error');
     }
   }
   renderEditor();
   markChanged();
+  showMsg('Uploaded ' + files.length + ' photo' + (files.length===1?'':'s') + '. Scroll to see them.', 'success');
 }
 
-// ── SAVE ──────────────────────────────────────────────────────
+// ── SAVE ──────────────────────────────────────────────────────────
 async function saveChanges() {
   var btn = document.getElementById('save-btn');
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Saving…';
+  closePanel();
 
   try {
-    var data = await ghGet('trips/' + currentTrip + '.html');
-    currentSHA = data.sha;
-    var baseHTML = decodeB64(data.content);
+    // Always get fresh SHA before writing
+    var freshData = await ghGet('trips/'+currentTrip+'.html');
+    currentSHA = freshData.sha;
+    var baseHTML = decodeB64(freshData.content);
     var newHTML = buildHTML(baseHTML);
-    var res = await ghPut('trips/' + currentTrip + '.html', encodeB64(newHTML), 'Update ' + currentTrip, currentSHA);
+
+    var res = await ghPut('trips/'+currentTrip+'.html', encodeB64(newHTML), 'Update '+currentTrip, currentSHA);
     currentSHA = res.content.sha;
 
-    // Clear unsaved markers
-    document.querySelectorAll('.unsaved').forEach(function(el) { el.classList.remove('unsaved'); });
-    resetChanges();
-
-    // Reload sections from saved HTML to keep in sync
+    // Parse saved HTML back to keep state in sync
     sections = parseHTML(newHTML);
     renderEditor();
 
-    document.getElementById('save-status').style.display = 'block';
-    setTimeout(function() { document.getElementById('save-status').style.display = 'none'; }, 5000);
+    document.querySelectorAll('.unsaved').forEach(function(el){ el.classList.remove('unsaved'); });
+    resetChanges();
 
-    // Refresh preview if open
-    if (previewWin && !previewWin.closed) previewWin.location.reload();
+    document.getElementById('save-status').style.display = 'block';
+    setTimeout(function(){ document.getElementById('save-status').style.display='none'; }, 5000);
 
   } catch(e) {
     showMsg('Save error: ' + e.message, 'error');
@@ -628,27 +718,11 @@ async function saveChanges() {
   btn.innerHTML = 'Save &amp; Publish';
 }
 
-// ── BUILD HTML ──────────────────────────────────────────────
+// ── BUILD HTML ──────────────────────────────────────────────────
+// Strategy: replace everything between hero and footer
 function buildHTML(baseHTML) {
-  var doc = new DOMParser().parseFromString(baseHTML, 'text/html');
-
-  // Step 1: Remove all city headings
-  Array.from(doc.querySelectorAll('h2.city-name, h3.city-name')).forEach(function(el) { el.remove(); });
-
-  // Step 2: Remove all photo-grids entirely
-  Array.from(doc.querySelectorAll('.photo-grid')).forEach(function(el) { el.remove(); });
-
-  // Step 3: Remove any remaining bare content images and their captions
-  Array.from(doc.querySelectorAll('img')).forEach(function(el) {
-    if (el.classList.contains('hero-img')) return;
-    if (el.closest('.photo-grid')) return; // already removed above
-    var next = el.nextElementSibling;
-    if (next && (next.classList.contains('caption') || next.classList.contains('photo-caption'))) next.remove();
-    el.remove();
-  });
-
-  // Step 4: Build new content from sections
-  var newContent = '';
+  // Build new section HTML
+  var newContent = '\n';
   sections.forEach(function(sec) {
     if (sec.name) {
       newContent += '<h2 class="city-name">' + escHtml(sec.name) + '</h2>\n';
@@ -656,8 +730,9 @@ function buildHTML(baseHTML) {
     if (sec.photos.length > 0) {
       newContent += '<div class="photo-grid">\n';
       sec.photos.forEach(function(photo) {
+        var cap = escHtml(photo.caption || '');
         newContent += '<div class="photo-item">';
-        newContent += '<img src="' + photo.src + '" alt="' + escHtml(photo.caption || '') + '" loading="lazy">';
+        newContent += '<img src="' + photo.src + '" alt="' + cap + '" loading="lazy">';
         if (photo.caption) {
           newContent += '<p class="photo-caption">' + escHtml(photo.caption) + '</p>';
         }
@@ -667,53 +742,46 @@ function buildHTML(baseHTML) {
     }
   });
 
-  // Step 5: Find insertion point in the SERIALIZED HTML (not DOM)
-  // Serialize what we have after cleanup
-  var cleanHTML = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
+  // Find end of hero div (track nesting depth)
+  var heroTag = '<div class="hero">';
+  var heroStart = baseHTML.indexOf(heroTag);
+  var insertAfter = -1;
 
-  // Insert after the closing </div> of the .hero div
-  // Find it by locating the hero div and tracking nesting
-  var heroStart = cleanHTML.indexOf('<div class="hero">');
   if (heroStart >= 0) {
     var depth = 0;
     var i = heroStart;
-    while (i < cleanHTML.length) {
-      if (cleanHTML.slice(i, i+4) === '<div') depth++;
-      else if (cleanHTML.slice(i, i+6) === '</div>') {
+    while (i < baseHTML.length) {
+      if (baseHTML.substr(i,4) === '<div') depth++;
+      else if (baseHTML.substr(i,6) === '</div>') {
         depth--;
-        if (depth === 0) {
-          var insertAt = i + 6;
-          return cleanHTML.slice(0, insertAt) + '\n' + newContent + cleanHTML.slice(insertAt);
-        }
+        if (depth === 0) { insertAfter = i + 6; break; }
       }
       i++;
     }
   }
 
+  // Find start of footer
+  var footerStart = baseHTML.indexOf('<footer');
+  if (footerStart < 0) footerStart = baseHTML.indexOf('</body>');
+
+  if (insertAfter >= 0 && footerStart > insertAfter) {
+    // Replace the region between hero-end and footer-start
+    return baseHTML.slice(0, insertAfter) + newContent + baseHTML.slice(footerStart);
+  }
+
   // Fallback: insert before </body>
-  return cleanHTML.replace('</body>', newContent + '</body>');
+  return baseHTML.replace('</body>', newContent + '</body>');
 }
 
 function escHtml(str) {
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(str)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── VIEW BUTTON ──────────────────────────────────────────────
-document.getElementById('view-btn').addEventListener('click', function(e) {
-  e.preventDefault();
-  var url = '/trips/' + currentTrip + '.html';
-  if (previewWin && !previewWin.closed) {
-    previewWin.location.href = url;
-    previewWin.focus();
-  } else {
-    previewWin = window.open(url, 'brodies_preview');
-  }
-});
-
-// ── CHANGE TRACKING ──────────────────────────────────────────
+// ── CHANGE TRACKING ──────────────────────────────────────────────
 function markChanged() {
   changes++;
-  document.getElementById('changes-count').textContent = changes + ' unsaved change' + (changes === 1 ? '' : 's');
+  document.getElementById('changes-label').textContent = changes + ' unsaved change' + (changes===1?'':'s');
   document.getElementById('save-btn-wrap').style.display = 'flex';
   document.getElementById('save-status').style.display = 'none';
 }
@@ -722,21 +790,21 @@ function resetChanges() {
   document.getElementById('save-btn-wrap').style.display = 'none';
 }
 
-// ── HELPERS ──────────────────────────────────────────────────
+// ── HELPERS ──────────────────────────────────────────────────────
 async function ghGet(path) {
-  var res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
-    headers: { 'Authorization': 'token ' + T, 'Accept': 'application/vnd.github.v3+json' }
+  var res = await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path, {
+    headers:{'Authorization':'token '+T,'Accept':'application/vnd.github.v3+json'}
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }
 async function ghPut(path, content, message, sha) {
-  var body = { message: message, content: content };
+  var body = {message:message, content:content};
   if (sha) body.sha = sha;
-  var res = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + path, {
-    method: 'PUT',
-    headers: { 'Authorization': 'token ' + T, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
+  var res = await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path, {
+    method:'PUT',
+    headers:{'Authorization':'token '+T,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+    body:JSON.stringify(body)
   });
   if (!res.ok) throw new Error(await res.text());
   return res.json();
@@ -744,16 +812,16 @@ async function ghPut(path, content, message, sha) {
 function decodeB64(b64) { return decodeURIComponent(escape(atob(b64.split('\n').join('')))); }
 function encodeB64(str) { return btoa(unescape(encodeURIComponent(str))); }
 function toB64(file) {
-  return new Promise(function(res, rej) {
-    var r = new FileReader(); r.onload = function() { res(r.result.split(',')[1]); }; r.onerror = rej; r.readAsDataURL(file);
+  return new Promise(function(res,rej){
+    var r=new FileReader(); r.onload=function(){ res(r.result.split(',')[1]); }; r.onerror=rej; r.readAsDataURL(file);
   });
 }
 function showMsg(msg, cls) {
   var el = document.getElementById('page-msg');
-  el.textContent = msg; el.className = cls || ''; el.style.display = 'block';
-  if (cls === 'success') setTimeout(function() { el.style.display = 'none'; }, 4000);
+  el.textContent=msg; el.className=cls||''; el.style.display='block';
+  if (cls==='success') setTimeout(function(){ el.style.display='none'; }, 4000);
 }
-function hideMsg() { document.getElementById('page-msg').style.display = 'none'; }
+function hideMsg() { document.getElementById('page-msg').style.display='none'; }
 </script>
 </body>
 </html>
