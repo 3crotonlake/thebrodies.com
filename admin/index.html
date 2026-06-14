@@ -134,14 +134,6 @@ input:checked+.tog-track:before{transform:translateX(16px)}
     </div>
 
     <div id="toolbar">
-      <div class="upload-zone" id="drop-zone"
-        onclick="document.getElementById('file-inp').click()"
-        ondragover="ev.preventDefault();this.classList.add('over')"
-        ondragleave="this.classList.remove('over')"
-        ondrop="this.classList.remove('over');handleFiles(event.dataTransfer.files,null);event.preventDefault()">
-        <p>Drop photos here or click to browse</p>
-        <p style="font-size:.65rem;margin-top:.2rem;color:#bbb">Photos go to the last section unless you use the section's + tile</p>
-      </div>
       <input type="file" id="file-inp" multiple accept="image/*" onchange="handleFiles(this.files,null);this.value=''">
       <input class="sec-inp" id="sec-inp" placeholder="New section (e.g. Paris)…" onkeydown="if(event.key==='Enter')addSection()">
       <button class="btn-ghost" onclick="addSection()">+ Add Section</button>
@@ -244,7 +236,7 @@ async function loadTrip() {
   closePanel(); dirty = false; setSaveDirty(false);
 
   var url = '/trips/'+v+'.html';
-  document.getElementById('view-link').href = url;
+  document.getElementById('view-link').href = url+'?v='+Date.now();
   document.getElementById('view-link').style.display = 'inline';
   document.getElementById('editor').innerHTML = '<p style="padding:2rem;color:#aaa;font-size:.85rem">Loading…</p>';
   document.getElementById('status-row').style.display = 'none';
