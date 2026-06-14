@@ -3,859 +3,569 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Brodies — Admin</title>
+<title>Brodies Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;
-  --accent:#8b3a2a;--accent-light:#f3ebe9;--green:#2a6b3a;--green-light:#e9f3eb;
-  --red:#8b2a2a;--red-light:#f3e9e9;--blue:#2a4a8b;--blue-light:#e9eef3;
-}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;min-height:100vh}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Jost',sans-serif;background:#f9f7f3;color:#1a1a18;font-weight:300;min-height:100vh}
 
 /* LOGIN */
-#login-screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:2rem}
-#login-screen h1{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:600;letter-spacing:.05em}
-.login-box{display:flex;flex-direction:column;gap:1rem;width:320px}
-.login-box input{padding:.9rem 1.2rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:1rem;color:var(--ink)}
-.login-box input:focus{outline:2px solid var(--accent)}
-#login-error{color:var(--red);font-size:.8rem;text-align:center;display:none}
+#login{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1.5rem}
+#login h1{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;letter-spacing:.06em}
+#login input{padding:.8rem 1.2rem;border:1px solid #ddd;width:280px;font-family:'Jost',sans-serif;font-size:1rem}
+#login button{padding:.8rem 2rem;background:#1a1a18;color:#f9f7f3;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;width:280px}
+#login-err{color:#8b2a2a;font-size:.8rem;display:none}
 
-/* BUTTONS */
-.btn{padding:.65rem 1.4rem;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;transition:opacity .2s}
-.btn:hover{opacity:.8}.btn:disabled{opacity:.4;cursor:not-allowed}
-.btn-primary{background:var(--ink);color:var(--cream)}
-.btn-save{background:var(--accent);color:white;padding:.7rem 2rem;font-size:.75rem}
-.btn-danger{background:var(--red);color:white}
-.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted)}
-.btn-sm{padding:.4rem .8rem;font-size:.65rem}
-.btn-green{background:var(--green);color:white}
-
-/* APP SHELL */
+/* APP */
 #app{display:none}
-header{position:sticky;top:0;z-index:200;background:rgba(249,247,243,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.8rem 2rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
-header h1{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;margin-right:.5rem}
-#trip-select{padding:.5rem .8rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:.85rem;color:var(--ink);cursor:pointer;min-width:220px}
-.header-spacer{flex:1}
-#save-btn-wrap{display:flex;align-items:center;gap:.8rem}
-#changes-label{font-size:.75rem;color:var(--accent);white-space:nowrap}
-#save-status{font-size:.72rem;color:var(--green);display:none;white-space:nowrap}
-
-/* STATUS BAR */
-#status-bar{display:none;padding:.6rem 2rem;background:white;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
-.toggle-wrap{position:relative;width:38px;height:21px;flex-shrink:0}
-.toggle-wrap input{opacity:0;width:0;height:0;position:absolute}
-.toggle-track{position:absolute;inset:0;background:var(--border);border-radius:21px;cursor:pointer;transition:.25s}
-.toggle-track:before{content:'';position:absolute;width:15px;height:15px;left:3px;top:3px;background:white;border-radius:50%;transition:.25s}
-input:checked+.toggle-track{background:var(--green)}
-input:checked+.toggle-track:before{transform:translateX(17px)}
-.status-item{display:flex;align-items:center;gap:.6rem;font-size:.78rem}
+header{position:sticky;top:0;z-index:100;background:rgba(249,247,243,.96);backdrop-filter:blur(6px);border-bottom:1px solid #e0ddd8;padding:.7rem 1.5rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
+header h1{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
+#trip-sel{padding:.45rem .7rem;border:1px solid #ddd;background:white;font-family:'Jost',sans-serif;font-size:.85rem;min-width:200px;cursor:pointer}
+#hdr-right{margin-left:auto;display:flex;align-items:center;gap:.8rem}
+#save-btn{padding:.55rem 1.4rem;background:#8b3a2a;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.35;pointer-events:none}
+#save-btn.active{opacity:1;pointer-events:auto}
+#save-msg{font-size:.72rem;color:#2a6b3a;display:none;white-space:nowrap}
+#view-link{font-size:.72rem;color:#7a7a72;text-decoration:underline;display:none}
 
 /* MAIN */
-.main{max-width:1100px;margin:0 auto;padding:1.5rem 2rem 6rem}
-#page-msg{display:none;padding:.8rem 1.2rem;margin-bottom:1rem;font-size:.82rem;border-left:3px solid var(--accent);background:var(--accent-light)}
-#page-msg.success{border-color:var(--green);background:var(--green-light)}
-#page-msg.error{border-color:var(--red);background:var(--red-light)}
-#loading-msg{padding:3rem;text-align:center;color:var(--muted);font-size:.85rem;display:none}
+.wrap{max-width:1080px;margin:0 auto;padding:1.2rem 1.5rem 8rem}
+#status-row{display:none;align-items:center;gap:1rem;padding:.6rem 0;margin-bottom:1rem;border-bottom:1px solid #e0ddd8}
+.tog{position:relative;width:36px;height:20px}
+.tog input{opacity:0;width:0;height:0;position:absolute}
+.tog-track{position:absolute;inset:0;background:#ccc;border-radius:20px;cursor:pointer;transition:.2s}
+.tog-track:before{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:white;border-radius:50%;transition:.2s}
+input:checked+.tog-track{background:#2a6b3a}
+input:checked+.tog-track:before{transform:translateX(16px)}
+#live-lbl{font-size:.8rem;color:#7a7a72}
 
 /* TOOLBAR */
-#toolbar{display:none;margin-bottom:1.5rem;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
+#toolbar{display:none;margin-bottom:1.2rem;padding:.8rem;background:white;border:1px solid #e0ddd8;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
 #toolbar{display:none}
-.new-section-input{padding:.6rem .9rem;border:1px solid var(--border);background:white;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--ink);width:240px}
-.new-section-input:focus{outline:2px solid var(--accent)}
+.upload-zone{border:2px dashed #e0ddd8;padding:.8rem 1.2rem;text-align:center;cursor:pointer;flex:1;min-width:200px;transition:.2s}
+.upload-zone:hover,.upload-zone.over{border-color:#8b3a2a;background:#f3ebe9}
+.upload-zone p{font-size:.75rem;color:#7a7a72}
+#file-inp{display:none}
+.sec-inp{padding:.5rem .8rem;border:1px solid #ddd;font-family:'Cormorant Garamond',serif;font-size:1.1rem;flex:1;min-width:160px}
+.btn-ghost{padding:.5rem 1rem;border:1px solid #ddd;background:transparent;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#7a7a72;white-space:nowrap}
+.btn-ghost:hover{border-color:#8b3a2a;color:#8b3a2a}
 
-/* UPLOAD ZONE */
-#upload-zone{border:2px dashed var(--border);padding:1rem 1.5rem;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:1.5rem;display:none}
-#upload-zone:hover,#upload-zone.over{border-color:var(--accent);background:var(--accent-light)}
-#upload-zone p{font-size:.8rem;color:var(--muted);margin-bottom:.5rem}
-#file-input{display:none}
+/* NOTICE */
+#notice{display:none;padding:.6rem 1rem;font-size:.8rem;margin-bottom:1rem;border-left:3px solid #8b3a2a;background:#f3ebe9}
+#notice.ok{border-color:#2a6b3a;background:#e9f3eb}
+#notice.err{border-color:#8b2a2a;background:#f3e9e9}
 
 /* SECTIONS */
-.section-block{margin-bottom:2.5rem}
-.section-header{display:flex;align-items:center;gap:.8rem;padding:.5rem 0;border-bottom:2px solid var(--border);margin-bottom:1rem}
-.section-name-input{flex:1;border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:var(--ink);letter-spacing:.04em;min-width:0}
-.section-name-input:focus{outline:none;border-bottom:2px solid var(--accent)}
-.section-name-input.unsaved{color:var(--accent)}
-.section-photo-count{font-size:.7rem;color:var(--muted);letter-spacing:.08em;white-space:nowrap}
+.sec-block{margin-bottom:2rem}
+.sec-hdr{display:flex;align-items:center;gap:.8rem;border-bottom:2px solid #e0ddd8;padding-bottom:.4rem;margin-bottom:.8rem}
+.sec-name{flex:1;border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#1a1a18;letter-spacing:.03em}
+.sec-name:focus{outline:none;border-bottom:2px solid #8b3a2a}
+.sec-count{font-size:.68rem;color:#7a7a72;letter-spacing:.08em;white-space:nowrap}
+.btn-del-sec{padding:.35rem .8rem;background:#8b2a2a;color:white;border:none;cursor:pointer;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 
-/* PHOTO GRID */
-.photo-grid-admin{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px;min-height:60px}
-.photo-grid-admin.drag-active .photo-card:not(.dragging){border:2px dashed var(--border)}
+/* GRID */
+.photo-grid-admin{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:6px}
+.add-tile{border:2px dashed #e0ddd8;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:#aaa;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;gap:.3rem;transition:.2s}
+.add-tile:hover{border-color:#8b3a2a;color:#8b3a2a;background:#f3ebe9}
+.add-tile span.plus{font-size:1.8rem;font-weight:300;opacity:.5}
 
 /* PHOTO CARD */
-.photo-card{position:relative;cursor:pointer;background:white;border:2px solid transparent;transition:border-color .15s}
-.photo-card:hover{border-color:var(--accent)}
-.photo-card.selected{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
-.photo-card.dragging{opacity:.3}
-.photo-card.drag-over{border-color:var(--blue)!important;border-style:dashed!important}
-.photo-card img{width:100%;height:120px;object-fit:cover;display:block}
-.photo-card img.broken{opacity:.3;filter:grayscale(1)}
-.card-caption{font-size:.65rem;color:var(--muted);padding:3px 5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;height:22px;background:#faf9f7}
-.card-caption.has-caption{color:var(--ink)}
-.card-new-badge{position:absolute;top:4px;left:4px;background:var(--green);color:white;font-size:.5rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 5px}
-.card-del{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.55);color:white;border:none;cursor:pointer;font-size:.75rem;width:20px;height:20px;display:none;align-items:center;justify-content:center;border-radius:2px}
-.photo-card:hover .card-del{display:flex}
-.drag-handle-card{position:absolute;bottom:24px;left:3px;color:rgba(255,255,255,.7);font-size:.9rem;cursor:grab;text-shadow:0 1px 2px rgba(0,0,0,.5);user-select:none}
+.pcard{position:relative;cursor:pointer;border:2px solid transparent;transition:border-color .15s;background:white}
+.pcard:hover{border-color:#8b3a2a}
+.pcard.sel{border-color:#8b3a2a;box-shadow:0 0 0 2px #8b3a2a}
+.pcard.dragging{opacity:.25}
+.pcard.dragover{border-color:#2a4a8b!important;border-style:dashed!important}
+.pcard img{width:100%;height:115px;object-fit:cover;display:block}
+.pcard img.err{opacity:.2;filter:grayscale(1)}
+.cap-bar{font-size:.62rem;padding:3px 5px;height:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;background:#faf9f7;color:#aaa}
+.cap-bar.has{color:#1a1a18}
+.drag-dot{position:absolute;bottom:22px;left:3px;color:rgba(255,255,255,.75);font-size:.85rem;cursor:grab;user-select:none;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.del-btn{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.55);color:white;border:none;cursor:pointer;width:20px;height:20px;font-size:.75rem;display:none;align-items:center;justify-content:center;border-radius:2px}
+.pcard:hover .del-btn{display:flex}
+.new-badge{position:absolute;top:3px;left:3px;background:#2a6b3a;color:white;font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;padding:2px 4px}
 
 /* EDIT PANEL */
-#edit-panel{position:fixed;bottom:0;left:0;right:0;z-index:300;background:white;border-top:2px solid var(--accent);padding:1rem 2rem;display:none;align-items:flex-start;gap:1.5rem;box-shadow:0 -4px 20px rgba(0,0,0,.1);flex-wrap:wrap}
-#edit-panel.open{display:flex}
-#panel-thumb{width:80px;height:64px;object-fit:cover;flex-shrink:0;border:1px solid var(--border)}
-#panel-filename{font-size:.6rem;color:var(--muted);margin-top:3px;max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.panel-field{display:flex;flex-direction:column;gap:.3rem;flex:1;min-width:200px}
-.panel-label{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-#panel-caption{width:100%;padding:.5rem .7rem;border:1px solid var(--border);font-family:'Jost',sans-serif;font-size:.85rem;color:var(--ink);resize:none;height:38px;background:var(--cream)}
-#panel-caption:focus{outline:2px solid var(--accent);background:white}
-#panel-section{padding:.5rem .7rem;border:1px solid var(--border);background:white;font-family:'Jost',sans-serif;font-size:.85rem;color:var(--ink);cursor:pointer;width:100%}
-#panel-close{background:none;border:none;cursor:pointer;font-size:1.3rem;color:var(--muted);flex-shrink:0;align-self:flex-start;margin-left:auto;padding:.2rem}
-#panel-close:hover{color:var(--ink)}
-#panel-note{font-size:.72rem;color:var(--muted);align-self:center}
+#panel{position:fixed;bottom:0;left:0;right:0;z-index:200;background:white;border-top:2px solid #8b3a2a;padding:.9rem 1.5rem;display:none;align-items:center;gap:1.2rem;box-shadow:0 -4px 18px rgba(0,0,0,.1);flex-wrap:wrap}
+#panel.open{display:flex}
+#panel-img{width:72px;height:58px;object-fit:cover;border:1px solid #ddd;flex-shrink:0}
+#panel-file{font-size:.58rem;color:#aaa;margin-top:2px;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pf{display:flex;flex-direction:column;gap:.25rem}
+.pf label{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#aaa}
+#panel-sec{padding:.4rem .6rem;border:1px solid #ddd;background:white;font-family:'Jost',sans-serif;font-size:.82rem;cursor:pointer;min-width:150px}
+#panel-cap{padding:.4rem .6rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.82rem;resize:none;height:34px;width:320px;background:#f9f7f3}
+#panel-cap:focus,#panel-sec:focus{outline:2px solid #8b3a2a;background:white}
+#panel-close{background:none;border:none;cursor:pointer;font-size:1.4rem;color:#aaa;margin-left:auto;align-self:flex-start}
+#panel-close:hover{color:#1a1a18}
 
-/* ADD PHOTO PLACEHOLDER */
-.add-photo-card{border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;height:144px;cursor:pointer;transition:all .2s;color:var(--muted);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;flex-direction:column;gap:.4rem}
-.add-photo-card:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
-
-.spinner{display:inline-block;width:12px;height:12px;border:2px solid rgba(0,0,0,.15);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:5px}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-.empty-section{font-size:.75rem;color:var(--muted);font-style:italic;padding:.5rem;letter-spacing:.05em}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:sp .6s linear infinite;vertical-align:middle;margin-right:4px}
+@keyframes sp{to{transform:rotate(360deg)}}
 </style>
 </head>
 <body>
 
-<div id="login-screen">
-  <div style="text-align:center">
-    <h1>The Brodies</h1>
-    <p style="margin-top:.4rem;font-size:.8rem;letter-spacing:.08em;color:#7a7a72">Site Admin</p>
-  </div>
-  <div class="login-box">
-    <input type="password" id="password-input" placeholder="Password">
-    <button class="btn btn-primary" onclick="login()" style="padding:.9rem">Enter</button>
-    <div id="login-error">Incorrect password</div>
-  </div>
+<!-- LOGIN -->
+<div id="login">
+  <h1>The Brodies</h1>
+  <p style="font-size:.75rem;letter-spacing:.1em;color:#7a7a72;text-transform:uppercase">Site Admin</p>
+  <input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+  <button onclick="doLogin()">Enter</button>
+  <div id="login-err">Incorrect password</div>
 </div>
 
+<!-- APP -->
 <div id="app">
   <header>
     <h1>Brodies Admin</h1>
-    <select id="trip-select" onchange="loadTrip()">
+    <select id="trip-sel" onchange="loadTrip()">
       <option value="">— Select a trip —</option>
     </select>
-    <div class="header-spacer"></div>
-    <a id="view-btn" href="#" target="_blank" style="display:none" class="btn btn-ghost btn-sm">View page ↗</a>
-    <div id="save-btn-wrap">
-      <span id="changes-label"></span>
-      <button class="btn btn-save" id="save-btn" onclick="saveChanges()" disabled style="opacity:.35;cursor:not-allowed">Save &amp; Publish</button>
+    <div id="hdr-right">
+      <a id="view-link" href="#" target="_blank">View live ↗</a>
+      <span id="save-msg">✓ Published</span>
+      <button id="save-btn" onclick="doSave()">Save &amp; Publish</button>
     </div>
-    <span id="save-status">✓ Saved — live in ~1 min</span>
   </header>
 
-  <div id="status-bar">
-    <div class="status-item">
-      <span style="font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)">Status:</span>
-      <label class="toggle-wrap">
-        <input type="checkbox" id="live-toggle" onchange="toggleLive()">
-        <span class="toggle-track"></span>
-      </label>
-      <span id="live-label" style="font-size:.78rem;color:var(--muted)">Planning</span>
+  <div class="wrap">
+    <div id="notice"></div>
+
+    <div id="status-row">
+      <label class="tog"><input type="checkbox" id="live-tog" onchange="toggleLive()"><span class="tog-track"></span></label>
+      <span id="live-lbl">Planning</span>
     </div>
-    <a id="view-btn2" href="#" target="_blank" style="font-size:.72rem;color:var(--muted);text-decoration:underline;display:none">View live page ↗</a>
-  </div>
 
-  <div class="main">
-    <div id="page-msg"></div>
-    <div id="loading-msg">Loading trip…</div>
-    <div id="trip-editor" style="display:none">
-
-      <!-- Toolbar: upload + add section -->
-      <div id="toolbar">
-        <div id="upload-zone" onclick="document.getElementById('file-input').click()"
-             ondragover="onDragUpload(event,'over')" ondragleave="onDragUpload(event,'leave')" ondrop="onDragUpload(event,'drop')">
-          <p>Drop photos here or click to browse</p>
-          <button class="btn btn-ghost btn-sm" onclick="event.stopPropagation();document.getElementById('file-input').click()">Choose Photos</button>
-        </div>
-        <input type="file" id="file-input" multiple accept="image/*" onchange="onFileSelect(event.target.files)">
-
-        <div style="display:flex;gap:.6rem;align-items:center">
-          <input class="new-section-input" id="new-section-input" placeholder="New section name (e.g. Paris)…" onkeydown="if(event.key==='Enter')addSection()">
-          <button class="btn btn-ghost btn-sm" onclick="addSection()">+ Add Section</button>
-        </div>
+    <div id="toolbar">
+      <div class="upload-zone" id="drop-zone"
+        onclick="document.getElementById('file-inp').click()"
+        ondragover="ev.preventDefault();this.classList.add('over')"
+        ondragleave="this.classList.remove('over')"
+        ondrop="this.classList.remove('over');handleFiles(event.dataTransfer.files,null);event.preventDefault()">
+        <p>Drop photos here or click to browse</p>
+        <p style="font-size:.65rem;margin-top:.2rem;color:#bbb">Photos go to the last section unless you use the section's + tile</p>
       </div>
-
-      <!-- Sections rendered here -->
-      <div id="editor-body"></div>
+      <input type="file" id="file-inp" multiple accept="image/*" onchange="handleFiles(this.files,null);this.value=''">
+      <input class="sec-inp" id="sec-inp" placeholder="New section (e.g. Paris)…" onkeydown="if(event.key==='Enter')addSection()">
+      <button class="btn-ghost" onclick="addSection()">+ Add Section</button>
     </div>
+
+    <div id="editor"></div>
   </div>
 </div>
 
-<!-- Edit panel (bottom drawer) -->
-<div id="edit-panel">
-  <div style="flex-shrink:0;text-align:center">
-    <img id="panel-thumb" src="" alt="">
-    <div id="panel-filename"></div>
+<!-- EDIT PANEL -->
+<div id="panel">
+  <div style="flex-shrink:0">
+    <img id="panel-img" src="" alt="">
+    <div id="panel-file"></div>
   </div>
-  <div class="panel-field" style="min-width:160px;max-width:220px">
-    <label class="panel-label">Move to section</label>
-    <select id="panel-section" onchange="onPanelSectionChange()"></select>
+  <div class="pf">
+    <label>Section</label>
+    <select id="panel-sec" onchange="panelSecChange()"></select>
   </div>
-  <div class="panel-field">
-    <label class="panel-label">Caption / Note</label>
-    <textarea id="panel-caption" placeholder="Add a caption or note…" oninput="onPanelCaptionInput()"></textarea>
+  <div class="pf">
+    <label>Caption / Note</label>
+    <textarea id="panel-cap" placeholder="Add a caption…" oninput="panelCapInput()"></textarea>
   </div>
   <button id="panel-close" onclick="closePanel()">×</button>
 </div>
 
 <script>
+// ── CONFIG ────────────────────────────────────────────────────────
 var REPO = '3crotonlake/thebrodies.com';
-var PW = '10520';
-var T = ['ghp_D7r6L','55hqPWTQk','SD1M3FWAY','zALQj773Cq4hq'].join('');
-
-// State
-var currentTrip = null;
-var currentSHA = '';
-var sections = [];   // [{name:string, photos:[{src,caption,isNew}]}]
-var changes = 0;
-var selectedCard = null;  // {si, pi} of selected photo
-var dragState = null;
+var PW   = '10520';
+var TOK  = ['ghp_D7r6L5','5hqPWTQkSD','1M3FWAYzAL','Qj773Cq4hq'].join('');
+var HOOK = 'https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/2a328602-f7bb-476d-9cd3-7b07d570bad7';
 
 var TRIPS = [
-  {v:'iceland-2026',      l:'Iceland 2026 (Girls Trip)',               y:2026},
-  {v:'memphis-2026',      l:'Memphis 2026',                            y:2026},
-  {v:'edinburgh-york-london-2026', l:'Edinburgh / York / London 2026', y:2026},
-  {v:'oxford-2026',       l:'Oxford 2026',                             y:2026},
-  {v:'london-oxford-paris-2025',   l:'London / Oxford / Paris 2025',   y:2025},
-  {v:'switzerland-sweden-2025',    l:'Switzerland & Sweden 2025',      y:2025},
-  {v:'utah-2025',         l:'Utah 2025 (Mighty 5)',                    y:2025},
-  {v:'florence-rome-2025',l:'Florence / Rome 2025',                    y:2025},
-  {v:'charleston-2025',   l:'Charleston 2025',                         y:2025},
-  {v:'belize-2025',       l:'Belize 2025',                             y:2025},
-  {v:'cambodia-2024',     l:'Cambodia 2024',                           y:2024},
-  {v:'ireland-2024',      l:'Ireland 2024',                            y:2024},
-  {v:'mont-tremblant-2024',l:'Mont Tremblant 2024',                   y:2024},
-  {v:'sedona-2023',       l:'Sedona & Grand Canyon 2023',              y:2023},
-  {v:'puerto-rico-2023',  l:'Puerto Rico 2023',                        y:2023},
-  {v:'thailand-cambodia-2023', l:'Thailand & Cambodia 2023',           y:2023},
-  {v:'london-2022',       l:'London 2022',                             y:2022},
-  {v:'spain-portugal-2022',l:'Spain & Portugal 2022',                  y:2022},
-  {v:'acadia-2021',       l:'Acadia 2021',                             y:2021},
-  {v:'spain-2019',        l:'Spain 2019',                              y:2019}
+  {v:'london-oxford-paris-2025',   l:'London / Oxford / Paris 2025',   f:'2025_london-oxford-paris'},
+  {v:'edinburgh-york-london-2026', l:'Edinburgh / York / London 2026',  f:'2026_edinburgh'},
+  {v:'iceland-2026',               l:'Iceland 2026 (Girls Trip)',       f:'2026_iceland'},
+  {v:'memphis-2026',               l:'Memphis 2026',                    f:'2026_Memphis'},
+  {v:'oxford-2026',                l:'Oxford 2026',                     f:'2026_oxford'},
+  {v:'switzerland-sweden-2025',    l:'Switzerland & Sweden 2025',       f:'2025_switzerland-sweden'},
+  {v:'utah-2025',                  l:'Utah 2025 (Mighty 5)',            f:'2025_utah'},
+  {v:'florence-rome-2025',         l:'Florence / Rome 2025',            f:'2025_FlorenceRome'},
+  {v:'charleston-2025',            l:'Charleston 2025',                 f:'2025_charleston'},
+  {v:'belize-2025',                l:'Belize 2025',                     f:'2025_Belize'},
+  {v:'cambodia-2024',              l:'Cambodia 2024',                   f:'2024_cambodia'},
+  {v:'ireland-2024',               l:'Ireland 2024',                    f:'2024_ireland'},
+  {v:'mont-tremblant-2024',        l:'Mont Tremblant 2024',             f:'2024_MontTremblant'},
+  {v:'sedona-2023',                l:'Sedona & Grand Canyon 2023',      f:'2023_sedona'},
+  {v:'puerto-rico-2023',           l:'Puerto Rico 2023',                f:'2023_PuertoRico'},
+  {v:'thailand-cambodia-2023',     l:'Thailand & Cambodia 2023',        f:'2023_thailand-cambodia'},
+  {v:'london-2022',                l:'London 2022',                     f:'2022_london'},
+  {v:'spain-portugal-2022',        l:'Spain & Portugal 2022',           f:'2022_spain-portugal'},
+  {v:'acadia-2021',                l:'Acadia 2021',                     f:'2021_acadia'},
+  {v:'spain-2019',                 l:'Spain 2019',                      f:'2019_spain'}
 ];
 
-var FOLDERS = {
-  'iceland-2026':'2026_iceland','memphis-2026':'2026_Memphis',
-  'edinburgh-york-london-2026':'2026_edinburgh','oxford-2026':'2026_oxford',
-  'london-oxford-paris-2025':'2025_london-oxford-paris',
-  'switzerland-sweden-2025':'2025_switzerland-sweden','utah-2025':'2025_utah',
-  'florence-rome-2025':'2025_FlorenceRome','charleston-2025':'2025_charleston',
-  'belize-2025':'2025_Belize','cambodia-2024':'2024_cambodia','ireland-2024':'2024_ireland',
-  'mont-tremblant-2024':'2024_MontTremblant','sedona-2023':'2023_sedona',
-  'puerto-rico-2023':'2023_PuertoRico','thailand-cambodia-2023':'2023_thailand-cambodia',
-  'london-2022':'2022_london','spain-portugal-2022':'2022_spain-portugal',
-  'acadia-2021':'2021_acadia','spain-2019':'2019_spain'
-};
+// ── STATE ─────────────────────────────────────────────────────────
+var trip = null, tripFolder = null, tripSHA = '', tripHTML = '';
+var sections = []; // [{name, photos:[{src,caption,isNew}]}]
+var dirty = false;
+var sel = null; // {si,pi} selected card
+var drag = null;
 
-// ── SESSION ──────────────────────────────────────────────────
-window.addEventListener('load', function() {
+// ── BOOT ──────────────────────────────────────────────────────────
+window.onload = function() {
   buildDropdown();
-  if (localStorage.getItem('brodies_auth') === 'ok') {
+  if (localStorage.getItem('ba') === '1') {
     showApp();
-    var lastTrip = localStorage.getItem('brodies_last_trip');
-    if (lastTrip) {
-      var sel = document.getElementById('trip-select');
-      sel.value = lastTrip;
-      if (sel.value === lastTrip) loadTrip();
-    }
+    var lt = localStorage.getItem('bt');
+    if (lt) { document.getElementById('trip-sel').value = lt; if (document.getElementById('trip-sel').value === lt) loadTrip(); }
   }
-});
-function showApp() {
-  document.getElementById('login-screen').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-}
-function login() {
-  if (document.getElementById('password-input').value === PW) {
-    localStorage.setItem('brodies_auth', 'ok');
-    showApp();
-  } else {
-    document.getElementById('login-error').style.display = 'block';
-  }
-}
-window.addEventListener('beforeunload', function(e) {
-  if (changes > 0) {
-    e.preventDefault();
-    e.returnValue = 'You have unsaved changes. Save & Publish before leaving.';
-  }
-});
-document.getElementById('password-input').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') login();
-});
+};
+window.onbeforeunload = function() { if (dirty) return 'Unsaved changes — Save & Publish first.'; };
 
-// ── DROPDOWN ──────────────────────────────────────────────────
 function buildDropdown() {
-  var sel = document.getElementById('trip-select');
-  var sorted = TRIPS.slice().sort(function(a,b){ return b.y-a.y || a.l.localeCompare(b.l); });
-  sel.innerHTML = '<option value="">— Select a trip —</option>';
-  sorted.forEach(function(t) {
-    var o = document.createElement('option');
-    o.value = t.v; o.textContent = t.l;
-    sel.appendChild(o);
+  var s = document.getElementById('trip-sel');
+  TRIPS.forEach(function(t) {
+    var o = document.createElement('option'); o.value = t.v; o.textContent = t.l; s.appendChild(o);
   });
 }
 
-// ── LOAD TRIP ──────────────────────────────────────────────────
-async function loadTrip() {
-  var sel = document.getElementById('trip-select');
-  currentTrip = sel.value;
-  closePanel();
-  if (!currentTrip) return;
-
-  localStorage.setItem('brodies_last_trip', currentTrip);
-  var url = '/trips/' + currentTrip + '.html';
-  document.getElementById('view-btn').href = url;
-  document.getElementById('view-btn').style.display = 'block';
-  document.getElementById('view-btn2').href = url;
-  document.getElementById('view-btn2').style.display = 'inline';
-  document.getElementById('trip-editor').style.display = 'none';
-  document.getElementById('loading-msg').style.display = 'block';
-  document.getElementById('status-bar').style.display = 'none';
-  hideMsg(); resetChanges();
-
-  try {
-    var data = await ghGet('trips/' + currentTrip + '.html');
-    currentSHA = data.sha;
-    var html = decodeB64(data.content);
-    sections = parseHTML(html);
-    renderEditor();
-    renderLiveToggle(html);
-    document.getElementById('loading-msg').style.display = 'none';
-    document.getElementById('trip-editor').style.display = 'block';
-    document.getElementById('status-bar').style.display = 'flex';
-    document.getElementById('toolbar').style.display = 'flex';
-    document.getElementById('upload-zone').style.display = 'block';
-  } catch(e) {
-    showMsg('Could not load: ' + e.message, 'error');
-    document.getElementById('loading-msg').style.display = 'none';
-  }
+function doLogin() {
+  if (document.getElementById('pw').value === PW) {
+    localStorage.setItem('ba','1'); showApp();
+  } else { document.getElementById('login-err').style.display='block'; }
+}
+function showApp() {
+  document.getElementById('login').style.display='none';
+  document.getElementById('app').style.display='block';
 }
 
-// ── PARSE HTML ──────────────────────────────────────────────────
-// Robust parser: scan ALL elements in document order
+// ── LOAD TRIP ─────────────────────────────────────────────────────
+async function loadTrip() {
+  var v = document.getElementById('trip-sel').value;
+  if (!v) return;
+  trip = v;
+  var info = TRIPS.find(function(t){return t.v===v;});
+  tripFolder = info ? info.f : v;
+  localStorage.setItem('bt', v);
+  closePanel(); dirty = false; setSaveDirty(false);
+
+  var url = '/trips/'+v+'.html';
+  document.getElementById('view-link').href = url;
+  document.getElementById('view-link').style.display = 'inline';
+  document.getElementById('editor').innerHTML = '<p style="padding:2rem;color:#aaa;font-size:.85rem">Loading…</p>';
+  document.getElementById('status-row').style.display = 'none';
+  document.getElementById('toolbar').style.display = 'none';
+  hideNotice();
+
+  try {
+    var d = await ghGet('trips/'+v+'.html');
+    tripSHA = d.sha;
+    tripHTML = atob64(d.content);
+    sections = parseHTML(tripHTML);
+    render();
+    setLiveToggle(tripHTML);
+    document.getElementById('status-row').style.display = 'flex';
+    document.getElementById('toolbar').style.display = 'flex';
+  } catch(e) { showNotice('Could not load trip: '+e.message, 'err'); document.getElementById('editor').innerHTML=''; }
+}
+
+// ── PARSE HTML ────────────────────────────────────────────────────
 function parseHTML(html) {
-  var doc = new DOMParser().parseFromString(html, 'text/html');
-  var result = [];
-  var current = null;
-
-  // Flatten all elements in document order
-  var all = Array.from(doc.body.querySelectorAll('*'));
-  all.forEach(function(el) {
-    var tag = el.tagName;
-    // Skip nav, header, footer, script, style
-    if (['NAV','SCRIPT','STYLE','FOOTER','HEADER'].indexOf(tag) >= 0) return;
-    if (el.closest('nav,header,footer,script,style')) return;
-
-    if ((tag==='H2'||tag==='H3') && el.classList.contains('city-name')) {
-      current = { name: el.textContent.trim(), photos: [] };
-      result.push(current);
-      return;
-    }
-    if (tag==='DIV' && el.classList.contains('photo-grid')) {
-      if (!current) { current={name:null,photos:[]}; result.push(current); }
+  var doc = new DOMParser().parseFromString(html,'text/html');
+  var result = [], cur = null;
+  doc.body.querySelectorAll('h2.city-name, div.photo-grid').forEach(function(el) {
+    if (el.tagName==='H2') {
+      cur = {name:el.textContent.trim(), photos:[]};
+      result.push(cur);
+    } else if (el.tagName==='DIV') {
+      if (!cur) { cur={name:null,photos:[]}; result.push(cur); }
       el.querySelectorAll('.photo-item').forEach(function(item) {
         var img = item.querySelector('img');
-        if (!img) return;
-        var src = img.getAttribute('src');
-        if (!src) return;
-        var capEl = item.querySelector('p.photo-caption,p.caption,figcaption');
+        if (!img||!img.getAttribute('src')) return;
+        var capEl = item.querySelector('p.photo-caption,figcaption');
         var cap = capEl ? capEl.textContent.trim() : (img.getAttribute('alt')||'');
-        current.photos.push({src:src, caption:cap, isNew:false});
+        cur.photos.push({src:img.getAttribute('src'), caption:cap, isNew:false});
       });
     }
   });
   return result;
 }
 
-// ── RENDER EDITOR ──────────────────────────────────────────────
-function renderEditor() {
-  var body = document.getElementById('editor-body');
-  body.innerHTML = '';
-  sections.forEach(function(sec, si) {
-    body.appendChild(makeSectionBlock(sec, si));
+// ── BUILD HTML ────────────────────────────────────────────────────
+function buildHTML() {
+  var body = '';
+  sections.forEach(function(sec) {
+    if (sec.name) body += '<h2 class="city-name">'+esc(sec.name)+'</h2>\n';
+    if (sec.photos.length) {
+      body += '<div class="photo-grid">\n';
+      sec.photos.forEach(function(p) {
+        body += '<div class="photo-item"><img src="'+p.src+'" alt="'+esc(p.caption)+'" loading="lazy">';
+        if (p.caption) body += '<p class="photo-caption">'+esc(p.caption)+'</p>';
+        body += '</div>\n';
+      });
+      body += '</div>\n';
+    }
   });
+
+  // Find end of hero div (depth tracking)
+  var heroStart = tripHTML.indexOf('<div class="hero">');
+  var pos = heroStart, depth = 0, heroEnd = -1;
+  while (pos < tripHTML.length && heroEnd < 0) {
+    if (tripHTML.substr(pos,4)==='<div') depth++;
+    else if (tripHTML.substr(pos,6)==='</div>') { depth--; if(depth===0) heroEnd = pos+6; }
+    pos++;
+  }
+  var footerStart = tripHTML.indexOf('<footer');
+  if (footerStart < 0) footerStart = tripHTML.indexOf('</body>');
+
+  if (heroEnd > 0 && footerStart > heroEnd) {
+    return tripHTML.slice(0,heroEnd) + '\n' + body + tripHTML.slice(footerStart);
+  }
+  return tripHTML.replace('</body>', body+'</body>');
 }
 
-function makeSectionBlock(sec, si) {
+// ── RENDER ────────────────────────────────────────────────────────
+function render() {
+  var ed = document.getElementById('editor');
+  ed.innerHTML = '';
+  sections.forEach(function(sec,si) { ed.appendChild(makeSection(sec,si)); });
+}
+
+function makeSection(sec,si) {
   var block = document.createElement('div');
-  block.className = 'section-block';
-  block.dataset.si = si;
+  block.className = 'sec-block';
 
-  // Header row
-  var hdr = document.createElement('div');
-  hdr.className = 'section-header';
-
+  var hdr = document.createElement('div'); hdr.className = 'sec-hdr';
   if (sec.name !== null) {
-    var nameInput = document.createElement('input');
-    nameInput.className = 'section-name-input';
-    nameInput.value = sec.name;
-    nameInput.placeholder = 'Section name…';
-    nameInput.addEventListener('input', function() {
-      sec.name = nameInput.value;
-      nameInput.classList.add('unsaved');
-      markChanged();
-      refreshPanelSectionDropdown();
-    });
-    hdr.appendChild(nameInput);
+    var ni = document.createElement('input'); ni.className='sec-name'; ni.value=sec.name; ni.placeholder='Section name…';
+    ni.oninput = function(){ sec.name=ni.value; setSaveDirty(true); rebuildPanelSecs(); };
+    hdr.appendChild(ni);
   }
-
-  var countEl = document.createElement('span');
-  countEl.className = 'section-photo-count';
-  countEl.textContent = sec.photos.length + ' photo' + (sec.photos.length===1?'':'s');
-  hdr.appendChild(countEl);
+  var ct = document.createElement('span'); ct.className='sec-count'; ct.textContent=sec.photos.length+' photo'+(sec.photos.length===1?'':'s');
+  hdr.appendChild(ct);
 
   if (sec.name !== null) {
-    var delSecBtn = document.createElement('button');
-    delSecBtn.className = 'btn btn-danger btn-sm';
-    delSecBtn.textContent = 'Remove section';
-    delSecBtn.onclick = function() {
-      if (!confirm('Remove "' + sec.name + '" and all its photos from this page?')) return;
-      sections.splice(si, 1);
-      closePanel();
-      renderEditor();
-      markChanged();
+    var db = document.createElement('button'); db.className='btn-del-sec'; db.textContent='Remove section';
+    db.onclick = function() {
+      if (!confirm('Remove "'+sec.name+'" and all its photos?')) return;
+      sections.splice(si,1); closePanel(); render(); setSaveDirty(true);
     };
-    hdr.appendChild(delSecBtn);
+    hdr.appendChild(db);
   }
   block.appendChild(hdr);
 
-  // Photo grid
-  var grid = document.createElement('div');
-  grid.className = 'photo-grid-admin';
-  grid.dataset.si = si;
+  var grid = document.createElement('div'); grid.className='photo-grid-admin';
+  sec.photos.forEach(function(p,pi) { grid.appendChild(makeCard(p,si,pi)); });
 
-  sec.photos.forEach(function(photo, pi) {
-    grid.appendChild(makePhotoCard(photo, si, pi));
-  });
-
-  // Add photo tile
-  var addTile = document.createElement('div');
-  addTile.className = 'add-photo-card';
-  addTile.innerHTML = '<span style="font-size:1.5rem;opacity:.4">+</span><span>Add photos</span>';
-  addTile.onclick = function() {
-    // Set target section for upload
-    window._uploadTargetSi = si;
-    document.getElementById('file-input').click();
-  };
-  grid.appendChild(addTile);
-
+  // Add tile
+  var add = document.createElement('div'); add.className='add-tile';
+  add.innerHTML='<span class="plus">+</span><span>Add Photos</span>';
+  add.onclick = function() { window._upSi=si; document.getElementById('file-inp').click(); };
+  grid.appendChild(add);
   block.appendChild(grid);
   return block;
 }
 
-function makePhotoCard(photo, si, pi) {
-  var card = document.createElement('div');
-  card.className = 'photo-card';
-  card.dataset.si = si;
-  card.dataset.pi = pi;
-  card.draggable = true;
+function makeCard(photo,si,pi) {
+  var c = document.createElement('div'); c.className='pcard'; c.draggable=true;
+  c.dataset.si=si; c.dataset.pi=pi;
 
-  var img = document.createElement('img');
-  img.src = photo.src;
-  img.onerror = function() { img.classList.add('broken'); };
-  card.appendChild(img);
+  var img = document.createElement('img'); img.src=photo.src;
+  img.onerror=function(){img.classList.add('err');};
+  c.appendChild(img);
 
-  var handle = document.createElement('span');
-  handle.className = 'drag-handle-card';
-  handle.textContent = '⠿';
-  handle.title = 'Drag to reorder';
-  card.appendChild(handle);
+  if (photo.isNew) { var nb=document.createElement('div'); nb.className='new-badge'; nb.textContent='New'; c.appendChild(nb); }
 
-  if (photo.isNew) {
-    var badge = document.createElement('div');
-    badge.className = 'card-new-badge';
-    badge.textContent = 'New';
-    card.appendChild(badge);
-  }
+  var dh=document.createElement('span'); dh.className='drag-dot'; dh.textContent='⠿'; dh.title='Drag to reorder'; c.appendChild(dh);
 
-  var delBtn = document.createElement('button');
-  delBtn.className = 'card-del';
-  delBtn.title = 'Remove photo';
-  delBtn.textContent = '✕';
-  delBtn.onclick = function(e) {
-    e.stopPropagation();
-    if (!confirm('Remove this photo from the page?')) return;
-    sections[si].photos.splice(pi, 1);
-    if (selectedCard && selectedCard.si===si && selectedCard.pi===pi) closePanel();
-    renderEditor();
-    markChanged();
-  };
-  card.appendChild(delBtn);
+  var db=document.createElement('button'); db.className='del-btn'; db.textContent='✕'; db.title='Remove';
+  db.onclick=function(e){ e.stopPropagation(); if(!confirm('Remove this photo?')) return;
+    sections[si].photos.splice(pi,1); if(sel&&sel.si===si&&sel.pi===pi) closePanel();
+    render(); setSaveDirty(true); };
+  c.appendChild(db);
 
-  var capBar = document.createElement('div');
-  capBar.className = 'card-caption' + (photo.caption ? ' has-caption' : '');
-  capBar.textContent = photo.caption || 'tap to add caption…';
-  card.appendChild(capBar);
+  var cb=document.createElement('div'); cb.className='cap-bar'+(photo.caption?' has':'');
+  cb.textContent=photo.caption||'tap to add caption…'; c.appendChild(cb);
 
-  // Click to select / open panel
-  card.addEventListener('click', function(e) {
-    if (e.target === delBtn) return;
-    selectCard(si, pi, card);
-  });
+  c.onclick=function(e){ if(e.target===db) return; openPanel(si,pi,c); };
 
-  // Drag events (within grid reorder)
-  card.addEventListener('dragstart', function(e) {
-    dragState = {si:si, pi:pi};
-    e.dataTransfer.effectAllowed = 'move';
-    setTimeout(function(){ card.classList.add('dragging'); }, 0);
-    card.closest('.photo-grid-admin').classList.add('drag-active');
-  });
-  card.addEventListener('dragend', function() {
-    card.classList.remove('dragging');
-    card.closest('.photo-grid-admin') && card.closest('.photo-grid-admin').classList.remove('drag-active');
-    document.querySelectorAll('.drag-over').forEach(function(el){ el.classList.remove('drag-over'); });
-    dragState = null;
-  });
-  card.addEventListener('dragover', function(e) {
-    e.preventDefault();
-    if (!dragState) return;
-    card.classList.add('drag-over');
-  });
-  card.addEventListener('dragleave', function() { card.classList.remove('drag-over'); });
-  card.addEventListener('drop', function(e) {
-    e.preventDefault();
-    card.classList.remove('drag-over');
-    if (!dragState) return;
-    var srcSi = dragState.si, srcPi = dragState.pi;
-    var dstSi = si, dstPi = pi;
-    if (srcSi===dstSi && srcPi===dstPi) return;
-
-    var moved = sections[srcSi].photos.splice(srcPi, 1)[0];
-    if (srcSi===dstSi) {
-      var adjDst = srcPi < dstPi ? dstPi-1 : dstPi;
-      sections[dstSi].photos.splice(adjDst, 0, moved);
-    } else {
-      sections[dstSi].photos.splice(dstPi, 0, moved);
-    }
-    closePanel();
-    renderEditor();
-    markChanged();
-  });
-
-  return card;
+  // Drag
+  c.ondragstart=function(e){ drag={si:si,pi:pi}; e.dataTransfer.effectAllowed='move'; setTimeout(function(){c.classList.add('dragging');},0); };
+  c.ondragend=function(){ c.classList.remove('dragging'); document.querySelectorAll('.dragover').forEach(function(x){x.classList.remove('dragover');}); drag=null; };
+  c.ondragover=function(e){ e.preventDefault(); if(drag) c.classList.add('dragover'); };
+  c.ondragleave=function(){ c.classList.remove('dragover'); };
+  c.ondrop=function(e){ e.preventDefault(); c.classList.remove('dragover');
+    if(!drag||( drag.si===si&&drag.pi===pi)) return;
+    var moved=sections[drag.si].photos.splice(drag.pi,1)[0];
+    var dst=pi; if(drag.si===si&&drag.pi<pi) dst--;
+    sections[si].photos.splice(dst,0,moved);
+    closePanel(); render(); setSaveDirty(true); };
+  return c;
 }
 
-// ── SELECT CARD / PANEL ──────────────────────────────────────────
-function selectCard(si, pi, cardEl) {
-  // Deselect previous
-  document.querySelectorAll('.photo-card.selected').forEach(function(c){ c.classList.remove('selected'); });
-
-  if (selectedCard && selectedCard.si===si && selectedCard.pi===pi) {
-    // Toggle off
-    closePanel();
-    return;
-  }
-
-  selectedCard = {si:si, pi:pi};
-  cardEl.classList.add('selected');
-
-  var photo = sections[si].photos[pi];
-  var panel = document.getElementById('edit-panel');
-
-  document.getElementById('panel-thumb').src = photo.src;
-  document.getElementById('panel-filename').textContent = photo.src.split('/').pop();
-  document.getElementById('panel-caption').value = photo.caption || '';
-
-  // Build section dropdown
-  refreshPanelSectionDropdown();
-  document.getElementById('panel-section').value = si;
-
-  panel.classList.add('open');
+// ── PANEL ─────────────────────────────────────────────────────────
+function openPanel(si,pi,cardEl) {
+  document.querySelectorAll('.pcard.sel').forEach(function(c){c.classList.remove('sel');});
+  if (sel&&sel.si===si&&sel.pi===pi) { closePanel(); return; }
+  sel={si:si,pi:pi}; cardEl.classList.add('sel');
+  var p=sections[si].photos[pi];
+  document.getElementById('panel-img').src=p.src;
+  document.getElementById('panel-file').textContent=p.src.split('/').pop();
+  document.getElementById('panel-cap').value=p.caption||'';
+  rebuildPanelSecs();
+  document.getElementById('panel-sec').value=si;
+  document.getElementById('panel').classList.add('open');
 }
-
-function refreshPanelSectionDropdown() {
-  var sel = document.getElementById('panel-section');
-  var curVal = sel.value;
-  sel.innerHTML = '';
-  sections.forEach(function(s, i) {
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.textContent = s.name || '(no heading)';
-    sel.appendChild(opt);
-  });
-  if (selectedCard) sel.value = selectedCard.si;
-}
-
-function onPanelCaptionInput() {
-  if (!selectedCard) return;
-  var val = document.getElementById('panel-caption').value;
-  sections[selectedCard.si].photos[selectedCard.pi].caption = val;
-  // Update caption bar on card without full re-render
-  var card = document.querySelector('.photo-card.selected');
-  if (card) {
-    var capBar = card.querySelector('.card-caption');
-    if (capBar) {
-      capBar.textContent = val || 'tap to add caption…';
-      capBar.className = 'card-caption' + (val ? ' has-caption' : '');
-    }
-  }
-  markChanged();
-}
-
-function onPanelSectionChange() {
-  if (!selectedCard) return;
-  var newSi = parseInt(document.getElementById('panel-section').value);
-  var oldSi = selectedCard.si;
-  if (newSi === oldSi) return;
-
-  var photo = sections[oldSi].photos.splice(selectedCard.pi, 1)[0];
-  sections[newSi].photos.push(photo);
-  closePanel();
-  renderEditor();
-  markChanged();
-}
-
 function closePanel() {
-  selectedCard = null;
-  document.querySelectorAll('.photo-card.selected').forEach(function(c){ c.classList.remove('selected'); });
-  document.getElementById('edit-panel').classList.remove('open');
+  sel=null;
+  document.querySelectorAll('.pcard.sel').forEach(function(c){c.classList.remove('sel');});
+  document.getElementById('panel').classList.remove('open');
+}
+function rebuildPanelSecs() {
+  var s=document.getElementById('panel-sec'), v=s.value; s.innerHTML='';
+  sections.forEach(function(sec,i){ var o=document.createElement('option'); o.value=i; o.textContent=sec.name||'(no heading)'; s.appendChild(o); });
+  if(sel) s.value=sel.si;
+}
+function panelCapInput() {
+  if(!sel) return;
+  var v=document.getElementById('panel-cap').value;
+  sections[sel.si].photos[sel.pi].caption=v;
+  var card=document.querySelector('.pcard.sel');
+  if(card){ var cb=card.querySelector('.cap-bar'); cb.textContent=v||'tap to add caption…'; cb.className='cap-bar'+(v?' has':''); }
+  setSaveDirty(true);
+}
+function panelSecChange() {
+  if(!sel) return;
+  var newSi=parseInt(document.getElementById('panel-sec').value);
+  if(newSi===sel.si) return;
+  var moved=sections[sel.si].photos.splice(sel.pi,1)[0];
+  sections[newSi].photos.push(moved);
+  closePanel(); render(); setSaveDirty(true);
 }
 
-// ── ADD SECTION ──────────────────────────────────────────────────
+// ── SECTION ───────────────────────────────────────────────────────
 function addSection() {
-  var input = document.getElementById('new-section-input');
-  var name = input.value.trim();
-  if (!name) { input.focus(); return; }
-  sections.push({ name: name, photos: [] });
-  input.value = '';
-  renderEditor();
-  markChanged();
-  // Scroll to new section
-  var blocks = document.querySelectorAll('.section-block');
-  if (blocks.length) blocks[blocks.length-1].scrollIntoView({behavior:'smooth', block:'start'});
+  var inp=document.getElementById('sec-inp'), name=inp.value.trim();
+  if(!name){inp.focus();return;}
+  sections.push({name:name,photos:[]}); inp.value='';
+  render(); setSaveDirty(true);
+  document.querySelectorAll('.sec-block').forEach(function(b,i){ if(i===sections.length-1) b.scrollIntoView({behavior:'smooth',block:'start'}); });
 }
 
-// ── LIVE TOGGLE ──────────────────────────────────────────────────
-function renderLiveToggle(html) {
-  var isPlanning = html.indexOf('badge-plan') >= 0;
-  var cb = document.getElementById('live-toggle');
-  cb.checked = !isPlanning;
-  document.getElementById('live-label').textContent = isPlanning ? 'Planning (hidden from home)' : 'Live ✓';
+// ── UPLOAD ────────────────────────────────────────────────────────
+function sanitize(name) {
+  var dot=name.lastIndexOf('.');
+  var ext=dot>=0?name.slice(dot).toLowerCase():'';
+  var base=name.slice(0,dot>=0?dot:name.length);
+  return base.replace(/[^a-zA-Z0-9_-]/g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'')+ext;
 }
 
-async function toggleLive() {
-  var isLive = document.getElementById('live-toggle').checked;
-  document.getElementById('live-label').textContent = isLive ? 'Live ✓' : 'Planning (hidden from home)';
-  try {
-    var data = await ghGet('index.html');
-    var html = decodeB64(data.content);
-    if (isLive) {
-      html = html.replace(/<span class="badge-plan">Planning<\/span>/g, '');
-    } else {
-      var re = new RegExp('(href="trips/' + currentTrip + '\\.html"[\\s\\S]*?class="thumb-name">)((?!.*badge-plan)[^<]*)(</div>)');
-      html = html.replace(re, '$1$2<span class="badge-plan">Planning</span>$3');
-    }
-    await ghPut('index.html', encodeB64(html), (isLive?'Mark live: ':'Mark planning: ')+currentTrip, data.sha);
-    showMsg(isLive ? 'Trip is now live on the homepage.' : 'Trip marked as Planning.', 'success');
-  } catch(e) { showMsg('Error: '+e.message, 'error'); }
-}
+async function handleFiles(fileList, targetSi) {
+  var files=Array.from(fileList).filter(function(f){return f.type.indexOf('image/')===0;});
+  if(!files.length) return;
+  var si = (targetSi!==null&&targetSi!==undefined) ? targetSi :
+           (window._upSi!==undefined) ? window._upSi :
+           (sections.length>0 ? sections.length-1 : -1);
+  window._upSi=undefined;
+  if(si<0||!sections[si]){ sections.push({name:null,photos:[]}); si=0; }
 
-// ── FILE UPLOAD ──────────────────────────────────────────────────
-function onDragUpload(e, type) {
-  e.preventDefault();
-  var z = document.getElementById('upload-zone');
-  if (type==='over') z.classList.add('over');
-  else if (type==='leave') z.classList.remove('over');
-  else { z.classList.remove('over'); onFileSelect(e.dataTransfer.files); }
-}
+  showNotice('Uploading '+files.length+' photo'+(files.length===1?'':'s')+'…');
 
-
-// Sanitize filename: remove spaces/special chars
-function sanitizeFilename(name) {
-  var ext = name.lastIndexOf('.') >= 0 ? name.slice(name.lastIndexOf('.')) : '';
-  var base = name.slice(0, name.length - ext.length);
-  base = base.replace(/[^a-zA-Z0-9_-]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
-  return base + ext.toLowerCase();
-}
-
-async function onFileSelect(fileList) {
-  var files = Array.from(fileList).filter(function(f){ return f.type.indexOf('image/')===0; });
-  if (!files.length) return;
-  document.getElementById('file-input').value = '';
-
-  // Determine target section
-  var targetSi = (window._uploadTargetSi !== undefined) ? window._uploadTargetSi : (sections.length > 0 ? sections.length-1 : -1);
-  window._uploadTargetSi = undefined;
-
-  if (targetSi < 0 || !sections[targetSi]) {
-    sections.push({name:null, photos:[]});
-    targetSi = 0;
-  }
-
-  var folder = FOLDERS[currentTrip] || currentTrip;
-
-  for (var i=0; i<files.length; i++) {
-    var f = files[i];
-    showMsg('Uploading ' + f.name + ' (' + (i+1) + '/' + files.length + ')…');
+  var uploaded=[];
+  for(var i=0;i<files.length;i++) {
+    var f=files[i], safe=sanitize(f.name);
     try {
-      var safeName = sanitizeFilename(f.name);
-      var b64img = await toB64(f);
-      await ghPut('images/'+folder+'/'+safeName, b64img, 'Add '+safeName, null);
-      sections[targetSi].photos.push({src:'/images/'+folder+'/'+safeName, caption:'', isNew:true});
-    } catch(e) {
-      showMsg('Upload failed: '+f.name+' — '+e.message, 'error');
-    }
+      var b64=await toB64(f);
+      // Check if file already exists (get SHA if so)
+      var existSHA=null;
+      try { var ex=await ghGet('images/'+tripFolder+'/'+safe); existSHA=ex.sha; } catch(e){}
+      await ghPut('images/'+tripFolder+'/'+safe, b64, 'Upload '+safe, existSHA);
+      uploaded.push({src:'/images/'+tripFolder+'/'+safe, caption:'', isNew:true});
+    } catch(e) { showNotice('Upload failed: '+safe+' — '+e.message,'err'); return; }
   }
-  renderEditor();
-  markChanged();
-  showMsg('Uploaded ' + files.length + ' photo' + (files.length===1?'':'s') + '. Scroll to see them.', 'success');
+
+  // Add to section
+  uploaded.forEach(function(p){ sections[si].photos.push(p); });
+  render();
+  showNotice(uploaded.length+' photo'+(uploaded.length===1?'':'s')+' uploaded. Hit Save & Publish to go live.','ok');
+  setSaveDirty(true);
 }
 
-// ── SAVE ──────────────────────────────────────────────────────────
-async function saveChanges() {
-  var btn = document.getElementById('save-btn');
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span>Saving…';
+// ── SAVE ─────────────────────────────────────────────────────────
+async function doSave() {
+  var btn=document.getElementById('save-btn');
+  btn.innerHTML='<span class="spin"></span>Saving…'; btn.style.pointerEvents='none';
   closePanel();
 
   try {
-    // Always get fresh SHA before writing
-    var freshData = await ghGet('trips/'+currentTrip+'.html');
-    currentSHA = freshData.sha;
-    var baseHTML = decodeB64(freshData.content);
-    var newHTML = buildHTML(baseHTML);
+    // Always get fresh SHA
+    var fresh=await ghGet('trips/'+trip+'.html');
+    tripSHA=fresh.sha;
+    tripHTML=atob64(fresh.content);
 
-    var res = await ghPut('trips/'+currentTrip+'.html', encodeB64(newHTML), 'Update '+currentTrip, currentSHA);
-    currentSHA = res.content.sha;
+    var newHTML=buildHTML();
+    var res=await ghPut('trips/'+trip+'.html', btoa64(newHTML), 'Update '+trip, tripSHA);
+    tripSHA=res.content.sha;
+    tripHTML=newHTML;
 
-    // Parse saved HTML back to keep state in sync
-    sections = parseHTML(newHTML);
-    renderEditor();
+    // Re-parse to keep state clean
+    sections=parseHTML(newHTML);
+    render();
+    setSaveDirty(false);
+    dirty=false;
 
-    document.querySelectorAll('.unsaved').forEach(function(el){ el.classList.remove('unsaved'); });
-    resetChanges();
+    // Trigger deploy
+    await fetch(HOOK,{method:'POST'});
 
-    document.getElementById('save-status').style.display = 'block';
-    setTimeout(function(){ document.getElementById('save-status').style.display='none'; }, 5000);
-    // Re-parse saved HTML to keep admin in sync
-    sections = parseHTML(newHTML);
-    renderEditor();
-    // Trigger Cloudflare deploy
-    fetch('https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/2a328602-f7bb-476d-9cd3-7b07d570bad7', {method:'POST'}).catch(function(){});
-
+    document.getElementById('save-msg').style.display='inline';
+    setTimeout(function(){document.getElementById('save-msg').style.display='none';},5000);
+    showNotice('Saved & deploying — live in ~1 min.','ok');
   } catch(e) {
-    showMsg('Save error: ' + e.message, 'error');
+    showNotice('Save failed: '+e.message,'err');
   }
-
-  btn.disabled = false;
-  btn.innerHTML = 'Save &amp; Publish';
+  btn.innerHTML='Save &amp; Publish'; btn.style.pointerEvents='';
 }
 
-// ── BUILD HTML ──────────────────────────────────────────────────
-// Strategy: replace everything between hero and footer
-function buildHTML(baseHTML) {
-  // Build new section HTML
-  var newContent = '\n';
-  sections.forEach(function(sec) {
-    if (sec.name) {
-      newContent += '<h2 class="city-name">' + escHtml(sec.name) + '</h2>\n';
-    }
-    if (sec.photos.length > 0) {
-      newContent += '<div class="photo-grid">\n';
-      sec.photos.forEach(function(photo) {
-        var cap = escHtml(photo.caption || '');
-        newContent += '<div class="photo-item">';
-        newContent += '<img src="' + photo.src + '" alt="' + cap + '" loading="lazy">';
-        if (photo.caption) {
-          newContent += '<p class="photo-caption">' + escHtml(photo.caption) + '</p>';
-        }
-        newContent += '</div>\n';
-      });
-      newContent += '</div>\n';
-    }
-  });
-
-  // Find end of hero div (track nesting depth)
-  var heroTag = '<div class="hero">';
-  var heroStart = baseHTML.indexOf(heroTag);
-  var insertAfter = -1;
-
-  if (heroStart >= 0) {
-    var depth = 0;
-    var i = heroStart;
-    while (i < baseHTML.length) {
-      if (baseHTML.substr(i,4) === '<div') depth++;
-      else if (baseHTML.substr(i,6) === '</div>') {
-        depth--;
-        if (depth === 0) { insertAfter = i + 6; break; }
-      }
-      i++;
-    }
-  }
-
-  // Find start of footer
-  var footerStart = baseHTML.indexOf('<footer');
-  if (footerStart < 0) footerStart = baseHTML.indexOf('</body>');
-
-  if (insertAfter >= 0 && footerStart > insertAfter) {
-    // Replace the region between hero-end and footer-start
-    return baseHTML.slice(0, insertAfter) + newContent + baseHTML.slice(footerStart);
-  }
-
-  // Fallback: insert before </body>
-  return baseHTML.replace('</body>', newContent + '</body>');
+// ── LIVE TOGGLE ───────────────────────────────────────────────────
+function setLiveToggle(html) {
+  var live=html.indexOf('badge-plan')<0;
+  document.getElementById('live-tog').checked=live;
+  document.getElementById('live-lbl').textContent=live?'Live ✓':'Planning';
+}
+async function toggleLive() {
+  var live=document.getElementById('live-tog').checked;
+  document.getElementById('live-lbl').textContent=live?'Live ✓':'Planning';
+  setSaveDirty(true);
 }
 
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// ── DIRTY STATE ───────────────────────────────────────────────────
+function setSaveDirty(d) {
+  dirty=d;
+  var btn=document.getElementById('save-btn');
+  if(d){ btn.classList.add('active'); } else { btn.classList.remove('active'); }
 }
 
-// ── CHANGE TRACKING ──────────────────────────────────────────────
-function markChanged() {
-  changes++;
-  document.getElementById('changes-label').textContent = changes + ' unsaved change' + (changes===1?'':'s');
-  var btn = document.getElementById('save-btn');
-  btn.disabled = false; btn.style.opacity = '1'; btn.style.cursor = 'pointer';
-  document.getElementById('save-status').style.display = 'none';
-}
-function resetChanges() {
-  changes = 0;
-  document.getElementById('changes-label').textContent = '';
-  var btn = document.getElementById('save-btn');
-  btn.disabled = true; btn.style.opacity = '.35'; btn.style.cursor = 'not-allowed';
-}
+// ── HELPERS ───────────────────────────────────────────────────────
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function atob64(b64){ return decodeURIComponent(escape(atob(b64.replace(/\n/g,'')))); }
+function btoa64(str){ return btoa(unescape(encodeURIComponent(str))); }
+function toB64(file){ return new Promise(function(res,rej){ var r=new FileReader(); r.onload=function(){res(r.result.split(',')[1]);}; r.onerror=rej; r.readAsDataURL(file); }); }
 
-// ── HELPERS ──────────────────────────────────────────────────────
 async function ghGet(path) {
-  var res = await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path, {
-    headers:{'Authorization':'token '+T,'Accept':'application/vnd.github.v3+json'}
-  });
-  if (!res.ok) throw new Error(await res.text());
-  return res.json();
+  var r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path,
+    {headers:{'Authorization':'token '+TOK,'Accept':'application/vnd.github.v3+json'}});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
 }
-async function ghPut(path, content, message, sha) {
-  var body = {message:message, content:content};
-  if (sha) body.sha = sha;
-  var res = await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path, {
-    method:'PUT',
-    headers:{'Authorization':'token '+T,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-    body:JSON.stringify(body)
-  });
-  if (!res.ok) throw new Error(await res.text());
-  return res.json();
+async function ghPut(path,content,message,sha) {
+  var body={message:message,content:content};
+  if(sha) body.sha=sha;
+  var r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path,
+    {method:'PUT',headers:{'Authorization':'token '+TOK,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!r.ok) throw new Error(await r.text());
+  return r.json();
 }
-function decodeB64(b64) { return decodeURIComponent(escape(atob(b64.split('\n').join('')))); }
-function encodeB64(str) { return btoa(unescape(encodeURIComponent(str))); }
-function toB64(file) {
-  return new Promise(function(res,rej){
-    var r=new FileReader(); r.onload=function(){ res(r.result.split(',')[1]); }; r.onerror=rej; r.readAsDataURL(file);
-  });
+
+function showNotice(msg,cls){
+  var n=document.getElementById('notice');
+  n.textContent=msg; n.className=cls||''; n.style.display='block';
+  if(cls==='ok') setTimeout(function(){n.style.display='none';},5000);
 }
-function showMsg(msg, cls) {
-  var el = document.getElementById('page-msg');
-  el.textContent=msg; el.className=cls||''; el.style.display='block';
-  if (cls==='success') setTimeout(function(){ el.style.display='none'; }, 4000);
-}
-function hideMsg() { document.getElementById('page-msg').style.display='none'; }
+function hideNotice(){ document.getElementById('notice').style.display='none'; }
 </script>
 </body>
 </html>
-
