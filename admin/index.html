@@ -39,8 +39,7 @@ input:checked+.tog-track:before{transform:translateX(16px)}
 #live-lbl{font-size:.8rem;color:#7a7a72}
 
 /* TOOLBAR */
-#toolbar{display:none;margin-bottom:1.2rem;padding:.8rem;background:white;border:1px solid #e0ddd8;display:flex;gap:.8rem;align-items:center;flex-wrap:wrap}
-#toolbar{display:none}
+#toolbar{display:none;margin-bottom:1.2rem;padding:.8rem;background:white;border:1px solid #e0ddd8;gap:.8rem;align-items:center;flex-wrap:wrap}
 .upload-zone{border:2px dashed #e0ddd8;padding:.8rem 1.2rem;text-align:center;cursor:pointer;flex:1;min-width:200px;transition:.2s}
 .upload-zone:hover,.upload-zone.over{border-color:#8b3a2a;background:#f3ebe9}
 .upload-zone p{font-size:.75rem;color:#7a7a72}
@@ -541,10 +540,6 @@ function setSaveDirty(d) {
   dirty=d;
   var btn=document.getElementById('save-btn');
   if(d){ btn.classList.add('active'); } else { btn.classList.remove('active'); }
-}
-function enablePreview() {
-  var pb=document.getElementById('preview-btn');
-  pb.style.opacity='1'; pb.style.pointerEvents='auto';
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────
