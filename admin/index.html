@@ -121,7 +121,7 @@ input:checked+.tog-track:before{transform:translateX(16px)}
     <div id="hdr-right">
       <a id="view-link" href="#" target="_blank">View live ↗</a>
       <span id="save-msg">✓ Published</span>
-      <button id="save-btn" onclick="doSave()">Save &amp; Publish</button>
+      <button id="preview-btn" onclick="doPreview()" style="padding:.55rem 1.4rem;background:#2a4a8b;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.35;pointer-events:none" id="preview-btn">Preview</button><button id="save-btn" onclick="doSave()">Save &amp; Publish</button>
     </div>
   </header>
 
@@ -477,6 +477,17 @@ async function handleFiles(fileList, targetSi) {
   setSaveDirty(true);
 }
 
+
+// ── PREVIEW ───────────────────────────────────────────────────────
+function doPreview() {
+  var html = buildHTML();
+  // Open in new tab
+  var w = window.open('', '_blank');
+  w.document.open();
+  w.document.write(html);
+  w.document.close();
+}
+
 // ── SAVE ─────────────────────────────────────────────────────────
 async function doSave() {
   var btn=document.getElementById('save-btn');
@@ -529,6 +540,10 @@ function setSaveDirty(d) {
   dirty=d;
   var btn=document.getElementById('save-btn');
   if(d){ btn.classList.add('active'); } else { btn.classList.remove('active'); }
+}
+function enablePreview() {
+  var pb=document.getElementById('preview-btn');
+  pb.style.opacity='1'; pb.style.pointerEvents='auto';
 }
 
 // ── HELPERS ───────────────────────────────────────────────────────
