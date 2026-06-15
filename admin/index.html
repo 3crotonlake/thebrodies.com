@@ -505,7 +505,6 @@ async function doSave() {
   closePanel();
 
   try {
-    // Always get fresh SHA
     var fresh=await ghGet('trips/'+trip+'.html');
     tripSHA=fresh.sha;
     tripHTML=atob64(fresh.content);
@@ -515,22 +514,23 @@ async function doSave() {
     tripSHA=res.content.sha;
     tripHTML=newHTML;
 
-    // Re-parse to keep state clean
     sections=parseHTML(newHTML);
     render();
-    setSaveDirty(false);
     dirty=false;
+    setSaveDirty(false);
 
-    // Trigger deploy
     await fetch(HOOK,{method:'POST'});
 
+    btn.innerHTML='Save &amp; Publish'; btn.style.pointerEvents='';
     document.getElementById('save-msg').style.display='inline';
     setTimeout(function(){document.getElementById('save-msg').style.display='none';},5000);
     showNotice('Saved & deploying — live in ~1 min.','ok');
   } catch(e) {
-    showNotice('Save failed: '+e.message,'err');
+    // Keep button active so user can retry
+    btn.innerHTML='Save &amp; Publish'; btn.style.pointerEvents='';
+    setSaveDirty(true);
+    showNotice('Save failed — please try again. ('+e.message+')','err');
   }
-  btn.innerHTML='Save &amp; Publish'; btn.style.pointerEvents='';
 }
 
 // ── LIVE TOGGLE ───────────────────────────────────────────────────
