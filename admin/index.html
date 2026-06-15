@@ -121,7 +121,7 @@ input:checked+.tog-track:before{transform:translateX(16px)}
     <div id="hdr-right">
       <a id="view-link" href="#" target="_blank">View live ↗</a>
       <span id="save-msg">✓ Published</span>
-      <button id="preview-btn" onclick="doPreview()" style="padding:.55rem 1.4rem;background:#2a4a8b;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.35;pointer-events:none" id="preview-btn">Preview</button><button id="save-btn" onclick="doSave()">Save &amp; Publish</button>
+      <button id="preview-btn" onclick="doPreview()" style="padding:.55rem 1.4rem;background:#2a4a8b;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;display:none">Preview</button><button id="save-btn" onclick="doSave()">Save &amp; Publish</button>
     </div>
   </header>
 
@@ -252,6 +252,7 @@ async function loadTrip() {
     setLiveToggle(tripHTML);
     document.getElementById('status-row').style.display = 'flex';
     document.getElementById('toolbar').style.display = 'flex';
+    document.getElementById('preview-btn').style.display = 'inline';
   } catch(e) { showNotice('Could not load trip: '+e.message, 'err'); document.getElementById('editor').innerHTML=''; }
 }
 
