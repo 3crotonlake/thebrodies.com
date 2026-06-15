@@ -59,9 +59,10 @@
 
     /* TABS */
     .tabs {
-      display:flex; border-bottom:1px solid var(--border);
+      display:flex; align-items:center; border-bottom:1px solid var(--border);
       margin-bottom:2rem;
     }
+    .tabs-right { margin-left:auto; }
     .tab-btn {
       font-family:'Jost',sans-serif; font-size:0.7rem; font-weight:400;
       letter-spacing:0.12em; text-transform:uppercase;
@@ -71,6 +72,13 @@
     }
     .tab-btn.active { color:var(--accent); border-bottom-color:var(--accent); font-weight:500; }
     .tab-btn:hover:not(.active) { color:var(--ink); }
+    .tab-link {
+      font-family:'Jost',sans-serif; font-size:0.7rem; font-weight:400;
+      letter-spacing:0.12em; text-transform:uppercase;
+      padding:0.9rem 1.4rem; color:var(--muted); text-decoration:none;
+      transition:color 0.2s; display:inline-block;
+    }
+    .tab-link:hover { color:var(--ink); }
 
     /* TIMELINE */
     .year-group { display:flex; margin-bottom:2.5rem; }
@@ -175,6 +183,9 @@
     <button class="tab-btn active" id="tab-timeline" onclick="showTab('timeline')">Timeline</button>
     <button class="tab-btn" id="tab-map" onclick="showTab('map')">Map</button>
     <button class="tab-btn" id="tab-plans" onclick="showTab('plans')">Plans</button>
+    <div class="tabs-right">
+      <a class="tab-link" href="cocktails/index.html">Cocktails</a>
+    </div>
   </div>
 
   <!-- TIMELINE -->
@@ -430,12 +441,6 @@
   </div>
 
 </div><!-- end page-wrap -->
-
-<section class="cocktails-section">
-  <h2>Cocktails</h2>
-  <p>Favorite recipes from around the world and home</p>
-  <a class="btn-outline" href="cocktails/index.html">View Recipes</a>
-</section>
 
 <footer>&copy; The Brodies &nbsp;&middot;&nbsp; Adventures around the world</footer>
 
