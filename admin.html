@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brodies Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #f9f7f3; --ink: #1a1a18; --muted: #7a7a72;
+      --border: #e0ddd8; --accent: #8b3a2a; --gold: #c9a84c;
+      --surface: #fff; --radius: 4px;
+    }
+    body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--ink); font-weight: 300; min-height: 100vh; }
+
+    /* ── NAV ── */
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1.5rem; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+    .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; cursor: pointer; }
+    .nav-actions { display: flex; gap: 0.5rem; }
+
+    /* ── BUTTONS ── */
+    button, .btn { font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.06em; cursor: pointer; border: none; border-radius: var(--radius); padding: 0.5rem 1rem; transition: opacity 0.15s; }
+    button:hover { opacity: 0.8; }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--ink); }
+    .btn-danger { background: #c0392b; color: #fff; }
+    .btn-sm { padding: 0.3rem 0.6rem; font-size: 0.72rem; }
+    .btn-icon { background: transparent; border: 1px solid var(--border); color: var(--muted); width: 28px; height: 28px; padding: 0; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; border-radius: var(--radius); }
+
+    /* ── VIEWS ── */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* ── TRIP LIST ── */
+    #view-list { max-width: 700px; margin: 0 auto; padding: 2rem 1.5rem; }
+    .list-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; }
+    .list-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 300; }
+    .trip-card { display: flex; align-items: center; gap: 1rem; padding: 0.85rem 1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0.5rem; cursor: pointer; transition: border-color 0.15s; }
+    .trip-card:hover { border-color: var(--accent); }
+    .trip-thumb { width: 52px; height: 40px; object-fit: cover; border-radius: 2px; background: var(--border); flex-shrink: 0; }
+    .trip-info { flex: 1; min-width: 0; }
+    .trip-info strong { display: block; font-size: 0.9rem; font-weight: 400; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .trip-info span { font-size: 0.72rem; color: var(--muted); }
+    .trip-arrow { color: var(--muted); font-size: 1.2rem; }
+
+    /* ── EDITOR ── */
+    #view-editor { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
+    .editor-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+    .editor-header h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 300; flex: 1; }
+    .save-status { font-size: 0.72rem; color: var(--muted); }
+    .save-status.saving { color: var(--gold); }
+    .save-status.saved { color: #2e7d32; }
+    .save-status.error { color: #c0392b; }
+
+    /* ── FORM ── */
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-group { margin-bottom: 1rem; }
+    label { display: block; font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.35rem; }
+    input[type=text], input[type=number], select, textarea {
+      width: 100%; padding: 0.55rem 0.75rem; border: 1px solid var(--border); border-radius: var(--radius);
+      font-family: 'Jost', sans-serif; font-size: 0.86rem; font-weight: 300;
+      background: var(--surface); color: var(--ink); appearance: none;
+    }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+    textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+
+    /* ── THUMBNAIL ── */
+    .thumb-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; }
+    .thumb-preview { width: 120px; height: 80px; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); background: var(--border); flex-shrink: 0; }
+    .thumb-preview.empty { display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--muted); }
+
+    /* ── SECTIONS ── */
+    .sections-label { font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: space-between; }
+    .section-block { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 0.75rem; overflow: hidden; }
+    .section-head { display: flex; align-items: center; gap: 0.5rem; padding: 0.65rem 0.75rem; border-bottom: 1px solid var(--border); background: #faf9f6; }
+    .section-head input { flex: 1; border: none; background: transparent; font-size: 0.9rem; font-family: 'Jost', sans-serif; font-weight: 400; color: var(--ink); padding: 0; }
+    .section-head input:focus { outline: none; }
+    .section-actions { display: flex; gap: 4px; flex-shrink: 0; }
+    .photo-grid-admin { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.5rem; padding: 0.75rem; }
+    .photo-cell { position: relative; }
+    .photo-cell img, .photo-cell video { width: 100%; height: 100px; object-fit: cover; border-radius: 2px; display: block; }
+    .photo-cell-caption { width: 100%; font-size: 0.68rem; border: none; border-top: 1px solid var(--border); padding: 0.25rem 0.35rem; font-family: 'Jost', sans-serif; background: #faf9f6; color: var(--ink); }
+    .photo-cell-caption:focus { outline: none; background: #fff; }
+    .photo-actions { position: absolute; top: 3px; right: 3px; display: flex; gap: 2px; opacity: 0; transition: opacity 0.15s; }
+    .photo-cell:hover .photo-actions { opacity: 1; }
+    .photo-cover-btn { position: absolute; top: 3px; left: 3px; opacity: 0; transition: opacity 0.15s; }
+    .photo-cell:hover .photo-cover-btn { opacity: 1; }
+    .upload-area { padding: 0.75rem; border-top: 1px solid var(--border); }
+    .upload-btn-label { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--cream); border: 1px dashed var(--border); border-radius: var(--radius); padding: 0.4rem 0.75rem; font-size: 0.75rem; color: var(--muted); cursor: pointer; transition: border-color 0.15s; }
+    .upload-btn-label:hover { border-color: var(--accent); color: var(--accent); }
+    .upload-progress { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; min-height: 1.2em; }
+
+    /* ── MODAL ── */
+    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; align-items: center; justify-content: center; }
+    .modal-bg.open { display: flex; }
+    .modal { background: var(--surface); border-radius: var(--radius); padding: 1.5rem; width: 90%; max-width: 420px; }
+    .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; margin-bottom: 1rem; }
+    .modal-actions { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1rem; }
+
+    /* ── TOAST ── */
+    #toast { position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%); background: var(--ink); color: #fff; padding: 0.55rem 1.1rem; border-radius: 20px; font-size: 0.8rem; opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 999; white-space: nowrap; }
+    #toast.show { opacity: 1; }
+
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .photo-grid-admin { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand" onclick="showList()">Brodies</span>
+  <div class="nav-actions">
+    <button class="btn-ghost btn-sm" onclick="showNewTripModal()">+ New Trip</button>
+  </div>
+</nav>
+
+<!-- TRIP LIST -->
+<div id="view-list" class="view">
+  <div class="list-header">
+    <h2>All Trips</h2>
+  </div>
+  <div id="trip-list-inner">
+    <div style="padding:3rem;text-align:center;color:var(--muted)">Loading…</div>
+  </div>
+</div>
+
+<!-- EDITOR -->
+<div id="view-editor" class="view">
+  <div class="editor-header">
+    <button class="btn-ghost btn-sm" onclick="showList()">← Back</button>
+    <h2 id="editor-title">Trip</h2>
+    <span class="save-status" id="save-status"></span>
+    <button class="btn-primary btn-sm" onclick="saveTrip()">Save</button>
+    <button class="btn-danger btn-sm" onclick="deleteTrip()">Delete</button>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Trip Name</label>
+      <input type="text" id="f-name" placeholder="e.g. Paris 2024">
+    </div>
+    <div class="form-group">
+      <label>Year</label>
+      <input type="number" id="f-year" placeholder="2024" min="2000" max="2099">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Country</label>
+      <select id="f-country">
+        <option value="">— Select country —</option>
+        <option>Belize</option>
+        <option>Cambodia</option>
+        <option>Canada</option>
+        <option>France</option>
+        <option>Greece</option>
+        <option>Iceland</option>
+        <option>Ireland</option>
+        <option>Italy</option>
+        <option>Japan</option>
+        <option>Mexico</option>
+        <option>Multiple</option>
+        <option>Portugal</option>
+        <option>Puerto Rico</option>
+        <option>Spain</option>
+        <option>Sweden</option>
+        <option>Switzerland</option>
+        <option>Thailand</option>
+        <option>United Kingdom</option>
+        <option>United States</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>City / Region</label>
+      <input type="text" id="f-city" placeholder="e.g. Paris, Lyon">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label>Status</label>
+      <select id="f-status">
+        <option value="published">Published</option>
+        <option value="completed">Completed</option>
+        <option value="planning">Planning</option>
+        <option value="draft">Draft</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Cover Photo</label>
+      <div class="thumb-row">
+        <div id="thumb-preview" class="thumb-preview empty">No cover</div>
+        <div>
+          <div id="thumb-url" style="font-size:0.7rem;color:var(--muted);word-break:break-all;max-width:200px"></div>
+          <button class="btn-ghost btn-sm" style="margin-top:0.4rem" onclick="clearCover()">Clear cover</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Notes</label>
+    <textarea id="f-notes" placeholder="Trip description, highlights…"></textarea>
+  </div>
+
+  <!-- SECTIONS -->
+  <div class="sections-label">
+    <span>Sections</span>
+    <button class="btn-ghost btn-sm" onclick="addSection()">+ Add Section</button>
+  </div>
+  <div id="sections-container"></div>
+</div>
+
+<!-- NEW TRIP MODAL -->
+<div class="modal-bg" id="modal-new">
+  <div class="modal">
+    <h3>New Trip</h3>
+    <div class="form-group"><label>Name</label><input type="text" id="new-name" placeholder="e.g. Paris 2024"></div>
+    <div class="form-group"><label>Slug (URL)</label><input type="text" id="new-slug" placeholder="e.g. paris-2024"></div>
+    <div class="form-group"><label>Year</label><input type="number" id="new-year" placeholder="2024"></div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeModal('modal-new')">Cancel</button>
+      <button class="btn-primary" onclick="createTrip()">Create</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  // ── CONFIG ──────────────────────────────────────────────────────
+  // When served from thebrodies.com, API_BASE is empty (same origin).
+  // When opening locally as a file, set this to the live API.
+  const API_BASE = (location.protocol === 'file:') ? 'https://thebrodies.com' : '';
+
+  // ── STATE ───────────────────────────────────────────────────────
+  let currentSlug = null;
+  let currentTrip = null;
+  let uploadFolder = '';
+
+  // ── HEIC CONVERSION ─────────────────────────────────────────────
+  const heic2anyReady = new Promise(res => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js';
+    s.onload = res; s.onerror = res;
+    document.head.appendChild(s);
+  });
+
+  async function convertIfHeic(file) {
+    const isHeicExt = /\.(heic|heif)$/i.test(file.name);
+    let isHeicData = false;
+    try {
+      const buf = await file.slice(0, 12).arrayBuffer();
+      const b = new Uint8Array(buf);
+      isHeicData = String.fromCharCode(b[4], b[5], b[6], b[7]) === 'ftyp';
+    } catch (e) {}
+    if (!isHeicExt && !isHeicData) return file;
+
+    const jpgName = file.name.replace(/\.(heic|heif)$/i, '.jpg');
+    // Try canvas (Safari/iOS)
+    try {
+      const bmp = await createImageBitmap(file);
+      const cv = new OffscreenCanvas(bmp.width, bmp.height);
+      cv.getContext('2d').drawImage(bmp, 0, 0);
+      const blob = await cv.convertToBlob({ type: 'image/jpeg', quality: 0.88 });
+      toast('HEIC converted ✓');
+      return new File([blob], jpgName, { type: 'image/jpeg' });
+    } catch (e) {}
+    // Try heic2any (Chrome/Windows)
+    try {
+      await heic2anyReady;
+      if (typeof heic2any === 'function') {
+        toast('Converting HEIC…');
+        const blob = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.88 });
+        const out = Array.isArray(blob) ? blob[0] : blob;
+        toast('HEIC converted ✓');
+        return new File([out], jpgName, { type: 'image/jpeg' });
+      }
+    } catch (e) {}
+    toast('⚠️ Could not convert HEIC — try saving as JPEG first');
+    throw new Error('HEIC conversion failed');
+  }
+
+  // ── VIEWS ───────────────────────────────────────────────────────
+  function showView(id) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  // ── TOAST ───────────────────────────────────────────────────────
+  let toastTimer;
+  function toast(msg) {
+    const el = document.getElementById('toast');
+    el.textContent = msg;
+    el.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => el.classList.remove('show'), 2800);
+  }
+
+  // ── MODAL ───────────────────────────────────────────────────────
+  function showNewTripModal() {
+    document.getElementById('new-name').value = '';
+    document.getElementById('new-slug').value = '';
+    document.getElementById('new-year').value = new Date().getFullYear();
+    document.getElementById('modal-new').classList.add('open');
+    setTimeout(() => document.getElementById('new-name').focus(), 50);
+  }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+  // Auto-generate slug from name
+  document.getElementById('new-name').addEventListener('input', function () {
+    const slug = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    document.getElementById('new-slug').value = slug;
+  });
+
+  // ── API HELPERS ─────────────────────────────────────────────────
+  async function apiFetch(path, opts = {}) {
+    const res = await fetch(API_BASE + path, opts);
+    if (!res.ok) throw new Error(`API error ${res.status} on ${path}`);
+    return res.json();
+  }
+
+  // ── TRIP LIST ───────────────────────────────────────────────────
+  async function showList() {
+    showView('view-list');
+    const inner = document.getElementById('trip-list-inner');
+    inner.innerHTML = '<div style="padding:3rem;text-align:center;color:var(--muted)">Loading…</div>';
+    try {
+      const slugs = await apiFetch('/api/trips');
+      if (!slugs.length) {
+        inner.innerHTML = '<div style="padding:3rem;text-align:center;color:var(--muted)">No trips yet. Create one above.</div>';
+        return;
+      }
+      inner.innerHTML = slugs.map(slug => `
+        <div class="trip-card" onclick="editTrip('${slug}')">
+          <img class="trip-thumb" id="th-${slug}" src="" alt="" onerror="this.style.opacity=0">
+          <div class="trip-info">
+            <strong id="nm-${slug}">${fmtSlug(slug)}</strong>
+            <span id="mt-${slug}"></span>
+          </div>
+          <span class="trip-arrow">›</span>
+        </div>`).join('');
+      // Load trip details for thumbnails/names in background
+      slugs.forEach(async slug => {
+        try {
+          const t = await apiFetch('/api/trip/' + slug);
+          const nm = document.getElementById('nm-' + slug);
+          const mt = document.getElementById('mt-' + slug);
+          const th = document.getElementById('th-' + slug);
+          if (nm && t.name) nm.textContent = t.name;
+          if (mt) mt.textContent = [t.country, t.city].filter(Boolean).join(' · ');
+          if (th && t.thumbnail) { th.src = API_BASE + t.thumbnail; th.style.opacity = 1; }
+        } catch (e) {}
+      });
+    } catch (e) {
+      inner.innerHTML = `<div style="padding:3rem;text-align:center;color:#c0392b">Failed to load trips: ${e.message}</div>`;
+    }
+  }
+
+  function fmtSlug(slug) {
+    return slug.replace(/-(\d{4})$/, ' $1').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  }
+
+  // ── CREATE TRIP ─────────────────────────────────────────────────
+  async function createTrip() {
+    const name = document.getElementById('new-name').value.trim();
+    const slug = document.getElementById('new-slug').value.trim();
+    const year = parseInt(document.getElementById('new-year').value) || new Date().getFullYear();
+    if (!name || !slug) { toast('Name and slug required'); return; }
+    try {
+      await apiFetch('/api/trip/' + slug, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ slug, name, year, status: 'published', sections: [], thumbnail: '' })
+      });
+      closeModal('modal-new');
+      editTrip(slug);
+    } catch (e) { toast('Error creating trip'); }
+  }
+
+  // ── EDIT TRIP ───────────────────────────────────────────────────
+  async function editTrip(slug) {
+    showView('view-editor');
+    currentSlug = slug;
+    document.getElementById('editor-title').textContent = '…';
+    document.getElementById('sections-container').innerHTML = '<div style="padding:2rem;text-align:center;color:var(--muted)">Loading…</div>';
+    try {
+      const t = await apiFetch('/api/trip/' + slug);
+      currentTrip = JSON.parse(JSON.stringify(t));
+      // Normalize sections to array
+      if (currentTrip.sections && !Array.isArray(currentTrip.sections)) {
+        currentTrip.sections = [currentTrip.sections];
+      }
+      if (!currentTrip.sections) currentTrip.sections = [];
+
+      // Set upload folder from slug (worker prepends images/)
+      const parts = slug.match(/^(.+)-(\d{4})$/);
+      uploadFolder = parts ? parts[2] + '_' + parts[1].replace(/-/g, '_') : slug.replace(/-/g, '_');
+
+      // Populate form
+      document.getElementById('editor-title').textContent = t.name || slug;
+      document.getElementById('f-name').value = t.name || '';
+      document.getElementById('f-year').value = t.year || '';
+      document.getElementById('f-country').value = t.country || '';
+      document.getElementById('f-city').value = t.city || t.meta || '';
+      document.getElementById('f-status').value = t.status || 'published';
+      document.getElementById('f-notes').value = t.notes || '';
+      setCoverPreview(t.thumbnail || '');
+      renderSections();
+    } catch (e) {
+      document.getElementById('sections-container').innerHTML = `<div style="padding:2rem;color:#c0392b">Error loading trip: ${e.message}</div>`;
+    }
+  }
+
+  // ── COVER PHOTO ─────────────────────────────────────────────────
+  function setCoverPreview(url) {
+    const el = document.getElementById('thumb-preview');
+    const urlEl = document.getElementById('thumb-url');
+    if (url) {
+      el.outerHTML = `<img id="thumb-preview" class="thumb-preview" src="${API_BASE + url}" alt="cover">`;
+      urlEl.textContent = url;
+    } else {
+      if (el.tagName === 'IMG') {
+        el.outerHTML = '<div id="thumb-preview" class="thumb-preview empty">No cover</div>';
+      }
+      urlEl.textContent = '';
+    }
+    if (currentTrip) currentTrip.thumbnail = url;
+  }
+
+  function clearCover() { setCoverPreview(''); }
+
+  function setAsCover(src) {
+    setCoverPreview(src);
+    toast('Cover photo set');
+  }
+
+  // ── SECTIONS ────────────────────────────────────────────────────
+  function renderSections() {
+    const container = document.getElementById('sections-container');
+    if (!currentTrip.sections.length) {
+      container.innerHTML = '<div style="padding:1rem;color:var(--muted);font-size:0.85rem">No sections yet. Add one above.</div>';
+      return;
+    }
+    container.innerHTML = currentTrip.sections.map((sec, i) => buildSection(sec, i)).join('');
+  }
+
+  function buildSection(sec, i) {
+    const total = currentTrip.sections.length;
+    const photos = Array.isArray(sec.photos) ? sec.photos : [];
+    const photoCells = photos.map((ph, pi) => buildPhotoCell(ph, i, pi)).join('');
+    return `
+    <div class="section-block" id="sec-${i}">
+      <div class="section-head">
+        <input type="text" value="${escAttr(sec.title || '')}" placeholder="Section title (e.g. Day 1 — Arrival)"
+          onchange="currentTrip.sections[${i}].title=this.value">
+        <div class="section-actions">
+          ${i > 0 ? `<button class="btn-icon" onclick="moveSection(${i},-1)" title="Move up">↑</button>` : ''}
+          ${i < total-1 ? `<button class="btn-icon" onclick="moveSection(${i},1)" title="Move down">↓</button>` : ''}
+          <button class="btn-icon btn-danger" onclick="deleteSection(${i})" title="Delete section" style="color:#c0392b">×</button>
+        </div>
+      </div>
+      <div class="photo-grid-admin" id="photos-${i}">${photoCells}</div>
+      <div class="upload-area">
+        <label class="upload-btn-label">
+          <span>＋ Add Photos / Video</span>
+          <input type="file" multiple accept="image/*,video/*,.heic,.heif" style="display:none" onchange="handleUpload(event,${i})">
+        </label>
+        <div class="upload-progress" id="prog-${i}"></div>
+      </div>
+    </div>`;
+  }
+
+  function buildPhotoCell(ph, si, pi) {
+    const isVideo = /\.(mp4|mov|webm|m4v)$/i.test(ph.src);
+    const media = isVideo
+      ? `<video src="${API_BASE + ph.src}" muted loop playsinline style="width:100%;height:100px;object-fit:cover;display:block"
+           onmouseenter="this.play()" onmouseleave="this.pause()"></video>`
+      : `<img src="${API_BASE + ph.src}" alt="" loading="lazy" onerror="this.style.opacity=0.3">`;
+    return `
+    <div class="photo-cell">
+      ${media}
+      <input class="photo-cell-caption" type="text" placeholder="Caption…" value="${escAttr(ph.caption || '')}"
+        onchange="currentTrip.sections[${si}].photos[${pi}].caption=this.value">
+      ${!isVideo ? `<div class="photo-cover-btn">
+        <button class="btn-primary btn-sm" onclick="setAsCover('${escAttr(ph.src)}')">★ Cover</button>
+      </div>` : ''}
+      <div class="photo-actions">
+        ${pi > 0 ? `<button class="btn-icon" onclick="movePhoto(${si},${pi},-1)" title="Move left">←</button>` : ''}
+        ${pi < currentTrip.sections[si].photos.length-1 ? `<button class="btn-icon" onclick="movePhoto(${si},${pi},1)" title="Move right">→</button>` : ''}
+        <button class="btn-icon" onclick="deletePhoto(${si},${pi})" style="color:#c0392b" title="Remove">×</button>
+      </div>
+    </div>`;
+  }
+
+  function escAttr(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  // ── SECTION OPERATIONS ──────────────────────────────────────────
+  function addSection() {
+    currentTrip.sections.push({ title: '', photos: [] });
+    renderSections();
+    // Focus the new section title
+    setTimeout(() => {
+      const inputs = document.querySelectorAll('.section-head input');
+      if (inputs.length) inputs[inputs.length - 1].focus();
+    }, 50);
+  }
+
+  function deleteSection(i) {
+    if (!confirm('Delete this section and all its photos from the editor? (Photos remain in storage)')) return;
+    currentTrip.sections.splice(i, 1);
+    renderSections();
+  }
+
+  function moveSection(i, dir) {
+    const s = currentTrip.sections;
+    const j = i + dir;
+    if (j < 0 || j >= s.length) return;
+    [s[i], s[j]] = [s[j], s[i]];
+    renderSections();
+    toast(dir < 0 ? 'Section moved up' : 'Section moved down');
+  }
+
+  // ── PHOTO OPERATIONS ────────────────────────────────────────────
+  function deletePhoto(si, pi) {
+    currentTrip.sections[si].photos.splice(pi, 1);
+    renderSections();
+  }
+
+  function movePhoto(si, pi, dir) {
+    const photos = currentTrip.sections[si].photos;
+    const j = pi + dir;
+    if (j < 0 || j >= photos.length) return;
+    [photos[pi], photos[j]] = [photos[j], photos[pi]];
+    renderSections();
+  }
+
+  // ── UPLOAD ──────────────────────────────────────────────────────
+  async function handleUpload(event, sIdx) {
+    const files = Array.from(event.target.files);
+    if (!files.length) return;
+    const prog = document.getElementById('prog-' + sIdx);
+    let done = 0;
+    prog.textContent = `Uploading 0 / ${files.length}…`;
+
+    for (const file of files) {
+      let toUpload;
+      if (file.type.startsWith('video/')) {
+        toUpload = file;
+      } else {
+        try {
+          toUpload = await convertIfHeic(file);
+        } catch (e) {
+          done++;
+          prog.textContent = `Uploading ${done} / ${files.length}…`;
+          continue;
+        }
+      }
+      const fname = toUpload.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+      try {
+        const res = await fetch(`${API_BASE}/api/upload/${uploadFolder}/${fname}`, {
+          method: 'POST',
+          headers: { 'Content-Type': toUpload.type || 'image/jpeg' },
+          body: toUpload
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (!currentTrip.sections[sIdx].photos) currentTrip.sections[sIdx].photos = [];
+          currentTrip.sections[sIdx].photos.push({ src: data.url, caption: '' });
+        }
+      } catch (e) {
+        toast('Upload failed: ' + fname);
+      }
+      done++;
+      prog.textContent = `Uploading ${done} / ${files.length}…`;
+    }
+    prog.textContent = `${done} file${done !== 1 ? 's' : ''} added`;
+    event.target.value = '';
+    renderSections();
+  }
+
+  // ── SAVE TRIP ───────────────────────────────────────────────────
+  function setSaveStatus(msg, cls) {
+    const el = document.getElementById('save-status');
+    el.textContent = msg;
+    el.className = 'save-status' + (cls ? ' ' + cls : '');
+  }
+
+  async function saveTrip() {
+    setSaveStatus('Saving…', 'saving');
+    const trip = Object.assign({}, currentTrip, {
+      name: document.getElementById('f-name').value,
+      year: parseInt(document.getElementById('f-year').value) || currentTrip.year,
+      status: document.getElementById('f-status').value,
+      notes: document.getElementById('f-notes').value,
+      country: document.getElementById('f-country').value,
+      city: document.getElementById('f-city').value,
+      meta: document.getElementById('f-city').value,
+      slug: currentSlug
+    });
+    try {
+      await apiFetch('/api/trip/' + currentSlug, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(trip)
+      });
+      currentTrip = trip;
+      document.getElementById('editor-title').textContent = trip.name || currentSlug;
+      setSaveStatus('Saved ✓', 'saved');
+      toast('Saved!');
+      setTimeout(() => setSaveStatus(''), 3000);
+    } catch (e) {
+      setSaveStatus('Save failed', 'error');
+      toast('Save failed — check connection');
+    }
+  }
+
+  // ── DELETE TRIP ─────────────────────────────────────────────────
+  async function deleteTrip() {
+    if (!confirm(`Delete "${currentTrip.name || currentSlug}"? This cannot be undone.`)) return;
+    try {
+      await apiFetch('/api/trip/' + currentSlug, { method: 'DELETE' });
+      toast('Trip deleted');
+      showList();
+    } catch (e) { toast('Delete failed'); }
+  }
+
+  // ── INIT ────────────────────────────────────────────────────────
+  const editParam = new URLSearchParams(window.location.search).get('edit');
+  if (editParam) {
+    editTrip(editParam);
+  } else {
+    showList();
+  }
+</script>
+</body>
+</html>
