@@ -44,7 +44,7 @@ textarea{resize:vertical;min-height:80px}
 select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a7a72' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.8rem center}
 
 /* ── LOGIN ── */
-#view-login{display:flex;align-items:center;justify-content:center;padding:2rem}
+#view-login.active{display:flex;align-items:center;justify-content:center;padding:2rem}
 .login-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2.5rem 2rem;width:100%;max-width:360px;text-align:center}
 .login-box h1{font-size:2rem;margin-bottom:0.3rem}
 .login-box p{color:var(--muted);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2rem}
@@ -275,42 +275,46 @@ function showView(id) {
 async function showList() {
   if (!localStorage.getItem('ba')) { showView('view-login'); return; }
   showView('view-list');
-  const resp = await fetch('/api/trips', { headers: { 'X-Admin-Password': PASSWORD } });
+  const resp = await fetch('/api/trips');
   const slugs = await resp.json();
 
-  // Load all trip summaries
-  const trips = await Promise.all(slugs.map(s => fetch(`/api/trip/${s}`).then(r => r.json()).catch(() => null)));
-
-  // Group by year
-  const byYear = {};
-  trips.filter(Boolean).forEach(t => {
-    const y = t.year || 'Planning';
-    if (!byYear[y]) byYear[y] = [];
-    byYear[y].push(t);
+  // Show slugs immediately as plain cards, then enrich lazily
+  let html = '<div class="trip-list">';
+  slugs.forEach(slug => {
+    const label = slug.replace(/-(\d{4})$/, ' $1').replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    html += `<div class="trip-card" id="card-${slug}" onclick="editTrip('${slug}')">
+      <div class="trip-thumb" id="thumb-${slug}"></div>
+      <div class="trip-info">
+        <strong id="name-${slug}">${label}</strong>
+        <span id="meta-${slug}">...</span>
+      </div>
+      <span class="trip-arrow">›</span>
+    </div>`;
   });
-
-  const years = Object.keys(byYear).sort((a, b) => b - a);
-  let html = '';
-  years.forEach(y => {
-    html += `<div class="section-year">${y}</div><div class="trip-list">`;
-    byYear[y].forEach(t => {
-      const badge = t.status === 'planning' ? `<span class="badge badge-plan">Plan</span>` : '';
-      const thumb = t.thumbnail
-        ? `<img class="trip-thumb" src="${t.thumbnail}" loading="lazy" onerror="this.style.display='none'">`
-        : `<div class="trip-thumb"></div>`;
-      const photoCount = (t.sections || []).reduce((n, s) => n + (s.photos || []).length, 0);
-      html += `<div class="trip-card" onclick="editTrip('${t.slug}')">
-        ${thumb}
-        <div class="trip-info">
-          <strong>${t.name || t.slug}${badge}</strong>
-          <span>${photoCount} photos · ${(t.sections || []).length} sections</span>
-        </div>
-        <span class="trip-arrow">›</span>
-      </div>`;
-    });
-    html += `</div>`;
-  });
+  html += '</div>';
   document.getElementById('trip-list-inner').innerHTML = html;
+
+  // Enrich cards in small batches (5 at a time) so mobile doesn't choke
+  const BATCH = 5;
+  for (let i = 0; i < slugs.length; i += BATCH) {
+    const batch = slugs.slice(i, i + BATCH);
+    await Promise.all(batch.map(async slug => {
+      try {
+        const t = await fetch(`/api/trip/${slug}`).then(r => r.json());
+        const nameEl = document.getElementById(`name-${slug}`);
+        const metaEl = document.getElementById(`meta-${slug}`);
+        const thumbEl = document.getElementById(`thumb-${slug}`);
+        if (!nameEl) return;
+        const badge = t.status === 'planning' ? ' <span class="badge badge-plan">Plan</span>' : '';
+        nameEl.innerHTML = (t.name || slug) + badge;
+        const photoCount = (t.sections || []).reduce((n, s) => n + (s.photos || []).length, 0);
+        metaEl.textContent = `${photoCount} photos · ${(t.sections || []).length} sections`;
+        if (t.thumbnail) {
+          thumbEl.outerHTML = `<img class="trip-thumb" src="${t.thumbnail}" loading="lazy" onerror="this.style.background='var(--border)'">`;
+        }
+      } catch(e) {}
+    }));
+  }
 }
 
 // ── EDITOR ───────────────────────────────────────────────────────────────
