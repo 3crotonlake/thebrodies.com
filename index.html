@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -501,6 +501,42 @@
       marker.bindPopup('<a class="map-popup" href="'+t.url+'">'+imgHtml+'<div class="map-popup-name">'+t.name+'</div><div class="map-popup-meta">'+t.meta+'</div><span class="map-popup-go">View trip →</span></a>', { maxWidth:180 });
     });
   }
+</script>
+
+<script>
+// Sync homepage thumbnails + names from admin KV so they always match what's set in the admin
+(async function() {
+  const cards = Array.from(document.querySelectorAll('a.thumb-card'));
+  await Promise.all(cards.map(async function(card) {
+    var slug = (card.getAttribute('href') || '').replace('trips/', '').replace('.html', '');
+    if (!slug) return;
+    try {
+      var trip = await fetch('/api/trip/' + slug).then(function(r) { return r.ok ? r.json() : null; });
+      if (!trip) return;
+      if (trip.thumbnail) {
+        var img = card.querySelector('img.thumb-img');
+        if (!img) {
+          img = document.createElement('img');
+          img.className = 'thumb-img';
+          card.insertBefore(img, card.firstChild);
+        }
+        img.src = trip.thumbnail;
+      }
+      if (trip.name) {
+        var nm = card.querySelector('.thumb-name');
+        if (nm) {
+          var badge = nm.querySelector('span');
+          nm.textContent = trip.name;
+          if (badge) nm.appendChild(badge);
+        }
+      }
+      if (trip.meta || trip.city) {
+        var mt = card.querySelector('.thumb-meta');
+        if (mt) mt.textContent = trip.meta || trip.city || '';
+      }
+    } catch(e) {}
+  }));
+})();
 </script>
 
 </body>
