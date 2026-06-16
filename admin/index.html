@@ -2,1006 +2,610 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Brodies Admin</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500&display=swap">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Jost',sans-serif;background:#f9f7f3;color:#1a1a18;font-weight:300;min-height:100vh}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;
+  --accent:#8b3a2a;--gold:#c9a84c;--green:#2e7d52;--red:#c0392b;
+  --surface:#fff;--radius:6px;
+}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;min-height:100vh}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400}
 
-/* LOGIN */
-#login{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:1.5rem}
-#login h1{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:600;letter-spacing:.06em}
-#login input{padding:.8rem 1.2rem;border:1px solid #ddd;width:280px;font-family:'Jost',sans-serif;font-size:1rem}
-#login button{padding:.8rem 2rem;background:#1a1a18;color:#f9f7f3;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;width:280px}
-#login-err{color:#8b2a2a;font-size:.8rem;display:none}
+/* ── LAYOUT ── */
+.view{display:none;min-height:100vh}
+.view.active{display:block}
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:1rem 1.2rem;display:flex;align-items:center;gap:0.8rem;position:sticky;top:0;z-index:50}
+header h1{font-size:1.15rem;letter-spacing:0.15em;text-transform:uppercase;flex:1}
+.back-btn{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted);padding:0.2rem 0.4rem;line-height:1}
 
-/* APP */
-#app{display:none}
-header{position:sticky;top:0;z-index:100;background:rgba(249,247,243,.96);backdrop-filter:blur(6px);border-bottom:1px solid #e0ddd8;padding:.7rem 1.5rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}
-header h1{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap}
-#trip-sel{padding:.45rem .7rem;border:1px solid #ddd;background:white;font-family:'Jost',sans-serif;font-size:.85rem;min-width:200px;cursor:pointer}
-#hdr-right{margin-left:auto;display:flex;align-items:center;gap:.8rem}
-#save-btn{padding:.55rem 1.4rem;background:#8b3a2a;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.35;pointer-events:none}
-#save-btn.active{opacity:1;pointer-events:auto}
-#save-msg{font-size:.72rem;color:#2a6b3a;display:none;white-space:nowrap}
-#view-link{font-size:.72rem;color:#7a7a72;text-decoration:underline;display:none}
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:0.4rem;padding:0.75rem 1.2rem;border:none;border-radius:var(--radius);font-family:'Jost',sans-serif;font-size:0.85rem;font-weight:500;letter-spacing:0.05em;cursor:pointer;transition:opacity 0.15s}
+.btn:active{opacity:0.75}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--ink)}
+.btn-danger{background:var(--red);color:#fff}
+.btn-green{background:var(--green);color:#fff}
+.btn-gold{background:var(--gold);color:#fff}
+.btn-full{width:100%}
+.btn-sm{padding:0.45rem 0.8rem;font-size:0.75rem}
+.btn:disabled{opacity:0.45;cursor:not-allowed}
 
-/* MAIN */
-.wrap{max-width:1080px;margin:0 auto;padding:1.2rem 1.5rem 8rem}
-#status-row{display:none;align-items:center;gap:1rem;padding:.6rem 0;margin-bottom:1rem;border-bottom:1px solid #e0ddd8}
-.tog{position:relative;width:36px;height:20px}
-.tog input{opacity:0;width:0;height:0;position:absolute}
-.tog-track{position:absolute;inset:0;background:#ccc;border-radius:20px;cursor:pointer;transition:.2s}
-.tog-track:before{content:'';position:absolute;width:14px;height:14px;left:3px;top:3px;background:white;border-radius:50%;transition:.2s}
-input:checked+.tog-track{background:#2a6b3a}
-input:checked+.tog-track:before{transform:translateX(16px)}
-#live-lbl{font-size:.8rem;color:#7a7a72}
+/* ── FORMS ── */
+.field{margin-bottom:1rem}
+.field label{display:block;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:0.35rem}
+input,select,textarea{width:100%;padding:0.7rem 0.9rem;border:1px solid var(--border);border-radius:var(--radius);font-family:'Jost',sans-serif;font-size:0.95rem;font-weight:300;background:var(--surface);color:var(--ink);-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+textarea{resize:vertical;min-height:80px}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a7a72' d='M6 8L1 3h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0.8rem center}
 
-/* TOOLBAR */
-#toolbar{display:none;margin-bottom:1.2rem;padding:.8rem;background:white;border:1px solid #e0ddd8;gap:.8rem;align-items:center;flex-wrap:wrap}
-.upload-zone{border:2px dashed #e0ddd8;padding:.8rem 1.2rem;text-align:center;cursor:pointer;flex:1;min-width:200px;transition:.2s}
-.upload-zone:hover,.upload-zone.over{border-color:#8b3a2a;background:#f3ebe9}
-.upload-zone p{font-size:.75rem;color:#7a7a72}
-#file-inp{display:none}
-.sec-inp{padding:.5rem .8rem;border:1px solid #ddd;font-family:'Cormorant Garamond',serif;font-size:1.1rem;flex:1;min-width:160px}
-.btn-ghost{padding:.5rem 1rem;border:1px solid #ddd;background:transparent;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#7a7a72;white-space:nowrap}
-.btn-ghost:hover{border-color:#8b3a2a;color:#8b3a2a}
+/* ── LOGIN ── */
+#view-login{display:flex;align-items:center;justify-content:center;padding:2rem}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:2.5rem 2rem;width:100%;max-width:360px;text-align:center}
+.login-box h1{font-size:2rem;margin-bottom:0.3rem}
+.login-box p{color:var(--muted);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2rem}
+.login-box input{text-align:center;font-size:1.2rem;letter-spacing:0.3em;margin-bottom:1rem}
+.login-error{color:var(--red);font-size:0.8rem;margin-top:0.5rem;min-height:1.2em}
 
-/* NOTICE */
-#notice{display:none;padding:.6rem 1rem;font-size:.8rem;margin-bottom:1rem;border-left:3px solid #8b3a2a;background:#f3ebe9}
-#notice.ok{border-color:#2a6b3a;background:#e9f3eb}
-#notice.err{border-color:#8b2a2a;background:#f3e9e9}
+/* ── TRIP LIST ── */
+#view-list .content{padding:1.2rem}
+.trip-list{display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.5rem}
+.trip-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.1rem;cursor:pointer;display:flex;align-items:center;gap:0.9rem;transition:border-color 0.15s}
+.trip-card:active{border-color:var(--accent)}
+.trip-thumb{width:52px;height:52px;border-radius:4px;object-fit:cover;flex-shrink:0;background:var(--border)}
+.trip-info{flex:1;min-width:0}
+.trip-info strong{display:block;font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trip-info span{font-size:0.72rem;color:var(--muted);letter-spacing:0.08em}
+.trip-arrow{color:var(--muted);font-size:1.1rem}
+.badge{display:inline-block;font-size:0.6rem;letter-spacing:0.08em;text-transform:uppercase;padding:2px 6px;border-radius:3px;margin-left:0.4rem;vertical-align:middle}
+.badge-plan{background:var(--gold);color:#fff}
+.badge-done{background:var(--green);color:#fff}
+.section-year{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);padding:0.5rem 0 0.3rem;border-bottom:1px solid var(--border);margin-bottom:0.6rem;margin-top:0.8rem}
 
-/* SECTIONS */
-.sec-block{margin-bottom:2rem}
-.sec-hdr{display:flex;align-items:center;gap:.8rem;border-bottom:2px solid #e0ddd8;padding-bottom:.4rem;margin-bottom:.8rem}
-.sec-name{flex:1;border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:600;color:#1a1a18;letter-spacing:.03em}
-.sec-name:focus{outline:none;border-bottom:2px solid #8b3a2a}
-.sec-count{font-size:.68rem;color:#7a7a72;letter-spacing:.08em;white-space:nowrap}
-.btn-del-sec{padding:.35rem .8rem;background:#8b2a2a;color:white;border:none;cursor:pointer;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+/* ── TRIP EDITOR ── */
+#view-editor .content{padding:1.2rem;padding-bottom:6rem}
+.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:0.9rem 1.2rem;display:flex;gap:0.7rem;z-index:50}
+.save-status{font-size:0.75rem;color:var(--muted);align-self:center;flex:1;text-align:right}
+.save-status.saved{color:var(--green)}
+.save-status.saving{color:var(--gold)}
+.save-status.error{color:var(--red)}
 
-/* GRID */
-.photo-grid-admin{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:6px}
-.add-tile{border:2px dashed #e0ddd8;height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;color:#aaa;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;gap:.3rem;transition:.2s}
-.add-tile:hover{border-color:#8b3a2a;color:#8b3a2a;background:#f3ebe9}
-.add-tile span.plus{font-size:1.8rem;font-weight:300;opacity:.5}
+/* ── THUMBNAIL PICKER ── */
+.thumb-row{display:flex;align-items:center;gap:0.8rem;margin-bottom:0.5rem}
+.thumb-preview{width:64px;height:64px;object-fit:cover;border-radius:4px;border:1px solid var(--border);flex-shrink:0;cursor:pointer}
+.thumb-preview-empty{width:64px;height:64px;border-radius:4px;border:2px dashed var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.4rem}
 
-/* PHOTO CARD */
-.pcard{position:relative;cursor:pointer;border:2px solid transparent;transition:border-color .15s;background:white}
-.pcard:hover{border-color:#8b3a2a}
-.pcard.sel{border-color:#8b3a2a;box-shadow:0 0 0 2px #8b3a2a}
-.pcard.dragging{opacity:.25}
-.pcard.dragover{border-color:#2a4a8b!important;border-style:dashed!important}
-.pcard img{width:100%;height:115px;object-fit:cover;display:block}
-.pcard img.err{opacity:.2;filter:grayscale(1)}
-.cap-bar{font-size:.62rem;padding:3px 5px;height:20px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;background:#faf9f7;color:#aaa}
-.cap-bar.has{color:#1a1a18}
-.drag-dot{position:absolute;bottom:22px;left:3px;color:rgba(255,255,255,.75);font-size:.85rem;cursor:grab;user-select:none;text-shadow:0 1px 3px rgba(0,0,0,.6)}
-.del-btn{position:absolute;top:3px;right:3px;background:rgba(0,0,0,.55);color:white;border:none;cursor:pointer;width:20px;height:20px;font-size:.75rem;display:none;align-items:center;justify-content:center;border-radius:2px}
-.pcard:hover .del-btn{display:flex}
-.new-badge{position:absolute;top:3px;left:3px;background:#2a6b3a;color:white;font-size:.5rem;letter-spacing:.07em;text-transform:uppercase;padding:2px 4px}
+/* ── SECTIONS ── */
+.sections-header{display:flex;justify-content:space-between;align-items:center;margin:1.5rem 0 0.8rem}
+.sections-header h2{font-size:1.1rem}
+.section-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:1rem;overflow:hidden}
+.section-head{padding:0.8rem 1rem;display:flex;align-items:center;gap:0.6rem;cursor:pointer;user-select:none}
+.section-head input{border:none;background:transparent;font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:400;flex:1;padding:0;cursor:text}
+.section-head input:focus{outline:none}
+.section-toggle{color:var(--muted);font-size:0.9rem;transition:transform 0.2s;flex-shrink:0}
+.section-toggle.open{transform:rotate(180deg)}
+.section-body{padding:0.8rem 1rem;border-top:1px solid var(--border);display:none}
+.section-body.open{display:block}
 
-/* EDIT PANEL */
-#panel{position:fixed;bottom:0;left:0;right:0;z-index:200;background:white;border-top:2px solid #8b3a2a;padding:.9rem 1.5rem;display:none;align-items:center;gap:1.2rem;box-shadow:0 -4px 18px rgba(0,0,0,.1);flex-wrap:wrap}
-#panel.open{display:flex}
-#panel-img{width:72px;height:58px;object-fit:cover;border:1px solid #ddd;flex-shrink:0}
-#panel-file{font-size:.58rem;color:#aaa;margin-top:2px;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.pf{display:flex;flex-direction:column;gap:.25rem}
-.pf label{font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:#aaa}
-#panel-sec{padding:.4rem .6rem;border:1px solid #ddd;background:white;font-family:'Jost',sans-serif;font-size:.82rem;cursor:pointer;min-width:150px}
-#panel-cap{padding:.4rem .6rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.82rem;resize:none;height:34px;width:320px;background:#f9f7f3}
-#panel-cap:focus,#panel-sec:focus{outline:2px solid #8b3a2a;background:white}
-#panel-close{background:none;border:none;cursor:pointer;font-size:1.4rem;color:#aaa;margin-left:auto;align-self:flex-start}
-#panel-close:hover{color:#1a1a18}
+/* ── PHOTO GRID ── */
+.photo-grid-admin{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-bottom:0.8rem}
+@media(min-width:480px){.photo-grid-admin{grid-template-columns:repeat(4,1fr)}}
+.photo-thumb-wrap{position:relative;aspect-ratio:1}
+.photo-thumb-wrap img{width:100%;height:100%;object-fit:cover;border-radius:4px;display:block}
+.photo-del{position:absolute;top:3px;right:3px;width:22px;height:22px;border-radius:50%;background:rgba(192,57,43,0.85);border:none;color:#fff;font-size:0.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.photo-caption-input{width:100%;font-size:0.72rem;padding:0.3rem 0.4rem;border:1px solid var(--border);border-radius:3px;margin-top:0.3rem;font-family:'Jost',sans-serif;background:var(--cream)}
 
-.spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:sp .6s linear infinite;vertical-align:middle;margin-right:4px}
-@keyframes sp{to{transform:rotate(360deg)}}
+/* ── UPLOAD ZONE ── */
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius);padding:1.2rem;text-align:center;cursor:pointer;transition:border-color 0.2s;position:relative}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--accent)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer}
+.upload-zone p{font-size:0.8rem;color:var(--muted)}
+.upload-zone .icon{font-size:1.8rem;margin-bottom:0.4rem}
+.upload-progress{margin-top:0.6rem;font-size:0.75rem;color:var(--muted)}
+
+/* ── NEW TRIP MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border-radius:12px 12px 0 0;padding:1.5rem 1.2rem 2.5rem;width:100%;max-width:500px}
+.modal h2{font-size:1.4rem;margin-bottom:1.2rem}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:5rem;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:0.6rem 1.2rem;border-radius:20px;font-size:0.8rem;z-index:300;opacity:0;transition:opacity 0.2s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login">
-  <h1>The Brodies</h1>
-  <p style="font-size:.75rem;letter-spacing:.1em;color:#7a7a72;text-transform:uppercase">Site Admin</p>
-  <input type="password" id="pw" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
-  <button onclick="doLogin()">Enter</button>
-  <div id="login-err">Incorrect password</div>
+<!-- ── LOGIN ──────────────────────────────────────────────────────────── -->
+<div id="view-login" class="view active">
+  <div class="login-box">
+    <h1>The Brodies</h1>
+    <p>Admin</p>
+    <input type="password" id="pw-input" placeholder="••••••" autocomplete="current-password">
+    <button class="btn btn-primary btn-full" onclick="login()">Enter</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
 </div>
 
-<!-- APP -->
-<div id="app">
+<!-- ── TRIP LIST ───────────────────────────────────────────────────────── -->
+<div id="view-list" class="view">
   <header>
-    <h1>Brodies Admin</h1>
-    <select id="trip-sel" onchange="loadTrip()">
-      <option value="">— Select a trip —</option>
-    </select>
-    <div id="hdr-right">
-      <a id="view-link" href="#" target="_blank">View live ↗</a>
-      <span id="save-msg">✓ Published</span>
-      <button onclick="showNewTripModal()" style="padding:.55rem 1.4rem;background:#2a6b3a;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase">+ New Trip</button><button id="preview-btn" onclick="doPreview()" style="padding:.55rem 1.4rem;background:#2a4a8b;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;display:none">Preview</button><button id="save-btn" onclick="doSave()">Save &amp; Publish</button>
-    </div>
+    <h1>Trips</h1>
+    <button class="btn btn-primary btn-sm" onclick="showNewTrip()">+ New</button>
   </header>
-
-  <div class="wrap">
-    <div id="notice"></div>
-
-    <div id="status-row">
-      <label class="tog"><input type="checkbox" id="live-tog" onchange="toggleLive()"><span class="tog-track"></span></label>
-      <span id="live-lbl">Planning</span>
+  <div class="content">
+    <div id="trip-list-inner">
+      <div style="text-align:center;padding:2rem;color:var(--muted)">Loading…</div>
     </div>
-
-    <div id="toolbar">
-      <input type="file" id="file-inp" multiple accept="image/*" onchange="handleFiles(this.files,null);this.value=''">
-      <input class="sec-inp" id="sec-inp" placeholder="New section (e.g. Paris)…" onkeydown="if(event.key==='Enter')addSection()">
-      <button class="btn-ghost" onclick="addSection()">+ Add Section</button>
-    </div>
-
-    <div id="editor"></div>
   </div>
 </div>
 
-<!-- EDIT PANEL -->
-<div id="panel">
-  <div style="flex-shrink:0">
-    <img id="panel-img" src="" alt="">
-    <div id="panel-file"></div>
+<!-- ── TRIP EDITOR ─────────────────────────────────────────────────────── -->
+<div id="view-editor" class="view">
+  <header>
+    <button class="back-btn" onclick="showList()">‹</button>
+    <h1 id="editor-title">Edit Trip</h1>
+  </header>
+  <div class="content">
+    <!-- Basic info -->
+    <div class="field">
+      <label>Trip Name</label>
+      <input type="text" id="f-name" placeholder="London">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem">
+      <div class="field">
+        <label>Year</label>
+        <input type="number" id="f-year" placeholder="2025">
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <select id="f-status">
+          <option value="completed">Completed</option>
+          <option value="planning">Planning</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem">
+      <div class="field">
+        <label>Latitude</label>
+        <input type="number" step="any" id="f-lat" placeholder="51.5">
+      </div>
+      <div class="field">
+        <label>Longitude</label>
+        <input type="number" step="any" id="f-lng" placeholder="-0.12">
+      </div>
+    </div>
+    <div class="field">
+      <label>Notes / Intro</label>
+      <textarea id="f-notes" placeholder="A short description of the trip…"></textarea>
+    </div>
+
+    <!-- Thumbnail -->
+    <div class="field">
+      <label>Cover Photo</label>
+      <div class="thumb-row">
+        <div id="thumb-preview-wrap">
+          <div class="thumb-preview-empty" onclick="pickThumbnail()">+</div>
+        </div>
+        <div style="flex:1">
+          <input type="text" id="f-thumbnail" placeholder="/images/2025_london/cover.jpg" style="margin-bottom:0.4rem">
+          <button class="btn btn-ghost btn-sm btn-full" onclick="pickThumbnailFromPhotos()">Pick from photos ↓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sections -->
+    <div class="sections-header">
+      <h2>Sections</h2>
+      <button class="btn btn-ghost btn-sm" onclick="addSection()">+ Section</button>
+    </div>
+    <div id="sections-container"></div>
   </div>
-  <div class="pf">
-    <label>Section</label>
-    <select id="panel-sec" onchange="panelSecChange()"></select>
+
+  <div class="save-bar">
+    <button class="btn btn-danger btn-sm" onclick="confirmDelete()">Delete</button>
+    <button class="btn btn-primary" style="flex:1" onclick="saveTrip()">Save Trip</button>
+    <span class="save-status" id="save-status"></span>
   </div>
-  <div class="pf">
-    <label>Caption / Note</label>
-    <textarea id="panel-cap" placeholder="Add a caption…" oninput="panelCapInput()"></textarea>
-  </div>
-  <button onclick="setThumbnail()" style="padding:.4rem .9rem;background:#1a1a18;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;align-self:center">★ Set as thumbnail</button><button id="panel-close" onclick="closePanel()">×</button>
 </div>
+
+<!-- ── NEW TRIP MODAL ──────────────────────────────────────────────────── -->
+<div class="modal-overlay" id="modal-new" onclick="closeModal(event)">
+  <div class="modal">
+    <h2>New Trip</h2>
+    <div class="field">
+      <label>Trip Name</label>
+      <input type="text" id="new-name" placeholder="Iceland">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.8rem">
+      <div class="field">
+        <label>Year</label>
+        <input type="number" id="new-year" placeholder="2026">
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <select id="new-status">
+          <option value="completed">Completed</option>
+          <option value="planning">Planning</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Slug (URL key)</label>
+      <input type="text" id="new-slug" placeholder="iceland-2026">
+    </div>
+    <button class="btn btn-primary btn-full" onclick="createTrip()">Create Trip</button>
+  </div>
+</div>
+
+<!-- ── TOAST ─────────────────────────────────────────────────────────── -->
+<div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG ────────────────────────────────────────────────────────
-var REPO = '3crotonlake/thebrodies.com';
-var PW   = '10520';
-var TOK  = ['github_pat_11CB22JLY0','WDPnax2MY9VU_qwWUlHsQL','cEOC3FUpEZH0m5t6WH8D5a','ESMS6sVp3mkfQYGJIOF3Uo3iFDkB'].join('');
-var HOOK = 'https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/2a328602-f7bb-476d-9cd3-7b07d570bad7';
+const PASSWORD = '10520';
+const API = '';  // same origin via Worker
+let currentSlug = null;
+let currentTrip = null;
+let uploadFolder = null;
 
-var TRIPS = [
-  {v:'london-oxford-paris-2025',   l:'London / Oxford / Paris 2025',   f:'2025_london-oxford-paris'},
-  {v:'edinburgh-york-london-2026', l:'Edinburgh / York / London 2026',  f:'2026_edinburgh'},
-  {v:'iceland-2026',               l:'Iceland 2026 (Girls Trip)',       f:'2026_iceland'},
-  {v:'memphis-2026',               l:'Memphis 2026',                    f:'2026_Memphis'},
-  {v:'oxford-2026',                l:'Oxford 2026',                     f:'2026_oxford'},
-  {v:'switzerland-sweden-2025',    l:'Switzerland & Sweden 2025',       f:'2025_switzerland-sweden'},
-  {v:'utah-2025',                  l:'Utah 2025 (Mighty 5)',            f:'2025_utah'},
-  {v:'florence-rome-2025',         l:'Florence / Rome 2025',            f:'2025_FlorenceRome'},
-  {v:'charleston-2025',            l:'Charleston 2025',                 f:'2025_charleston'},
-  {v:'belize-2025',                l:'Belize 2025',                     f:'2025_Belize'},
-  {v:'cambodia-2024',              l:'Cambodia 2024',                   f:'2024_cambodia'},
-  {v:'ireland-2024',               l:'Ireland 2024',                    f:'2024_ireland'},
-  {v:'mont-tremblant-2024',        l:'Mont Tremblant 2024',             f:'2024_MontTremblant'},
-  {v:'sedona-2023',                l:'Sedona & Grand Canyon 2023',      f:'2023_sedona'},
-  {v:'puerto-rico-2023',           l:'Puerto Rico 2023',                f:'2023_PuertoRico'},
-  {v:'thailand-cambodia-2023',     l:'Thailand & Cambodia 2023',        f:'2023_thailand-cambodia'},
-  {v:'london-2022',                l:'London 2022',                     f:'2022_london'},
-  {v:'spain-portugal-2022',        l:'Spain & Portugal 2022',           f:'2022_spain-portugal'},
-  {v:'acadia-2021',                l:'Acadia 2021',                     f:'2021_acadia'},
-  {v:'spain-2019',                 l:'Spain 2019',                      f:'2019_spain'}
-];
-
-// ── STATE ─────────────────────────────────────────────────────────
-var trip = null, tripFolder = null, tripSHA = '', tripHTML = '';
-var sections = []; // [{name, photos:[{src,caption,isNew}]}]
-var dirty = false;
-var sel = null; // {si,pi} selected card
-var drag = null;
-
-// ── BOOT ──────────────────────────────────────────────────────────
-window.onload = function() {
-  buildDropdown();
-  if (localStorage.getItem('ba') === '1') {
-    showApp();
-    var lt = localStorage.getItem('bt');
-    if (lt) { document.getElementById('trip-sel').value = lt; if (document.getElementById('trip-sel').value === lt) loadTrip(); }
+// ── AUTH ────────────────────────────────────────────────────────────────
+function login() {
+  const pw = document.getElementById('pw-input').value;
+  if (pw === PASSWORD) {
+    localStorage.setItem('ba', '1');
+    showList();
+  } else {
+    document.getElementById('login-error').textContent = 'Incorrect password';
+    document.getElementById('pw-input').value = '';
   }
-};
-window.onbeforeunload = function() { if (dirty) return 'Unsaved changes — Save & Publish first.'; };
+}
+document.getElementById('pw-input').addEventListener('keydown', e => { if (e.key === 'Enter') login(); });
 
-function buildDropdown() {
-  var s = document.getElementById('trip-sel');
-  TRIPS.forEach(function(t) {
-    var o = document.createElement('option'); o.value = t.v; o.textContent = t.l; s.appendChild(o);
-  });
+function showView(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-function doLogin() {
-  if (document.getElementById('pw').value === PW) {
-    localStorage.setItem('ba','1'); showApp();
-  } else { document.getElementById('login-err').style.display='block'; }
-}
-function showApp() {
-  document.getElementById('login').style.display='none';
-  document.getElementById('app').style.display='block';
-}
+// ── TRIP LIST ────────────────────────────────────────────────────────────
+async function showList() {
+  if (!localStorage.getItem('ba')) { showView('view-login'); return; }
+  showView('view-list');
+  const resp = await fetch('/api/trips', { headers: { 'X-Admin-Password': PASSWORD } });
+  const slugs = await resp.json();
 
-// ── LOAD TRIP ─────────────────────────────────────────────────────
-async function loadTrip() {
-  var v = document.getElementById('trip-sel').value;
-  if (!v) return;
-  trip = v;
-  var info = TRIPS.find(function(t){return t.v===v;});
-  tripFolder = info ? info.f : v;
-  localStorage.setItem('bt', v);
-  closePanel(); dirty = false; setSaveDirty(false);
+  // Load all trip summaries
+  const trips = await Promise.all(slugs.map(s => fetch(`/api/trip/${s}`).then(r => r.json()).catch(() => null)));
 
-  var url = '/trips/'+v+'.html';
-  document.getElementById('view-link').href = url+'?v='+Date.now();
-  document.getElementById('view-link').style.display = 'inline';
-  document.getElementById('editor').innerHTML = '<p style="padding:2rem;color:#aaa;font-size:.85rem">Loading…</p>';
-  document.getElementById('status-row').style.display = 'none';
-  document.getElementById('toolbar').style.display = 'none';
-  hideNotice();
-
-  try {
-    var d = await ghGet('trips/'+v+'.html');
-    tripSHA = d.sha;
-    tripHTML = atob64(d.content);
-    sections = parseHTML(tripHTML);
-    render();
-    setLiveToggle(tripHTML);
-    document.getElementById('status-row').style.display = 'flex';
-    document.getElementById('toolbar').style.display = 'flex';
-    document.getElementById('preview-btn').style.display = 'inline';
-  } catch(e) { showNotice('Could not load trip: '+e.message, 'err'); document.getElementById('editor').innerHTML=''; }
-}
-
-// ── PARSE HTML ────────────────────────────────────────────────────
-function parseHTML(html) {
-  var doc = new DOMParser().parseFromString(html,'text/html');
-  var result = [], cur = null;
-  doc.body.querySelectorAll('h2.city-name, div.photo-grid').forEach(function(el) {
-    if (el.tagName==='H2') {
-      cur = {name:el.textContent.trim(), photos:[]};
-      result.push(cur);
-    } else if (el.tagName==='DIV') {
-      if (!cur) { cur={name:null,photos:[]}; result.push(cur); }
-      el.querySelectorAll('.photo-item').forEach(function(item) {
-        var img = item.querySelector('img');
-        if (!img||!img.getAttribute('src')) return;
-        var capEl = item.querySelector('p.photo-caption,figcaption');
-        var cap = capEl ? capEl.textContent.trim() : (img.getAttribute('alt')||'');
-        cur.photos.push({src:img.getAttribute('src'), caption:cap, isNew:false});
-      });
-    }
-  });
-  return result;
-}
-
-// ── BUILD HTML ────────────────────────────────────────────────────
-function buildHTML() {
-  var body = '';
-  sections.forEach(function(sec) {
-    if (sec.name) body += '<h2 class="city-name">'+esc(sec.name)+'</h2>\n';
-    if (sec.photos.length) {
-      body += '<div class="photo-grid">\n';
-      sec.photos.forEach(function(p) {
-        body += '<div class="photo-item"><img src="'+p.src+'" alt="'+esc(p.caption)+'" loading="lazy">';
-        if (p.caption) body += '<p class="photo-caption">'+esc(p.caption)+'</p>';
-        body += '</div>\n';
-      });
-      body += '</div>\n';
-    }
+  // Group by year
+  const byYear = {};
+  trips.filter(Boolean).forEach(t => {
+    const y = t.year || 'Planning';
+    if (!byYear[y]) byYear[y] = [];
+    byYear[y].push(t);
   });
 
-  // Find end of hero div (depth tracking)
-  var heroStart = tripHTML.indexOf('<div class="hero">');
-  var pos = heroStart, depth = 0, heroEnd = -1;
-  while (pos < tripHTML.length && heroEnd < 0) {
-    if (tripHTML.substr(pos,4)==='<div') depth++;
-    else if (tripHTML.substr(pos,6)==='</div>') { depth--; if(depth===0) heroEnd = pos+6; }
-    pos++;
+  const years = Object.keys(byYear).sort((a, b) => b - a);
+  let html = '';
+  years.forEach(y => {
+    html += `<div class="section-year">${y}</div><div class="trip-list">`;
+    byYear[y].forEach(t => {
+      const badge = t.status === 'planning' ? `<span class="badge badge-plan">Plan</span>` : '';
+      const thumb = t.thumbnail
+        ? `<img class="trip-thumb" src="${t.thumbnail}" loading="lazy" onerror="this.style.display='none'">`
+        : `<div class="trip-thumb"></div>`;
+      const photoCount = (t.sections || []).reduce((n, s) => n + (s.photos || []).length, 0);
+      html += `<div class="trip-card" onclick="editTrip('${t.slug}')">
+        ${thumb}
+        <div class="trip-info">
+          <strong>${t.name || t.slug}${badge}</strong>
+          <span>${photoCount} photos · ${(t.sections || []).length} sections</span>
+        </div>
+        <span class="trip-arrow">›</span>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  document.getElementById('trip-list-inner').innerHTML = html;
+}
+
+// ── EDITOR ───────────────────────────────────────────────────────────────
+async function editTrip(slug) {
+  showView('view-editor');
+  currentSlug = slug;
+  document.getElementById('editor-title').textContent = 'Loading…';
+  setSaveStatus('');
+
+  const resp = await fetch(`/api/trip/${slug}`);
+  currentTrip = await resp.json();
+  uploadFolder = `images/${slug.replace(/-(\d{4})$/, '_$1').replace(/-/g, '_').replace('_', '_')}`;
+
+  // Derive image folder from slug: iceland-2026 → 2026_iceland
+  const parts = slug.match(/^(.*)-(\d{4})$/);
+  if (parts) uploadFolder = `images/${parts[2]}_${parts[1].replace(/-/g, '_')}`;
+  else uploadFolder = `images/${slug.replace(/-/g, '_')}`;
+
+  document.getElementById('editor-title').textContent = currentTrip.name || slug;
+  document.getElementById('f-name').value = currentTrip.name || '';
+  document.getElementById('f-year').value = currentTrip.year || '';
+  document.getElementById('f-status').value = currentTrip.status || 'completed';
+  document.getElementById('f-lat').value = currentTrip.lat || '';
+  document.getElementById('f-lng').value = currentTrip.lng || '';
+  document.getElementById('f-notes').value = currentTrip.notes || '';
+  document.getElementById('f-thumbnail').value = currentTrip.thumbnail || '';
+  updateThumbPreview(currentTrip.thumbnail);
+
+  renderSections(currentTrip.sections || []);
+}
+
+function updateThumbPreview(src) {
+  const wrap = document.getElementById('thumb-preview-wrap');
+  if (src) {
+    wrap.innerHTML = `<img class="thumb-preview" src="${src}" onclick="pickThumbnailFromPhotos()">`;
+  } else {
+    wrap.innerHTML = `<div class="thumb-preview-empty" onclick="pickThumbnailFromPhotos()">📷</div>`;
   }
-  var footerStart = tripHTML.indexOf('<footer');
-  if (footerStart < 0) footerStart = tripHTML.indexOf('
-<!-- NEW TRIP MODAL -->
-<div id="new-trip-modal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);align-items:center;justify-content:center">
-  <div style="background:white;padding:2rem;width:480px;max-width:95vw;max-height:90vh;overflow-y:auto">
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1.5rem">New Trip</h2>
-    <div style="display:flex;flex-direction:column;gap:1rem">
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Trip Name *</label>
-        <input id="nt-name" placeholder="e.g. Edinburgh, York & London" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Year *</label>
-          <input id="nt-year" type="number" placeholder="2026" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Status *</label>
-          <select id="nt-status" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-            <option value="planning">Planning</option>
-            <option value="completed">Completed</option>
-            <option value="future">Future (no year)</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Location / Meta Text *</label>
-        <input id="nt-meta" placeholder="e.g. Scotland & England · 2026" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Route (optional)</label>
-        <input id="nt-route" placeholder="e.g. Edinburgh · York · London" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Map Latitude</label>
-          <input id="nt-lat" placeholder="e.g. 55.9" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Map Longitude</label>
-          <input id="nt-lng" placeholder="e.g. -3.2" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Image Folder Name</label>
-        <input id="nt-folder" placeholder="e.g. 2026_paris" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        <p style="font-size:.62rem;color:#aaa;margin-top:.3rem">Used for storing photos. Suggested: YEAR_cityname</p>
-      </div>
-      <div id="nt-error" style="color:#8b2a2a;font-size:.78rem;display:none"></div>
-      <div style="display:flex;gap:.8rem;justify-content:flex-end;margin-top:.5rem">
-        <button onclick="hideNewTripModal()" style="padding:.6rem 1.2rem;border:1px solid #ddd;background:transparent;cursor:pointer;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#7a7a72">Cancel</button>
-        <button onclick="createNewTrip()" id="nt-create-btn" style="padding:.6rem 1.4rem;background:#8b3a2a;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase">Create Trip</button>
+}
+
+document.getElementById('f-thumbnail').addEventListener('input', function() {
+  updateThumbPreview(this.value);
+});
+
+// ── SECTIONS ─────────────────────────────────────────────────────────────
+function renderSections(sections) {
+  const container = document.getElementById('sections-container');
+  container.innerHTML = '';
+  sections.forEach((sec, i) => renderSection(container, sec, i));
+}
+
+function renderSection(container, sec, idx) {
+  const div = document.createElement('div');
+  div.className = 'section-block';
+  div.dataset.idx = idx;
+
+  const photos = sec.photos || [];
+  const photosHtml = photos.map((p, pi) => `
+    <div class="photo-thumb-wrap" data-pi="${pi}">
+      <img src="${p.src}" loading="lazy" onerror="this.parentElement.style.opacity='0.3'">
+      <button class="photo-del" onclick="removePhoto(${idx},${pi})">×</button>
+      <input class="photo-caption-input" type="text" placeholder="Caption…" value="${escAttr(p.caption || '')}" onchange="updateCaption(${idx},${pi},this.value)">
+    </div>
+  `).join('');
+
+  div.innerHTML = `
+    <div class="section-head" onclick="toggleSection(this)">
+      <input type="text" value="${escAttr(sec.title || '')}" placeholder="Section title…" onclick="event.stopPropagation()" onchange="updateSectionTitle(${idx},this.value)">
+      <button class="btn btn-danger btn-sm" onclick="event.stopPropagation();removeSection(${idx})" style="flex-shrink:0">×</button>
+      <span class="section-toggle">▾</span>
+    </div>
+    <div class="section-body open">
+      <div class="photo-grid-admin" id="pgrid-${idx}">${photosHtml}</div>
+      <div class="upload-zone" id="uzone-${idx}">
+        <input type="file" accept="image/*" multiple onchange="handleUpload(event,${idx})">
+        <div class="icon">📷</div>
+        <p>Tap to add photos</p>
+        <div class="upload-progress" id="uprog-${idx}"></div>
       </div>
     </div>
-  </div>
-</div>
-</body>');
-
-  if (heroEnd > 0 && footerStart > heroEnd) {
-    return tripHTML.slice(0,heroEnd) + '\n' + body + tripHTML.slice(footerStart);
-  }
-  return tripHTML.replace('
-<!-- NEW TRIP MODAL -->
-<div id="new-trip-modal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);align-items:center;justify-content:center">
-  <div style="background:white;padding:2rem;width:480px;max-width:95vw;max-height:90vh;overflow-y:auto">
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1.5rem">New Trip</h2>
-    <div style="display:flex;flex-direction:column;gap:1rem">
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Trip Name *</label>
-        <input id="nt-name" placeholder="e.g. Edinburgh, York & London" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Year *</label>
-          <input id="nt-year" type="number" placeholder="2026" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Status *</label>
-          <select id="nt-status" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-            <option value="planning">Planning</option>
-            <option value="completed">Completed</option>
-            <option value="future">Future (no year)</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Location / Meta Text *</label>
-        <input id="nt-meta" placeholder="e.g. Scotland & England · 2026" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Route (optional)</label>
-        <input id="nt-route" placeholder="e.g. Edinburgh · York · London" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Map Latitude</label>
-          <input id="nt-lat" placeholder="e.g. 55.9" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Map Longitude</label>
-          <input id="nt-lng" placeholder="e.g. -3.2" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Image Folder Name</label>
-        <input id="nt-folder" placeholder="e.g. 2026_paris" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        <p style="font-size:.62rem;color:#aaa;margin-top:.3rem">Used for storing photos. Suggested: YEAR_cityname</p>
-      </div>
-      <div id="nt-error" style="color:#8b2a2a;font-size:.78rem;display:none"></div>
-      <div style="display:flex;gap:.8rem;justify-content:flex-end;margin-top:.5rem">
-        <button onclick="hideNewTripModal()" style="padding:.6rem 1.2rem;border:1px solid #ddd;background:transparent;cursor:pointer;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#7a7a72">Cancel</button>
-        <button onclick="createNewTrip()" id="nt-create-btn" style="padding:.6rem 1.4rem;background:#8b3a2a;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase">Create Trip</button>
-      </div>
-    </div>
-  </div>
-</div>
-</body>', body+'
-<!-- NEW TRIP MODAL -->
-<div id="new-trip-modal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);align-items:center;justify-content:center">
-  <div style="background:white;padding:2rem;width:480px;max-width:95vw;max-height:90vh;overflow-y:auto">
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1.5rem">New Trip</h2>
-    <div style="display:flex;flex-direction:column;gap:1rem">
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Trip Name *</label>
-        <input id="nt-name" placeholder="e.g. Edinburgh, York & London" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Year *</label>
-          <input id="nt-year" type="number" placeholder="2026" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Status *</label>
-          <select id="nt-status" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-            <option value="planning">Planning</option>
-            <option value="completed">Completed</option>
-            <option value="future">Future (no year)</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Location / Meta Text *</label>
-        <input id="nt-meta" placeholder="e.g. Scotland & England · 2026" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Route (optional)</label>
-        <input id="nt-route" placeholder="e.g. Edinburgh · York · London" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Map Latitude</label>
-          <input id="nt-lat" placeholder="e.g. 55.9" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Map Longitude</label>
-          <input id="nt-lng" placeholder="e.g. -3.2" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Image Folder Name</label>
-        <input id="nt-folder" placeholder="e.g. 2026_paris" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        <p style="font-size:.62rem;color:#aaa;margin-top:.3rem">Used for storing photos. Suggested: YEAR_cityname</p>
-      </div>
-      <div id="nt-error" style="color:#8b2a2a;font-size:.78rem;display:none"></div>
-      <div style="display:flex;gap:.8rem;justify-content:flex-end;margin-top:.5rem">
-        <button onclick="hideNewTripModal()" style="padding:.6rem 1.2rem;border:1px solid #ddd;background:transparent;cursor:pointer;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#7a7a72">Cancel</button>
-        <button onclick="createNewTrip()" id="nt-create-btn" style="padding:.6rem 1.4rem;background:#8b3a2a;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase">Create Trip</button>
-      </div>
-    </div>
-  </div>
-</div>
-</body>');
+  `;
+  container.appendChild(div);
 }
 
-// ── RENDER ────────────────────────────────────────────────────────
-function render() {
-  var ed = document.getElementById('editor');
-  ed.innerHTML = '';
-  sections.forEach(function(sec,si) { ed.appendChild(makeSection(sec,si)); });
+function toggleSection(head) {
+  const body = head.nextElementSibling;
+  const toggle = head.querySelector('.section-toggle');
+  body.classList.toggle('open');
+  toggle.classList.toggle('open');
 }
 
-function makeSection(sec,si) {
-  var block = document.createElement('div');
-  block.className = 'sec-block';
-
-  var hdr = document.createElement('div'); hdr.className = 'sec-hdr';
-  if (sec.name !== null) {
-    var ni = document.createElement('input'); ni.className='sec-name'; ni.value=sec.name; ni.placeholder='Section name…';
-    ni.oninput = function(){ sec.name=ni.value; setSaveDirty(true); rebuildPanelSecs(); };
-    hdr.appendChild(ni);
-  }
-  var ct = document.createElement('span'); ct.className='sec-count'; ct.textContent=sec.photos.length+' photo'+(sec.photos.length===1?'':'s');
-  hdr.appendChild(ct);
-
-  if (sec.name !== null) {
-    var db = document.createElement('button'); db.className='btn-del-sec'; db.textContent='Remove section';
-    db.onclick = function() {
-      if (!confirm('Remove "'+sec.name+'" and all its photos?')) return;
-      sections.splice(si,1); closePanel(); render(); setSaveDirty(true);
-    };
-    hdr.appendChild(db);
-  }
-  block.appendChild(hdr);
-
-  var grid = document.createElement('div'); grid.className='photo-grid-admin';
-  sec.photos.forEach(function(p,pi) { grid.appendChild(makeCard(p,si,pi)); });
-
-  // Add tile
-  var add = document.createElement('div'); add.className='add-tile';
-  add.innerHTML='<span class="plus">+</span><span>Add Photos</span>';
-  add.onclick = function() { window._upSi=si; document.getElementById('file-inp').click(); };
-  grid.appendChild(add);
-  block.appendChild(grid);
-  return block;
-}
-
-function makeCard(photo,si,pi) {
-  var c = document.createElement('div'); c.className='pcard'; c.draggable=true;
-  c.dataset.si=si; c.dataset.pi=pi;
-
-  var img = document.createElement('img'); img.src=photo.src;
-  img.onerror=function(){img.classList.add('err');};
-  c.appendChild(img);
-
-  if (photo.isNew) { var nb=document.createElement('div'); nb.className='new-badge'; nb.textContent='New'; c.appendChild(nb); }
-
-  var dh=document.createElement('span'); dh.className='drag-dot'; dh.textContent='⠿'; dh.title='Drag to reorder'; c.appendChild(dh);
-
-  var db=document.createElement('button'); db.className='del-btn'; db.textContent='✕'; db.title='Remove';
-  db.onclick=function(e){ e.stopPropagation(); if(!confirm('Remove this photo?')) return;
-    sections[si].photos.splice(pi,1); if(sel&&sel.si===si&&sel.pi===pi) closePanel();
-    render(); setSaveDirty(true); };
-  c.appendChild(db);
-
-  var cb=document.createElement('div'); cb.className='cap-bar'+(photo.caption?' has':'');
-  cb.textContent=photo.caption||'tap to add caption…'; c.appendChild(cb);
-
-  c.onclick=function(e){ if(e.target===db) return; openPanel(si,pi,c); };
-
-  // Drag
-  c.ondragstart=function(e){ drag={si:si,pi:pi}; e.dataTransfer.effectAllowed='move'; setTimeout(function(){c.classList.add('dragging');},0); };
-  c.ondragend=function(){ c.classList.remove('dragging'); document.querySelectorAll('.dragover').forEach(function(x){x.classList.remove('dragover');}); drag=null; };
-  c.ondragover=function(e){ e.preventDefault(); if(drag) c.classList.add('dragover'); };
-  c.ondragleave=function(){ c.classList.remove('dragover'); };
-  c.ondrop=function(e){ e.preventDefault(); c.classList.remove('dragover');
-    if(!drag||( drag.si===si&&drag.pi===pi)) return;
-    var moved=sections[drag.si].photos.splice(drag.pi,1)[0];
-    var dst=pi; if(drag.si===si&&drag.pi<pi) dst--;
-    sections[si].photos.splice(dst,0,moved);
-    closePanel(); render(); setSaveDirty(true); };
-  return c;
-}
-
-// ── PANEL ─────────────────────────────────────────────────────────
-function openPanel(si,pi,cardEl) {
-  document.querySelectorAll('.pcard.sel').forEach(function(c){c.classList.remove('sel');});
-  if (sel&&sel.si===si&&sel.pi===pi) { closePanel(); return; }
-  sel={si:si,pi:pi}; cardEl.classList.add('sel');
-  var p=sections[si].photos[pi];
-  document.getElementById('panel-img').src=p.src;
-  document.getElementById('panel-file').textContent=p.src.split('/').pop();
-  document.getElementById('panel-cap').value=p.caption||'';
-  rebuildPanelSecs();
-  document.getElementById('panel-sec').value=si;
-  document.getElementById('panel').classList.add('open');
-}
-function closePanel() {
-  sel=null;
-  document.querySelectorAll('.pcard.sel').forEach(function(c){c.classList.remove('sel');});
-  document.getElementById('panel').classList.remove('open');
-}
-function rebuildPanelSecs() {
-  var s=document.getElementById('panel-sec'), v=s.value; s.innerHTML='';
-  sections.forEach(function(sec,i){ var o=document.createElement('option'); o.value=i; o.textContent=sec.name||'(no heading)'; s.appendChild(o); });
-  if(sel) s.value=sel.si;
-}
-function panelCapInput() {
-  if(!sel) return;
-  var v=document.getElementById('panel-cap').value;
-  sections[sel.si].photos[sel.pi].caption=v;
-  var card=document.querySelector('.pcard.sel');
-  if(card){ var cb=card.querySelector('.cap-bar'); cb.textContent=v||'tap to add caption…'; cb.className='cap-bar'+(v?' has':''); }
-  setSaveDirty(true);
-}
-function panelSecChange() {
-  if(!sel) return;
-  var newSi=parseInt(document.getElementById('panel-sec').value);
-  if(newSi===sel.si) return;
-  var moved=sections[sel.si].photos.splice(sel.pi,1)[0];
-  sections[newSi].photos.push(moved);
-  closePanel(); render(); setSaveDirty(true);
-}
-
-// ── SECTION ───────────────────────────────────────────────────────
 function addSection() {
-  var inp=document.getElementById('sec-inp'), name=inp.value.trim();
-  if(!name){inp.focus();return;}
-  sections.push({name:name,photos:[]}); inp.value='';
-  render(); setSaveDirty(true);
-  document.querySelectorAll('.sec-block').forEach(function(b,i){ if(i===sections.length-1) b.scrollIntoView({behavior:'smooth',block:'start'}); });
+  if (!currentTrip.sections) currentTrip.sections = [];
+  const newSec = { title: 'New Section', photos: [] };
+  currentTrip.sections.push(newSec);
+  const container = document.getElementById('sections-container');
+  renderSection(container, newSec, currentTrip.sections.length - 1);
+  // Scroll to new section
+  container.lastElementChild.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-// ── UPLOAD ────────────────────────────────────────────────────────
-function sanitize(name) {
-  var dot=name.lastIndexOf('.');
-  var ext=dot>=0?name.slice(dot).toLowerCase():'';
-  var base=name.slice(0,dot>=0?dot:name.length);
-  return base.replace(/[^a-zA-Z0-9_-]/g,'_').replace(/_+/g,'_').replace(/^_|_$/g,'')+ext;
+function removeSection(idx) {
+  if (!confirm('Remove this section and all its photos?')) return;
+  currentTrip.sections.splice(idx, 1);
+  renderSections(currentTrip.sections);
+  toast('Section removed');
 }
 
-async function handleFiles(fileList, targetSi) {
-  var files=Array.from(fileList).filter(function(f){return f.type.indexOf('image/')===0;});
-  if(!files.length) return;
-  var si = (targetSi!==null&&targetSi!==undefined) ? targetSi :
-           (window._upSi!==undefined) ? window._upSi :
-           (sections.length>0 ? sections.length-1 : -1);
-  window._upSi=undefined;
-  if(si<0||!sections[si]){ sections.push({name:null,photos:[]}); si=0; }
+function updateSectionTitle(idx, val) {
+  if (!currentTrip.sections[idx]) return;
+  currentTrip.sections[idx].title = val;
+}
 
-  showNotice('Uploading '+files.length+' photo'+(files.length===1?'':'s')+'…');
+function updateCaption(sIdx, pIdx, val) {
+  currentTrip.sections[sIdx].photos[pIdx].caption = val;
+}
 
-  var uploaded=[];
-  for(var i=0;i<files.length;i++) {
-    var f=files[i], safe=sanitize(f.name);
+function removePhoto(sIdx, pIdx) {
+  currentTrip.sections[sIdx].photos.splice(pIdx, 1);
+  const grid = document.getElementById(`pgrid-${sIdx}`);
+  grid.querySelectorAll('.photo-thumb-wrap')[pIdx].remove();
+  // Re-index onclick attributes
+  grid.querySelectorAll('.photo-thumb-wrap').forEach((el, i) => {
+    el.querySelector('.photo-del').setAttribute('onclick', `removePhoto(${sIdx},${i})`);
+    el.querySelector('.photo-caption-input').setAttribute('onchange', `updateCaption(${sIdx},${i},this.value)`);
+  });
+  toast('Photo removed');
+}
+
+// ── UPLOAD ───────────────────────────────────────────────────────────────
+async function handleUpload(event, sIdx) {
+  const files = Array.from(event.target.files);
+  if (!files.length) return;
+
+  const prog = document.getElementById(`uprog-${sIdx}`);
+  const grid = document.getElementById(`pgrid-${sIdx}`);
+  prog.textContent = `Uploading 0 / ${files.length}…`;
+
+  let done = 0;
+  for (const file of files) {
+    const fname = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+    const url = `/api/upload/${uploadFolder}/${fname}`;
     try {
-      var b64=await toB64(f);
-      // Check if file already exists (get SHA if so)
-      var existSHA=null;
-      try { var ex=await ghGet('images/'+tripFolder+'/'+safe); existSHA=ex.sha; } catch(e){}
-      await ghPut('images/'+tripFolder+'/'+safe, b64, 'Upload '+safe, existSHA);
-      uploaded.push({src:'/images/'+tripFolder+'/'+safe, caption:'', isNew:true});
-    } catch(e) { showNotice('Upload failed: '+safe+' — '+e.message,'err'); return; }
+      const resp = await fetch(url, {
+        method: 'POST',
+        headers: { 'X-Admin-Password': PASSWORD, 'Content-Type': file.type || 'image/jpeg' },
+        body: file
+      });
+      if (resp.ok) {
+        const data = await resp.json();
+        const src = data.url;
+        // Add to trip data
+        if (!currentTrip.sections[sIdx]) return;
+        if (!currentTrip.sections[sIdx].photos) currentTrip.sections[sIdx].photos = [];
+        currentTrip.sections[sIdx].photos.push({ src, caption: '' });
+        // Add thumbnail to grid
+        const wrap = document.createElement('div');
+        wrap.className = 'photo-thumb-wrap';
+        const pi = currentTrip.sections[sIdx].photos.length - 1;
+        wrap.innerHTML = `
+          <img src="${src}" loading="lazy">
+          <button class="photo-del" onclick="removePhoto(${sIdx},${pi})">×</button>
+          <input class="photo-caption-input" type="text" placeholder="Caption…" onchange="updateCaption(${sIdx},${pi},this.value)">
+        `;
+        grid.appendChild(wrap);
+      }
+    } catch(e) { console.error(e); }
+    done++;
+    prog.textContent = `Uploading ${done} / ${files.length}…`;
   }
-
-  // Add to section
-  uploaded.forEach(function(p){ sections[si].photos.push(p); });
-  render();
-  showNotice(uploaded.length+' photo'+(uploaded.length===1?'':'s')+' uploaded. Hit Save & Publish to go live.','ok');
-  setSaveDirty(true);
+  prog.textContent = `${done} photo${done !== 1 ? 's' : ''} added`;
+  event.target.value = '';
 }
 
-
-// ── PREVIEW ───────────────────────────────────────────────────────
-var previewWin = null;
-function doPreview() {
-  var pageHTML = buildHTML();
-
-  // Inject preview banner + tinted background after <body>
-  var banner = '<div style="position:fixed;top:0;left:0;right:0;z-index:9999;background:#8b3a2a;color:white;text-align:center;padding:.7rem 1rem;font-family:sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.03em;box-shadow:0 2px 8px rgba(0,0,0,.3)">⚠️ PREVIEW ONLY — Changes are NOT saved. Go back to the Admin tab and click <strong>Save &amp; Publish</strong> to make this live.</div><div style="height:44px"></div>';
-  var bgStyle = '<style>body{background:#e8e0d0!important}nav{top:44px!important}</style>';
-  pageHTML = pageHTML.replace('<body>', '<body>' + bgStyle).replace(/<nav/, banner + '<nav');
-
-  // Reuse same preview tab
-  if (!previewWin || previewWin.closed) {
-    previewWin = window.open('', 'brodies-preview');
-  }
-  previewWin.document.open();
-  previewWin.document.write(pageHTML);
-  previewWin.document.close();
-  previewWin.focus();
+// ── THUMBNAIL PICKER ─────────────────────────────────────────────────────
+function pickThumbnailFromPhotos() {
+  // Show first photo of first section as options
+  const allPhotos = (currentTrip.sections || []).flatMap(s => s.photos || []);
+  if (!allPhotos.length) { toast('Add photos first'); return; }
+  // Simple: set to first photo
+  const src = allPhotos[0].src;
+  document.getElementById('f-thumbnail').value = src;
+  updateThumbPreview(src);
+  toast('Cover photo set — scroll to pick a different one');
 }
 
-// ── SAVE ─────────────────────────────────────────────────────────
-async function doSave() {
-  var btn=document.getElementById('save-btn');
-  btn.innerHTML='<span class="spin"></span>Saving…'; btn.style.pointerEvents='none';
-  closePanel();
+// Allow clicking any photo in section to set as thumbnail
+document.getElementById('sections-container').addEventListener('click', function(e) {
+  const img = e.target.closest('.photo-thumb-wrap img');
+  if (!img || !e.shiftKey) return;
+  const src = img.src.replace(location.origin, '').split('?')[0];
+  document.getElementById('f-thumbnail').value = src;
+  updateThumbPreview(src);
+  toast('Cover photo updated');
+});
 
+// ── SAVE ─────────────────────────────────────────────────────────────────
+function setSaveStatus(msg, type='') {
+  const el = document.getElementById('save-status');
+  el.textContent = msg;
+  el.className = 'save-status' + (type ? ' ' + type : '');
+}
+
+async function saveTrip() {
+  setSaveStatus('Saving…', 'saving');
+  const trip = {
+    ...currentTrip,
+    name: document.getElementById('f-name').value,
+    year: parseInt(document.getElementById('f-year').value) || currentTrip.year,
+    status: document.getElementById('f-status').value,
+    lat: parseFloat(document.getElementById('f-lat').value) || currentTrip.lat,
+    lng: parseFloat(document.getElementById('f-lng').value) || currentTrip.lng,
+    notes: document.getElementById('f-notes').value,
+    thumbnail: document.getElementById('f-thumbnail').value,
+    slug: currentSlug
+  };
   try {
-    var fresh=await ghGet('trips/'+trip+'.html');
-    tripSHA=fresh.sha;
-    tripHTML=atob64(fresh.content);
-
-    var newHTML=buildHTML();
-    var res=await ghPut('trips/'+trip+'.html', btoa64(newHTML), 'Update '+trip, tripSHA);
-    tripSHA=res.content.sha;
-    tripHTML=newHTML;
-
-    sections=parseHTML(newHTML);
-    render();
-    dirty=false;
-    setSaveDirty(false);
-
-    await fetch(HOOK,{method:'POST'});
-
-    btn.innerHTML='Save &amp; Publish'; btn.style.pointerEvents='';
-    document.getElementById('save-msg').style.display='inline';
-    setTimeout(function(){document.getElementById('save-msg').style.display='none';},5000);
-    showNotice('Saved & deploying — live in ~1 min.','ok');
-  } catch(e) {
-    // Keep button active so user can retry
-    btn.innerHTML='Save &amp; Publish'; btn.style.pointerEvents='';
-    setSaveDirty(true);
-    showNotice('Save failed — please try again. ('+e.message+')','err');
-  }
-}
-
-// ── LIVE TOGGLE ───────────────────────────────────────────────────
-function setLiveToggle(html) {
-  var live=html.indexOf('badge-plan')<0;
-  document.getElementById('live-tog').checked=live;
-  document.getElementById('live-lbl').textContent=live?'Live ✓':'Planning';
-}
-async function toggleLive() {
-  var live=document.getElementById('live-tog').checked;
-  document.getElementById('live-lbl').textContent=live?'Live ✓':'Planning';
-  setSaveDirty(true);
-}
-
-// ── DIRTY STATE ───────────────────────────────────────────────────
-function setSaveDirty(d) {
-  dirty=d;
-  var btn=document.getElementById('save-btn');
-  if(d){ btn.classList.add('active'); } else { btn.classList.remove('active'); }
-}
-
-// ── HELPERS ───────────────────────────────────────────────────────
-function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function atob64(b64){ return decodeURIComponent(escape(atob(b64.replace(/\n/g,'')))); }
-function btoa64(str){ return btoa(unescape(encodeURIComponent(str))); }
-function toB64(file){ return new Promise(function(res,rej){ var r=new FileReader(); r.onload=function(){res(r.result.split(',')[1]);}; r.onerror=rej; r.readAsDataURL(file); }); }
-
-async function ghGet(path) {
-  var r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path,
-    {headers:{'Authorization':'token '+TOK,'Accept':'application/vnd.github.v3+json'}});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
-}
-async function ghPut(path,content,message,sha) {
-  var body={message:message,content:content};
-  if(sha) body.sha=sha;
-  var r=await fetch('https://api.github.com/repos/'+REPO+'/contents/'+path,
-    {method:'PUT',headers:{'Authorization':'token '+TOK,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify(body)});
-  if(!r.ok) throw new Error(await r.text());
-  return r.json();
-}
-
-function showNotice(msg,cls){
-  var n=document.getElementById('notice');
-  n.textContent=msg; n.className=cls||''; n.style.display='block';
-  if(cls==='ok') setTimeout(function(){n.style.display='none';},5000);
-}
-function hideNotice(){ document.getElementById('notice').style.display='none'; }
-
-// ── NEW TRIP ──────────────────────────────────────────────────────
-function showNewTripModal() {
-  document.getElementById('new-trip-modal').style.display = 'flex';
-  document.getElementById('nt-name').focus();
-}
-function hideNewTripModal() {
-  document.getElementById('new-trip-modal').style.display = 'none';
-  document.getElementById('nt-error').style.display = 'none';
-}
-function slugify(str) {
-  return str.toLowerCase().replace(/[&]/g,' and ').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-}
-
-async function createNewTrip() {
-  var name   = document.getElementById('nt-name').value.trim();
-  var year   = document.getElementById('nt-year').value.trim();
-  var status = document.getElementById('nt-status').value;
-  var meta   = document.getElementById('nt-meta').value.trim();
-  var route  = document.getElementById('nt-route').value.trim();
-  var lat    = document.getElementById('nt-lat').value.trim();
-  var lng    = document.getElementById('nt-lng').value.trim();
-  var folder = document.getElementById('nt-folder').value.trim();
-  var errEl  = document.getElementById('nt-error');
-
-  if (!name || !meta) { errEl.textContent='Trip name and location are required.'; errEl.style.display='block'; return; }
-  if (status !== 'future' && !year) { errEl.textContent='Year is required for Planning and Completed trips.'; errEl.style.display='block'; return; }
-
-  var slug = slugify(name) + (year ? '-'+year : '');
-  if (!folder) folder = (year||'future') + '_' + slugify(name.split(',')[0].split('&')[0].trim());
-
-  var btn = document.getElementById('nt-create-btn');
-  btn.textContent = 'Creating...'; btn.disabled = true;
-
-  try {
-    var escName = name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    var escMeta = meta.replace(/&/g,'&amp;');
-    var routeParts = route ? route.split('·').map(function(s,i){ return (i>0 ? '<span>··</span>' : '') + s.trim(); }).join(' ') : '';
-    var routeHTML = route ? '<div class="route">'+routeParts+'</div>' : '';
-
-    var tripPage = [
-      '<!DOCTYPE html>',
-      '<html lang="en"><head>',
-      '<meta charset="UTF-8">',
-      '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
-      '<title>'+escName+' — Brodie Trips</title>',
-      '<link rel="preconnect" href="https://fonts.googleapis.com">',
-      '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap">',
-      '<style>',
-      '*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}',
-      ':root{--cream:#f9f7f3;--ink:#1a1a18;--muted:#7a7a72;--border:#e0ddd8;--accent:#8b3a2a;}',
-      'body{font-family:\'Jost\',sans-serif;background:var(--cream);color:var(--ink);font-weight:300;}',
-      'nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.4rem 3rem;background:rgba(249,247,243,0.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);}',
-      '.nav-brand{font-family:\'Cormorant Garamond\',serif;font-size:1.1rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--ink);}',
-      '.nav-links{display:flex;gap:2.5rem;list-style:none;}',
-      '.nav-links a{font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);transition:color .2s;}',
-      '.nav-links a:hover{color:var(--ink);}',
-      '.hero{padding:120px 2rem 3rem;max-width:900px;margin:0 auto;}',
-      '.back-link{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:var(--muted);display:inline-block;margin-bottom:2rem;}',
-      '.trip-title{font-family:\'Cormorant Garamond\',serif;font-size:clamp(3rem,8vw,5.5rem);font-weight:300;line-height:1;margin-bottom:.75rem;}',
-      '.trip-meta{font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;}',
-      '.route{font-family:\'Cormorant Garamond\',serif;font-size:1.1rem;font-style:italic;color:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem 0;margin-bottom:3rem;}',
-      '.route span{color:var(--accent);}',
-      'h2.city-name{font-family:\'Cormorant Garamond\',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:400;margin:2.5rem 0 1rem;border-bottom:1px solid var(--border);padding-bottom:.5rem;}',
-      '.photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.75rem;margin:1.5rem 0;}',
-      '.photo-item img{width:100%;height:200px;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s;}',
-      '.photo-item img:hover{opacity:.92;}',
-      'p.photo-caption{font-size:.78rem;color:var(--muted);letter-spacing:.06em;text-align:center;margin:.4rem 0 1.2rem;font-style:italic;}',
-      '.lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:1000;align-items:center;justify-content:center;}',
-      '.lightbox.open{display:flex;}',
-      '.lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;}',
-      '.lightbox-close{position:absolute;top:1.5rem;right:2rem;color:#fff;font-size:2rem;cursor:pointer;opacity:.7;}',
-      '.lightbox-prev,.lightbox-next{position:absolute;top:50%;transform:translateY(-50%);color:#fff;font-size:2rem;cursor:pointer;opacity:.6;background:none;border:none;padding:.5rem 1rem;}',
-      '.lightbox-prev{left:1rem;}.lightbox-next{right:1rem;}',
-      'footer{text-align:center;padding:2.5rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-top:1px solid var(--border);}',
-      '@media(max-width:600px){nav{padding:1rem 1.5rem;}.hero{padding-left:1.5rem;padding-right:1.5rem;}.photo-grid{grid-template-columns:1fr 1fr;}}',
-      '</style></head><body>',
-      '<nav>',
-      '<a class="nav-brand" href="../index.html">Brodie Trips</a>',
-      '<ul class="nav-links"><li><a href="../index.html">Home</a></li><li><a href="../index.html#trips">Trips</a></li><li><a href="../cocktails/index.html">Cocktails</a></li></ul>',
-      '</nav>',
-      '<div class="hero">',
-      '<a class="back-link" href="../index.html">← All Trips</a>',
-      '<h1 class="trip-title">'+escName+'</h1>',
-      '<div class="trip-meta">'+escMeta+'</div>',
-      routeHTML,
-      '</div>',
-      '<footer>© The Brodies · Adventures around the world</footer>',
-      '<div class="lightbox" id="lightbox">',
-      '<span class="lightbox-close" id="lb-close">×</span>',
-      '<button class="lightbox-prev" id="lb-prev">‹</button>',
-      '<img id="lb-img" src="" alt="">',
-      '<button class="lightbox-next" id="lb-next">›</button>',
-      '</div>',
-      '<script>',
-      'var imgs=[],lbIdx=0;',
-      'document.querySelectorAll(".photo-item img").forEach(function(img,i){imgs.push(img.src);img.onclick=function(){lbIdx=i;openLB();};});',
-      'function openLB(){document.getElementById("lightbox").classList.add("open");document.getElementById("lb-img").src=imgs[lbIdx];}',
-      'function closeLB(){document.getElementById("lightbox").classList.remove("open");}',
-      'document.getElementById("lb-close").onclick=closeLB;',
-      'document.getElementById("lb-prev").onclick=function(){lbIdx=(lbIdx-1+imgs.length)%imgs.length;document.getElementById("lb-img").src=imgs[lbIdx];};',
-      'document.getElementById("lb-next").onclick=function(){lbIdx=(lbIdx+1)%imgs.length;document.getElementById("lb-img").src=imgs[lbIdx];};',
-      'document.getElementById("lightbox").onclick=function(e){if(e.target===this)closeLB();};',
-      '<\/script>',
-      '</body></html>'
-    ].join('\n');
-
-    await ghPut('trips/'+slug+'.html', btoa64(tripPage), 'New trip: '+name, null);
-
-    // Update index.html
-    var d = await ghGet('index.html');
-    var indexHTML = atob64(d.content);
-
-    var isPlan = status === 'planning';
-    var isFuture = status === 'future';
-    var badgeHTML = isPlan ? '<span class="badge-plan">Planning</span>' : isFuture ? '<span class="badge-plan">Future</span>' : '';
-    var outlineStyle = (isPlan||isFuture) ? ' style="outline:2px solid #c9a84c;outline-offset:3px;"' : '';
-
-    // Add to map trips array
-    var mapLine = "      { name:'"+name.replace(/'/g,"\\'")+"', meta:'"+meta.replace(/'/g,"\\'")+"', lat:"+(lat||0)+", lng:"+(lng||0)+", url:'trips/"+slug+".html'"+(isFuture?", future:true":"")+", img:'' },\n";
-    indexHTML = indexHTML.replace("      { name:'Greece'", mapLine + "      { name:'Greece'");
-
-    // Add thumb card
-    var thumbCard = '\n            <a class="thumb-card" href="trips/'+slug+'.html"'+outlineStyle+'>\n'+
-      '              <div class="thumb-ph">'+meta.split('·')[0].trim()+'</div>\n'+
-      '              <div class="thumb-label">\n'+
-      '                <div class="thumb-name">'+escName+badgeHTML+'</div>\n'+
-      '                <div class="thumb-meta">'+meta+'</div>\n'+
-      '              </div>\n            </a>';
-
-    var yearLabel = isFuture ? 'Future' : year;
-    var stripRe = new RegExp('(<div class="year-label">'+yearLabel+'<\\/div>[\\s\\S]*?<div class="thumb-strip">)');
-    if (stripRe.test(indexHTML)) {
-      indexHTML = indexHTML.replace(stripRe, function(m){ return m + thumbCard; });
+    const resp = await fetch(`/api/trip/${currentSlug}`, {
+      method: 'PUT',
+      headers: { 'X-Admin-Password': PASSWORD, 'Content-Type': 'application/json' },
+      body: JSON.stringify(trip)
+    });
+    if (resp.ok) {
+      currentTrip = trip;
+      setSaveStatus('Saved ✓', 'saved');
+      document.getElementById('editor-title').textContent = trip.name || currentSlug;
+      setTimeout(() => setSaveStatus(''), 2500);
+      toast('Saved!');
     } else {
-      var newGroup = '\n      <div class="year-group">\n'+
-        '        <div class="year-spine"><div class="year-dot"></div><div class="year-line"></div></div>\n'+
-        '        <div class="year-body">\n'+
-        '          <div class="year-label">'+yearLabel+'</div>\n'+
-        '          <span class="year-count">1 trip</span>\n'+
-        '          <div class="thumb-strip">'+thumbCard+'\n          </div>\n'+
-        '        </div>\n      </div>';
-      indexHTML = indexHTML.replace('      <div class="year-group">', newGroup+'\n      <div class="year-group">');
+      setSaveStatus('Save failed', 'error');
     }
-
-    await ghPut('index.html', btoa64(indexHTML), 'Add to home: '+name, d.sha);
-
-    // Add to dropdown
-    TRIPS.unshift({v:slug, l:name, f:folder});
-    var selEl = document.getElementById('trip-sel');
-    var opt = document.createElement('option'); opt.value=slug; opt.textContent=name;
-    selEl.insertBefore(opt, selEl.options[1]);
-
-    await fetch(HOOK,{method:'POST'});
-    hideNewTripModal();
-    showNotice('Trip "'+name+'" created! Select it from the dropdown to add photos.','ok');
-    selEl.value=slug; if(selEl.value===slug) loadTrip();
-
   } catch(e) {
-    errEl.textContent='Error: '+e.message; errEl.style.display='block';
-  }
-  btn.textContent='Create Trip'; btn.disabled=false;
-}
-
-// ── SET THUMBNAIL ──────────────────────────────────────────────────
-async function setThumbnail() {
-  if (!sel||!trip) return;
-  var src = sections[sel.si].photos[sel.pi].src;
-  showNotice('Setting thumbnail...');
-  try {
-    var d = await ghGet('index.html');
-    var indexHTML = atob64(d.content);
-
-    // Replace thumb-ph or thumb-img in the trip's thumb-card
-    var escTrip = trip.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-    var phRe = new RegExp('(<a class="thumb-card"[^>]*href="trips/'+escTrip+'.html"[^>]*>[\\s\\S]{0,200}?)<div class="thumb-ph">[^<]*<\\/div>');
-    var imgRe = new RegExp('(<a class="thumb-card"[^>]*href="trips/'+escTrip+'.html"[^>]*>[\\s\\S]{0,200}?)<img class="thumb-img"[^>]*>');
-    var imgTag = '<img class="thumb-img" src="'+src+'" alt="">';
-    if (phRe.test(indexHTML)) {
-      indexHTML = indexHTML.replace(phRe, '$1'+imgTag);
-    } else if (imgRe.test(indexHTML)) {
-      indexHTML = indexHTML.replace(imgRe, '$1'+imgTag);
-    }
-
-    // Update map img
-    var mapRe = new RegExp("(url:'trips/"+escTrip+".html'[^}]*?),\\s*img:'[^']*'");
-    var mapRe2 = new RegExp("(url:'trips/"+escTrip+".html'[^}]*)\\}");
-    if (mapRe.test(indexHTML)) {
-      indexHTML = indexHTML.replace(mapRe, "$1, img:'"+src+"'");
-    } else {
-      indexHTML = indexHTML.replace(mapRe2, "$1, img:'"+src+"'}");
-    }
-
-    await ghPut('index.html', btoa64(indexHTML), 'Set thumbnail: '+trip, d.sha);
-    await fetch(HOOK,{method:'POST'});
-    showNotice('Thumbnail set — live in ~1 min.','ok');
-  } catch(e) {
-    showNotice('Failed: '+e.message,'err');
+    setSaveStatus('Error — check connection', 'error');
   }
 }
 
+async function confirmDelete() {
+  if (!confirm(`Delete "${currentTrip.name || currentSlug}"? This cannot be undone.`)) return;
+  const resp = await fetch(`/api/trip/${currentSlug}`, {
+    method: 'DELETE',
+    headers: { 'X-Admin-Password': PASSWORD }
+  });
+  if (resp.ok) { toast('Trip deleted'); showList(); }
+}
+
+// ── NEW TRIP ──────────────────────────────────────────────────────────────
+function showNewTrip() { document.getElementById('modal-new').classList.add('open'); }
+function closeModal(e) { if (e.target === e.currentTarget) e.currentTarget.classList.remove('open'); }
+document.getElementById('new-name').addEventListener('input', function() {
+  const slug = this.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const year = document.getElementById('new-year').value;
+  document.getElementById('new-slug').value = slug + (year ? '-' + year : '');
+});
+document.getElementById('new-year').addEventListener('input', function() {
+  const name = document.getElementById('new-name').value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  document.getElementById('new-slug').value = name + (this.value ? '-' + this.value : '');
+});
+
+async function createTrip() {
+  const name = document.getElementById('new-name').value.trim();
+  const year = parseInt(document.getElementById('new-year').value);
+  const slug = document.getElementById('new-slug').value.trim();
+  const status = document.getElementById('new-status').value;
+  if (!name || !slug) { toast('Name and slug required'); return; }
+
+  const trip = { slug, name, year: year || new Date().getFullYear(), status, sections: [] };
+  const resp = await fetch(`/api/trip/${slug}`, {
+    method: 'PUT',
+    headers: { 'X-Admin-Password': PASSWORD, 'Content-Type': 'application/json' },
+    body: JSON.stringify(trip)
+  });
+  if (resp.ok) {
+    document.getElementById('modal-new').classList.remove('open');
+    toast('Trip created!');
+    editTrip(slug);
+  } else {
+    toast('Error creating trip');
+  }
+}
+
+// ── UTILS ─────────────────────────────────────────────────────────────────
+function escAttr(s) { return String(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+function escHtml(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+let toastTimer;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+if (localStorage.getItem('ba')) showList();
 </script>
-
-<!-- NEW TRIP MODAL -->
-<div id="new-trip-modal" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);align-items:center;justify-content:center">
-  <div style="background:white;padding:2rem;width:480px;max-width:95vw;max-height:90vh;overflow-y:auto">
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;margin-bottom:1.5rem">New Trip</h2>
-    <div style="display:flex;flex-direction:column;gap:1rem">
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Trip Name *</label>
-        <input id="nt-name" placeholder="e.g. Edinburgh, York & London" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Year *</label>
-          <input id="nt-year" type="number" placeholder="2026" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Status *</label>
-          <select id="nt-status" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-            <option value="planning">Planning</option>
-            <option value="completed">Completed</option>
-            <option value="future">Future (no year)</option>
-          </select>
-        </div>
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Location / Meta Text *</label>
-        <input id="nt-meta" placeholder="e.g. Scotland & England · 2026" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Route (optional)</label>
-        <input id="nt-route" placeholder="e.g. Edinburgh · York · London" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem">
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Map Latitude</label>
-          <input id="nt-lat" placeholder="e.g. 55.9" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-        <div>
-          <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Map Longitude</label>
-          <input id="nt-lng" placeholder="e.g. -3.2" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        </div>
-      </div>
-      <div>
-        <label style="font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#7a7a72;display:block;margin-bottom:.3rem">Image Folder Name</label>
-        <input id="nt-folder" placeholder="e.g. 2026_paris" style="width:100%;padding:.6rem .8rem;border:1px solid #ddd;font-family:'Jost',sans-serif;font-size:.9rem">
-        <p style="font-size:.62rem;color:#aaa;margin-top:.3rem">Used for storing photos. Suggested: YEAR_cityname</p>
-      </div>
-      <div id="nt-error" style="color:#8b2a2a;font-size:.78rem;display:none"></div>
-      <div style="display:flex;gap:.8rem;justify-content:flex-end;margin-top:.5rem">
-        <button onclick="hideNewTripModal()" style="padding:.6rem 1.2rem;border:1px solid #ddd;background:transparent;cursor:pointer;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:#7a7a72">Cancel</button>
-        <button onclick="createNewTrip()" id="nt-create-btn" style="padding:.6rem 1.4rem;background:#8b3a2a;color:white;border:none;cursor:pointer;font-family:'Jost',sans-serif;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase">Create Trip</button>
-      </div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
-
-
